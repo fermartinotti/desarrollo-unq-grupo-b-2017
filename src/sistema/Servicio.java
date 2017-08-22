@@ -15,7 +15,7 @@ public class Servicio {
 	String facebook; 
 	String email;
 	Telefono telefono;
-	HashMap<String, String> diasYHorariosAtencion;
+	HashMap<String, String> diasYHorariosAtencion; // ??? 
 	String localidadEntrega;
 
 	

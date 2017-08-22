@@ -1,5 +1,14 @@
 package sistema;
 
 public class Proveedor {
-		// No estoy muy seguro de que un proveedor pueda tener varios servicios
+	String nombre;
+	Servicio servicio;
+	
+	public void agregarServicio(Servicio servicio) {
+		this.servicio = servicio;
+	}
+	
+	public void reputacion() {
+		
+	}
 }
