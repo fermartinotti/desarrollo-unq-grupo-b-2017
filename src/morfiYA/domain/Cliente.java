@@ -1,7 +1,7 @@
 package morfiYA.domain;
 
 public class Cliente {
-	
+	// test
 	Integer cuit;
 	String nombre;
 	String apellido;
