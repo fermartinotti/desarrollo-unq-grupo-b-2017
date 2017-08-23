@@ -1,4 +1,4 @@
-package sistema;
+package morfiYA.domain;
 
 public class Proveedor {
 	String nombre;

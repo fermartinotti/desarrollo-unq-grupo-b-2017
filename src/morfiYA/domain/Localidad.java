@@ -1,4 +1,4 @@
-package sistema;
+package morfiYA.domain;
 
 public enum Localidad {
 	QUILMES("Quilmes"),

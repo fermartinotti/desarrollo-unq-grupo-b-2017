@@ -1,4 +1,4 @@
-package sistema;
+package morfiYA.domain;
 
 public class Opinion {
 	Integer puntuacion; // estrellas (1 al 5)

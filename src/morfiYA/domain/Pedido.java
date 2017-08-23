@@ -1,4 +1,4 @@
-package sistema;
+package morfiYA.domain;
 
 import java.util.Date;
 
