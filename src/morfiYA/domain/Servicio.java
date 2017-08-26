@@ -1,33 +1,110 @@
 package morfiYA.domain;
 
-import java.util.HashMap;
 import java.util.List;
+
+import morfiYA.exceptions.DatoInvalidoException;
+import morfiYA.exceptions.MenuException;
 
 public class Servicio {
 	
-	String nombre;
-	List<Menu> menues; 
+	private String nombre;
+	private List<Menu> menues; 
 	// LOGO ??  
-	String localidad; // Quizas estaria bueno crear una clase que contenga la localidad, direccion y la ubicacion en el mapa
-	String direccion;
-	String descripcion;
-	String web; // puede tener ambos (web y facebook) o solamente uno de los 2
-	String facebook; 
-	String email;
-	Telefono telefono;
-	HashMap<String, String> diasYHorariosAtencion; // ??? 
-	String localidadEntrega;
-
+	private Direccion direccion;
+	private String descripcion;
+	private String link; // Referencia a la direccion web o al link de su perfil de FB.
+	private String email;
+	private Telefono telefono;
+	private DiasDeAtencion atencionAlPublico;
+	private Localidad localidadDeEntregas;
 	
-	public void agregarMenu(Menu menu) {
-		// Agregar menu
+	public void agregarMenu(Menu menu) throws MenuException {
+		if(menues.size() >= 20) {
+			throw new MenuException("Llego a su limite de menues permitidos");
+		}			
+		menues.add(menu);		
 	}
 	
 	public void eliminarMenu(Menu menu) {
-		// Eliminar menu
+		menues.remove(menu);	
 	}
-	
-	public void actualizarMenu(Menu menu) {
-		// Actualizar Menu
+
+	public String getNombre() {
+		return nombre;
 	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public List<Menu> getMenues() {
+		return menues;
+	}
+
+	public void setMenues(List<Menu> menues) {
+		this.menues = menues;
+	}
+
+	public Direccion getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(Direccion direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) throws DatoInvalidoException{
+		if (descripcion.length() <30) {
+			throw new DatoInvalidoException("Descripcion demasiado corta");
+		}
+		if (descripcion.length() > 200) {
+			throw new DatoInvalidoException("Descripcion demasiado larga");
+		}
+		this.descripcion = descripcion;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Telefono getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(Telefono telefono) {
+		this.telefono = telefono;
+	}
+
+	public DiasDeAtencion getAtencionAlPublico() {
+		return atencionAlPublico;
+	}
+
+	public void setAtencionAlPublico(DiasDeAtencion atencionAlPublico) {
+		this.atencionAlPublico = atencionAlPublico;
+	}
+
+	public Localidad getLocalidadDeEntregas() {
+		return localidadDeEntregas;
+	}
+
+	public void setLocalidadDeEntregas(Localidad localidadDeEntregas) {
+		this.localidadDeEntregas = localidadDeEntregas;
+	}
+		
 }
