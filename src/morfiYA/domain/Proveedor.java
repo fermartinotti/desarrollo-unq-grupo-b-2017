@@ -8,7 +8,4 @@ public class Proveedor {
 		this.servicio = servicio;
 	}
 	
-	public void reputacion() {
-		
-	}
 }
