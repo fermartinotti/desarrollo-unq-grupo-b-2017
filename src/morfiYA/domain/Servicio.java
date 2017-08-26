@@ -7,17 +7,17 @@ import morfiYA.exceptions.MenuException;
 
 public class Servicio {
 	
-	String nombre;
-	List<Menu> menues; 
+	private String nombre;
+	private List<Menu> menues; 
 	// LOGO ??  
-	Localidad localidad;
-	String direccion;
-	String descripcion;
-	String link; // Referencia a la direccion web o al link de su perfil de FB.
-	String email;
-	Telefono telefono;
-	DiasDeAtencion atencionAlPublico;
-	Localidad localidadDeEntregas;
+	private Localidad localidad;
+	private String direccion;
+	private String descripcion;
+	private String link; // Referencia a la direccion web o al link de su perfil de FB.
+	private String email;
+	private Telefono telefono;
+	private DiasDeAtencion atencionAlPublico;
+	private Localidad localidadDeEntregas;
 	
 	public void agregarMenu(Menu menu) throws MenuException {
 		if(menues.size() >= 20) {
