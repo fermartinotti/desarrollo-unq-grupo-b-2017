@@ -10,8 +10,7 @@ public class Servicio {
 	private String nombre;
 	private List<Menu> menues; 
 	// LOGO ??  
-	private Localidad localidad;
-	private String direccion;
+	private Direccion direccion;
 	private String descripcion;
 	private String link; // Referencia a la direccion web o al link de su perfil de FB.
 	private String email;
@@ -46,19 +45,11 @@ public class Servicio {
 		this.menues = menues;
 	}
 
-	public Localidad getLocalidad() {
-		return localidad;
-	}
-
-	public void setLocalidad(Localidad localidad) {
-		this.localidad = localidad;
-	}
-
-	public String getDireccion() {
+	public Direccion getDireccion() {
 		return direccion;
 	}
 
-	public void setDireccion(String direccion) {
+	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
 	}
 

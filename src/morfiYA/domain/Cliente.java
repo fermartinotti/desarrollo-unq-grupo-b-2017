@@ -1,15 +1,23 @@
 package morfiYA.domain;
 
+import morfiYA.exceptions.DatoInvalidoException;
+
 public class Cliente {
 	
-	Integer cuit;
-	String nombre;
-	String apellido;
-	String email;
-	Integer telefono;
-	String localidad;
-	String direccion;
-	Float credito;
+	private Integer cuit;
+	private String nombre;
+	private String apellido;
+	private String email;
+	private Telefono telefono;
+	private Direccion direccion;
+	private Float creditos;
+	
+	public void cargarCredito(Float cantidad)throws DatoInvalidoException {
+		if (cantidad <0) {
+			throw new DatoInvalidoException("No se puede cargar saldo negativo");
+		}
+		creditos += cantidad;
+	}
 	
 	public Integer getCuit() {
 		return cuit;
@@ -35,29 +43,17 @@ public class Cliente {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Integer getTelefono() {
+	public Telefono getTelefono() {
 		return telefono;
 	}
-	public void setTelefono(Integer telefono) {
+	public void setTelefono(Telefono telefono) {
 		this.telefono = telefono;
 	}
-	public String getLocalidad() {
-		return localidad;
-	}
-	public void setLocalidad(String localidad) {
-		this.localidad = localidad;
-	}
-	public String getDireccion() {
+	public Direccion getDireccion() {
 		return direccion;
 	}
-	public void setDireccion(String direccion) {
+	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
-	}
-	public Float getCredito() {
-		return credito;
-	}
-	public void setCredito(Float credito) {
-		this.credito = credito;
 	}
 
 }
