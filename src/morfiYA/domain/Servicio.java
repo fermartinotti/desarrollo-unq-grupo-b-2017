@@ -17,14 +17,23 @@ public class Servicio {
 	private Telefono telefono;
 	private DiasDeAtencion atencionAlPublico;
 	private Localidad localidadDeEntregas;
+	Integer maximoDeMenusVigentes = 20;
 	
 	public void agregarMenu(Menu menu) throws MenuException {
-		if(menues.size() >= 20) {
+		if(menues.size() >= getMaximoDeMenusVigentes()) {
 			throw new MenuException("Llego a su limite de menues permitidos");
 		}			
 		menues.add(menu);		
 	}
 	
+	public Integer getMaximoDeMenusVigentes() {
+		return maximoDeMenusVigentes;
+	}
+
+	public void setMaximoDeMenuesVigentes(Integer maximoDeMenuesVigentes) {
+		this.maximoDeMenusVigentes = maximoDeMenuesVigentes;
+	}
+
 	public void eliminarMenu(Menu menu) {
 		menues.remove(menu);	
 	}

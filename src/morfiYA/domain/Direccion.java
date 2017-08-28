@@ -5,7 +5,8 @@ public class Direccion {
 	private Localidad localidad;
 	private String direccion;
 	private Integer numero;
-	private String geolocalizacion;
+	//private String geolocalizacion;
+	private LocalizacionMapa geolocalizacion;
 	
 	public Localidad getLocalidad() {
 		return localidad;
@@ -25,10 +26,10 @@ public class Direccion {
 	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
-	public String getGeolocalizacion() {
+	public LocalizacionMapa getGeolocalizacion() {
 		return geolocalizacion;
 	}
-	public void setGeolocalizacion(String geolocalizacion) {
+	public void setGeolocalizacion(LocalizacionMapa geolocalizacion) {
 		this.geolocalizacion = geolocalizacion;
 	}
 }
