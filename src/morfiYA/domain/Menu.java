@@ -10,7 +10,7 @@ public class Menu {
 	private String nombre;
 	private String descripcion; 
 	private Categoria categoria;
-	private Float valorDelivery;
+	private double valorDelivery;
 	private Date fechaVigenciaDesde;
 	private Date fechaVigenciaHasta;
 	private List<String> turnos;
@@ -19,8 +19,8 @@ public class Menu {
 	//Turnos entrega envio
 	private Integer tiempoDeEntrega;
 	private double precio;
-	private int cantidadMinima;
-	private int cantidadMinima2;
+	private Integer cantidadMinima;
+	private Integer cantidadMinima2;
 	private double precioCantidadMinima;
 	private double precioCantidadMinima2;
 	private Integer cantidadMaxVtasPorDia;
@@ -31,10 +31,10 @@ public class Menu {
 	}
 
 	public void setPrecioCantidadMinima(double precioCantidadMinima)throws DatoInvalidoException {
-		if (precioCantidadMinima <=0) {
+		if (precioCantidadMinima <0) {
 			throw new DatoInvalidoException("El precio no puede ser negativo");
 		}
-		if (precioCantidadMinima >=1000) {
+		if (precioCantidadMinima >1000) {
 			throw new DatoInvalidoException("El precio maximo de venta es de 1000");
 		}
 		if (precioCantidadMinima > this.precio) {
@@ -48,10 +48,10 @@ public class Menu {
 	}
 
 	public void setPrecioCantidadMinima2(double precioCantidadMinima2)throws DatoInvalidoException {
-		if (precioCantidadMinima2 <=0) {
+		if (precioCantidadMinima2 <0) {
 			throw new DatoInvalidoException("El precio no puede ser negativo");
 		}
-		if (precioCantidadMinima2 >=1000) {
+		if (precioCantidadMinima2 >1000) {
 			throw new DatoInvalidoException("El precio maximo de venta es de 1000");
 		}
 		if (precioCantidadMinima2 > this.precio) {
@@ -95,25 +95,25 @@ public class Menu {
 		this.precio = precio;
 	}
 
-	public int getCantidadMinima() {
+	public Integer getCantidadMinima() {
 		return cantidadMinima;
 	}
 
-	public void setCantidadMinima(int cantidadMinima) throws DatoInvalidoException {
-		if (cantidadMinima <= 10) {
+	public void setCantidadMinima(Integer cantidadMinima) throws DatoInvalidoException {
+		if (cantidadMinima < 10) {
 			throw new DatoInvalidoException("La cantidad tiene que ser mayor o igual a 10");
 		}
-		if(cantidadMinima >= 70) {
+		if(cantidadMinima > 70) {
 			throw new DatoInvalidoException("La cantidad maxima permitida menor o igual a 70");
 		}
 		this.cantidadMinima = cantidadMinima;
 	}
 
-	public int getCantidadMinima2() {
+	public Integer getCantidadMinima2() {
 		return cantidadMinima2;
 	}
 
-	public void setCantidadMinima2(int cantidadMinima2)throws DatoInvalidoException {
+	public void setCantidadMinima2(Integer cantidadMinima2)throws DatoInvalidoException {
 		if (cantidadMinima2 < 40) {
 			throw new DatoInvalidoException("La cantidad tiene que ser mayor a 39");
 		}
@@ -139,11 +139,11 @@ public class Menu {
 		this.categoria = categoria;
 	}
 
-	public Float getValorDelivery() {
+	public double getValorDelivery() {
 		return valorDelivery;
 	}
 
-	public void setValorDelivery(Float precio)throws DatoInvalidoException {
+	public void setValorDelivery(double precio)throws DatoInvalidoException {
 		if (precio < 10) {
 			throw new DatoInvalidoException("El precio debe ser mayor a $10");
 		}

@@ -1,5 +1,7 @@
 package morfiYA.domain;
 
+import morfiYA.exceptions.DatoInvalidoException;
+
 public class Cliente {
 	
 	private Integer cuit;
@@ -49,7 +51,14 @@ public class Cliente {
 	public Float getCreditos() {
 		return creditos;
 	}
-	public void setCreditos(Float creditos) {
-		this.creditos = creditos;
-	}	
+	
+	 public void cargarCredito(Float cantidad)throws DatoInvalidoException {
+		 
+		    if (cantidad <0) {
+		    	throw new DatoInvalidoException("No se puede cargar saldo negativo");
+		    }
+		    creditos += cantidad;
+		 
+	}
+		 
 }
