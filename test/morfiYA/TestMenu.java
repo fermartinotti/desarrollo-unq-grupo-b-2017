@@ -27,7 +27,7 @@ public class TestMenu {
 	}
 	
 	@Test 
-	public void setValorDelivery(){
+	public void testSetValorDelivery(){
 		Menu menu = new Menu();
 		try {
 			menu.setValorDelivery(20);
@@ -36,12 +36,21 @@ public class TestMenu {
 	}
 
 	@Test 
-	public void setNombre(){
+	public void testSetNombre(){
 		Menu menu = new Menu();
 		try {
 			menu.setNombre("0 descensos");
 		} catch (DatoInvalidoException e) {}
 		assertEquals(11, menu.getNombre().length());
+	}
+	
+	@Test
+	public void testSetDescripcion(){
+		Menu menu = new Menu();
+		try {
+			menu.setDescripcion("123456789123456789111111");
+		} catch (DatoInvalidoException e) {}
+		assertEquals(24, menu.getDescripcion().length());
 	}
 
 }

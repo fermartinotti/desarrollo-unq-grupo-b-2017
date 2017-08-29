@@ -4,7 +4,10 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import morfiYA.domain.Cliente;
 import morfiYA.domain.Menu;
+import morfiYA.domain.Proveedor;
+import morfiYA.domain.Servicio;
 import morfiYA.exceptions.DatoInvalidoException;
 
 public class TestDatoInvalidoException {
@@ -165,7 +168,7 @@ public class TestDatoInvalidoException {
 	}
 	
 	@Test
-	public void testNombreMayorACuarenta(){
+	public void testNombreMayorATreinta(){
 		Menu menu = new Menu();
 		try{
 			menu.setNombre("Esto va a re contra fallar aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
@@ -173,6 +176,72 @@ public class TestDatoInvalidoException {
 		} catch(DatoInvalidoException e){}
 	}
 	
+	@Test
+	public void testDescripcionMenorAVeinte(){
+		Menu menu = new Menu();
+		try{
+			menu.setDescripcion("h");
+			fail("Se esperaba excepcion");
+		} catch(DatoInvalidoException e){}
+	}
 	
-		
+	@Test
+	public void testDescripcionMayorACuarenta(){
+		Menu menu = new Menu();
+		try{
+			menu.setDescripcion("123456789123456789123456789123456789123456789");
+			fail("Se esperaba excepcion");
+		} catch(DatoInvalidoException e){}
+	}
+	
+	@Test
+	public void testCargarCreditoNegativo(){
+		Cliente cliente = new Cliente();
+		try{
+			cliente.cargarCredito(-1);
+			fail("Se esperaba excepcion");
+		} catch(DatoInvalidoException e){}
+	}
+	
+	@Test
+	public void testRetirarCreditosNegativos(){
+		Proveedor proveedor = new Proveedor();
+		proveedor.setCreditos(10);
+		try{
+			proveedor.retirarCreditos(-1);
+			fail("Se esperaba excepcion");
+		} catch(DatoInvalidoException e){}
+	}
+	
+	@Test
+	public void testRetirarCreditosMayoresALosDisponibles(){
+		Proveedor proveedor = new Proveedor();
+		proveedor.setCreditos(10);
+		try{
+			proveedor.retirarCreditos(20);
+			fail("Se esperaba excepcion");
+		} catch(DatoInvalidoException e){}
+	}
+	
+	@Test
+	public void testDescripcionLongitudMenorATreinta(){
+		Servicio servicio = new Servicio();
+		try{
+			servicio.setDescripcion("d");
+			fail("Se esperaba excepcion");
+		} catch(DatoInvalidoException e){}
+	}
+	
+	@Test
+	public void testDescripcionLongitudMayorADoscientos(){
+		Servicio servicio = new Servicio();
+		try{
+			servicio.setDescripcion("1234567891123456789112345678911234567891123456789112345678911234567891123456789112345678911234567891123456789112345678911234567891123456789112345678911234567891123456789112345678911234567891123456789112345678911234567891");
+			fail("Se esperaba excepcion");
+		} catch(DatoInvalidoException e){}
+	}
+	
+	
 }
+		
+

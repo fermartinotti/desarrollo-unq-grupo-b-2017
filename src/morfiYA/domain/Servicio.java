@@ -1,5 +1,6 @@
 package morfiYA.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import morfiYA.exceptions.DatoInvalidoException;
@@ -8,7 +9,7 @@ import morfiYA.exceptions.MenuException;
 public class Servicio {
 	
 	private String nombre;
-	private List<Menu> menues; 
+	private List<Menu> menus = new ArrayList<Menu>();
 	// LOGO ??  
 	private Direccion direccion;
 	private String descripcion;
@@ -20,22 +21,18 @@ public class Servicio {
 	Integer maximoDeMenusVigentes = 20;
 	
 	public void agregarMenu(Menu menu) throws MenuException {
-		if(menues.size() >= getMaximoDeMenusVigentes()) {
+		if(menus.size() >= getMaximoDeMenusVigentes()) {
 			throw new MenuException("Llego a su limite de menues permitidos");
 		}			
-		menues.add(menu);		
+		menus.add(menu);		
 	}
 	
 	public Integer getMaximoDeMenusVigentes() {
 		return maximoDeMenusVigentes;
 	}
 
-	public void setMaximoDeMenuesVigentes(Integer maximoDeMenuesVigentes) {
-		this.maximoDeMenusVigentes = maximoDeMenuesVigentes;
-	}
-
 	public void eliminarMenu(Menu menu) {
-		menues.remove(menu);	
+		menus.remove(menu);	
 	}
 
 	public String getNombre() {
@@ -46,12 +43,12 @@ public class Servicio {
 		this.nombre = nombre;
 	}
 
-	public List<Menu> getMenues() {
-		return menues;
+	public List<Menu> getMenus() {
+		return menus;
 	}
 
 	public void setMenues(List<Menu> menues) {
-		this.menues = menues;
+		this.menus = menues;
 	}
 
 	public Direccion getDireccion() {
@@ -78,6 +75,10 @@ public class Servicio {
 
 	public String getLink() {
 		return link;
+	}
+
+	public void setMaximoDeMenusVigentes(Integer maximoDeMenusVigentes) {
+		this.maximoDeMenusVigentes = maximoDeMenusVigentes;
 	}
 
 	public void setLink(String link) {
