@@ -10,7 +10,7 @@ public class Cliente {
 	private String email;
 	private Telefono telefono;
 	private Direccion direccion;
-	private double creditos;
+	private double creditos = 0;
 	
 	public Integer getCuit() {
 		return cuit;

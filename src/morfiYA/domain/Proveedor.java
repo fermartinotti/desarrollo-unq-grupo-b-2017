@@ -5,7 +5,7 @@ import morfiYA.exceptions.DatoInvalidoException;
 public class Proveedor {
 	private String nombre;
 	private Servicio servicio; // Preguntar sin falta si un proveedor puede tener mas de un servicio
-	private double creditos;
+	private double creditos = 0;
 	
 	public void agregarServicio(Servicio servicio) {
 		this.servicio = servicio;

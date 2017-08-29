@@ -2,6 +2,8 @@ package morfiYA;
 
 import static org.junit.Assert.fail;
 
+import java.util.Collections;
+
 import org.junit.Test;
 
 import morfiYA.domain.Cliente;
@@ -236,7 +238,8 @@ public class TestDatoInvalidoException {
 	public void testDescripcionLongitudMayorADoscientos(){
 		Servicio servicio = new Servicio();
 		try{
-			servicio.setDescripcion("1234567891123456789112345678911234567891123456789112345678911234567891123456789112345678911234567891123456789112345678911234567891123456789112345678911234567891123456789112345678911234567891123456789112345678911234567891");
+			String descripcion = String.join("", Collections.nCopies(201, "c"));
+			servicio.setDescripcion(descripcion);
 			fail("Se esperaba excepcion");
 		} catch(DatoInvalidoException e){}
 	}
