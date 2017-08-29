@@ -10,14 +10,7 @@ public class Cliente {
 	private String email;
 	private Telefono telefono;
 	private Direccion direccion;
-	private Float creditos;
-	
-	public void cargarCredito(Float cantidad)throws DatoInvalidoException {
-		if (cantidad <0) {
-			throw new DatoInvalidoException("No se puede cargar saldo negativo");
-		}
-		creditos += cantidad;
-	}
+	private double creditos;
 	
 	public Integer getCuit() {
 		return cuit;
@@ -55,5 +48,17 @@ public class Cliente {
 	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
 	}
-
+	public double getCreditos() {
+		return creditos;
+	}
+	
+	 public void cargarCredito(double cantidad)throws DatoInvalidoException {
+		 
+		    if (cantidad <0) {
+		    	throw new DatoInvalidoException("No se puede cargar saldo negativo");
+		    }
+		    creditos += cantidad;
+		 
+	}
+		 
 }

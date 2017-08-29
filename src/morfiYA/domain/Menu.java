@@ -1,6 +1,7 @@
 package morfiYA.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import morfiYA.exceptions.DatoInvalidoException;
 
@@ -9,24 +10,27 @@ public class Menu {
 	private String nombre;
 	private String descripcion; 
 	private Categoria categoria;
-	private Float valorDelivery;
+	private double valorDelivery;
 	private Date fechaVigenciaDesde;
 	private Date fechaVigenciaHasta;
+	private List<String> turnos;
+	private List<Date> horariosDeEntrega;
+	private List<Date> horariosDeEnvio;
 	//Turnos entrega envio
 	private Integer tiempoDeEntrega;
-	private Float precio;
+	private double precio;
 	private Integer cantidadMinima;
 	private Integer cantidadMinima2;
-	private Float precioCantidadMinima;
-	private Float precioCantidadMinima2;
+	private double precioCantidadMinima;
+	private double precioCantidadMinima2;
 	private Integer cantidadMaxVtasPorDia;
 	private Integer cantidadVendidos;//Para validar si puedo seguir vendiendo.
 
-	public Float getPrecioCantidadMinima() {
+	public double getPrecioCantidadMinima() {
 		return precioCantidadMinima;
 	}
 
-	public void setPrecioCantidadMinima(Float precioCantidadMinima)throws DatoInvalidoException {
+	public void setPrecioCantidadMinima(double precioCantidadMinima)throws DatoInvalidoException {
 		if (precioCantidadMinima <0) {
 			throw new DatoInvalidoException("El precio no puede ser negativo");
 		}
@@ -39,16 +43,19 @@ public class Menu {
 		this.precioCantidadMinima = precioCantidadMinima;
 	}
 
-	public Float getPrecioCantidadMinima2() {
+	public double getPrecioCantidadMinima2() {
 		return precioCantidadMinima2;
 	}
 
-	public void setPrecioCantidadMinima2(Float precioCantidadMinima2)throws DatoInvalidoException {
+	public void setPrecioCantidadMinima2(double precioCantidadMinima2)throws DatoInvalidoException {
 		if (precioCantidadMinima2 <0) {
 			throw new DatoInvalidoException("El precio no puede ser negativo");
 		}
 		if (precioCantidadMinima2 >1000) {
 			throw new DatoInvalidoException("El precio maximo de venta es de 1000");
+		}
+		if (precioCantidadMinima2 > this.precio) {
+			throw new DatoInvalidoException("El precio de cantidad minima 2 debe ser menor al precio general");
 		}
 		if(precioCantidadMinima2 > this.precioCantidadMinima) {
 			throw new DatoInvalidoException("El precio debe ser menor al precio de la cantidad minima 1");
@@ -80,11 +87,11 @@ public class Menu {
 		this.tiempoDeEntrega = tiempoDeEntrega;
 	}
 
-	public Float getPrecio() {
+	public double getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(Float precio) {
+	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
 
@@ -94,10 +101,10 @@ public class Menu {
 
 	public void setCantidadMinima(Integer cantidadMinima) throws DatoInvalidoException {
 		if (cantidadMinima < 10) {
-			throw new DatoInvalidoException("La cantidad tiene que ser mayor a 9");
+			throw new DatoInvalidoException("La cantidad tiene que ser mayor o igual a 10");
 		}
 		if(cantidadMinima > 70) {
-			throw new DatoInvalidoException("La cantidad maxima permitida es de 70");
+			throw new DatoInvalidoException("La cantidad maxima permitida menor o igual a 70");
 		}
 		this.cantidadMinima = cantidadMinima;
 	}
@@ -132,11 +139,11 @@ public class Menu {
 		this.categoria = categoria;
 	}
 
-	public Float getValorDelivery() {
+	public double getValorDelivery() {
 		return valorDelivery;
 	}
 
-	public void setValorDelivery(Float precio)throws DatoInvalidoException {
+	public void setValorDelivery(double precio)throws DatoInvalidoException {
 		if (precio < 10) {
 			throw new DatoInvalidoException("El precio debe ser mayor a $10");
 		}
@@ -174,5 +181,28 @@ public class Menu {
 		this.descripcion = descripcion;
 	}
 
-	
+	public List<Date> getHorariosDeEnvio() {
+		return horariosDeEnvio;
+	}
+
+	public void setHorariosDeEnvio(List<Date> horariosDeEnvio) {
+		this.horariosDeEnvio = horariosDeEnvio;
+	}
+
+	public List<Date> getHorariosDeEntrega() {
+		return horariosDeEntrega;
+	}
+
+	public void setHorariosDeEntrega(List<Date> horariosDeEntrega) {
+		this.horariosDeEntrega = horariosDeEntrega;
+	}
+
+	public List<String> getTurnos() {
+		return turnos;
+	}
+
+	public void setTurnos(List<String> turnos) {
+		this.turnos = turnos;
+	}
+
 }
