@@ -3,6 +3,8 @@ package morfiYA.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import morfiYA.exceptions.DatoInvalidoException;
+
 public class AlarmaCambioPrecio {
 	private static List<Cliente> compradoresCantidadMinima = new ArrayList<Cliente>();
 	private static List<Cliente> compradoresCantidadMinima2 = new ArrayList<Cliente>();
@@ -40,21 +42,21 @@ public class AlarmaCambioPrecio {
 		proveedores.remove(proveedor);
 	}
 
-	public void notifyObserversCantidadMinima(double monto) {
+	public void notifyObserversCantidadMinima(double monto) throws DatoInvalidoException {
 		for(int i  = 0; i < compradoresCantidadMinima.size(); i++){
-			compradoresCantidadMinima.get(i).update(monto);
+			compradoresCantidadMinima.get(i).cargarCredito(monto);
 		}
 	}
 		
-	public void notifyObserversCantidadMinima2(double monto) {
+	public void notifyObserversCantidadMinima2(double monto) throws DatoInvalidoException {
 		for(int i  = 0; i < compradoresCantidadMinima2.size(); i++){
-			compradoresCantidadMinima.get(i).update(monto);
+			compradoresCantidadMinima.get(i).cargarCredito(monto);
 			}
 	}
 
-	public void notifyObserversProveedores(double monto) {
+	public void notifyObserversProveedores(double monto) throws DatoInvalidoException {
 		for(int i  = 0; i < proveedores.size(); i++){
-			compradoresCantidadMinima.get(i).update(monto);
+			compradoresCantidadMinima.get(i).cargarCredito(monto);
 		}
 	}
 }

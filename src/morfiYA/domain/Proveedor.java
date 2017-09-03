@@ -11,7 +11,6 @@ public class Proveedor {
 		this.servicio = servicio;
 	}
 	
-	// No me cierra este metodo
 	public void retirarCreditos(double cantidad) throws DatoInvalidoException{
 		if(cantidad < 0) {
 			throw new DatoInvalidoException("No se puede retirar una cantidad negativa de creditos");
