@@ -32,4 +32,11 @@ public class Direccion {
 	public void setGeolocalizacion(LocalizacionMapa geolocalizacion) {
 		this.geolocalizacion = geolocalizacion;
 	}
+	public Direccion(Localidad localidad, String direccion, Integer numero, LocalizacionMapa geolocalizacion) {
+		super();
+		this.localidad = localidad;
+		this.direccion = direccion;
+		this.numero = numero;
+		this.geolocalizacion = geolocalizacion;
+	}
 }
