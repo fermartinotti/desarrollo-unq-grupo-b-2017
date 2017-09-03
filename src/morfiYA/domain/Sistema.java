@@ -11,17 +11,17 @@ public class Sistema {
 		if(menu.estaMenuVigente() && (menu.getPrecio() * cantidad) <= cliente.getCreditos() && menu.puedeVender()) {
 			Pedido nuevoPedido = new Pedido(fechaEntrega, null, menu, cliente); // Falta tipo de entrega
 			// No se al final a donde va el pedido
-			cliente.setCreditos(menu.getPrecio() * cantidad);
-			proveedor.setCreditos(menu.getPrecio() * cantidad);
+			cliente.setCreditos(cliente.getCreditos() - menu.getPrecio() * cantidad);
+			proveedor.setCreditos(proveedor.getCreditos() + menu.getPrecio() * cantidad);
 			menu.setCantidadVendidos(menu.getCantidadVendidos() + cantidad);
-			if(menu.getCantidadMinima()<= menu.getCantidadVendidos() && (menu.getCantidadVendidos() < menu.getCantidadMinima2())) {
+			if(menu.getCantidadMinima()>= menu.getCantidadVendidos() && (menu.getCantidadVendidos() < menu.getCantidadMinima2())) {
 				AlarmaCambioPrecio alarma = new AlarmaCambioPrecio();
 				alarma.attachCantidadMinima(cliente);
 				alarma.attachProveedores(proveedor);
 				alarma.notifyObserversCantidadMinima(menu.getPrecio()-menu.getPrecioCantidadMinima());
 				alarma.notifyObserversProveedores(menu.getPrecio()-menu.getPrecioCantidadMinima());
 			}
-			if(menu.getCantidadMinima2()<= menu.getCantidadVendidos() && menu.getCantidadVendidos() > menu.getCantidadMinima()) {
+			if(menu.getCantidadMinima2()>= menu.getCantidadVendidos() && menu.getCantidadVendidos() > menu.getCantidadMinima()) {
 				AlarmaCambioPrecio alarma = new AlarmaCambioPrecio();
 				alarma.attachCantidadMinima2(cliente);
 				alarma.attachProveedores(proveedor);
