@@ -3,42 +3,60 @@ package morfiYA.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AlarmaCambioPrecio implements Subject {
-	private static List<ICambioDePrecio> compradoresCantidadMinima = new ArrayList<ICambioDePrecio>();
-	private static List<ICambioDePrecio> compradoresCantidadMinima2 = new ArrayList<ICambioDePrecio>();
-	
+public class AlarmaCambioPrecio {
+	private static List<Cliente> compradoresCantidadMinima = new ArrayList<Cliente>();
+	private static List<Cliente> compradoresCantidadMinima2 = new ArrayList<Cliente>();
+	private static List<Proveedor> proveedores = new ArrayList<Proveedor>();
 
-	@Override
-	public void attachCantidadMinima(ICambioDePrecio observador) {
+	
+	public void attachCantidadMinima(Cliente observador) {
 		compradoresCantidadMinima.add(observador);
 		
 	}
 	
-	@Override
-	public void attachCantidadMinima2(ICambioDePrecio observador) {
+	
+	public void attachCantidadMinima2(Cliente observador) {
 		compradoresCantidadMinima2.add(observador);
 		
 	}
+	
+	public void attachProveedores(Proveedor proveedor) {
+		proveedores.add(proveedor);
+	}
 
-	@Override
-	public void dettachCantidadMinima(ICambioDePrecio observador) {
+	
+	public void dettachCantidadMinima(Cliente observador) {
 		compradoresCantidadMinima.remove(observador);
 		
 	}
 	
-	@Override
-	public void dettachCantidadMinima2(ICambioDePrecio observador) {
+	
+	public void dettachCantidadMinima2(Cliente observador) {
 		compradoresCantidadMinima2.remove(observador);
 		
 	}
-
-	@Override
-	public void notifyObservers() {
-		for(int i  = 0; i < compradoresCantidadMinima.size(); i++){
-			compradoresCantidadMinima.get(i).update();
-		}
-		
-	}
 	
+	public void dettachProveedores(Proveedor proveedor) {
+		proveedores.remove(proveedor);
+	}
 
+	public void notifyObserversCantidadMinima(double monto) {
+		for(int i  = 0; i < compradoresCantidadMinima.size(); i++){
+			compradoresCantidadMinima.get(i).update(monto);
+		}
+	}
+		
+	public void notifyObserversCantidadMinima2(double monto) {
+		for(int i  = 0; i < compradoresCantidadMinima2.size(); i++){
+			compradoresCantidadMinima.get(i).update(monto);
+			}
+	}
+
+	public void notifyObserversProveedores(double monto) {
+		for(int i  = 0; i < proveedores.size(); i++){
+			compradoresCantidadMinima.get(i).update(monto);
+		}
+	}
 }
+
+

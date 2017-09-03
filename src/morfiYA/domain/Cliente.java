@@ -60,5 +60,11 @@ public class Cliente {
 		    creditos += cantidad;
 		 
 	}
-		 
+	public void setCreditos(double creditos) {
+		this.creditos = creditos;
+	}	
+	
+	public void update(double monto) {
+		setCreditos(creditos + monto);
+	}
 }

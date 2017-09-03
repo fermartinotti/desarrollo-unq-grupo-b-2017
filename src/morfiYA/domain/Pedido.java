@@ -9,4 +9,14 @@ public class Pedido {
 	private Opinion opinion;
 	private Menu menu;
 	private Cliente cliente;
+	
+	public Pedido(Date fechaDeEntrega, Opinion opinion, Menu menu, Cliente cliente) {
+		super();
+		this.fechaDeEntrega = fechaDeEntrega;
+		this.opinion = opinion;
+		this.menu = menu;
+		this.cliente = cliente;
+	}
+	
+	
 }

@@ -204,5 +204,21 @@ public class Menu {
 	public void setTurnos(List<String> turnos) {
 		this.turnos = turnos;
 	}
+	
+	public boolean estaMenuVigente() {
+		Date diaActual = new Date();
+		return (getFechaVigenciaDesde().after(diaActual) && getFechaVigenciaHasta().before(diaActual));
+	}
+	
+	public boolean puedeVender() {
+		return this.cantidadVendidos <= getCantidadMaxVtasPorDia();
+	}
 
+	public Integer getCantidadVendidos() {
+		return cantidadVendidos;
+	}
+
+	public void setCantidadVendidos(Integer cantidadVendidos) {
+		this.cantidadVendidos = cantidadVendidos;
+	}
 }

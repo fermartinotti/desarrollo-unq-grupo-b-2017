@@ -38,4 +38,8 @@ public class Proveedor {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+	public void update(double monto) {
+		setCreditos(creditos - monto);
+	}
 }
