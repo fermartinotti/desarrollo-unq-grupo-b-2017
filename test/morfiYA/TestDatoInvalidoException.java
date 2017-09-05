@@ -137,7 +137,7 @@ public class TestDatoInvalidoException {
 	public void testCantidadMinima2MayorACientoCincuenta() {
 		Menu menu = new Menu();
 		try {
-			menu.setCantidadMinima2(200);
+			menu.setCantidadMinima2(151);
 			fail("Se esperaba excepcion");
 		} catch (DatoInvalidoException e) {}
 	}
