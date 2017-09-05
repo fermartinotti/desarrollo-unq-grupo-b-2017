@@ -21,7 +21,7 @@ public class Pedido {
 		this.puntuacion = puntuacion;
 		this.menu = menu;
 		this.cliente = cliente;
-		this.descripcion = descripcion;
+		this.descripcion = descripcion; 
 	}
 	
 	public Proveedor getProveedor() {
