@@ -11,6 +11,7 @@ public class Cliente {
 	private Telefono telefono;
 	private Direccion direccion;
 	private double creditos = 0;
+	private Habilitacion puedeComprar = Habilitacion.HABILITADO; 
 	
 	public Integer getCuit() {
 		return cuit;
@@ -50,6 +51,12 @@ public class Cliente {
 	}
 	public double getCreditos() {
 		return creditos;
+	}
+	public void habilitarCliente(){
+		puedeComprar = Habilitacion.HABILITADO; 
+	}
+	public void deshabilitarCliente(){
+		puedeComprar = Habilitacion.HABILITADO; 
 	}
 	
 	 public void cargarCredito(double cantidad)throws DatoInvalidoException {

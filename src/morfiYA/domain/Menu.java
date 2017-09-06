@@ -25,6 +25,7 @@ public class Menu {
 	private double precioCantidadMinima2;
 	private Integer cantidadMaxVtasPorDia;
 	private Integer cantidadVendidos;//Para validar si puedo seguir vendiendo.
+	private Habilitacion estaParaLaVenta = Habilitacion.HABILITADO; 
 
 	public double getPrecioCantidadMinima() {
 		return precioCantidadMinima;
@@ -220,5 +221,10 @@ public class Menu {
 
 	public void setCantidadVendidos(Integer cantidadVendidos) {
 		this.cantidadVendidos = cantidadVendidos;
+	}
+	
+	public void inhabilitarMenu(){
+		estaParaLaVenta  = Habilitacion.INHABILITADO; 
+
 	}
 }
