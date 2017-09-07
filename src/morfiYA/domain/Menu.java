@@ -1,5 +1,6 @@
 package morfiYA.domain;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -11,8 +12,8 @@ public class Menu {
 	private String descripcion; 
 	private Categoria categoria;
 	private double valorDelivery;
-	private Date fechaVigenciaDesde;
-	private Date fechaVigenciaHasta;
+	private LocalDate fechaVigenciaDesde;
+	private LocalDate fechaVigenciaHasta;
 	private List<String> turnos;
 	private List<Date> horariosDeEntrega;
 	private List<Date> horariosDeEnvio;
@@ -64,19 +65,19 @@ public class Menu {
 		this.precioCantidadMinima2 = precioCantidadMinima2;
 	}
 
-	public Date getFechaVigenciaDesde() {
+	public LocalDate getFechaVigenciaDesde() {
 		return fechaVigenciaDesde;
 	}
 
-	public void setFechaVigenciaDesde(Date fechaVigenciaDesde) {
+	public void setFechaVigenciaDesde(LocalDate fechaVigenciaDesde) {
 		this.fechaVigenciaDesde = fechaVigenciaDesde;
 	}
 
-	public Date getFechaVigenciaHasta() {
+	public LocalDate getFechaVigenciaHasta() {
 		return fechaVigenciaHasta;
 	}
 
-	public void setFechaVigenciaHasta(Date fechaVigenciaHasta) {
+	public void setFechaVigenciaHasta(LocalDate fechaVigenciaHasta) {
 		this.fechaVigenciaHasta = fechaVigenciaHasta;
 	}
 
@@ -204,11 +205,6 @@ public class Menu {
 
 	public void setTurnos(List<String> turnos) {
 		this.turnos = turnos;
-	}
-	
-	public boolean estaMenuVigente() {
-		Date diaActual = new Date();
-		return (getFechaVigenciaDesde().after(diaActual) && getFechaVigenciaHasta().before(diaActual));
 	}
 	
 	public boolean puedeVender() {

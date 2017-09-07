@@ -1,11 +1,11 @@
 package morfiYA.domain;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import morfiYA.exceptions.DatoInvalidoException;
 
 public class Pedido {
-	private Date fechaDeEntrega;
+	private LocalDate fechaDeEntrega;
 	// como almacenamos la hora
 	// Tipo de entrega definir
 	Integer puntuacion=0;
@@ -15,7 +15,7 @@ public class Pedido {
 	String	descripcion;
 	EstadoPuntuacion estadoPuntuacion = EstadoPuntuacion.PENDIENTE;
 	
-	public Pedido(Date fechaDeEntrega, String descripcion, Menu menu, Cliente cliente) {
+	public Pedido(LocalDate fechaDeEntrega, String descripcion, Menu menu, Cliente cliente) {
 		super();
 		this.fechaDeEntrega = fechaDeEntrega;
 		this.menu = menu;
