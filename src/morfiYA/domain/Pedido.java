@@ -15,10 +15,9 @@ public class Pedido {
 	String	descripcion;
 	EstadoPuntuacion estadoPuntuacion = EstadoPuntuacion.PENDIENTE;
 	
-	public Pedido(Date fechaDeEntrega, String descripcion, Integer puntuacion, Menu menu, Cliente cliente) {
+	public Pedido(Date fechaDeEntrega, String descripcion, Menu menu, Cliente cliente) {
 		super();
 		this.fechaDeEntrega = fechaDeEntrega;
-		this.puntuacion = puntuacion;
 		this.menu = menu;
 		this.cliente = cliente;
 		this.descripcion = descripcion; 

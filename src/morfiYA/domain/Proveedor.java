@@ -6,7 +6,9 @@ public class Proveedor {
 	private String nombre;
 	private Servicio servicio;
 	private double creditos = 0;
+	private double creditosNoDisponibles= 0;
 	
+
 	public void agregarServicio(Servicio servicio) {
 		this.servicio = servicio;
 	}
@@ -21,13 +23,48 @@ public class Proveedor {
 		}
 		creditos -= cantidad;
 	}
+	
+	public void cargarCredito(double cantidad)throws DatoInvalidoException {
+		 
+	    if (cantidad <0) {
+	    	throw new DatoInvalidoException("No se puede cargar saldo negativo");
+	    }
+	    creditos += cantidad;
+	 }
 
 	public double getCreditos() {
 		return creditos;
 	}
 
+	public double getCreditosNoDisponibles() {
+		return creditosNoDisponibles;
+	}
+	
+	public void retirarCreditosNoDisponibles(double cantidad) throws DatoInvalidoException{
+		if(cantidad < 0) {
+			throw new DatoInvalidoException("No se puede retirar una cantidad negativa de creditos");
+		}
+		
+		if(cantidad > creditosNoDisponibles) {
+			throw new DatoInvalidoException("No tiene saldo suficiente para retirar la cantidad ingresada");
+		}
+		creditosNoDisponibles -= cantidad;
+	}
+	
+	public void cargarCreditoNoDisponible(double cantidad)throws DatoInvalidoException {
+		 
+	    if (cantidad <0) {
+	    	throw new DatoInvalidoException("No se puede cargar saldo negativo");
+	    }
+	    creditosNoDisponibles += cantidad;
+	 }
+
 	public void setCreditos(double creditos) {
 		this.creditos = creditos;
+	}
+
+	public void setCreditosNoDisponibles(double creditosNoDisponibles) {
+		this.creditosNoDisponibles = creditosNoDisponibles;
 	}
 
 	public String getNombre() {
@@ -36,9 +73,5 @@ public class Proveedor {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-	
-	public void update(double monto) {
-		setCreditos(creditos - monto);
 	}
 }

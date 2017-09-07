@@ -53,11 +53,21 @@ public class Cliente {
 	}
 	
 	 public void cargarCredito(double cantidad)throws DatoInvalidoException {
-		 
-		    if (cantidad <0) {
-		    	throw new DatoInvalidoException("No se puede cargar saldo negativo");
-		    }
-		    creditos += cantidad;
+		 if (cantidad <0) {
+		   	throw new DatoInvalidoException("No se puede cargar saldo negativo");
+		 }
+		 creditos += cantidad;
 		 
 	}
+	
+	 public void retirarCreditos(double cantidad) throws DatoInvalidoException{
+		if(cantidad < 0) {
+			throw new DatoInvalidoException("No se puede retirar una cantidad negativa de creditos");
+		}	
+		if(cantidad > creditos) {
+			throw new DatoInvalidoException("No tiene saldo suficiente para retirar la cantidad ingresada");
+		}
+		creditos -= cantidad;
+	}
+	 
 }
