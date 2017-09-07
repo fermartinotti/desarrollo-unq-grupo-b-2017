@@ -14,14 +14,23 @@ public class Sistema {
 		pedidos.add(pedido);
 	}
 	
-	public double puntajePromedioProveedor(Proveedor proveedor) {
-		return pedidos.stream().filter(puntuacion-> puntuacion.estaFinalizado() && puntuacion.getProveedor().equals(proveedor))
-				.mapToDouble(puntuacion -> puntuacion.getPuntuacion()).average().getAsDouble();
-	}
-	
-	public boolean hayPuntuacionesPendientesCliente(Cliente cliente) {
-		return pedidos.stream().filter(puntuacion -> puntuacion.estaPendiente() && puntuacion.getCliente().equals(cliente)).count() > 0;
+	public double puntajePromedioPedido(List<Pedido> pedidos) {
+		double sumaPuntajes = 0;
 		
+		for(Pedido p: pedidos){
+			sumaPuntajes+=p.getPuntuacion();
+		}
+		return sumaPuntajes/pedidos.size();
 	}
 	
+	public void evaluarMenu(List<Pedido> pedidos){
+		if(puntajePromedioPedido(pedidos) < 2 ){
+			pedidos.get(0).menu.inhabilitarMenu();
+		}
+	}
+	
+	public void calificarMenu(Cliente cliente, Pedido pedido, Integer puntuacion){
+		pedido.puntuacion = puntuacion;
+		cliente.habilitarCliente();
+	}
 }
