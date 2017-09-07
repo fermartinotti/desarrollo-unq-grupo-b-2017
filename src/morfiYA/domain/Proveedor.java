@@ -7,6 +7,7 @@ public class Proveedor {
 	private Servicio servicio;
 	private double creditos = 0;
 	private double creditosNoDisponibles= 0;
+	private Habilitacion puedeVender = Habilitacion.HABILITADO; 
 	
 
 	public void agregarServicio(Servicio servicio) {

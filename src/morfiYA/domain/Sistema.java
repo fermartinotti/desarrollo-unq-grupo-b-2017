@@ -16,9 +16,13 @@ public class Sistema {
 		pedidos.add(pedido);
 	}
 	
-	public double puntajePromedioProveedor(Proveedor proveedor) {
-		return pedidos.stream().filter(puntuacion-> puntuacion.estaFinalizado() && puntuacion.getProveedor().equals(proveedor))
-				.mapToDouble(puntuacion -> puntuacion.getPuntuacion()).average().getAsDouble();
+	public double puntajePromedioPedido(List<Pedido> pedidos) {
+		double sumaPuntajes = 0;
+		
+		for(Pedido p: pedidos){
+			sumaPuntajes+=p.getPuntuacion();
+		}
+		return sumaPuntajes/pedidos.size();
 	}
 	
 //	public boolean hayPuntuacionesPendientesCliente(Cliente cliente) {
@@ -62,5 +66,15 @@ public class Sistema {
 		// Se cobra a todos el mismo precio, se devuelve a todos lo mismo
 		// updatear saldos, pasar saldos de no disponible a disponible
 		// actualizar estado de los pedidos. 
+    
+	public void evaluarMenu(List<Pedido> pedidos){
+		if(puntajePromedioPedido(pedidos) < 2 ){
+			pedidos.get(0).menu.inhabilitarMenu();
+		}
+	}
+	
+	public void calificarMenu(Cliente cliente, Pedido pedido, Integer puntuacion){
+		pedido.puntuacion = puntuacion;
+		cliente.habilitarCliente();
 	}
 }
