@@ -44,13 +44,21 @@ public class Sistema {
 	public Boolean esFechaValida(Menu menu, LocalDate fecha){
 		// FALTA AGREGARLE LA LOGICA DE LOS FERIADOS
 		LocalDate today = LocalDate.now();
-		if(today.getDayOfWeek().equals(DayOfWeek.SATURDAY) || today.getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
-			return false;
+		
+		if(today.getDayOfWeek().equals(DayOfWeek.MONDAY) || today.getDayOfWeek().equals(DayOfWeek.TUESDAY) 
+		   || today.getDayOfWeek().equals(DayOfWeek.WEDNESDAY)) {
+			
+			Duration diferencia = Duration.between(today, fecha); // throws an exception
+			return (diferencia.toHours() < 48);
 		}
-		
-		Duration diferencia = Duration.between(today, fecha); // throws an exception
-		
-		return (diferencia.toHours() < 48);
+		if(today.getDayOfWeek().equals(DayOfWeek.THURSDAY)){
+			Duration diferencia = Duration.between(today.plusDays(2), fecha); // throws an exception
+			return (diferencia.toHours() < 48);
+		}
+		else {
+			Duration diferencia = Duration.between(today.plusDays(2), fecha); // throws an exception
+			return (diferencia.toHours() < 48);
+		}
 	}
 	
 	// DIEGO
