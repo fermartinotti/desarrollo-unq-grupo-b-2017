@@ -1,7 +1,6 @@
 package morfiYA.domain;
 
 import java.time.DayOfWeek;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +29,8 @@ public class Sistema {
 		}
 	}
 	
-	public Boolean puedeComprar(Menu menu, Cliente cliente, LocalDate fecha){
-		return (cantDeVentasNoSuperada(menu) && cliente.puedeComprar() && esFechaValida(menu, fecha));
+	public Boolean puedeComprar(Menu menu, Cliente cliente, LocalDate fechaDeEntrega){
+		return (cantDeVentasNoSuperada(menu) && cliente.puedeComprar() && esFechaValida(fechaDeEntrega));
 	}
 	
 	public Boolean cantDeVentasNoSuperada(Menu menu){
@@ -41,65 +40,46 @@ public class Sistema {
 		// En este caso pedidos es TODOS los pedidos, no se realiza el filter ya que es una Query a DB. Se implementa para el prox release.
 	}
 	
-	public Boolean esFechaValida(Menu menu, LocalDate fecha){
-		// FALTA AGREGARLE LA LOGICA DE LOS FERIADOS
+	public Boolean esFechaValida(LocalDate fecha) {
+		int diffDays= 0;
 		LocalDate today = LocalDate.now();
-		
-		if(today.getDayOfWeek().equals(DayOfWeek.MONDAY) || today.getDayOfWeek().equals(DayOfWeek.TUESDAY) 
-		   || today.getDayOfWeek().equals(DayOfWeek.WEDNESDAY)) {
-			
-			Duration diferencia = Duration.between(today, fecha); // throws an exception
-			return (diferencia.toHours() < 48);
-		}
-		if(today.getDayOfWeek().equals(DayOfWeek.THURSDAY)){
-			Duration diferencia = Duration.between(today.plusDays(2), fecha); // throws an exception
-			return (diferencia.toHours() < 48);
-		}
-		else {
-			Duration diferencia = Duration.between(today.plusDays(2), fecha); // throws an exception
-			return (diferencia.toHours() < 48);
-		}
+		  //mientras la fecha inicial sea menor o igual que la fecha final se cuentan los dias
+		  while (today.isBefore(fecha) || today.equals(fecha)) {
+			  if (today.getDayOfWeek() != DayOfWeek.SUNDAY || today.getDayOfWeek() != DayOfWeek.SATURDAY) {
+				  diffDays++;
+			  }
+		  today.plusDays(1);
+		  }
+		return diffDays > 2;
 	}
-	
-	// DIEGO
-	public double evaluarDiferenciaDinero(Menu menu) {
-		// Cuando son las 00hs, no habria que setear la cantidad de vendidos en 0????
-		if(menu.getCantidadVendidos() >= menu.getCantidadMinima() && menu.getCantidadVendidos() < menu.getCantidadMinima2()) {
+
+	public double evaluarDiferenciaDinero(Menu menu, int cantVendidos) {
+
+		if(cantVendidos >= menu.getCantidadMinima() && cantVendidos < menu.getCantidadMinima2()) {
 			return menu.getPrecio() - menu.getPrecioCantidadMinima();
 		}
-		if(menu.getCantidadMinima2() >= menu.getCantidadVendidos()) {
+		if(cantVendidos >= menu.getCantidadMinima2() ) {
 			return menu.getPrecio() - menu.getPrecioCantidadMinima2();
 		}
 		return 0;
 	}
 	
-	// DIEGO
 	public void confirmarCompras() throws DatoInvalidoException {
-		/*
-		 IMPORTANTE: 
-		 Cuando se confirman los pedidos se confirma por FECHA, es decir en esa fecha hay MUCHOS menues
-		 y para cada menu hay que hacer una consulta para ver la cantidad que se vendio DE CADA UNO.
-		 Se resuelve con querys a la base que realizan los servicios:
-		 
-		 1- Se les pide una lista de los menues que se vendieron por lo menos 1 en ese dia
-		 2- Se realiza un for para cada menu
-		 	FOR:
-		 		3- se pide todos los pedidos para cada menu.
-		 		4- se calcula el minimo alcanzado y se updatean los saldos en caso de ser necesario.
-
-		 */
+	// Se deberia hacer un for para cada menu comprado en X dia -> Esto me da una lista de pedidos de X menu realizados X dia.
+	// Al resolverse con consultas a la db se agrega en release 2.
+		
 		for(Pedido pedido: this.pedidos) {
+			
+			Double precioMenu = pedido.getMenu().getPrecio();
+			Double diferenciaDePrecio = evaluarDiferenciaDinero(pedido.getMenu(), pedidos.size());
+			
 			if(pedido.getFechaCompra().plusDays(1).equals(LocalDate.now())) {
-				pedido.getCliente().cargarCredito(evaluarDiferenciaDinero(pedido.getMenu()));
-				pedido.getProveedor().retirarCreditosNoDisponibles(pedido.getMenu().getPrecio());
-				pedido.getProveedor().cargarCredito(pedido.menu.getPrecio()-evaluarDiferenciaDinero(pedido.getMenu()));
+				pedido.getCliente().cargarCredito(diferenciaDePrecio);
+				pedido.getProveedor().retirarCreditosNoDisponibles(precioMenu);
+				pedido.getProveedor().cargarCredito(precioMenu-diferenciaDePrecio);
 			}
 		}
-		
-		// POR ULTIMO: 
-		this.evaluarMenu(pedidos);
-		// IMPORTANTE: Revisar y pensar si vale la pena tener en menu una variable con su calificacion, 
-		// y se recalcula con cada calificacion nueva.
+
 	}
 	public double puntajePromedioPedido(List<Pedido> pedidos) {
 		double sumaPuntajes = 0;
