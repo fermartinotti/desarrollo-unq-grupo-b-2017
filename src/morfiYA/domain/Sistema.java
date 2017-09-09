@@ -1,9 +1,12 @@
 package morfiYA.domain;
 
+import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import morfiYA.exceptions.DatoInvalidoException;
 
 public class Sistema {
 	
@@ -39,13 +42,31 @@ public class Sistema {
 	}
 	
 	public Boolean esFechaValida(Menu menu, LocalDate fecha){
-		// FALTA AGREGARLE LA LOGICA DE LOS FERIADOS Y FINES DE SEMANA
-				LocalDate today = LocalDate.now();
-				Duration diferencia = Duration.between(today, fecha); // throws an exception
-				return (diferencia.toHours() < 48);
+		// FALTA AGREGARLE LA LOGICA DE LOS FERIADOS
+		LocalDate today = LocalDate.now();
+		if(today.getDayOfWeek().equals(DayOfWeek.SATURDAY) || today.getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
+			return false;
+		}
+		
+		Duration diferencia = Duration.between(today, fecha); // throws an exception
+		
+		return (diferencia.toHours() < 48);
 	}
 	
-	public void confirmarCompras(){
+	// DIEGO
+	public double evaluarDiferenciaDinero(Menu menu) {
+		// Cuando son las 00hs, no habria que setear la cantidad de vendidos en 0????
+		if(menu.getCantidadVendidos() >= menu.getCantidadMinima() && menu.getCantidadVendidos() < menu.getCantidadMinima2()) {
+			return menu.getPrecio() - menu.getPrecioCantidadMinima();
+		}
+		if(menu.getCantidadMinima2() >= menu.getCantidadVendidos()) {
+			return menu.getPrecio() - menu.getPrecioCantidadMinima2();
+		}
+		return 0;
+	}
+	
+	// DIEGO
+	public void confirmarCompras() throws DatoInvalidoException {
 		/*
 		 IMPORTANTE: 
 		 Cuando se confirman los pedidos se confirma por FECHA, es decir en esa fecha hay MUCHOS menues
@@ -59,6 +80,13 @@ public class Sistema {
 		 		4- se calcula el minimo alcanzado y se updatean los saldos en caso de ser necesario.
 
 		 */
+		for(Pedido pedido: this.pedidos) {
+			if(pedido.getFechaCompra().plusDays(1).equals(LocalDate.now())) {
+				pedido.getCliente().cargarCredito(evaluarDiferenciaDinero(pedido.getMenu()));
+				pedido.getProveedor().retirarCreditosNoDisponibles(pedido.getMenu().getPrecio());
+				pedido.getProveedor().cargarCredito(pedido.menu.getPrecio()-evaluarDiferenciaDinero(pedido.getMenu()));
+			}
+		}
 		
 		// POR ULTIMO: 
 		this.evaluarMenu(pedidos);
