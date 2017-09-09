@@ -6,6 +6,9 @@ import morfiYA.exceptions.DatoInvalidoException;
 
 public class Pedido {
 	private LocalDate fechaDeEntrega;
+	private LocalDate fechaCompra = LocalDate.now();
+	
+
 	// como almacenamos la hora
 	// Tipo de entrega definir
 	Integer puntuacion=0;
@@ -63,6 +66,10 @@ public class Pedido {
 	
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	
+	public LocalDate getFechaCompra() {
+		return fechaCompra;
 	}
 	
 	public void puntuar(Integer valor) throws DatoInvalidoException {
