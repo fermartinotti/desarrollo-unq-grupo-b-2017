@@ -56,7 +56,11 @@ public class Cliente {
 		puedeComprar = Habilitacion.HABILITADO; 
 	}
 	public void deshabilitarCliente(){
-		puedeComprar = Habilitacion.HABILITADO; 
+		puedeComprar = Habilitacion.INHABILITADO; 
+	}
+	
+	public Boolean puedeComprar() {
+		return (puedeComprar == Habilitacion.HABILITADO);
 	}
 	
 	 public void cargarCredito(double cantidad)throws DatoInvalidoException {
