@@ -10,7 +10,7 @@ public class Servicio {
 	
 	private String nombre;
 	private List<Menu> menus = new ArrayList<Menu>();
-	// LOGO ??  
+	private String logo = "http://marketing.cdn.telefe.com/wp-content/uploads/2017/04/Logo-morfi-la-pe%C3%B1a.jpg?x97692";  
 	private Direccion direccion;
 	private String descripcion;
 	private String link; // Referencia a la direccion web o al link de su perfil de FB.
@@ -101,6 +101,13 @@ public class Servicio {
 		this.telefono = telefono;
 	}
 
+	public String getLogo() {
+		return logo;
+	}
+
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
 	public DiasDeAtencion getAtencionAlPublico() {
 		return atencionAlPublico;
 	}
@@ -115,6 +122,5 @@ public class Servicio {
 
 	public void setLocalidadDeEntregas(Localidad localidadDeEntregas) {
 		this.localidadDeEntregas = localidadDeEntregas;
-	}
-		
+	}		
 }

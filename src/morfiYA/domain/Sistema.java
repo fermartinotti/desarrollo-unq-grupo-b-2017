@@ -11,16 +11,23 @@ public class Sistema {
 	
 	List<Pedido> pedidos = new ArrayList<Pedido>();
 	
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+	
 	public void agregarPedido(Pedido pedido) {
 		pedidos.add(pedido);
 	}
 	
-	
-	public void comprar(Menu menu, LocalDate fechaDeEntrega, Cliente cliente, String descripcion, Proveedor proveedor) {
+	public void comprar(Menu menu, Integer cantidad, LocalDate fechaDeEntrega, Cliente cliente, String descripcion, Proveedor proveedor) {
 		if (puedeComprar(menu, cliente, fechaDeEntrega)){ 
 			try{
-				cliente.retirarCreditos(menu.getPrecio());
-				proveedor.cargarCreditoNoDisponible(menu.getPrecio());
+				cliente.retirarCreditos(menu.getPrecio() * cantidad);
+				proveedor.cargarCreditoNoDisponible(menu.getPrecio() * cantidad);
 				//calcular tiempo de entrega (RELEASE 2)
 				Pedido pedido = new Pedido(fechaDeEntrega, descripcion,menu, cliente);
 				pedidos.add(pedido); // Futuro save de un servicio a la DB.
@@ -28,7 +35,7 @@ public class Sistema {
 			}catch (Exception e) {}
 		}
 	}
-	
+
 	public Boolean puedeComprar(Menu menu, Cliente cliente, LocalDate fechaDeEntrega){
 		return (cantDeVentasNoSuperada(menu) && cliente.puedeComprar() && esFechaValida(fechaDeEntrega));
 	}
@@ -48,7 +55,7 @@ public class Sistema {
 			  if (today.getDayOfWeek() != DayOfWeek.SUNDAY || today.getDayOfWeek() != DayOfWeek.SATURDAY) {
 				  diffDays++;
 			  }
-		  today.plusDays(1);
+			  today = today.plusDays(1);
 		  }
 		return diffDays > 2;
 	}

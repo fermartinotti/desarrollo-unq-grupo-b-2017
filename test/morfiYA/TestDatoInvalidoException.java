@@ -44,8 +44,9 @@ public class TestDatoInvalidoException {
 	public void testPrecioCantidadMinimaMayorAPrecioNormal() {
 
 		Menu menu = new Menu();
-		menu.setPrecio(900);
+		
 		try {
+			menu.setPrecio(900);
 			menu.setPrecioCantidadMinima(950);
 			fail("Se esperaba excepcion");
 		} catch (DatoInvalidoException e) {}
@@ -80,8 +81,9 @@ public class TestDatoInvalidoException {
 	public void testPrecioCantidadMinimaMayor2APrecioNormal() {
 
 		Menu menu = new Menu();
-		menu.setPrecio(900);
+		
 		try {
+			menu.setPrecio(900);
 			menu.setPrecioCantidadMinima2(950);
 			fail("Se esperaba excepcion");
 		} catch (DatoInvalidoException e) {}
@@ -92,8 +94,9 @@ public class TestDatoInvalidoException {
 	public void testPrecioCantidadMinima2MayorAPrecioCantidadMinima() {
 
 		Menu menu = new Menu();
-		menu.setPrecio(900);
+		
 		try {
+			menu.setPrecio(900);
 			menu.setPrecioCantidadMinima(700);
 			menu.setPrecioCantidadMinima2(800);
 			fail("Se esperaba excepcion");
