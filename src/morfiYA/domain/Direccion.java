@@ -5,7 +5,6 @@ public class Direccion {
 	private Localidad localidad;
 	private String direccion;
 	private Integer numero;
-	//private String geolocalizacion;
 	private LocalizacionMapa geolocalizacion;
 	
 	public Localidad getLocalidad() {

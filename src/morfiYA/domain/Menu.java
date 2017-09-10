@@ -207,6 +207,10 @@ public class Menu {
 		this.turnos = turnos;
 	}
 	
+	public Habilitacion getEstado() {
+		return estaParaLaVenta;
+	}
+	
 	public boolean puedeVender() {
 		return this.cantidadVendidos <= getCantidadMaxVtasPorDia();
 	}

@@ -3,6 +3,7 @@ package morfiYA;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import morfiYA.domain.Habilitacion;
 import morfiYA.domain.Menu;
 import morfiYA.exceptions.DatoInvalidoException;
 
@@ -52,5 +53,13 @@ public class TestMenu {
 		} catch (DatoInvalidoException e) {}
 		assertEquals(24, menu.getDescripcion().length());
 	}
+	
+	@Test 
+	public void testInhabilitarMenu() {
+		Menu menu = new Menu();
+		menu.inhabilitarMenu();
+		assertEquals(Habilitacion.INHABILITADO, menu.getEstado());
+	}
+	
 
 }
