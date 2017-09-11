@@ -44,8 +44,9 @@ public class TestDatoInvalidoException {
 	public void testPrecioCantidadMinimaMayorAPrecioNormal() {
 
 		Menu menu = new Menu();
-		menu.setPrecio(900);
+		
 		try {
+			menu.setPrecio(900);
 			menu.setPrecioCantidadMinima(950);
 			fail("Se esperaba excepcion");
 		} catch (DatoInvalidoException e) {}
@@ -80,8 +81,9 @@ public class TestDatoInvalidoException {
 	public void testPrecioCantidadMinimaMayor2APrecioNormal() {
 
 		Menu menu = new Menu();
-		menu.setPrecio(900);
+		
 		try {
+			menu.setPrecio(900);
 			menu.setPrecioCantidadMinima2(950);
 			fail("Se esperaba excepcion");
 		} catch (DatoInvalidoException e) {}
@@ -92,8 +94,9 @@ public class TestDatoInvalidoException {
 	public void testPrecioCantidadMinima2MayorAPrecioCantidadMinima() {
 
 		Menu menu = new Menu();
-		menu.setPrecio(900);
+		
 		try {
+			menu.setPrecio(900);
 			menu.setPrecioCantidadMinima(700);
 			menu.setPrecioCantidadMinima2(800);
 			fail("Se esperaba excepcion");
@@ -206,10 +209,31 @@ public class TestDatoInvalidoException {
 	}
 	
 	@Test
+	public void testCargaCreditoNegativo() {
+		Proveedor proveedor = new Proveedor();
+		
+		try{
+			proveedor.cargarCredito(-10);
+			fail("Se esperaba excepcion");
+		} catch(DatoInvalidoException e){}
+	}
+	
+	@Test
+	public void testCargaCreditoNegativoNoDisponible() {
+		Proveedor proveedor = new Proveedor();
+		
+		try{
+			proveedor.cargarCreditoNoDisponible(-10);
+			fail("Se esperaba excepcion");
+		} catch(DatoInvalidoException e){}
+	}
+	
+	@Test
 	public void testRetirarCreditosNegativos(){
 		Proveedor proveedor = new Proveedor();
-		proveedor.setCreditos(10);
+		
 		try{
+			proveedor.cargarCredito(10);
 			proveedor.retirarCreditos(-1);
 			fail("Se esperaba excepcion");
 		} catch(DatoInvalidoException e){}
@@ -218,9 +242,32 @@ public class TestDatoInvalidoException {
 	@Test
 	public void testRetirarCreditosMayoresALosDisponibles(){
 		Proveedor proveedor = new Proveedor();
-		proveedor.setCreditos(10);
+		
 		try{
+			proveedor.cargarCredito(10);
 			proveedor.retirarCreditos(20);
+			fail("Se esperaba excepcion");
+		} catch(DatoInvalidoException e){}
+	}
+	
+	@Test
+	public void testRetirarCreditosNegativosNoDisponibles(){
+		Proveedor proveedor = new Proveedor();
+		
+		try{
+			proveedor.cargarCreditoNoDisponible(10);
+			proveedor.retirarCreditosNoDisponibles(-1);
+			fail("Se esperaba excepcion");
+		} catch(DatoInvalidoException e){}
+	}
+	
+	@Test
+	public void testRetirarCreditosNoDisponiblesMayoresALosDisponibles(){
+		Proveedor proveedor = new Proveedor();
+		
+		try{
+			proveedor.cargarCreditoNoDisponible(10);
+			proveedor.retirarCreditosNoDisponibles(20);
 			fail("Se esperaba excepcion");
 		} catch(DatoInvalidoException e){}
 	}

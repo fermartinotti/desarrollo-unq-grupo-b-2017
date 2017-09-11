@@ -92,8 +92,11 @@ public class Menu {
 	public double getPrecio() {
 		return precio;
 	}
-
-	public void setPrecio(double precio) {
+	
+	public void setPrecio(double precio) throws DatoInvalidoException {
+		if (precio <0) {
+			throw new DatoInvalidoException("El precio no puede ser negativo");
+		}
 		this.precio = precio;
 	}
 
@@ -205,6 +208,10 @@ public class Menu {
 
 	public void setTurnos(List<String> turnos) {
 		this.turnos = turnos;
+	}
+	
+	public Habilitacion getEstado() {
+		return estaParaLaVenta;
 	}
 	
 	public boolean puedeVender() {

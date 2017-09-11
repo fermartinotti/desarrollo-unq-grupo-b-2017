@@ -25,7 +25,4 @@ public class LocalizacionMapa {
 		this.latitud = latitud;
 		this.longitud = longitud;
 	}
-	
-	
-
 }

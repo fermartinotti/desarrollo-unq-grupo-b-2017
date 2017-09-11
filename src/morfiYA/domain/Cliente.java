@@ -52,6 +52,10 @@ public class Cliente {
 	public double getCreditos() {
 		return creditos;
 	}
+	
+	public Habilitacion getEstado(){
+		return puedeComprar;
+	}
 	public void habilitarCliente(){
 		puedeComprar = Habilitacion.HABILITADO; 
 	}
@@ -68,7 +72,6 @@ public class Cliente {
 		   	throw new DatoInvalidoException("No se puede cargar saldo negativo");
 		 }
 		 creditos += cantidad;
-		 
 	}
 	
 	 public void retirarCreditos(double cantidad) throws DatoInvalidoException{

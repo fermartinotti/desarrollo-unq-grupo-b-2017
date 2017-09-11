@@ -14,6 +14,14 @@ public class Proveedor {
 		this.servicio = servicio;
 	}
 	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
 	public void retirarCreditos(double cantidad) throws DatoInvalidoException{
 		if(cantidad < 0) {
 			throw new DatoInvalidoException("No se puede retirar una cantidad negativa de creditos");
@@ -59,20 +67,4 @@ public class Proveedor {
 	    }
 	    creditosNoDisponibles += cantidad;
 	 }
-
-	public void setCreditos(double creditos) {
-		this.creditos = creditos;
-	}
-
-	public void setCreditosNoDisponibles(double creditosNoDisponibles) {
-		this.creditosNoDisponibles = creditosNoDisponibles;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
 }
