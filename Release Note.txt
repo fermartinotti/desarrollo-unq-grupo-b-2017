@@ -1,0 +1,23 @@
+------------------------
+TAG 1
+------------------------
+NEW FEATURES:
+* Configuracion de integracion continua Travis, build corriendo y SUCCESS. 
+* Deploy automatico en heroku
+* Codacy configurado, link en readme.md en github. 
+* Todas las relaciones creadas entre entidades.
+* Se puede puntuar una compra.
+* Se puede comprar un menu.
+* Confirmar las compras.
+* Se califica el menu
+* Se calcula el promedio de los menues y se evalua si se debe dar de baja a un proveedor.
+* Se realizan todos los chekeos y validaciones pedidas en el alcance del proyeccto.
+
+
+NOTES:
+Algunos metodos que "emulan" el funcionamiento del sistema (por ejemplo el confirmar las compras) no funcionan realmente, 
+ya que hay algunas cosas van a migrar a Querys a DB  llamando al dao y estas pasan a ser un servicio,
+funcionando asi todo en un ambiente transaccional seguro. Cosa que en este momento NO lo esta.
+
+
+KNOWN ISSUES:
