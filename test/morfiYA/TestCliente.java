@@ -13,7 +13,7 @@ public class TestCliente {
 	public void testCargarCredito(){
 		Cliente cliente= new Cliente();
 		try {
-			cliente.cargarCredito(10);;
+			cliente.cargarCredito(10);
 		} catch (DatoInvalidoException e) {}
 		assertEquals(10, cliente.getCreditos(), 0);
 	}
