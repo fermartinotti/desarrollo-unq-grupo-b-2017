@@ -18,6 +18,7 @@ NOTES:
 Algunos metodos que "emulan" el funcionamiento del sistema (por ejemplo el confirmar las compras) no funcionan realmente, 
 ya que hay algunas cosas van a migrar a Querys a DB  llamando al dao y estas pasan a ser un servicio,
 funcionando asi todo en un ambiente transaccional seguro. Cosa que en este momento NO lo esta.
-
+* Falta definir el tema de los "Turnos" de los pedidos
+* Falta agregar el tipo de envio : Ej: retiro en el local, envio a domicilio.
 
 KNOWN ISSUES:
