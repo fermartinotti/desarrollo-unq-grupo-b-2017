@@ -1,13 +1,13 @@
-package morfiYA;
+package morfiya;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import morfiYA.domain.Menu;
-import morfiYA.domain.Servicio;
-import morfiYA.exceptions.DatoInvalidoException;
-import morfiYA.exceptions.MenuException;
+import morfiya.domain.Menu;
+import morfiya.domain.Servicio;
+import morfiya.exceptions.DatoInvalidoException;
+import morfiya.exceptions.MenuException;
 
 public class TestServicio {
 	@Test 

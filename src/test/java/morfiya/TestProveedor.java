@@ -1,11 +1,11 @@
-package morfiYA;
+package morfiya;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import morfiYA.domain.Proveedor;
-import morfiYA.exceptions.DatoInvalidoException;
+import morfiya.domain.Proveedor;
+import morfiya.exceptions.DatoInvalidoException;
 
 public class TestProveedor {
 	@Test 
