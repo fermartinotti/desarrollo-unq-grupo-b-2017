@@ -1,4 +1,4 @@
-package morfiYA;
+package morfiya;
 
 import static org.junit.Assert.fail;
 
@@ -6,11 +6,11 @@ import java.util.Collections;
 
 import org.junit.Test;
 
-import morfiYA.domain.Cliente;
-import morfiYA.domain.Menu;
-import morfiYA.domain.Proveedor;
-import morfiYA.domain.Servicio;
-import morfiYA.exceptions.DatoInvalidoException;
+import morfiya.domain.Cliente;
+import morfiya.domain.Menu;
+import morfiya.domain.Proveedor;
+import morfiya.domain.Servicio;
+import morfiya.exceptions.DatoInvalidoException;
 
 public class TestDatoInvalidoException {
 	

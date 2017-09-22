@@ -1,12 +1,12 @@
-package morfiYA;
+package morfiya;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import morfiYA.domain.Cliente;
-import morfiYA.domain.Habilitacion;
-import morfiYA.exceptions.DatoInvalidoException;
+import morfiya.domain.Cliente;
+import morfiya.domain.Habilitacion;
+import morfiya.exceptions.DatoInvalidoException;
 
 public class TestCliente {
 	@Test 
