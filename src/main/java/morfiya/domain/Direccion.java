@@ -1,7 +1,9 @@
 package morfiya.domain;
 
-public class Direccion {
+public class Direccion extends Entity{
 
+	
+	private static final long serialVersionUID = -9161568105782812175L;
 	private Localidad localidad;
 	private String direccion;
 	private Integer numero;

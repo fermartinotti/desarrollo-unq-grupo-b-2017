@@ -1,6 +1,8 @@
 package morfiya.domain;
 
-public class LocalizacionMapa {
+public class LocalizacionMapa extends Entity {
+	
+	private static final long serialVersionUID = -437707288653161778L;
 	double latitud;
 	double longitud;
 	

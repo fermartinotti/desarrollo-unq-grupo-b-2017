@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field"
+	default-cascade="save-update">
+	<class name="morfiya.domain.Direccion">
+		<id column="ID" name="id">
+			<generator class="native" />
+		</id>
+
+		<property name="direccion" />
+		<property name="numero" />
+		
+		<property name="localidad">
+		   <type name="org.hibernate.type.EnumType"> 
+		      <param name="enumClass">morfiya.domain.Localidad</param> 
+		      <param name="useNamed">true</param>
+		   </type> 
+		</property>
+		
+		<one-to-one name="geolocalizacion" class="morfiya.domain.LocalizacionMapa" />
+
+	</class>
+</hibernate-mapping>

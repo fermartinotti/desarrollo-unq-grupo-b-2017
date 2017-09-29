@@ -1,9 +1,12 @@
 package morfiya.domain;
 
+
 import morfiya.exceptions.DatoInvalidoException;
 
-public class Cliente {
+public class Cliente extends Entity{
 	
+
+	private static final long serialVersionUID = 1L;
 	private Integer cuit;
 	private String nombre;
 	private String apellido;
@@ -12,6 +15,10 @@ public class Cliente {
 	private Direccion direccion;
 	private double creditos = 0;
 	private Habilitacion puedeComprar = Habilitacion.HABILITADO; 
+	
+	public Cliente() {
+		super();
+	}
 	
 	public Integer getCuit() {
 		return cuit;
