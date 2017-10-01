@@ -108,9 +108,10 @@ public class TestSistema {
 		Cliente cliente2 = new Cliente();
 		Menu menu = new Menu();
 		menu.setCantidadMaxVtasPorDia(500);
-		Proveedor proveedor = new Proveedor();
+		
 		
 		try {
+			Proveedor proveedor = new Proveedor();
 			menu.setPrecio(20);
 			cliente1.cargarCredito(500);
 			sistema.comprar(menu, 1, LocalDate.of(2017, 10, 02), cliente1, "descripcion", proveedor);
