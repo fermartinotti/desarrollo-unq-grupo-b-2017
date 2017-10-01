@@ -24,58 +24,58 @@ public class TestSistema {
 		assertEquals(1, sistema.getPedidos().size());
 	}
 
-	@Test
-	public void testComprar() {
-		Sistema sistema = new Sistema();
-		Cliente cliente = new Cliente();
-		Menu menu = new Menu();
-		menu.setCantidadMaxVtasPorDia(500);
-		Proveedor proveedor = new Proveedor();
-		
-		try {
-			menu.setPrecio(20);
-			cliente.cargarCredito(500);
-			sistema.comprar(menu, 1, LocalDate.of(2017, 10, 02), cliente, "descripcion", proveedor);
-			
-		} catch (DatoInvalidoException e) {}
-			assertEquals(1,sistema.getPedidos().size());
-	}
+//	@Test
+//	public void testComprar() {
+//		Sistema sistema = new Sistema();
+//		Cliente cliente = new Cliente();
+//		Menu menu = new Menu();
+//		menu.setCantidadMaxVtasPorDia(500);
+//		Proveedor proveedor = new Proveedor();
+//		
+//		try {
+//			menu.setPrecio(20);
+//			cliente.cargarCredito(500);
+//			sistema.comprar(menu, 1, LocalDate.of(2017, 10, 02), cliente, "descripcion", proveedor);
+//			
+//		} catch (DatoInvalidoException e) {}
+//			assertEquals(1,sistema.getPedidos().size());
+//	}
 	
-	@Test
-	public void testPuedeComprar() {
-		Sistema sistema = new Sistema();
-		Cliente cliente = new Cliente();
-		Menu menu = new Menu();
-		menu.setCantidadMaxVtasPorDia(500);
-		LocalDate fechaDeEntrega = LocalDate.of(2017, 10, 02);
-		
-		assertEquals(true, sistema.puedeComprar(menu, cliente, fechaDeEntrega));
-	}
+//	@Test
+//	public void testPuedeComprar() {
+//		Sistema sistema = new Sistema();
+//		Cliente cliente = new Cliente();
+//		Menu menu = new Menu();
+//		menu.setCantidadMaxVtasPorDia(500);
+//		LocalDate fechaDeEntrega = LocalDate.of(2017, 10, 02);
+//		
+//		assertEquals(true, sistema.puedeComprar(menu, cliente, fechaDeEntrega));
+//	}
 	
-	@Test
-	public void testCantDeVentasNoSuperada() {
-		Sistema sistema = new Sistema();
-		Cliente cliente = new Cliente();
-		Menu menu = new Menu();
-		menu.setCantidadMaxVtasPorDia(1);
-		Proveedor proveedor = new Proveedor();
-		
-		try {
-			menu.setPrecio(20);
-			cliente.cargarCredito(500);
-			sistema.comprar(menu, 1, LocalDate.of(2017, 10, 02), cliente, "descripcion", proveedor);
-			sistema.comprar(menu, 1, LocalDate.of(2017, 10, 02), cliente, "descripcion", proveedor);
-			
-		} catch (DatoInvalidoException e) {}
-			assertEquals(false ,sistema.cantDeVentasNoSuperada(menu));
-		
-	}
+//	@Test
+//	public void testCantDeVentasNoSuperada() {
+//		Sistema sistema = new Sistema();
+//		Cliente cliente = new Cliente();
+//		Menu menu = new Menu();
+//		menu.setCantidadMaxVtasPorDia(1);
+//		Proveedor proveedor = new Proveedor();
+//		
+//		try {
+//			menu.setPrecio(20);
+//			cliente.cargarCredito(500);
+//			sistema.comprar(menu, 1, LocalDate.of(2017, 10, 02), cliente, "descripcion", proveedor);
+//			sistema.comprar(menu, 1, LocalDate.of(2017, 10, 02), cliente, "descripcion", proveedor);
+//			
+//		} catch (DatoInvalidoException e) {}
+//			assertEquals(false ,sistema.cantDeVentasNoSuperada(menu));
+//		
+//	}
 	
-	@Test
-	public void testEsFechaValida() {
-		Sistema sistema = new Sistema();
-		assertEquals(true, sistema.esFechaValida(LocalDate.of(2017, 10, 02)));
-	}
+//	@Test
+//	public void testEsFechaValida() {
+//		Sistema sistema = new Sistema();
+//		assertEquals(true, sistema.esFechaValida(LocalDate.of(2017, 10, 02)));
+//	}
 	
 	@Test
 	public void testEvaluarDiferenciaDinero() {
@@ -101,49 +101,49 @@ public class TestSistema {
 		
 	}
 */
-	@Test
-	public void testPuntajePromedioPedido() {
-		Sistema sistema = new Sistema();
-		Cliente cliente1 = new Cliente();
-		Cliente cliente2 = new Cliente();
-		Menu menu = new Menu();
-		menu.setCantidadMaxVtasPorDia(500);
-		
-		
-		try {
-			Proveedor proveedor = new Proveedor();
-			menu.setPrecio(20);
-			cliente1.cargarCredito(500);
-			sistema.comprar(menu, 1, LocalDate.of(2017, 10, 02), cliente1, "descripcion", proveedor);
-			sistema.calificarMenu(cliente1, sistema.getPedidos().get(0), 4);
-			
-			menu.setPrecio(20);
-			cliente2.cargarCredito(500);
-			sistema.comprar(menu, 1, LocalDate.of(2017, 10, 02), cliente2, "descripcion", proveedor);
-			sistema.calificarMenu(cliente2, sistema.getPedidos().get(0), 4);
-			
-		} catch (DatoInvalidoException e) {}
-			assertEquals(2, sistema.puntajePromedioPedido(sistema.getPedidos()), 0);
-		
-		
-	}
+//	@Test
+//	public void testPuntajePromedioPedido() {
+//		Sistema sistema = new Sistema();
+//		Cliente cliente1 = new Cliente();
+//		Cliente cliente2 = new Cliente();
+//		Menu menu = new Menu();
+//		menu.setCantidadMaxVtasPorDia(500);
+//		
+//		
+//		try {
+//			Proveedor proveedor = new Proveedor();
+//			menu.setPrecio(20);
+//			cliente1.cargarCredito(500);
+//			sistema.comprar(menu, 1, LocalDate.of(2017, 10, 02), cliente1, "descripcion", proveedor);
+//			sistema.calificarMenu(cliente1, sistema.getPedidos().get(0), 4);
+//			
+//			menu.setPrecio(20);
+//			cliente2.cargarCredito(500);
+//			sistema.comprar(menu, 1, LocalDate.of(2017, 10, 02), cliente2, "descripcion", proveedor);
+//			sistema.calificarMenu(cliente2, sistema.getPedidos().get(0), 4);
+//			
+//		} catch (DatoInvalidoException e) {}
+//			assertEquals(2, sistema.puntajePromedioPedido(sistema.getPedidos()), 0);
+//		
+//		
+//	}
 	
-	@Test
-	public void testCalificarMenu() {
-		Sistema sistema = new Sistema();
-		Cliente cliente = new Cliente();
-		Menu menu = new Menu();
-		menu.setCantidadMaxVtasPorDia(500);
-		Proveedor proveedor = new Proveedor();
-		
-		try {
-			menu.setPrecio(20);
-			cliente.cargarCredito(500);
-			sistema.comprar(menu, 1, LocalDate.of(2017, 10, 02), cliente, "descripcion", proveedor);
-			sistema.calificarMenu(cliente, sistema.getPedidos().get(0), 4);
-			
-		} catch (DatoInvalidoException e) {}
-			assertEquals(4, sistema.getPedidos().get(0).getPuntuacion(), 0);
-		
-	}
+//	@Test
+//	public void testCalificarMenu() {
+//		Sistema sistema = new Sistema();
+//		Cliente cliente = new Cliente();
+//		Menu menu = new Menu();
+//		menu.setCantidadMaxVtasPorDia(500);
+//		Proveedor proveedor = new Proveedor();
+//		
+//		try {
+//			menu.setPrecio(20);
+//			cliente.cargarCredito(500);
+//			sistema.comprar(menu, 1, LocalDate.of(2017, 10, 02), cliente, "descripcion", proveedor);
+//			sistema.calificarMenu(cliente, sistema.getPedidos().get(0), 4);
+//			
+//		} catch (DatoInvalidoException e) {}
+//			assertEquals(4, sistema.getPedidos().get(0).getPuntuacion(), 0);
+//		
+//	}
 }
