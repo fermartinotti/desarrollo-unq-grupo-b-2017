@@ -1,10 +1,15 @@
 package morfiya.domain;
 
+import java.time.LocalTime;
 import java.util.List;
 
-public class DiasDeAtencion {
+public class DiasDeAtencion extends Entity{
 
-	List<DiaLaboral> diasAbierto;
-	int horarioDeApertura;
-	int horarioDeCierre;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	List<DiaLaboral> diasAbierto; // falta ver como mapear
+	LocalTime horarioDeApertura;
+	LocalTime horarioDeCierre;
 }

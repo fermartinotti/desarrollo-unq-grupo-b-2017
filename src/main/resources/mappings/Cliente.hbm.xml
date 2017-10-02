@@ -17,11 +17,13 @@
 		<one-to-one name="direccion" class="morfiya.domain.Direccion" />
 
 		<property name="puedeComprar">
-		   <type name="org.hibernate.type.EnumType"> 
-		      <param name="enumClass">morfiya.domain.Habilitacion</param> 
-		      <param name="useNamed">true</param>
-		   </type> 
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">morfiya.domain.Habilitacion</param>
+				<param name="useNamed">true</param>
+			</type>
 		</property>
-		
+
 	</class>
 </hibernate-mapping>
+
+

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field"
+	default-cascade="save-update">
+	<class name="morfiya.domain.Servicio">
+		<id column="ID" name="id">
+			<generator class="native" />
+		</id>
+		
+		<property name="nombre" />
+		
+		<property name="logo" />
+		<one-to-one name="direccion" class="morfiya.domain.Direccion" />
+		<property name="descripcion" />
+		<property name="link" />
+		<property name="email" />
+		<one-to-one name="telefono" class="morfiya.domain.Telefono" />
+		<one-to-one name="atencionAlPublico" class="morfiya.domain.DiasDeAtencion" />
+		
+		<property name="localidadDeEntregas">
+		   <type name="org.hibernate.type.EnumType"> 
+		      <param name="enumClass">morfiya.domain.Localidad</param> 
+		      <param name="useNamed">true</param>
+		   </type> 
+		</property>
+		
+		<property name="maximoDeMenusVigentes" type="java.lang.Integer"/>
+
+	</class>
+</hibernate-mapping>

@@ -6,10 +6,14 @@ import java.util.List;
 import morfiya.exceptions.DatoInvalidoException;
 import morfiya.exceptions.MenuException;
 
-public class Servicio {
+public class Servicio extends Entity{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nombre;
-	private List<Menu> menus = new ArrayList<Menu>();
+	private List<Menu> menus = new ArrayList<Menu>();	//falta mapear
 	private String logo = "http://marketing.cdn.telefe.com/wp-content/uploads/2017/04/Logo-morfi-la-pe%C3%B1a.jpg?x97692";  
 	private Direccion direccion;
 	private String descripcion;

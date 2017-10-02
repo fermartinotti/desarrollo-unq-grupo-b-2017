@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field"
+	default-cascade="save-update">
+	<class name="morfiya.domain.Proveedor">
+		<id column="ID" name="id">
+			<generator class="native" />
+		</id>
+
+		<property name="nombre" />
+		<property name="creditos" />
+		<property name="creditosNoDisponibles" />
+		<one-to-one name="servicio" class="morfiya.domain.Servicio" />
+		<property name="puedeVender">
+		   <type name="org.hibernate.type.EnumType"> 
+		      <param name="enumClass">morfiya.domain.Habilitacion</param> 
+		      <param name="useNamed">true</param>
+		   </type> 
+		</property>
+		
+	</class>
+</hibernate-mapping>

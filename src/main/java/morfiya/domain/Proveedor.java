@@ -2,13 +2,13 @@ package morfiya.domain;
 
 import morfiya.exceptions.DatoInvalidoException;
 
-public class Proveedor {
+public class Proveedor extends Entity{
 	private String nombre;
 	private Servicio servicio;
 	private double creditos = 0;
 	private double creditosNoDisponibles= 0;
 	private Habilitacion puedeVender = Habilitacion.HABILITADO; 
-	
+	//preguntar si el cliente no tiene que tener un telefono de contacto, y una direccion???
 
 	public void agregarServicio(Servicio servicio) {
 		this.servicio = servicio;
