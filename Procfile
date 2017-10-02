@@ -1,1 +1,1 @@
-web: java -cp target/classes/:target/dependency/* morfiya
+web: java -jar target/morfiya.jar
