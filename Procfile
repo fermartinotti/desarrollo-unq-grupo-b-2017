@@ -1,1 +1,1 @@
-web: java -jar target/morfiya.jar
+web: java -jar target/dependency/jetty-runner.jar --port $PORT target/*.war
