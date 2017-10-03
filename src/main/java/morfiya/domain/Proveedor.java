@@ -3,6 +3,10 @@ package morfiya.domain;
 import morfiya.exceptions.DatoInvalidoException;
 
 public class Proveedor extends Entity{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nombre;
 	private Servicio servicio;
 	private double creditos = 0;
