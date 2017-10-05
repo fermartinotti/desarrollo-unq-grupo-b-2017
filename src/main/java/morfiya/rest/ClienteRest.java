@@ -7,12 +7,15 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
+
 import morfiya.domain.Cliente;
 import morfiya.services.ClienteService;
 
 public class ClienteRest {
 	
 	ClienteService clienteService;
+	
+	
 	
 	@GET
 	@Path("/calificaciones")
@@ -22,12 +25,12 @@ public class ClienteRest {
 		
 	}
 	
-	@GET
+/*	@GET
 	@Path("/calificaciones/{id}")
 	@Produces("application/json")
 	public Cliente getClienteByID(@PathParam("id") final Integer idUser){
 		return clienteService.getClienteByID(idUser);
 	}
-	
+*/	
 
 }

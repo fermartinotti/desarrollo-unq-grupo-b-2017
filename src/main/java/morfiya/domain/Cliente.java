@@ -90,5 +90,14 @@ public class Cliente extends Entity{
 		}
 		creditos -= cantidad;
 	}
-	 
+
+	public Cliente(Integer cuit, String nombre, String apellido, String email, Telefono telefono, Direccion direccion) {
+		super();
+		this.cuit = cuit;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.telefono = telefono;
+		this.direccion = direccion;
+	}
 }
