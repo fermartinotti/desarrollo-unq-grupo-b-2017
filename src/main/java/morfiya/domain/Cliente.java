@@ -1,8 +1,11 @@
 package morfiya.domain;
 
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import morfiya.exceptions.DatoInvalidoException;
 
+@XmlRootElement(name="cliente")
 public class Cliente extends Entity{
 	
 
@@ -90,5 +93,83 @@ public class Cliente extends Entity{
 		}
 		creditos -= cantidad;
 	}
-	 
+
+	public Cliente(Integer cuit, String nombre, String apellido, String email, Telefono telefono, Direccion direccion) {
+		super();
+		this.cuit = cuit;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.telefono = telefono;
+		this.direccion = direccion;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((apellido == null) ? 0 : apellido.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(creditos);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((cuit == null) ? 0 : cuit.hashCode());
+		result = prime * result
+				+ ((direccion == null) ? 0 : direccion.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result
+				+ ((puedeComprar == null) ? 0 : puedeComprar.hashCode());
+		result = prime * result
+				+ ((telefono == null) ? 0 : telefono.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cliente other = (Cliente) obj;
+		if (apellido == null) {
+			if (other.apellido != null)
+				return false;
+		} else if (!apellido.equals(other.apellido))
+			return false;
+		if (Double.doubleToLongBits(creditos) != Double
+				.doubleToLongBits(other.creditos))
+			return false;
+		if (cuit == null) {
+			if (other.cuit != null)
+				return false;
+		} else if (!cuit.equals(other.cuit))
+			return false;
+		if (direccion == null) {
+			if (other.direccion != null)
+				return false;
+		} else if (!direccion.equals(other.direccion))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		if (puedeComprar != other.puedeComprar)
+			return false;
+		if (telefono == null) {
+			if (other.telefono != null)
+				return false;
+		} else if (!telefono.equals(other.telefono))
+			return false;
+		return true;
+	}
+	
 }
