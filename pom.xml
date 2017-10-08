@@ -19,16 +19,6 @@
 		<jackson.version>1.8.2</jackson.version>
 	</properties>
   
-
-
-  <dependencies>
-	<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-api</artifactId>
-			<version>7.0</version>
-			<scope>provided</scope>
-	</dependency>
-
 	<build>
 	 <plugins>
 	    <plugin>
@@ -54,6 +44,14 @@
 	    </plugin>
 	  </plugins>
 	  </build>
+
+  <dependencies>
+	<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+			<scope>provided</scope>
+	</dependency>
 		
 		
   	<!-- /////// -->
