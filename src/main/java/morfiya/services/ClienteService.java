@@ -10,6 +10,8 @@ public class ClienteService extends GenericService<Cliente>{
 
 	private static final long serialVersionUID = 1L;
 	
+	ClienteDAO repository;
+	
 	ClienteBD clienteBD = new ClienteBD();
 	
 	/*
@@ -25,7 +27,7 @@ public class ClienteService extends GenericService<Cliente>{
 	}
 */
 	public List<Cliente> getAll(){
-		return clienteBD.getClientes();
+		return repository.getAll();
 		
 	}
 	

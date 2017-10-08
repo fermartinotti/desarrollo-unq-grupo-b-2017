@@ -6,10 +6,9 @@
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
-	<!-- beans de spring -->
-	
 	<bean id="services.cliente" class="morfiya.services.ClienteService">
-		<property name="repository" ref="persistence.clienteDAO" />
+		<property name="repository" ref="persistence.clienteDAO"/>
 	</bean>
+
 
 </beans>

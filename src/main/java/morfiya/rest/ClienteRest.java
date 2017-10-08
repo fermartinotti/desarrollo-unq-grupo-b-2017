@@ -4,24 +4,33 @@ import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-
 import morfiya.domain.Cliente;
+import morfiya.repositories.ClienteDAO;
 import morfiya.services.ClienteService;
 
+@Path("/clientes")
 public class ClienteRest {
 	
-	ClienteService clienteService;
-	
-	
-	
+	ClienteDAO repository;
+		
+
+	public ClienteDAO getRepository() {
+		return repository;
+	}
+
+
+	public void setRepository(ClienteDAO repository) {
+		this.repository = repository;
+	}
+
+
 	@GET
-	@Path("/calificaciones")
+	@Path("/todos")
 	@Produces("application/json")
 	public List<Cliente> getAllClientes(){
-		return clienteService.getAll();
+		return repository.getAll();
 		
 	}
 	
