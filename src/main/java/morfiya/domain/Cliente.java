@@ -1,11 +1,8 @@
 package morfiya.domain;
 
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 import morfiya.exceptions.DatoInvalidoException;
 
-@XmlRootElement(name="cliente")
 public class Cliente extends Entity{
 	
 

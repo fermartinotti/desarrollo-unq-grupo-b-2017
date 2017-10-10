@@ -14,6 +14,14 @@ public class ClienteService extends GenericService<Cliente>{
 	
 	ClienteBD clienteBD = new ClienteBD();
 	
+	public ClienteDAO getRepository() {
+		return repository;
+	}
+
+	public void setRepository(ClienteDAO repository) {
+		this.repository = repository;
+	}
+
 	/*
 	ClienteDAO clienteDAO;
 	

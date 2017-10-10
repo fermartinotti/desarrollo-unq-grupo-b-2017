@@ -31,8 +31,6 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	
-
-
 	<servlet-mapping>
 		<servlet-name>CXFServlet</servlet-name>
 		<url-pattern>/rest/*</url-pattern>

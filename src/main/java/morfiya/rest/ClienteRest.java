@@ -13,24 +13,21 @@ import morfiya.services.ClienteService;
 @Path("/clientes")
 public class ClienteRest {
 	
-	ClienteDAO repository;
-		
+	ClienteService service;
 
-	public ClienteDAO getRepository() {
-		return repository;
+	public ClienteService getService() {
+		return service;
 	}
 
-
-	public void setRepository(ClienteDAO repository) {
-		this.repository = repository;
+	public void setService(ClienteService service) {
+		this.service = service;
 	}
-
 
 	@GET
 	@Path("/todos")
 	@Produces("application/json")
 	public List<Cliente> getAllClientes(){
-		return repository.getAll();
+		return service.getAll();
 		
 	}
 	

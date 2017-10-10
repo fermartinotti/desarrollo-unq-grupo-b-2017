@@ -138,7 +138,7 @@
 	
 	<!-- beans de spring -->
 	<bean id="clienteRest" class="morfiya.rest.ClienteRest">
-		<property name="repository" ref="persistence.clienteDAO" />
+		<property name="service" ref="services.cliente" />
 	</bean>	
 	
 	<!-- ________________________________________ -->
