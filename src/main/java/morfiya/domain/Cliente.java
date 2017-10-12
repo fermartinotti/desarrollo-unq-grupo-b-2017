@@ -100,6 +100,16 @@ public class Cliente extends Entity{
 		this.telefono = telefono;
 		this.direccion = direccion;
 	}
+	
+	public Cliente(Integer cuit, String nombre, String apellido, String email) {
+		super();
+		this.cuit = cuit;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+	}
+	
+	
 
 	@Override
 	public int hashCode() {

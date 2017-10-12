@@ -1,8 +1,6 @@
 package morfiya.services;
 
 import java.util.List;
-
-import morfiya.baseDeDatosFake.ClienteBD;
 import morfiya.domain.Cliente;
 import morfiya.repositories.ClienteDAO;
 
@@ -12,31 +10,22 @@ public class ClienteService extends GenericService<Cliente>{
 	
 	ClienteDAO repository;
 	
-	ClienteBD clienteBD = new ClienteBD();
-	
-	public ClienteDAO getRepository() {
-		return repository;
-	}
-
-	public void setRepository(ClienteDAO repository) {
-		this.repository = repository;
-	}
-
-	/*
-	ClienteDAO clienteDAO;
-	
 	public List<Cliente> getAll(){
-		return clienteDAO.findAll();
+		return repository.findAll();
 		
 	}
 	
 	public Cliente getClienteByID(Integer id) {
-		return clienteDAO.findByID(id);
+		return repository.findByID(id);
 	}
-*/
-	public List<Cliente> getAll(){
-		return repository.getAll();
-		
+	
+	public Cliente crearCliente(Integer cuit, String nombre, String apellido, String email){
+		return repository.createCliente(cuit, nombre, apellido, email);
 	}
+
+//	public List<Cliente> getAll(){
+//		return repository.getAll();
+//		
+//	}
 	
 }

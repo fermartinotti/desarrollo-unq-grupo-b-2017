@@ -7,21 +7,27 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 import morfiya.domain.Cliente;
-import morfiya.repositories.ClienteDAO;
 import morfiya.services.ClienteService;
+
 
 @Path("/clientes")
 public class ClienteRest {
 	
+	//ClienteDAO repository;
+	
 	ClienteService service;
+		
 
-	public ClienteService getService() {
+	public ClienteService getRepository() {
+		//return repository;
 		return service;
 	}
 
-	public void setService(ClienteService service) {
-		this.service = service;
+
+	public void setService(ClienteService repository) {
+		this.service = repository;
 	}
+
 
 	@GET
 	@Path("/todos")
@@ -38,5 +44,7 @@ public class ClienteRest {
 		return clienteService.getClienteByID(idUser);
 	}
 */	
+	
+	
 
 }
