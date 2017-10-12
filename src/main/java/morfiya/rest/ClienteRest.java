@@ -3,8 +3,12 @@ package morfiya.rest;
 import java.util.List;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+
+import org.apache.cxf.jaxrs.ext.multipart.Multipart;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import morfiya.domain.Cliente;
 import morfiya.services.ClienteService;
@@ -13,19 +17,16 @@ import morfiya.services.ClienteService;
 @Path("/clientes")
 public class ClienteRest {
 	
-	//ClienteDAO repository;
-	
 	ClienteService service;
 		
 
-	public ClienteService getRepository() {
-		//return repository;
+	public ClienteService getService() {
 		return service;
 	}
 
 
-	public void setService(ClienteService repository) {
-		this.service = repository;
+	public void setService(ClienteService service) {
+		this.service = service;
 	}
 
 
@@ -44,6 +45,15 @@ public class ClienteRest {
 		return clienteService.getClienteByID(idUser);
 	}
 */	
+	
+	@POST
+	@Path("/create")
+	@Produces("application/json")
+	public void createCliente(@Multipart(value = "jsonRequest", type = "application/json")
+	Cliente cliente){
+		service.crearCliente(cliente);
+		
+	}
 	
 	
 

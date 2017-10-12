@@ -136,28 +136,22 @@
 		</jaxrs:features>
 	</jaxrs:server>
 	
-	<!-- beans de spring -->
-<!-- 	<bean id="clienteRest" class="morfiya.rest.ClienteRest"> -->
-<!-- 		<property name="service" ref="services.cliente" /> -->
-<!-- 	</bean>	 -->
-	
 	<!-- ________________________________________ -->
 	<!-- ________________________________________ -->
 	<!-- ___________ Beans  de negocio___________ -->
 	<!-- ________________________________________ -->
 	<!-- ________________________________________ -->
 	
-<!-- 	<bean id="persistence.clienteDAO" class="morfiya.repositories.ClienteDAO" > -->
-<!-- 		<property name="sessionFactory" ref="persistence.sessionFactory" /> -->
-<!-- 	</bean> -->
-
-   <bean id="clienteService" class="morfiya.services.ClienteService">
-    	<property name="repository" ref="clienteDAO"/>
-    </bean>
     
     <bean id="clienteDAO" class="morfiya.repositories.ClienteDAO">
     	<property name="sessionFactory" ref="persistence.sessionFactory"/>
     </bean>
+
+
+   <bean id="clienteService" class="morfiya.services.ClienteService">
+    	<property name="repository" ref="clienteDAO"/>
+    </bean>
+
 	
 
 </beans>
