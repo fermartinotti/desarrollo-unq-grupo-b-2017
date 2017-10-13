@@ -6,13 +6,13 @@ public abstract class Entity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private int id;
+    private Integer id;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(final int id) {
+    public void setId(final Integer id) {
         this.id = id;
     }
 }

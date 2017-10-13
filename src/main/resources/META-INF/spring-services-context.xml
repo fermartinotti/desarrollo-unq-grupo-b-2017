@@ -10,4 +10,6 @@
 		<property name="service" ref="clienteService" />
 	</bean>
 
+	<tx:annotation-driven/>
 </beans>
+

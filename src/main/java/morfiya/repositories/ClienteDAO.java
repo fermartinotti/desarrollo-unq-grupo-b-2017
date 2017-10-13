@@ -8,6 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateCallback;
+import org.hibernate.FlushMode;
+
 
 import morfiya.domain.Cliente;
 
@@ -28,14 +30,14 @@ public class ClienteDAO extends HibernateGenericDAO<Cliente> implements GenericR
 			public List<Cliente> doInHibernate(Session session) throws HibernateException {
 				
 				List<Cliente> ret = (List<Cliente>) session.createCriteria(Cliente.class).list();
-				Cliente cliente1 = new Cliente(11111, "Diego", "Maradona", "d10s@gmaill.com");
-				ret.add(cliente1);
+//				Cliente cliente1 = new Cliente(11111, "Diego", "Maradona", "d10s@gmaill.com");
+//				ret.add(cliente1);
 								
 				return ret;
 			}			
 	});
-		Cliente cliente1 = new Cliente(11111, "Diego", "Maradona", "d10s@gmaill.com");
-		list.add(cliente1);
+		//Cliente cliente1 = new Cliente(11111, "Diego", "Maradona", "d10s@gmaill.com");
+		//list.add(cliente1);
 		return list;
 	}
 	
@@ -49,6 +51,7 @@ public class ClienteDAO extends HibernateGenericDAO<Cliente> implements GenericR
 	
 	@Override
 	public void save(Cliente cliente) {
+		getHibernateTemplate().getSessionFactory().getCurrentSession().setFlushMode(FlushMode.AUTO);
 		getHibernateTemplate().save(cliente);
 		getHibernateTemplate().flush();
 	}
