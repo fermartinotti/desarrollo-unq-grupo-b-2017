@@ -6,6 +6,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.apache.cxf.jaxrs.ext.multipart.Multipart;
@@ -43,13 +44,13 @@ public class ClienteRest {
 		
 	}
 	
-/*	@GET
-	@Path("/calificaciones/{id}")
+	@GET
+	@Path("/cliente/{id}")
 	@Produces("application/json")
-	public Cliente getClienteByID(@PathParam("id") final Integer idUser){
-		return clienteService.getClienteByID(idUser);
+	public Cliente getClienteByID(@PathParam("id") final Integer id){
+		return service.getClienteByID(id);
 	}
-*/	
+	
 	
 	@POST
 	@Path("/create")
@@ -57,7 +58,6 @@ public class ClienteRest {
 		Gson gson = new Gson();
 		Cliente cliente = gson.fromJson(clienteJson,Cliente.class);
 		service.crearCliente(cliente);
-		//System.out.println(cliente);
 	}
 	
 	
