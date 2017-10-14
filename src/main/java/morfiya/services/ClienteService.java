@@ -19,6 +19,10 @@ public class ClienteService extends GenericService<Cliente> {
 	public void crearCliente(Cliente cliente) {
 		getRepository().save(cliente);
 	}
+	
+	public void editarCliente(Cliente cliente){
+		getRepository().update(cliente);
+	}
 
 
 

@@ -6,8 +6,16 @@
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
+	<!-- *************** Cliente *************** -->
+	
 	<bean id="clienteRest" class="morfiya.rest.ClienteRest">
 		<property name="service" ref="clienteService" />
+	</bean>
+	
+	<!-- *************** Proveedor *************** -->
+	
+		<bean id="proveedorRest" class="morfiya.rest.ProveedorRest">
+		<property name="service" ref="proveedorService" />
 	</bean>
 
 	<tx:annotation-driven/>
