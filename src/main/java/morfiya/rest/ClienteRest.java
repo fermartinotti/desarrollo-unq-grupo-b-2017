@@ -63,7 +63,7 @@ public class ClienteRest {
 	}
 	
 	@PUT
-	@Path("/edit/{id}")
+	@Path("/editCreditos")
 	public void editCliente(String clienteJson){
 		Gson gson = new Gson();
 		Cliente cliente = gson.fromJson(clienteJson,Cliente.class);

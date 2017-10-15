@@ -59,7 +59,7 @@ public class ProveedorRest {
 	}
 	
 	@PUT
-	@Path("/edit/{id}")
+	@Path("/editCreditos")
 	public void editProveedor(String proveedorJson){
 		Gson gson = new Gson();
 		Proveedor proveedor = gson.fromJson(proveedorJson,Proveedor.class);
