@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field"
+	default-cascade="save-update">
+	<class name="morfiya.domain.Menu">
+		<id column="ID" name="id">
+			<generator class="native" />
+		</id>
+
+		<property name="nombre"/>
+		<property name="descripcion"/>
+		<property name="categoria">
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">morfiya.domain.Categoria</param>
+				<param name="useNamed">true</param>
+			</type>
+		</property>
+		<property name="valorDelivery"/>
+		<property name="fechaVigenciaDesde"/>
+		<property name="fechaVigenciaHasta"/>
+		<!--  lista de turnos ? mappear -->
+		
+		<list name="horariosDeEntrega">  
+	     <key column="mid"></key>  
+	     <index column="type"></index>  
+	     <element column="horariosDeEntrega" type="date"></element>  
+	   	</list>  
+	   	
+	   	<list name="horariosDeEnvio">  
+	     <key column="mid"></key>  
+	     <index column="type"></index>  
+	     <element column="horariosDeEnvio" type="date"></element>  
+	   	</list>  
+	   	
+		<property name="precio"/>
+		<property name="cantidadMinima"/>
+		<property name="cantidadMinima2"/>
+		<property name="precioCantidadMinima"/>
+		<property name="precioCantidadMinima2"/>
+		<property name="cantidadMaxVtasPorDia"/>
+		<property name="estaParaLaVenta">
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">morfiya.domain.Habilitacion</param>
+				<param name="useNamed">true</param>
+			</type>
+		</property>
+
+	</class>
+</hibernate-mapping>
+
+

@@ -1,31 +1,33 @@
 package morfiya.domain;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import morfiya.exceptions.DatoInvalidoException;
 
-public class Menu {
+public class Menu extends Entity{
 	
+	
+	private static final long serialVersionUID = 1L;
 	private String nombre;
 	private String descripcion; 
 	private Categoria categoria;
 	private double valorDelivery;
 	private LocalDate fechaVigenciaDesde;
 	private LocalDate fechaVigenciaHasta;
-	private List<String> turnos;
-	private List<Date> horariosDeEntrega;
-	private List<Date> horariosDeEnvio;
+	private ArrayList<String> turnos; // ESTO QUEDA ? 
+	private ArrayList<Date> horariosDeEntrega;
+	private ArrayList<Date> horariosDeEnvio;
 	//Turnos entrega envio
-	private Integer tiempoDeEntrega;
 	private double precio;
 	private Integer cantidadMinima;
 	private Integer cantidadMinima2;
 	private double precioCantidadMinima;
 	private double precioCantidadMinima2;
 	private Integer cantidadMaxVtasPorDia;
-	private Integer cantidadVendidos;//Para validar si puedo seguir vendiendo.
+	private Integer cantidadVendidos;// ESO SE VA Y SE CALCULA ON THE FLY.
 	private Habilitacion estaParaLaVenta = Habilitacion.HABILITADO; 
 
 	public double getPrecioCantidadMinima() {
@@ -79,14 +81,6 @@ public class Menu {
 
 	public void setFechaVigenciaHasta(LocalDate fechaVigenciaHasta) {
 		this.fechaVigenciaHasta = fechaVigenciaHasta;
-	}
-
-	public Integer getTiempoDeEntrega() {
-		return tiempoDeEntrega;
-	}
-
-	public void setTiempoDeEntrega(Integer tiempoDeEntrega) {
-		this.tiempoDeEntrega = tiempoDeEntrega;
 	}
 
 	public double getPrecio() {
@@ -190,23 +184,23 @@ public class Menu {
 		return horariosDeEnvio;
 	}
 
-	public void setHorariosDeEnvio(List<Date> horariosDeEnvio) {
+	public void setHorariosDeEnvio(ArrayList<Date> horariosDeEnvio) {
 		this.horariosDeEnvio = horariosDeEnvio;
 	}
 
-	public List<Date> getHorariosDeEntrega() {
+	public ArrayList<Date> getHorariosDeEntrega() {
 		return horariosDeEntrega;
 	}
 
-	public void setHorariosDeEntrega(List<Date> horariosDeEntrega) {
+	public void setHorariosDeEntrega(ArrayList<Date> horariosDeEntrega) {
 		this.horariosDeEntrega = horariosDeEntrega;
 	}
 
-	public List<String> getTurnos() {
+	public ArrayList<String> getTurnos() {
 		return turnos;
 	}
 
-	public void setTurnos(List<String> turnos) {
+	public void setTurnos(ArrayList<String> turnos) {
 		this.turnos = turnos;
 	}
 	

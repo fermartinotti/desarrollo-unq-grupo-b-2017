@@ -10,6 +10,12 @@
 		
 		<property name="nombre" />
 		
+		<list name="menus">  
+	     <key column="mid"></key>  
+	     <index column="type"></index>  
+	     <element column="menu" type="morfiya.domain.Menu"></element>  
+	   	</list> 
+	   	
 		<property name="logo" />
 		<one-to-one name="direccion" class="morfiya.domain.Direccion" />
 		<property name="descripcion" />
