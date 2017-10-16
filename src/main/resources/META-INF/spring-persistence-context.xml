@@ -122,6 +122,7 @@
 	<jaxrs:server id="cliente" address="/"  > 
 		<jaxrs:serviceBeans>
 			<ref bean="clienteRest" />
+			<ref bean="proveedorRest" />
 		</jaxrs:serviceBeans>
 		<jaxrs:extensionMappings>
 			<entry key="json" value="application/json" />
@@ -136,10 +137,6 @@
 		</jaxrs:features>
 	</jaxrs:server>
 	
-	<!-- beans de spring -->
-	<bean id="clienteRest" class="morfiya.rest.ClienteRest">
-		<property name="service" ref="services.cliente" />
-	</bean>	
 	
 	<!-- ________________________________________ -->
 	<!-- ________________________________________ -->
@@ -147,9 +144,27 @@
 	<!-- ________________________________________ -->
 	<!-- ________________________________________ -->
 	
-	<bean id="persistence.clienteDAO" class="morfiya.repositories.ClienteDAO" >
-		<property name="sessionFactory" ref="persistence.sessionFactory" />
-	</bean>
+    <!-- *************** Cliente *************** -->
+    
+    <bean id="clienteDAO" class="morfiya.repositories.ClienteDAO">
+    	<property name="sessionFactory" ref="persistence.sessionFactory"/>
+    </bean>
+
+
+   <bean id="clienteService" class="morfiya.services.ClienteService">
+    	<property name="repository" ref="clienteDAO"/>
+    </bean>
+
+	<!-- *************** Proveedor *************** -->
+
+    <bean id="proveedorDAO" class="morfiya.repositories.ProveedorDAO">
+    	<property name="sessionFactory" ref="persistence.sessionFactory"/>
+    </bean>
+
+
+   <bean id="proveedorService" class="morfiya.services.ProveedorService">
+    	<property name="repository" ref="proveedorDAO"/>
+    </bean>
 	
 
 </beans>

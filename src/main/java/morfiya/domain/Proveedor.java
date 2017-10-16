@@ -3,10 +3,9 @@ package morfiya.domain;
 import morfiya.exceptions.DatoInvalidoException;
 
 public class Proveedor extends Entity{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = -6057666662166650299L;
+	
 	private String nombre;
 	private Servicio servicio;
 	private double creditos = 0;
@@ -14,6 +13,10 @@ public class Proveedor extends Entity{
 	private Habilitacion puedeVender = Habilitacion.HABILITADO; 
 	//preguntar si el cliente no tiene que tener un telefono de contacto, y una direccion???
 
+	public Proveedor() {
+		super();
+	}
+	
 	public void agregarServicio(Servicio servicio) {
 		this.servicio = servicio;
 	}
@@ -71,4 +74,11 @@ public class Proveedor extends Entity{
 	    }
 	    creditosNoDisponibles += cantidad;
 	 }
+
+	public Proveedor(String nombre) {
+		super();
+		this.nombre = nombre;
+	}
+	
+	
 }
