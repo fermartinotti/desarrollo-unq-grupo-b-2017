@@ -22,3 +22,18 @@ funcionando asi todo en un ambiente transaccional seguro. Cosa que en este momen
 * Falta agregar el tipo de envio : Ej: retiro en el local, envio a domicilio.
 
 KNOWN ISSUES:
+
+------------------------
+TAG 2
+------------------------
+NEW FEATURES:
+* Entidades "cliente" y "proveedor" (y todos sus colaboradores) mappeados en hibernate  
+* API REST: Los metodos necesarios para poder crear, buscar, y editar un cliente y un proveedor.
+
+NOTES: 
+Lo unico que se puede editar de ambas entidades son los creditos.
+
+KNOWN ISSUES:
+*No se encuentra todavia la logica para buscar por substring un menu.
+
+
