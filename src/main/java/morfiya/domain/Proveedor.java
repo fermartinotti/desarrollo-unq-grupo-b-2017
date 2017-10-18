@@ -17,6 +17,11 @@ public class Proveedor extends Entity{
 		super();
 	}
 	
+	public Proveedor(String nombre) {
+		super();
+		this.nombre = nombre;
+	}
+
 	public void agregarServicio(Servicio servicio) {
 		this.servicio = servicio;
 	}
@@ -52,6 +57,14 @@ public class Proveedor extends Entity{
 		return creditos;
 	}
 
+	public Habilitacion getPuedeVender() {
+		return puedeVender;
+	}
+
+	public void setPuedeVender(Habilitacion puedeVender) {
+		this.puedeVender = puedeVender;
+	}
+
 	public double getCreditosNoDisponibles() {
 		return creditosNoDisponibles;
 	}
@@ -73,12 +86,5 @@ public class Proveedor extends Entity{
 	    	throw new DatoInvalidoException("No se puede cargar saldo negativo");
 	    }
 	    creditosNoDisponibles += cantidad;
-	 }
-
-	public Proveedor(String nombre) {
-		super();
-		this.nombre = nombre;
-	}
-	
-	
+	 }	
 }

@@ -6,9 +6,29 @@ public class Telefono extends Entity{
 	String codigoDeArea;
 	String numero;
 	
+	public String getCodigoDeArea() {
+		return codigoDeArea;
+	}
+
+	public void setCodigoDeArea(String codigoDeArea) {
+		this.codigoDeArea = codigoDeArea;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
 	public Telefono (String codigoDeArea, String numero) {
 		super();
 		this.codigoDeArea = codigoDeArea;
 		this.numero = numero;
+	}
+	
+	public Telefono () {
+		super();
 	}
 }
