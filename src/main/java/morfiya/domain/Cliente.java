@@ -5,6 +5,7 @@ import morfiya.exceptions.DatoInvalidoException;
 public class Cliente extends Entity {
 
 	private static final long serialVersionUID = 1L;
+	
 	private Integer cuit;
 	private String nombre;
 	private String apellido;

@@ -20,10 +20,14 @@ public interface GenericRepository<T> {
 
 	List<T> findAll();
 
+	T findBySubstring(String string);
+	
 	void deleteById(Serializable id);
 
 	int count();
 
 	List<T> findByExample(T exampleObject);
+	
+	
 
 }

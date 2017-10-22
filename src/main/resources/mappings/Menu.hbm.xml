@@ -21,17 +21,17 @@
 		<property name="fechaVigenciaHasta"/>
 		<!--  lista de turnos ? mappear -->
 		
-		<list name="horariosDeEntrega">  
-	     <key column="mid"></key>  
-	     <index column="type"></index>  
-	     <element column="horariosDeEntrega" type="date"></element>  
-	   	</list>  
+<!-- 		<list name="horariosDeEntrega">   -->
+<!-- 	     <key column="mid"></key>   -->
+<!-- 	     <index column="type"></index>   -->
+<!-- 	     <element column="horariosDeEntrega" type="date"></element>   -->
+<!-- 	   	</list>   -->
 	   	
-	   	<list name="horariosDeEnvio">  
-	     <key column="mid"></key>  
-	     <index column="type"></index>  
-	     <element column="horariosDeEnvio" type="date"></element>  
-	   	</list>  
+<!-- 	   	<list name="horariosDeEnvio">   -->
+<!-- 	     <key column="mid"></key>   -->
+<!-- 	     <index column="type"></index>   -->
+<!-- 	     <element column="horariosDeEnvio" type="date"></element>   -->
+<!-- 	   	</list>   -->
 	   	
 		<property name="precio"/>
 		<property name="cantidadMinima"/>

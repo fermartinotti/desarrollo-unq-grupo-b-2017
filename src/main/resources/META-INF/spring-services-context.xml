@@ -17,6 +17,13 @@
 		<bean id="proveedorRest" class="morfiya.rest.ProveedorRest">
 		<property name="service" ref="proveedorService" />
 	</bean>
+	
+	<!-- *************** MENU *************** -->
+	
+		<bean id="menuRest" class="morfiya.rest.MenuRest">
+		<property name="service" ref="menuService" />
+	</bean>
+	
 
 	<tx:annotation-driven/>
 </beans>

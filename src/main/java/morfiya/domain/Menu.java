@@ -9,8 +9,8 @@ import morfiya.exceptions.DatoInvalidoException;
 
 public class Menu extends Entity{
 	
-	
 	private static final long serialVersionUID = 1L;
+	
 	private String nombre;
 	private String descripcion; 
 	private Categoria categoria;
@@ -18,8 +18,8 @@ public class Menu extends Entity{
 	private LocalDate fechaVigenciaDesde;
 	private LocalDate fechaVigenciaHasta;
 	private ArrayList<String> turnos; // ESTO QUEDA ? 
-	private ArrayList<Date> horariosDeEntrega;
-	private ArrayList<Date> horariosDeEnvio;
+//	private ArrayList<Date> horariosDeEntrega;
+	//private ArrayList<Date> horariosDeEnvio;
 	//Turnos entrega envio
 	private double precio;
 	private Integer cantidadMinima;
@@ -29,6 +29,32 @@ public class Menu extends Entity{
 	private Integer cantidadMaxVtasPorDia;
 	private Integer cantidadVendidos;// ESO SE VA Y SE CALCULA ON THE FLY.
 	private Habilitacion estaParaLaVenta = Habilitacion.HABILITADO; 
+
+	public Menu() {
+		super();
+	}
+	
+
+	public Menu(String nombre, String descripcion, Categoria categoria, double valorDelivery,
+			LocalDate fechaVigenciaDesde, LocalDate fechaVigenciaHasta, ArrayList<String> turnos,
+	        double precio, Integer cantidadMinima,
+			Integer cantidadMinima2, double precioCantidadMinima, double precioCantidadMinima2,
+			Integer cantidadMaxVtasPorDia) {
+		super();
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.categoria = categoria;
+		this.valorDelivery = valorDelivery;
+		this.fechaVigenciaDesde = fechaVigenciaDesde;
+		this.fechaVigenciaHasta = fechaVigenciaHasta;
+		this.turnos = turnos;
+		this.precio = precio;
+		this.cantidadMinima = cantidadMinima;
+		this.cantidadMinima2 = cantidadMinima2;
+		this.precioCantidadMinima = precioCantidadMinima;
+		this.precioCantidadMinima2 = precioCantidadMinima2;
+		this.cantidadMaxVtasPorDia = cantidadMaxVtasPorDia;
+	}
 
 	public double getPrecioCantidadMinima() {
 		return precioCantidadMinima;
@@ -180,21 +206,21 @@ public class Menu extends Entity{
 		this.descripcion = descripcion;
 	}
 
-	public List<Date> getHorariosDeEnvio() {
-		return horariosDeEnvio;
-	}
+//	public List<Date> getHorariosDeEnvio() {
+//		return horariosDeEnvio;
+//	}
+//
+//	public void setHorariosDeEnvio(ArrayList<Date> horariosDeEnvio) {
+//		this.horariosDeEnvio = horariosDeEnvio;
+//	}
 
-	public void setHorariosDeEnvio(ArrayList<Date> horariosDeEnvio) {
-		this.horariosDeEnvio = horariosDeEnvio;
-	}
-
-	public ArrayList<Date> getHorariosDeEntrega() {
-		return horariosDeEntrega;
-	}
-
-	public void setHorariosDeEntrega(ArrayList<Date> horariosDeEntrega) {
-		this.horariosDeEntrega = horariosDeEntrega;
-	}
+//	public ArrayList<Date> getHorariosDeEntrega() {
+//		return horariosDeEntrega;
+//	}
+//
+//	public void setHorariosDeEntrega(ArrayList<Date> horariosDeEntrega) {
+//		this.horariosDeEntrega = horariosDeEntrega;
+//	}
 
 	public ArrayList<String> getTurnos() {
 		return turnos;
