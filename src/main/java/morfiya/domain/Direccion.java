@@ -40,4 +40,8 @@ public class Direccion extends Entity{
 		this.numero = numero;
 		this.geolocalizacion = geolocalizacion;
 	}
+	
+	public Direccion() {
+		super();
+	}
 }

@@ -2,19 +2,23 @@ package morfiya.rest;
 
 import java.util.List;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.node.ArrayNode;
+import org.codehaus.jackson.node.ObjectNode;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.Gson;
 
 import morfiya.domain.Proveedor;
-import morfiya.exceptions.DatoInvalidoException;
 import morfiya.services.ProveedorService;
 
 @Path("/proveedores")
@@ -35,42 +39,74 @@ public class ProveedorRest {
 
 
 	@GET
-	@Path("/todos")
+	@Path("/getAll")
 	@Produces("application/json")
-	public List<Proveedor> getAllProveedores(){
-		return service.getAll();
+	public Response getAllProveedores(){
+		List<Proveedor> proveedores = service.getAll();
+		
+		return Response.ok(proveedores).build();
 		
 	}
 	
 	@GET
-	@Path("/proveedor/{id}")
+	@Path("/getById/{id}")
 	@Produces("application/json")
-	public Proveedor getProveedorByID(@PathParam("id") final Integer id){
-		return service.getProveedorByID(id);
+	public Response getProveedorByID(@PathParam("id") final Integer id){
+		try {
+			Proveedor proveedor = service.getProveedorByID(id);
+			return Response.ok(proveedor).build();
+		}
+
+		catch (Exception e) {
+			return Response.serverError().entity(e.getMessage()).build();
+		}
 	}
-	
 	
 	@POST
 	@Path("/create")
-	public void createProveedor(String proveedorJson){
+	public Response createProveedor(String proveedorJson){
 		Gson gson = new Gson();
 		Proveedor proveedor = gson.fromJson(proveedorJson,Proveedor.class);
 		service.crearProveedor(proveedor);
+		
+		return Response.ok().build();
 	}
 	
 	@PUT
 	@Path("/editCreditos")
-	public void editProveedor(String proveedorJson){
+	public Response editProveedor(String proveedorJson){
 		Gson gson = new Gson();
 		Proveedor proveedor = gson.fromJson(proveedorJson,Proveedor.class);
-		Proveedor proveedorEncontrado = getProveedorByID(proveedor.getId());
+		
 		try {
+			Proveedor proveedorEncontrado = service.getProveedorByID(proveedor.getId());
 			proveedorEncontrado.cargarCredito(proveedor.getCreditos());
-		} catch (DatoInvalidoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			service.editarProveedor(proveedorEncontrado);
+			return Response.ok().build();
+		} catch (Exception e) {
+			return Response.serverError().entity(e.getMessage()).build();
 		}
-		service.editarProveedor(proveedorEncontrado);
+		
+	}
+	
+	@DELETE
+	@Path("/delete/{id}")
+	@Produces("application/json")
+	public Response deleteProveedor(@PathParam("id") Integer id) {
+		ObjectMapper mapper = new ObjectMapper();
+		ObjectNode objectNode1 = mapper.createObjectNode();
+		try {
+			service.deleteProveedor(id);
+			objectNode1.put("id", new Long(id));
+			return Response.ok(objectNode1.toString()).build();
+		} catch (IllegalArgumentException e) {
+			ObjectNode objectNode2 = mapper.createObjectNode();
+			objectNode2.put("onDelete", e.getMessage());
+			ArrayNode arrayNode = mapper.createArrayNode();
+			arrayNode.add(objectNode2);
+			objectNode1.put("errors", arrayNode);
+			return Response.status(Response.Status.BAD_REQUEST).entity(objectNode1.toString()).build();
+		}
 	}
 	
 

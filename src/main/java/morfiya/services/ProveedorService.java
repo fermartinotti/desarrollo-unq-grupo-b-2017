@@ -25,6 +25,10 @@ public class ProveedorService extends GenericService<Proveedor> {
 	public void editarProveedor(Proveedor proveedor){
 		getRepository().update(proveedor);
 	}
+	
+	public void deleteProveedor(Integer id){
+		getRepository().deleteById(id);
+	}
 
 
 }

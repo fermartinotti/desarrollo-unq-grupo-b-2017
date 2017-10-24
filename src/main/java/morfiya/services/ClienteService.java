@@ -23,7 +23,8 @@ public class ClienteService extends GenericService<Cliente> {
 	public void editarCliente(Cliente cliente){
 		getRepository().update(cliente);
 	}
-
-
-
+	
+	public void deleteCliente(Integer id){
+		getRepository().deleteById(id);
+	}
 }
