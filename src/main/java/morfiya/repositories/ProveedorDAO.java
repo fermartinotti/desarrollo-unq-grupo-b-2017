@@ -48,11 +48,5 @@ public class ProveedorDAO extends HibernateGenericDAO<Proveedor> implements Gene
 		getHibernateTemplate().save(proveedor);
 		getHibernateTemplate().flush();
 	}
-
-	@Override
-	public Proveedor findBySubstring(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
 

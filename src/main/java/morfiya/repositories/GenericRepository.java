@@ -19,8 +19,6 @@ public interface GenericRepository<T> {
 	T findById(Serializable id);
 
 	List<T> findAll();
-
-	T findBySubstring(String string);
 	
 	void deleteById(Serializable id);
 
@@ -28,6 +26,7 @@ public interface GenericRepository<T> {
 
 	List<T> findByExample(T exampleObject);
 	
+	public T findByName(Serializable name);
+		
 	
-
 }

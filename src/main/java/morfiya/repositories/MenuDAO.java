@@ -6,16 +6,18 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.FlushMode;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateCallback;
 
 import morfiya.domain.Menu;
+import morfiya.exceptions.MenuException;
 
 public class MenuDAO extends HibernateGenericDAO<Menu> implements GenericRepository<Menu> {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 6287473767660304813L;
 
 	@Override
 	protected Class<Menu> getDomainClass() {
@@ -32,7 +34,7 @@ public class MenuDAO extends HibernateGenericDAO<Menu> implements GenericReposit
 				return (List<Menu>) session.createCriteria(Menu.class).list();
 			}
 		});
-		
+
 		return list;
 	}
 
@@ -43,7 +45,15 @@ public class MenuDAO extends HibernateGenericDAO<Menu> implements GenericReposit
 
 		return (Menu) (this.getHibernateTemplate().findByCriteria(criteria).get(0));
 	}
+	
+	@Override
+	public Menu findByName(Serializable id) {
+		DetachedCriteria criteria = DetachedCriteria.forClass(Menu.class);
+		criteria.add(Restrictions.eq("nombre", id));
 
+		return (Menu) (this.getHibernateTemplate().findByCriteria(criteria).get(0));
+	}
+	
 	@Override
 	public void save(Menu menu) {
 		getHibernateTemplate().getSessionFactory().getCurrentSession().setFlushMode(FlushMode.AUTO);
@@ -67,11 +77,14 @@ public class MenuDAO extends HibernateGenericDAO<Menu> implements GenericReposit
 		});
 
 	}
-
-	@Override
-	public Menu findBySubstring(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+//	
+//	public Menu findMenuByName(String nombre) {
+//		Session session = this.getSessionFactory().getCurrentSession();
+//		String hql = "FROM Menu Menu WHERE Menu.nombre = :nombre ";
+//		Query query = session.createQuery(hql);
+//		query.setParameter("nombre", nombre);
+//
+//		return (Menu) (query.list().isEmpty() ? null : query.list().get(0));
+//	}
 }
-

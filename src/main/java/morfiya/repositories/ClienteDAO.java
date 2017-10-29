@@ -67,10 +67,4 @@ public class ClienteDAO extends HibernateGenericDAO<Cliente> implements GenericR
 		});
 
 	}
-
-	@Override
-	public Cliente findBySubstring(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
