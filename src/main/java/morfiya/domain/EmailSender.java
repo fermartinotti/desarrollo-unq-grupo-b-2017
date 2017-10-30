@@ -39,7 +39,7 @@ public class EmailSender {
         t.connect("smtp.mailgun.com", "postmaster@sandbox1c3b7ddcc6da457d87aa7e485e6feaf9.mailgun.org", "37bdb2b7ef9235a2b7b124da3a64a562");
         t.sendMessage(msg, msg.getAllRecipients());
 
-        // ENVIAR RESPONOSE ?? 
+        // ENVIAR RESPONOSE por API ?? 
         log.info("Response: " + t.getLastServerResponse());
         
         t.close();
