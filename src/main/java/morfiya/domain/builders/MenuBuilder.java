@@ -25,7 +25,7 @@ public class MenuBuilder {
 	private double precioCantidadMinima2;
 	private Integer cantidadMaxVtasPorDia;
 	
-	private MenuBuilder() {}
+	public MenuBuilder() {}
 	
 	public static MenuBuilder mkBuilder() {
 		return new MenuBuilder();
