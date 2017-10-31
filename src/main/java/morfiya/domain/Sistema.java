@@ -9,7 +9,6 @@ import morfiya.exceptions.DatoInvalidoException;
 
 public class Sistema {
 	EmailSender emailSender = new EmailSender();
-	
 	List<Pedido> pedidos = new ArrayList<Pedido>();
 	
 	public List<Pedido> getPedidos() {
