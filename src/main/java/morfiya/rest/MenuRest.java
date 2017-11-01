@@ -37,10 +37,11 @@ public class MenuRest {
 	}
 	
 	@GET
-	@Path("/getByNombre")
+	@Path("/getByNombre/{nombre}")
 	@Produces("application/json")
-	public Response getMenuByName(final String nombre) {
+	public Response getMenuByName(@PathParam("nombre") final String nombre) {
 
+		System.out.println("El nombre es"+nombre);
 		try {
 			Menu menu = service.findMenuForName(nombre);
 			return Response.ok(menu).build();

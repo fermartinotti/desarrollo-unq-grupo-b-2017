@@ -47,9 +47,9 @@ public class MenuDAO extends HibernateGenericDAO<Menu> implements GenericReposit
 	}
 	
 	@Override
-	public Menu findByName(Serializable id) {
+	public Menu findByName(Serializable nombre) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Menu.class);
-		criteria.add(Restrictions.eq("nombre", id));
+		criteria.add(Restrictions.eq("nombre", nombre));
 
 		return (Menu) (this.getHibernateTemplate().findByCriteria(criteria).get(0));
 	}
