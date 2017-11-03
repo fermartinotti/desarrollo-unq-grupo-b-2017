@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import morfiya.domain.Menu;
-import morfiya.repositories.MenuDAO;
 
 public class MenuService extends GenericService<Menu> {
 
@@ -22,7 +21,7 @@ public class MenuService extends GenericService<Menu> {
 		return getRepository().findByName(nombre);
 	}
 	
-//	public Menu findByNombre(String nombre){
-//		return getRepository().findByName(nombre);
-//	}
+	public List<Menu> getAllAdminsWithPagination(int page, int recordePerPage) {
+		return getRepository().getAllAdminsWithPagination(page, recordePerPage); 
+	}
 }

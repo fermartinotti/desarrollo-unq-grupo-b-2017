@@ -10,6 +10,7 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateCallback;
 
+import morfiya.domain.Menu;
 import morfiya.domain.Proveedor;
 
 public class ProveedorDAO extends HibernateGenericDAO<Proveedor> implements GenericRepository<Proveedor>{
@@ -47,6 +48,12 @@ public class ProveedorDAO extends HibernateGenericDAO<Proveedor> implements Gene
 		getHibernateTemplate().getSessionFactory().getCurrentSession().setFlushMode(FlushMode.AUTO);
 		getHibernateTemplate().save(proveedor);
 		getHibernateTemplate().flush();
+	}
+
+	@Override
+	public List<Menu> getAllAdminsWithPagination(int page, int recordePerPage) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
 

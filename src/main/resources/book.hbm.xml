@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="co.mobiwise.hibernate.model.Book" table="Book">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="increment" />
+        </id>
+        <property name="bookName" type="java.lang.String">
+            <column name="bookName" />
+        </property>
+        <property name="bookDesc" type="java.lang.String">
+            <column name="bookDesc" />
+        </property>
+        <property name="insertTime" type="timestamp">
+            <column name="insert_time" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -12,6 +12,7 @@ import org.hibernate.Criteria;
 import org.hibernate.FlushMode;
 
 import morfiya.domain.Cliente;
+import morfiya.domain.Menu;
 
 public class ClienteDAO extends HibernateGenericDAO<Cliente> implements GenericRepository<Cliente> {
 
@@ -66,5 +67,11 @@ public class ClienteDAO extends HibernateGenericDAO<Cliente> implements GenericR
 			}
 		});
 
+	}
+
+	@Override
+	public List<Menu> getAllAdminsWithPagination(int page, int recordePerPage) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

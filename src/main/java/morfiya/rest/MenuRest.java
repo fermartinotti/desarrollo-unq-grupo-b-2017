@@ -62,6 +62,19 @@ public class MenuRest {
 		return Response.ok(menus).build();
 
 	}
+	
+	
+	@GET
+	@Path("/getAllP")
+	@Produces("application/json")
+	public Response getAllMenusP() {
+		List<Menu> menus = service.getAllAdminsWithPagination(1,4);
+
+		return Response.ok(menus).build();
+
+	}
+	
+	
 
 	@POST
 	@Path("/create")

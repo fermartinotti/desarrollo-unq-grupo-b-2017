@@ -3,6 +3,8 @@ package morfiya.repositories;
 import java.io.Serializable;
 import java.util.List;
 
+import morfiya.domain.Menu;
+
 /**
  * Interface for generic DAO
  * 
@@ -27,6 +29,8 @@ public interface GenericRepository<T> {
 	List<T> findByExample(T exampleObject);
 	
 	public T findByName(Serializable name);
+
+	List<Menu> getAllAdminsWithPagination(int page, int recordePerPage);
 		
 	
 }
