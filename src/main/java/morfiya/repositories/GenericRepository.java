@@ -28,9 +28,10 @@ public interface GenericRepository<T> {
 
 	List<T> findByExample(T exampleObject);
 	
-	public T findByName(Serializable name);
+	public List<T> getAllByPage(final Integer pageSize, final Integer pageNumber);
 
-	List<Menu> getAllAdminsWithPagination(int page, int recordePerPage);
+	List<Menu> findByName(Serializable nombre, Integer pageSize, Integer pageNumber);
+
 		
 	
 }

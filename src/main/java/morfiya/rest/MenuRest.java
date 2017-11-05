@@ -17,7 +17,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import morfiya.adapters.MenuGsonTypeAdapter;
-import morfiya.domain.Cliente;
 import morfiya.domain.Menu;
 import morfiya.exceptions.DatoInvalidoException;
 import morfiya.services.MenuService;
@@ -27,6 +26,7 @@ import morfiya.services.MenuService;
 public class MenuRest {
 
 	MenuService service;
+	private final Integer pageSize = 10;
 
 	public MenuService getService() {
 		return service;
@@ -36,14 +36,13 @@ public class MenuRest {
 		this.service = service;
 	}
 	
+    // Con paginacion 
 	@GET
-	@Path("/getByNombre/{nombre}")
+	@Path("/getByNombre/{nombre}/{pageNumber}")
 	@Produces("application/json")
-	public Response getMenuByName(@PathParam("nombre") final String nombre) {
-
-		System.out.println("El nombre es"+nombre);
+	public Response getMenuByName(@PathParam("nombre") final String nombre, @PathParam("pageNumber") final String pageNumber) {
 		try {
-			Menu menu = service.findMenuForName(nombre);
+			List<Menu> menu = service.findMenuForName(nombre, pageSize, Integer.parseInt(pageNumber));
 			return Response.ok(menu).build();
 		}
 
@@ -52,7 +51,7 @@ public class MenuRest {
 		}
 	}
 	
-
+	// Sin paginacion
 	@GET
 	@Path("/getAll")
 	@Produces("application/json")
@@ -60,21 +59,18 @@ public class MenuRest {
 		List<Menu> menus = service.getAll();
 
 		return Response.ok(menus).build();
-
 	}
 	
 	
+	// CON paginacion
 	@GET
-	@Path("/getAllP")
+	@Path("/getAllPagination/{pageNumber}")
 	@Produces("application/json")
-	public Response getAllMenusP() {
-		List<Menu> menus = service.getAllAdminsWithPagination(1,4);
+	public Response getAllMenusPagination(@PathParam("pageNumber") final String pageNumber) {
+		List<Menu> menus = service.getAllByPage(pageSize, Integer.parseInt(pageNumber));
 
 		return Response.ok(menus).build();
-
 	}
-	
-	
 
 	@POST
 	@Path("/create")
@@ -93,5 +89,4 @@ public class MenuRest {
 			return Response.status(Response.Status.BAD_REQUEST).entity(objectNode1.toString()).build();
 		}
 	}
-
 }

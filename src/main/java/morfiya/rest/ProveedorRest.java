@@ -26,32 +26,39 @@ import morfiya.services.ProveedorService;
 public class ProveedorRest {
 
 	ProveedorService service;
-	
+	private final Integer pageSize = 10;
 
 	public ProveedorService getService() {
 		return service;
 	}
 
-
 	public void setService(ProveedorService service) {
 		this.service = service;
 	}
 
-
 	@GET
 	@Path("/getAll")
 	@Produces("application/json")
-	public Response getAllProveedores(){
+	public Response getAllProveedores() {
 		List<Proveedor> proveedores = service.getAll();
-		
+
 		return Response.ok(proveedores).build();
-		
 	}
-	
+
+	@GET
+	@Path("/getAllPagination/{pageNumber}")
+	@Produces("application/json")
+	public Response getAllProveedoresPagination(@PathParam("pageNumber") final String pageNumber) {
+		List<Proveedor> proveedores = service.getAllByPage(pageSize, Integer.parseInt(pageNumber));
+
+		return Response.ok(proveedores).build();
+
+	}
+
 	@GET
 	@Path("/getById/{id}")
 	@Produces("application/json")
-	public Response getProveedorByID(@PathParam("id") final Integer id){
+	public Response getProveedorByID(@PathParam("id") final Integer id) {
 		try {
 			Proveedor proveedor = service.getProveedorByID(id);
 			return Response.ok(proveedor).build();
@@ -61,23 +68,40 @@ public class ProveedorRest {
 			return Response.serverError().entity(e.getMessage()).build();
 		}
 	}
-	
+
+	@GET
+	@Path("/getCreditos/{id}")
+	@Produces("application/json")
+	public Response getCreditosProveedor(@PathParam("id") final Integer id) {
+
+		try {
+			Proveedor proveedor = service.getProveedorByID(id);
+			return Response
+					.ok("Los créditos del proveedor " + proveedor.getNombre() + " son: " + proveedor.getCreditos())
+					.build();
+		}
+
+		catch (Exception e) {
+			return Response.serverError().entity(e.getMessage()).build();
+		}
+	}
+
 	@POST
 	@Path("/create")
-	public Response createProveedor(String proveedorJson){
+	public Response createProveedor(String proveedorJson) {
 		Gson gson = new Gson();
-		Proveedor proveedor = gson.fromJson(proveedorJson,Proveedor.class);
+		Proveedor proveedor = gson.fromJson(proveedorJson, Proveedor.class);
 		service.crearProveedor(proveedor);
-		
+
 		return Response.ok().build();
 	}
-	
+
 	@PUT
 	@Path("/editCreditos")
-	public Response editProveedor(String proveedorJson){
+	public Response editCreditosProveedor(String proveedorJson) {
 		Gson gson = new Gson();
-		Proveedor proveedor = gson.fromJson(proveedorJson,Proveedor.class);
-		
+		Proveedor proveedor = gson.fromJson(proveedorJson, Proveedor.class);
+
 		try {
 			Proveedor proveedorEncontrado = service.getProveedorByID(proveedor.getId());
 			proveedorEncontrado.cargarCredito(proveedor.getCreditos());
@@ -86,9 +110,26 @@ public class ProveedorRest {
 		} catch (Exception e) {
 			return Response.serverError().entity(e.getMessage()).build();
 		}
-		
 	}
-	
+
+	// No edito el credito ya que tiene su propio servicio
+	// Edito solo el nombre
+	@PUT
+	@Path("/edit")
+	public Response editProovedor(String proveedorJson) {
+		Gson gson = new Gson();
+		Proveedor proveedor = gson.fromJson(proveedorJson, Proveedor.class);
+
+		try {
+			Proveedor proveedorEncontrado = service.getProveedorByID(proveedor.getId());
+			proveedorEncontrado.setNombre(proveedor.getNombre());
+			service.editarProveedor(proveedorEncontrado);
+			return Response.ok().build();
+		} catch (Exception e) {
+			return Response.serverError().entity(e.getMessage()).build();
+		}
+	}
+
 	@DELETE
 	@Path("/delete/{id}")
 	@Produces("application/json")
@@ -108,6 +149,4 @@ public class ProveedorRest {
 			return Response.status(Response.Status.BAD_REQUEST).entity(objectNode1.toString()).build();
 		}
 	}
-	
-
 }

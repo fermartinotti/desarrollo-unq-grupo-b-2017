@@ -17,11 +17,15 @@ public class MenuService extends GenericService<Menu> {
 		getRepository().save(menu);
 	}
 
-	public Menu findMenuForName(Serializable nombre) {
-		return getRepository().findByName(nombre);
+//	public List<Menu> findMenuForName(Serializable nombre) {
+//		return getRepository().findByName(nombre);
+//	}
+	
+	public List<Menu> findMenuForName(Serializable nombre,final Integer pageSize, final Integer pageNumber) {
+		return getRepository().findByName(nombre, pageSize, pageNumber);
 	}
 	
-	public List<Menu> getAllAdminsWithPagination(int page, int recordePerPage) {
-		return getRepository().getAllAdminsWithPagination(page, recordePerPage); 
+	public List<Menu> getAllByPage(final int pageSize, final int pageNumber){
+		return getRepository().getAllByPage(pageSize, pageNumber);
 	}
 }

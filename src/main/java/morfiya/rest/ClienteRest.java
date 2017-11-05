@@ -26,6 +26,7 @@ import morfiya.services.ClienteService;
 public class ClienteRest {
 
 	ClienteService service;
+	private final Integer pageSize = 10;
 
 	public ClienteService getService() {
 		return service;
@@ -42,7 +43,15 @@ public class ClienteRest {
 		List<Cliente> clientes = service.getAll();
 
 		return Response.ok(clientes).build();
+	}
 
+	@GET
+	@Path("/getAllPagination/{pageNumber}")
+	@Produces("application/json")
+	public Response getAllClientesPagination(@PathParam("pageNumber") final String pageNumber) {
+		List<Cliente> clientes = service.getAllByPage(pageSize, Integer.parseInt(pageNumber));
+
+		return Response.ok(clientes).build();
 	}
 
 	@GET
@@ -59,6 +68,22 @@ public class ClienteRest {
 			return Response.serverError().entity(e.getMessage()).build();
 		}
 	}
+	
+	@GET
+	@Path("/getCreditos/{id}")
+	@Produces("application/json")
+	public Response getCreditosCliente(@PathParam("id") final Integer id) {
+
+		try {
+			Cliente cliente = service.getClienteByID(id);
+			return Response.ok("Los créditos del cliente "+ cliente.getNombre() + " son: " + cliente.getCreditos()).build();
+		}
+
+		catch (Exception e) {
+			return Response.serverError().entity(e.getMessage()).build();
+		}
+	}
+	
 
 	@POST
 	@Path("/create")
@@ -72,13 +97,36 @@ public class ClienteRest {
 
 	@PUT
 	@Path("/editCreditos")
-	public Response editCliente(String clienteJson) {
+	public Response editCreditosCliente(String clienteJson) {
 		Gson gson = new Gson();
 		Cliente cliente = gson.fromJson(clienteJson, Cliente.class);
-		
+
 		try {
 			Cliente clienteEncontrado = service.getClienteByID(cliente.getId());
 			clienteEncontrado.cargarCredito(cliente.getCreditos());
+			service.editarCliente(clienteEncontrado);
+			return Response.ok().build();
+		} catch (Exception e) {
+			return Response.serverError().entity(e.getMessage()).build();
+		}
+	}
+	
+	
+	// No edito el credito ya que tiene su propio servicio
+	@PUT
+	@Path("/edit")
+	public Response editCliente(String clienteJson) {
+		Gson gson = new Gson();
+		Cliente cliente = gson.fromJson(clienteJson, Cliente.class);
+
+		try {
+			Cliente clienteEncontrado = service.getClienteByID(cliente.getId());
+			clienteEncontrado.setCuit(cliente.getCuit());
+			clienteEncontrado.setNombre(cliente.getNombre());
+			clienteEncontrado.setApellido(cliente.getApellido());
+			clienteEncontrado.setEmail(cliente.getEmail());
+			clienteEncontrado.setTelefono(cliente.getTelefono());
+			clienteEncontrado.setDireccion(cliente.getDireccion());
 			service.editarCliente(clienteEncontrado);
 			return Response.ok().build();
 		} catch (Exception e) {

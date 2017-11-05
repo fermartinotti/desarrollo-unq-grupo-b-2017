@@ -6,14 +6,14 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.FlushMode;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateTemplate;
 
 import morfiya.domain.Menu;
-import morfiya.utils.HibernateUtil;
 
 public class MenuDAO extends HibernateGenericDAO<Menu> implements GenericRepository<Menu> {
 
@@ -46,12 +46,20 @@ public class MenuDAO extends HibernateGenericDAO<Menu> implements GenericReposit
 		return (Menu) (this.getHibernateTemplate().findByCriteria(criteria).get(0));
 	}
 
+	// Busca por substring
+	@SuppressWarnings("unchecked")
 	@Override
-	public Menu findByName(Serializable nombre) {
-		DetachedCriteria criteria = DetachedCriteria.forClass(Menu.class);
-		criteria.add(Restrictions.eq("nombre", nombre));
+	public List<Menu> findByName(Serializable nombre, final Integer pageSize, final Integer pageNumber) {
+		HibernateTemplate template = getHibernateTemplate();
+		return (List<Menu>) template.execute(new HibernateCallback<Object>() {
 
-		return (Menu) (this.getHibernateTemplate().findByCriteria(criteria).get(0));
+			public Object doInHibernate(Session session) throws HibernateException {
+				Query query = session.createQuery(("FROM Menu WHERE nombre like '%" + nombre + "%'"));
+				query.setMaxResults(pageSize);
+				query.setFirstResult(pageSize * (pageNumber - 1));
+				return query.list();
+			}
+		});
 	}
 
 	@Override
@@ -78,28 +86,17 @@ public class MenuDAO extends HibernateGenericDAO<Menu> implements GenericReposit
 
 	}
 
-	public List<Menu> getAllAdminsWithPagination(int page, int recordePerPage) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		Transaction tr = null;
-		try {
-			tr = session.beginTransaction();
-			Criteria cr = session.createCriteria(Menu.class);
-			cr.setFirstResult((page - 1) * recordePerPage);
-			cr.setMaxResults(recordePerPage);
-			List<Menu> adminAll = cr.list();
-			tr.commit();
+	@SuppressWarnings("unchecked")
+	public List<Menu> getAllByPage(final Integer pageSize, final Integer pageNumber) {
+		HibernateTemplate template = getHibernateTemplate();
+		return (List<Menu>) template.execute(new HibernateCallback<Object>() {
 
-			if (adminAll.isEmpty()) {
-				return null;
-			} else {
-				return adminAll;
+			public Object doInHibernate(Session session) throws HibernateException {
+				Query query = session.createQuery("from Menu");
+				query.setMaxResults(pageSize);
+				query.setFirstResult(pageSize * (pageNumber - 1));
+				return query.list();
 			}
-		} catch (RuntimeException ex) {
-
-			if (tr != null) {
-				tr.rollback(); // roll back the transaction due to runtime error
-			}
-			return null;
-		}
+		});
 	}
 }

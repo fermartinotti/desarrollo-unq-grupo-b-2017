@@ -18,7 +18,6 @@ public class DateFormatter {
 	}
 	
 	public static ArrayList<LocalTime> formatLocalTime( ArrayList<String> horariosDeEntrega){
-		//LocalDateTime time = LocalDate.now().atTime(6, 0);
 		ArrayList<LocalTime> horariosRet = new ArrayList<LocalTime>();
 		for(String horario : horariosDeEntrega){
 			horariosRet.add(LocalTime.parse(horario));
@@ -27,19 +26,7 @@ public class DateFormatter {
 		return horariosRet;
 	}
 
-
 	public DateFormatter() {
 		super();
-	}
-	
-	public static void main (String [ ] args) {
-		 
-		//LocalTime todayAt6 = LocalTime.of(22, 0);
-		LocalTime todayAt6 = LocalTime.parse("22:20");
-		
-		System.out.println(todayAt6);
-
-}
-	
-	
+	}	
 }

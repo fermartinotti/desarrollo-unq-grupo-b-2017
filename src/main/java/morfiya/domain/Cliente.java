@@ -14,15 +14,6 @@ public class Cliente extends Entity {
 	private Direccion direccion;
 	private double creditos = 0;
 	private Habilitacion puedeComprar = Habilitacion.HABILITADO;
-	private Localidad localidad = Localidad.ALMIRANTE_BROWN;
-
-	public Localidad getLocalidad() {
-		return localidad;
-	}
-
-	public void setLocalidad(Localidad localidad) {
-		this.localidad = localidad;
-	}
 
 	public Integer getCuit() {
 		return cuit;

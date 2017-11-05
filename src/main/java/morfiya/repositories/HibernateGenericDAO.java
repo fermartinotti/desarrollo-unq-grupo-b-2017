@@ -58,10 +58,6 @@ public abstract class HibernateGenericDAO<T> extends HibernateDaoSupport impleme
 		return this.getHibernateTemplate().get(this.persistentClass, id);
 	}
 	
-	public T findByName(final Serializable name){
-		return this.getHibernateTemplate().get(this.persistentClass, name);
-	}
-
 	protected abstract Class<T> getDomainClass();
 
 	public void save(final T entity) {
