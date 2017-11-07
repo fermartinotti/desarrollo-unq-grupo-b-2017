@@ -3,6 +3,8 @@ package morfiya.repositories;
 import java.io.Serializable;
 import java.util.List;
 
+import morfiya.domain.Menu;
+
 /**
  * Interface for generic DAO
  * 
@@ -19,11 +21,17 @@ public interface GenericRepository<T> {
 	T findById(Serializable id);
 
 	List<T> findAll();
-
+	
 	void deleteById(Serializable id);
 
 	int count();
 
 	List<T> findByExample(T exampleObject);
+	
+	public List<T> getAllByPage(final Integer pageSize, final Integer pageNumber);
 
+	List<Menu> findByName(Serializable nombre, Integer pageSize, Integer pageNumber);
+
+		
+	
 }

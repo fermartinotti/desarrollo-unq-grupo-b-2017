@@ -1,6 +1,6 @@
 package morfiya.exceptions;
 
-public class DatoInvalidoException extends Exception {
+public class DatoInvalidoException extends RuntimeException {
 
 	
 	/**

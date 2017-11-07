@@ -27,4 +27,8 @@ public class LocalizacionMapa extends Entity {
 		this.latitud = latitud;
 		this.longitud = longitud;
 	}
+	
+	public LocalizacionMapa() {
+		super();
+	}
 }

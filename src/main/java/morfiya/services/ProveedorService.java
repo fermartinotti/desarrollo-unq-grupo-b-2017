@@ -9,7 +9,11 @@ public class ProveedorService extends GenericService<Proveedor> {
 	
 	public List<Proveedor> getAll() {
 		return getRepository().findAll();
-
+	}
+	
+	// CON paginacion
+	public List<Proveedor> getAllByPage(final int pageSize, final int pageNumber){
+		return getRepository().getAllByPage(pageSize, pageNumber);
 	}
 
 	public Proveedor getProveedorByID(Integer id) {
@@ -22,6 +26,10 @@ public class ProveedorService extends GenericService<Proveedor> {
 	
 	public void editarProveedor(Proveedor proveedor){
 		getRepository().update(proveedor);
+	}
+	
+	public void deleteProveedor(Integer id){
+		getRepository().deleteById(id);
 	}
 
 

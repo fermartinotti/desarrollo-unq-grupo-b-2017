@@ -1,6 +1,6 @@
 package morfiya.exceptions;
 
-public class MenuException extends Exception {
+public class MenuException extends RuntimeException {
 
 	
 	/**
