@@ -16,12 +16,18 @@ public class Proveedor extends Entity{
 	public Proveedor() {
 		super();
 	}
+
+	public Proveedor(String nombre, Servicio servicio, double creditos) {
+		super();
+		this.nombre=nombre;
+		this.servicio=servicio;
+		this.creditos=creditos;
+	}
 	
 	public Proveedor(String nombre) {
 		super();
 		this.nombre = nombre;
 	}
-
 	public void agregarServicio(Servicio servicio) {
 		this.servicio = servicio;
 	}

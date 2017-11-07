@@ -103,8 +103,7 @@ public class Cliente extends Entity {
 	public Cliente() {
 		super();
 	}
-
-	public Cliente(Integer cuit, String nombre, String apellido, String email, Telefono telefono, Direccion direccion) {
+  public Cliente(Integer cuit, String nombre, String apellido, String email, Telefono telefono, Direccion direccion, Double creditos) {
 		super();
 		this.cuit = cuit;
 		this.nombre = nombre;
@@ -112,6 +111,7 @@ public class Cliente extends Entity {
 		this.email = email;
 		this.telefono = telefono;
 		this.direccion = direccion;
+		this.creditos= creditos;
 	}
 
 	@Override

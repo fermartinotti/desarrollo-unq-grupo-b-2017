@@ -30,7 +30,7 @@ public class Menu extends Entity {
 	private Integer cantidadVendidos = 0;// ESO SE VA Y SE CALCULA ON THE FLY.
 	private Habilitacion estaParaLaVenta = Habilitacion.HABILITADO;
 
-	public Menu() {
+	public Menu(){
 		super();
 	}
 	
@@ -60,6 +60,19 @@ public class Menu extends Entity {
 
 	public double getPrecioCantidadMinima() {
 		return precioCantidadMinima;
+	}
+	
+
+	public Menu(double valorDelivery, double precio, double precioCantMin1, double precioCantMin2,
+			Integer cantMin1, Integer cantMin2, Integer cantMaxVtasPorDia) {
+		super();
+		this.valorDelivery= valorDelivery;
+		this.precio= precio;
+		this.precioCantidadMinima= precioCantMin1;
+		this.precioCantidadMinima2= precioCantMin2;
+		this.cantidadMinima= cantMin1;
+		this.cantidadMinima2= cantMin2;
+		this.cantidadMaxVtasPorDia= cantMaxVtasPorDia;
 	}
 
 	public void setPrecioCantidadMinima(double precioCantidadMinima) throws DatoInvalidoException {

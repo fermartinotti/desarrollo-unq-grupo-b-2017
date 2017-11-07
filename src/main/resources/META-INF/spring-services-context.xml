@@ -25,6 +25,8 @@
 	</bean>
 	
 
+	<!-- *************** Menu *************** -->
+	
 	<tx:annotation-driven/>
 </beans>
 

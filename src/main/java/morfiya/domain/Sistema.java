@@ -8,7 +8,7 @@ import java.util.List;
 import morfiya.exceptions.DatoInvalidoException;
 
 public class Sistema {
-	
+	private EmailSender emailSender = new EmailSender();
 	List<Pedido> pedidos = new ArrayList<Pedido>();
 	
 	public List<Pedido> getPedidos() {
@@ -31,7 +31,7 @@ public class Sistema {
 				//calcular tiempo de entrega (RELEASE 2)
 				Pedido pedido = new Pedido(fechaDeEntrega, descripcion,menu, cliente);
 				pedidos.add(pedido); // Futuro save de un servicio a la DB.
-				// Enviar emails ( RELEASE 2 )
+				emailSender.sendEmaill(cliente, descripcion);
 			}catch (Exception e) {}
 		}
 	}
