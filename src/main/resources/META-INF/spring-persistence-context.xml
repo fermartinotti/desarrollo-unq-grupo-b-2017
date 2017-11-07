@@ -123,7 +123,7 @@
 		<jaxrs:serviceBeans>
 			<ref bean="clienteRest" />
 			<ref bean="proveedorRest" />
-			<ref bean="menuRest" />
+			<ref bean="menuRest"/>
 		</jaxrs:serviceBeans>
 		<jaxrs:extensionMappings>
 			<entry key="json" value="application/json" />
