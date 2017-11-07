@@ -9,8 +9,6 @@ public class ProveedorBuilder {
 	private double creditos = 0;
 	
 	
-	public ProveedorBuilder() {}
-	
 	public static ProveedorBuilder mkBuilder() {
 		return new ProveedorBuilder();
 	}

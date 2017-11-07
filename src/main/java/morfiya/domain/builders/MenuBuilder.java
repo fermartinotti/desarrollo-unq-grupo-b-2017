@@ -1,10 +1,5 @@
 package morfiya.domain.builders;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-
-import morfiya.domain.Categoria;
 import morfiya.domain.Menu;
 
 public class MenuBuilder {
@@ -25,7 +20,6 @@ public class MenuBuilder {
 	private double precioCantidadMinima2;
 	private Integer cantidadMaxVtasPorDia;
 	
-	public MenuBuilder() {}
 	
 	public static MenuBuilder mkBuilder() {
 		return new MenuBuilder();
