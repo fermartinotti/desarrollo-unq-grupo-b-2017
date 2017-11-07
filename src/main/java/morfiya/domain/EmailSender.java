@@ -1,18 +1,34 @@
 package morfiya.domain;
-import java.util.Properties;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.UnknownHostException;
+import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
 import java.util.Date;
+import java.util.Properties;
 
-import javax.mail.*;
-
-import javax.mail.internet.*;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.apache.log4j.Logger;
 
-import com.sun.mail.smtp.*;
+import com.sun.mail.smtp.SMTPTransport;
+
 
 
 
 public class EmailSender {
+	
+	
 	Properties props = System.getProperties();
 	Session session = Session.getInstance(props, null);
 	private final static Logger log = Logger.getLogger(EmailSender.class);
@@ -23,7 +39,11 @@ public class EmailSender {
         
 	}
 	
-	public void sendEmaill(Cliente cliente, String descripcion) throws AddressException, MessagingException {
+	public void sendEmaill(Cliente cliente, String descripcion) throws AddressException, MessagingException, UnknownHostException, IOException, KeyManagementException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyStoreException, CertificateException {
+		
+		//////////////////////////////
+		
+		///////////////////////////
 		
         Message msg = new MimeMessage(session);
         msg.setFrom(new InternetAddress("fermartinotti@gmail.com"));

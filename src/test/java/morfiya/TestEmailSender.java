@@ -3,6 +3,8 @@ package morfiya;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.*;
 
+import java.io.IOException;
+import java.net.UnknownHostException;
 import java.time.LocalDate;
 
 import javax.mail.MessagingException;
@@ -35,10 +37,7 @@ public class TestEmailSender{
 		
 		try {
 			emailSender.sendEmaill(cliente, "descripcion");
-		} catch (AddressException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (MessagingException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
