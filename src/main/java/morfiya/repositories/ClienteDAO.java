@@ -16,7 +16,7 @@ import org.hibernate.FlushMode;
 import morfiya.domain.Cliente;
 import morfiya.domain.Menu;
 
-public class ClienteDAO extends HibernateGenericDAO<Cliente> implements GenericRepository<Cliente> {
+final class ClienteDAO extends HibernateGenericDAO<Cliente> {
 
 	private static final long serialVersionUID = -8437497503411362604L;
 

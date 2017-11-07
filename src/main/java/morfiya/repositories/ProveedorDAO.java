@@ -15,7 +15,7 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import morfiya.domain.Menu;
 import morfiya.domain.Proveedor;
 
-public class ProveedorDAO extends HibernateGenericDAO<Proveedor> implements GenericRepository<Proveedor> {
+final class ProveedorDAO extends HibernateGenericDAO<Proveedor>{
 
 	private static final long serialVersionUID = 2274059891644843280L;
 

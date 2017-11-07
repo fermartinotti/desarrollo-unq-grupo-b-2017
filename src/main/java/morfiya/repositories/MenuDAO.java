@@ -15,7 +15,7 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 
 import morfiya.domain.Menu;
 
-public class MenuDAO extends HibernateGenericDAO<Menu> implements GenericRepository<Menu> {
+final class MenuDAO extends HibernateGenericDAO<Menu> {
 
 	private static final long serialVersionUID = 6287473767660304813L;
 
