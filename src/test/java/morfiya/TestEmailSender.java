@@ -1,24 +1,14 @@
 package morfiya;
 
-import static org.junit.Assert.fail;
-import static org.mockito.Mockito.*;
-
-import java.io.IOException;
-import java.net.UnknownHostException;
-import java.time.LocalDate;
-
-import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.Test;
-import org.springframework.format.datetime.joda.LocalDateParser;
 
 import morfiya.domain.Cliente;
 import morfiya.domain.EmailSender;
-import morfiya.domain.Menu;
-import morfiya.domain.Proveedor;
-import morfiya.domain.Sistema;
-import morfiya.domain.builders.MenuBuilder;
 
 
 public class TestEmailSender{

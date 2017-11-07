@@ -1,10 +1,7 @@
 package morfiya.domain;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.security.KeyManagementException;
-import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
@@ -22,8 +19,6 @@ import javax.mail.internet.MimeMessage;
 import org.apache.log4j.Logger;
 
 import com.sun.mail.smtp.SMTPTransport;
-
-
 
 
 public class EmailSender {

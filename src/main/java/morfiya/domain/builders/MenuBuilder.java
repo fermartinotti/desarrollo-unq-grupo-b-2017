@@ -8,15 +8,15 @@ import morfiya.domain.Categoria;
 import morfiya.domain.Menu;
 
 public class MenuBuilder {
-	private String nombre;
-	private String descripcion; 
-	private Categoria categoria;
+//	private String nombre;
+//	private String descripcion; 
+//	private Categoria categoria;
 	private double valorDelivery;
-	private LocalDate fechaVigenciaDesde;
-	private LocalDate fechaVigenciaHasta;
-	private ArrayList<String> turnos; // ESTO QUEDA ? 
-	private ArrayList<Date> horariosDeEntrega;
-	private ArrayList<Date> horariosDeEnvio;
+//	private LocalDate fechaVigenciaDesde;
+//	private LocalDate fechaVigenciaHasta;
+//	private ArrayList<String> turnos; // ESTO QUEDA ? 
+//	private ArrayList<Date> horariosDeEntrega;
+//	private ArrayList<Date> horariosDeEnvio;
 	//Turnos entrega envio
 	private double precio;
 	private Integer cantidadMinima;
