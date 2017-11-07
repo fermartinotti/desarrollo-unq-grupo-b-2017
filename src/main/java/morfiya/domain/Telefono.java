@@ -1,11 +1,11 @@
 package morfiya.domain;
 
 public class Telefono extends Entity{
-	
+
 	private static final long serialVersionUID = -785467544755502668L;
 	String codigoDeArea;
 	String numero;
-	
+
 	public String getCodigoDeArea() {
 		return codigoDeArea;
 	}
@@ -27,7 +27,7 @@ public class Telefono extends Entity{
 		this.codigoDeArea = codigoDeArea;
 		this.numero = numero;
 	}
-	
+
 	public Telefono () {
 		super();
 	}
