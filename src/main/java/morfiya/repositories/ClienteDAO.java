@@ -72,7 +72,7 @@ final class ClienteDAO extends HibernateGenericDAO<Cliente> {
 	}
 
 	@Override
-	public void deleteById(Serializable id) {
+	public void deleteById(final Serializable id) {
 		this.getHibernateTemplate().execute(new HibernateCallback<Cliente>() {
 
 			@Override
