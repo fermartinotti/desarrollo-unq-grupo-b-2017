@@ -26,7 +26,7 @@ public class TestEmailSender{
 
 		
 		try {
-			emailSender.sendEmaill(cliente, "descripcion");
+			EmailSender.sendEmail(cliente, "descripcion");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

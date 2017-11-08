@@ -31,7 +31,7 @@ public class Sistema {
 				//calcular tiempo de entrega (RELEASE 2)
 				Pedido pedido = new Pedido(fechaDeEntrega, descripcion,menu, cliente);
 				pedidos.add(pedido); // Futuro save de un servicio a la DB.
-				emailSender.sendEmaill(cliente, descripcion);
+				emailSender.sendEmail(cliente, descripcion);
 			}catch (Exception e) {}
 		}
 	}
