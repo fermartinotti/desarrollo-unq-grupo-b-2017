@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.FlushMode;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -24,6 +23,7 @@ final class MenuDAO extends HibernateGenericDAO<Menu> {
 		return Menu.class;
 	}
 
+	// Sin paginación
 	@Override
 	public List<Menu> findAll() {
 		List<Menu> list = (List<Menu>) getHibernateTemplate().execute(new HibernateCallback<List<Menu>>() {
@@ -38,6 +38,21 @@ final class MenuDAO extends HibernateGenericDAO<Menu> {
 		return list;
 	}
 
+	// Con paginación
+	@SuppressWarnings("unchecked")
+	public List<Menu> getAllByPage(final Integer pageSize, final Integer pageNumber) {
+		HibernateTemplate template = getHibernateTemplate();
+		return (List<Menu>) template.execute(new HibernateCallback<Object>() {
+
+			public Object doInHibernate(Session session) throws HibernateException {
+				Query query = session.createQuery("from Menu");
+				query.setMaxResults(pageSize);
+				query.setFirstResult(pageSize * (pageNumber - 1));
+				return query.list();
+			}
+		});
+	}
+
 	@Override
 	public Menu findById(Serializable id) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Menu.class);
@@ -46,7 +61,7 @@ final class MenuDAO extends HibernateGenericDAO<Menu> {
 		return (Menu) (this.getHibernateTemplate().findByCriteria(criteria).get(0));
 	}
 
-	// Busca por substring
+	// Busca por substring (con paginación)
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Menu> findByName(final Serializable nombre, final Integer pageSize, final Integer pageNumber) {
@@ -61,12 +76,21 @@ final class MenuDAO extends HibernateGenericDAO<Menu> {
 			}
 		});
 	}
-
+	
+	// Busca por substring (con paginación)
+	@SuppressWarnings("unchecked")
 	@Override
-	public void save(Menu menu) {
-		getHibernateTemplate().getSessionFactory().getCurrentSession().setFlushMode(FlushMode.AUTO);
-		getHibernateTemplate().save(menu);
-		getHibernateTemplate().flush();
+	public List<Menu> findByCategoria(final String categoria, final Integer pageSize, final Integer pageNumber) {
+		HibernateTemplate template = getHibernateTemplate();
+		return (List<Menu>) template.execute(new HibernateCallback<Object>() {
+
+			public Object doInHibernate(Session session) throws HibernateException {
+				Query query = session.createQuery(("FROM Menu WHERE categoria like '%" + categoria.toString() + "%'"));
+				query.setMaxResults(pageSize);
+				query.setFirstResult(pageSize * (pageNumber - 1));
+				return query.list();
+			}
+		});
 	}
 
 	@Override
@@ -84,19 +108,5 @@ final class MenuDAO extends HibernateGenericDAO<Menu> {
 			}
 		});
 
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Menu> getAllByPage(final Integer pageSize, final Integer pageNumber) {
-		HibernateTemplate template = getHibernateTemplate();
-		return (List<Menu>) template.execute(new HibernateCallback<Object>() {
-
-			public Object doInHibernate(Session session) throws HibernateException {
-				Query query = session.createQuery("from Menu");
-				query.setMaxResults(pageSize);
-				query.setFirstResult(pageSize * (pageNumber - 1));
-				return query.list();
-			}
-		});
 	}
 }

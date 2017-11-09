@@ -3,6 +3,7 @@ package morfiya.repositories;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.FlushMode;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 /**
@@ -60,11 +61,14 @@ public abstract class HibernateGenericDAO<T> extends HibernateDaoSupport impleme
 	
 	protected abstract Class<T> getDomainClass();
 
+	// Funciona para todos
 	public void save(final T entity) {
-		this.getHibernateTemplate().save(entity);
-		this.getHibernateTemplate().flush();
+		getHibernateTemplate().getSessionFactory().getCurrentSession().setFlushMode(FlushMode.AUTO);
+		getHibernateTemplate().save(entity);
+		getHibernateTemplate().flush();
 	}
-
+	
+	// Funciona para todos
 	public void update(final T entity) {
 		this.getHibernateTemplate().update(entity);
 	}

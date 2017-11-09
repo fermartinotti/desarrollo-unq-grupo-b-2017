@@ -32,6 +32,6 @@ public interface GenericRepository<T> {
 
 	List<Menu> findByName(Serializable nombre, Integer pageSize, Integer pageNumber);
 
-		
-	
+	List<Menu> findByCategoria(String categoria, Integer pageSize, Integer pageNumber);
+
 }

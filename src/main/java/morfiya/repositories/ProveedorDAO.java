@@ -3,7 +3,6 @@ package morfiya.repositories;
 import java.io.Serializable;
 import java.util.List;
 
-import org.hibernate.FlushMode;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -60,13 +59,6 @@ final class ProveedorDAO extends HibernateGenericDAO<Proveedor>{
 		criteria.add(Restrictions.eq("id", id));
 
 		return (Proveedor) (this.getHibernateTemplate().findByCriteria(criteria).get(0));
-	}
-
-	@Override
-	public void save(Proveedor proveedor) {
-		getHibernateTemplate().getSessionFactory().getCurrentSession().setFlushMode(FlushMode.AUTO);
-		getHibernateTemplate().save(proveedor);
-		getHibernateTemplate().flush();
 	}
 
 	@Override
