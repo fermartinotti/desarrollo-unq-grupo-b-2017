@@ -27,7 +27,7 @@ public class TestEmailSender{
 		try {
 			EmailSender.sendEmail(cliente, "descripcion");
 		} catch (Exception e) {
-			log.error("Error al enviar email");
+			log.error("Error al enviar email. Erorr: " + e.getMessage());
 		}
 		
         verify(cliente, times(1)).getEmail();
