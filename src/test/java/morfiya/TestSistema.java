@@ -3,12 +3,6 @@ package morfiya;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.print.DocFlavor.URL;
-
 import org.junit.Test;
 
 import jdepend.framework.DependencyConstraint;
