@@ -1,40 +1,15 @@
 package morfiya.domain;
-import java.io.IOException;
-import java.net.UnknownHostException;
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.UnrecoverableKeyException;
-import java.security.cert.CertificateException;
-import java.util.Date;
-import java.util.Properties;
-
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.JsonNode;
 
-import com.sun.mail.smtp.SMTPTransport;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 public class EmailSender {
 	
-	
-//	Properties props = System.getProperties();
-//	Session session = Session.getInstance(props, null);
 	private final static Logger log = Logger.getLogger(EmailSender.class);
 	
-	public EmailSender(){
-//		props.put("mail.smtps.host", "smtp.mailgun.org");
-//        props.put("mail.smtps.auth", "true");
-        
+	public EmailSender(){ 
 	}
 	
 //////////////////////////////
@@ -48,6 +23,7 @@ public class EmailSender {
 	.queryString("text", descripcion)
 	.asJson();
 	
+	log.debug("Se enviar email con exito con descripcion:" + descripcion);
 	return request.getBody();
 	}
 ///////////////////////////
