@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import morfiya.domain.Menu;
+import morfiya.domain.Servicio;
 
 /**
  * Interface for generic DAO
@@ -33,5 +34,8 @@ public interface GenericRepository<T> {
 	List<Menu> findByName(Serializable nombre, Integer pageSize, Integer pageNumber);
 
 	List<Menu> findByCategoria(String categoria, Integer pageSize, Integer pageNumber);
+	
+	List<Menu> findByLocalidad(String localidad, Integer pageSize, Integer pageNumber);
+
 
 }

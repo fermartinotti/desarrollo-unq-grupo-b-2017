@@ -85,4 +85,16 @@ final class ClienteDAO extends HibernateGenericDAO<Cliente> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<Menu> findByCategoria(String categoria, Integer pageSize, Integer pageNumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Menu> findByLocalidad(String localidad, Integer pageSize, Integer pageNumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -54,7 +54,7 @@ public class MenuRest {
 	
     // Con paginacion 
 	@GET
-	@Path("/getBycategoria/{categoria}/{pageNumber}")
+	@Path("/getByCategoria/{categoria}/{pageNumber}")
 	@Produces("application/json")
 	public Response getMenuByCategoria(@PathParam("categoria") final String categoria, @PathParam("pageNumber") final String pageNumber) {
 		try {
