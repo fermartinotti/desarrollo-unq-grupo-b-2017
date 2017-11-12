@@ -13,7 +13,6 @@ import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
 import morfiya.domain.Cliente;
-import morfiya.domain.Menu;
 
 final class ClienteDAO extends HibernateGenericDAO<Cliente> {
 
@@ -78,23 +77,5 @@ final class ClienteDAO extends HibernateGenericDAO<Cliente> {
 			}
 		});
 
-	}
-
-	@Override
-	public List<Menu> findByName(Serializable nombre, Integer pageSize, Integer pageNumber) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Menu> findByCategoria(String categoria, Integer pageSize, Integer pageNumber) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Menu> findByLocalidad(String localidad, Integer pageSize, Integer pageNumber) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

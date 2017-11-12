@@ -68,7 +68,6 @@ public class MenuRest {
 	}
 	
 	
-	
 	// Sin paginacion
 	@GET
 	@Path("/getAll")

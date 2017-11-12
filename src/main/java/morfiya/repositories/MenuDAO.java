@@ -14,7 +14,7 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 
 import morfiya.domain.Menu;
 
-final class MenuDAO extends HibernateGenericDAO<Menu> {
+public final class MenuDAO extends HibernateGenericDAO<Menu> {
 
 	private static final long serialVersionUID = 6287473767660304813L;
 
@@ -64,7 +64,6 @@ final class MenuDAO extends HibernateGenericDAO<Menu> {
 
 	// Busca por substring (con paginación)
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<Menu> findByName(final Serializable nombre, final Integer pageSize, final Integer pageNumber) {
 		HibernateTemplate template = getHibernateTemplate();
 		return (List<Menu>) template.execute(new HibernateCallback<Object>() {
@@ -80,7 +79,6 @@ final class MenuDAO extends HibernateGenericDAO<Menu> {
 	
 	// Busca por substring (con paginación)
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<Menu> findByCategoria(final String categoria, final Integer pageSize, final Integer pageNumber) {
 		HibernateTemplate template = getHibernateTemplate();
 		return (List<Menu>) template.execute(new HibernateCallback<Object>() {
@@ -110,11 +108,4 @@ final class MenuDAO extends HibernateGenericDAO<Menu> {
 		});
 
 	}
-
-	@Override
-	public List<Menu> findByLocalidad(String localidad, Integer pageSize, Integer pageNumber) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

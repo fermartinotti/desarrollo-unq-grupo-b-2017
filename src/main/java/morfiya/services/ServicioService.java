@@ -4,6 +4,7 @@ import java.util.List;
 
 import morfiya.domain.Menu;
 import morfiya.domain.Servicio;
+import morfiya.repositories.*;
 
 public class ServicioService extends GenericService<Servicio> {
 
@@ -18,10 +19,10 @@ public class ServicioService extends GenericService<Servicio> {
 	}
 	
 	public void crearServicio(Servicio servicio) {
-		getRepository().save(servicio);
+		((ServicioDAO) getRepository()).save(servicio);
 	}
 
 	public List<Menu> findMenuForLocalidad(String localidad, final Integer pageSize, final Integer pageNumber) {
-		return getRepository().findByLocalidad(localidad, pageSize, pageNumber);
+		return ((ServicioDAO) getRepository()).findByLocalidad(localidad, pageSize, pageNumber);
 	}
 }
