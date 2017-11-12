@@ -16,10 +16,10 @@ public class MenuService extends GenericService<Menu> {
 	public void crearMenu(Menu menu) {
 		getRepository().save(menu);
 	}
-
-//	public List<Menu> findMenuForName(Serializable nombre) {
-//		return getRepository().findByName(nombre);
-//	}
+	
+	public List<Menu> findMenuForCategory(String categoria,final Integer pageSize, final Integer pageNumber) {
+		return getRepository().findByCategoria(categoria, pageSize, pageNumber);
+	}
 	
 	public List<Menu> findMenuForName(Serializable nombre,final Integer pageSize, final Integer pageNumber) {
 		return getRepository().findByName(nombre, pageSize, pageNumber);

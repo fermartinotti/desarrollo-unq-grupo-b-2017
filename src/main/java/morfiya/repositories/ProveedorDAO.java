@@ -3,7 +3,6 @@ package morfiya.repositories;
 import java.io.Serializable;
 import java.util.List;
 
-import org.hibernate.FlushMode;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -62,13 +61,18 @@ final class ProveedorDAO extends HibernateGenericDAO<Proveedor>{
 	}
 
 	@Override
-	public void save(Proveedor proveedor) {
-		getHibernateTemplate().getSessionFactory().getCurrentSession().setFlushMode(FlushMode.AUTO);
-		getHibernateTemplate().save(proveedor);
-		getHibernateTemplate().flush();
+	public List<Menu> findByName(Serializable nombre, Integer pageSize, Integer pageNumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+  
+	@Override
+	public List<Menu> findByCategoria(String categoria, Integer pageSize, Integer pageNumber) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	public List<Menu> findByName(Serializable nombre, Integer pageSize, Integer pageNumber) {
+	public List<Menu> findByLocalidad(String localidad, Integer pageSize, Integer pageNumber) {
 		// TODO Auto-generated method stub
 		return null;
 	}

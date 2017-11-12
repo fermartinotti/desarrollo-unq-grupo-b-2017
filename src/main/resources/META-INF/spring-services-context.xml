@@ -7,26 +7,29 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
 	<!-- *************** Cliente *************** -->
-	
+
 	<bean id="clienteRest" class="morfiya.rest.ClienteRest">
 		<property name="service" ref="clienteService" />
 	</bean>
-	
+
 	<!-- *************** Proveedor *************** -->
-	
-		<bean id="proveedorRest" class="morfiya.rest.ProveedorRest">
+
+	<bean id="proveedorRest" class="morfiya.rest.ProveedorRest">
 		<property name="service" ref="proveedorService" />
 	</bean>
-	
+
 	<!-- *************** MENU *************** -->
-	
-		<bean id="menuRest" class="morfiya.rest.MenuRest">
+
+	<bean id="menuRest" class="morfiya.rest.MenuRest">
 		<property name="service" ref="menuService" />
 	</bean>
-	
 
-	<!-- *************** Menu *************** -->
-	
-	<tx:annotation-driven/>
+	<!-- *************** Servicio *************** -->
+
+	<bean id="servicioRest" class="morfiya.rest.ServicioRest">
+		<property name="service" ref="servicioService" />
+	</bean>
+
+	<tx:annotation-driven />
 </beans>
 

@@ -3,6 +3,7 @@ package morfiya.repositories;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -10,8 +11,6 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.HibernateTemplate;
-import org.hibernate.Criteria;
-import org.hibernate.FlushMode;
 
 import morfiya.domain.Cliente;
 import morfiya.domain.Menu;
@@ -64,13 +63,6 @@ final class ClienteDAO extends HibernateGenericDAO<Cliente> {
 	}
 
 	@Override
-	public void save(Cliente cliente) {
-		getHibernateTemplate().getSessionFactory().getCurrentSession().setFlushMode(FlushMode.AUTO);
-		getHibernateTemplate().save(cliente);
-		getHibernateTemplate().flush();
-	}
-
-	@Override
 	public void deleteById(final Serializable id) {
 		this.getHibernateTemplate().execute(new HibernateCallback<Cliente>() {
 
@@ -87,6 +79,18 @@ final class ClienteDAO extends HibernateGenericDAO<Cliente> {
 	}
 
 	public List<Menu> findByName(Serializable nombre, Integer pageSize, Integer pageNumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Menu> findByCategoria(String categoria, Integer pageSize, Integer pageNumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Menu> findByLocalidad(String localidad, Integer pageSize, Integer pageNumber) {
 		// TODO Auto-generated method stub
 		return null;
 	}

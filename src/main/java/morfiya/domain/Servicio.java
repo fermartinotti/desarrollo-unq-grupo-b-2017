@@ -8,9 +8,6 @@ import morfiya.exceptions.MenuException;
 
 public class Servicio extends Entity{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String nombre;
 	private List<Menu> menus = new ArrayList<Menu>();	//falta mapear
@@ -24,6 +21,29 @@ public class Servicio extends Entity{
 	private Localidad localidadDeEntregas;
 	Integer maximoDeMenusVigentes = 20;
 	
+	
+	
+	// 
+	public Servicio(String nombre, List<Menu> menus, Direccion direccion, String descripcion, String link,
+			String email, Telefono telefono, DiasDeAtencion atencionAlPublico, Localidad localidadDeEntregas) 
+	{
+		super();
+		this.nombre = nombre;
+		setMenus(menus);
+		this.direccion = direccion;
+		setDescripcion(descripcion);
+		this.link = link;
+		this.email = email;
+		this.telefono = telefono;
+		this.atencionAlPublico = atencionAlPublico;
+		this.localidadDeEntregas = localidadDeEntregas;
+		
+	}
+
+	public Servicio() {
+		super();
+	}
+
 	public void agregarMenu(Menu menu) throws MenuException {
 		if(menus.size() >= getMaximoDeMenusVigentes()) {
 			throw new MenuException("Llego a su limite de menues permitidos");
@@ -51,8 +71,11 @@ public class Servicio extends Entity{
 		return menus;
 	}
 
-	public void setMenues(List<Menu> menues) {
-		this.menus = menues;
+	public void setMenus(List<Menu> menus) {
+		if(menus.size() >= getMaximoDeMenusVigentes()) {
+			throw new MenuException("Llego a su limite de menues permitidos");
+		}			
+		this.menus = menus;		
 	}
 
 	public Direccion getDireccion() {

@@ -124,6 +124,7 @@
 			<ref bean="clienteRest" />
 			<ref bean="proveedorRest" />
 			<ref bean="menuRest"/>
+			<ref bean="servicioRest"/>
 		</jaxrs:serviceBeans>
 		<jaxrs:extensionMappings>
 			<entry key="json" value="application/json" />
@@ -145,6 +146,7 @@
 	<!-- ________________________________________ -->
 	<!-- ________________________________________ -->
 	
+    
     <!-- *************** Cliente *************** -->
     
     <bean id="clienteDAO" class="morfiya.repositories.ClienteDAO">
@@ -176,6 +178,17 @@
 
    <bean id="menuService" class="morfiya.services.MenuService">
     	<property name="repository" ref="menuDAO"/>
+    </bean>
+    
+    <!-- *************** Servicio *************** -->
+    
+    <bean id="servicioDAO" class="morfiya.repositories.ServicioDAO">
+    	<property name="sessionFactory" ref="persistence.sessionFactory"/>
+    </bean>
+
+
+   <bean id="servicioService" class="morfiya.services.ServicioService">
+    	<property name="repository" ref="servicioDAO"/>
     </bean>
 	
 

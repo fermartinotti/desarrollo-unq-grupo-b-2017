@@ -51,6 +51,24 @@ public class MenuRest {
 		}
 	}
 	
+	
+    // Con paginacion 
+	@GET
+	@Path("/getByCategoria/{categoria}/{pageNumber}")
+	@Produces("application/json")
+	public Response getMenuByCategoria(@PathParam("categoria") final String categoria, @PathParam("pageNumber") final String pageNumber) {
+		try {
+			List<Menu> menu = service.findMenuForCategory(categoria, pageSize, Integer.parseInt(pageNumber));
+			return Response.ok(menu).build();
+		}
+
+		catch (Exception e) {
+			return Response.serverError().entity(e.getMessage()).build();
+		}
+	}
+	
+	
+	
 	// Sin paginacion
 	@GET
 	@Path("/getAll")
