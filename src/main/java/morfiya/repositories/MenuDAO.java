@@ -64,7 +64,6 @@ final class MenuDAO extends HibernateGenericDAO<Menu> {
 
 	// Busca por substring (con paginación)
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<Menu> findByName(final Serializable nombre, final Integer pageSize, final Integer pageNumber) {
 		HibernateTemplate template = getHibernateTemplate();
 		return (List<Menu>) template.execute(new HibernateCallback<Object>() {
@@ -98,7 +97,6 @@ final class MenuDAO extends HibernateGenericDAO<Menu> {
 	public void deleteById(final Serializable id) {
 		this.getHibernateTemplate().execute(new HibernateCallback<Menu>() {
 
-			@Override
 			public Menu doInHibernate(Session session) throws HibernateException {
 				Criteria criteria = session.createCriteria(Menu.class);
 				criteria.add(Restrictions.eq("id", id));
