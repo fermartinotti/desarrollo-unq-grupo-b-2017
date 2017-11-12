@@ -5,6 +5,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import morfiya.domain.Cliente;
@@ -12,24 +13,21 @@ import morfiya.domain.EmailSender;
 
 
 public class TestEmailSender{
-
+	private final static Logger log = Logger.getLogger(TestEmailSender.class);
 	// ARREGLAR LOGGEO,  O FALLAR TEST.
 	
 	@Test
 	public void testSendEmail() {
-		
-		EmailSender emailSender = new EmailSender();
-		
+				
 		Cliente cliente= mock(Cliente.class);
        
        when(cliente.getEmail()).thenReturn("fermartinotti@gmail.com");
 
 		
 		try {
-			emailSender.sendEmaill(cliente, "descripcion");
+			EmailSender.sendEmail(cliente, "descripcion");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("Error al enviar email. Erorr: " + e.getMessage());
 		}
 		
         verify(cliente, times(1)).getEmail();
