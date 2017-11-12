@@ -65,7 +65,6 @@ public final class StringGsonTypeAdapter implements JsonDeserializer<String> {
         return INSTANCE;
     }
 
-    @Override
     public String deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) {
        return normalizeSpace(trimToNull(jsonElement.getAsString()));
     	  

@@ -37,7 +37,6 @@ final class ProveedorDAO extends HibernateGenericDAO<Proveedor>{
 	}
 
 	// CON paginacion
-	@Override
 	@SuppressWarnings("unchecked")
 	public List<Proveedor> getAllByPage(final Integer pageSize, final Integer pageNumber) {
 		HibernateTemplate template = getHibernateTemplate();

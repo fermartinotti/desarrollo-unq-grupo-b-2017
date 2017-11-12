@@ -39,7 +39,6 @@ final class ClienteDAO extends HibernateGenericDAO<Cliente> {
 	}
 
 	// CON paginacion
-	@Override
 	@SuppressWarnings("unchecked")
 	public List<Cliente> getAllByPage(final Integer pageSize, final Integer pageNumber) {
 		HibernateTemplate template = getHibernateTemplate();
@@ -66,7 +65,6 @@ final class ClienteDAO extends HibernateGenericDAO<Cliente> {
 	public void deleteById(final Serializable id) {
 		this.getHibernateTemplate().execute(new HibernateCallback<Cliente>() {
 
-			@Override
 			public Cliente doInHibernate(Session session) throws HibernateException {
 				Criteria criteria = session.createCriteria(Cliente.class);
 				criteria.add(Restrictions.eq("id", id));

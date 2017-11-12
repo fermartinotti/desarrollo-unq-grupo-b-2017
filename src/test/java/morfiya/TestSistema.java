@@ -1,9 +1,13 @@
 package morfiya;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
 
+import jdepend.framework.DependencyConstraint;
+import jdepend.framework.JDepend;
+import jdepend.framework.JavaPackage;
 import morfiya.domain.Menu;
 import morfiya.domain.Pedido;
 import morfiya.domain.Sistema;
@@ -20,6 +24,21 @@ public class TestSistema {
 		assertEquals(1, sistema.getPedidos().size());
 	}
 
+	@Test
+	public void testServicesPkgShouldNotDependOnDommainPkg() {
+		final JDepend jDepend = new JDepend();
+		
+		DependencyConstraint constraint = new DependencyConstraint();
+		JavaPackage domain = constraint.addPackage("domain");
+		JavaPackage services = constraint.addPackage("services");
+		
+		domain.dependsUpon(services);
+		
+		jDepend.analyze();
+		assertFalse(jDepend.dependencyMatch(constraint));
+	}
+		
+	
 //	@Test
 //	public void testComprar() {
 //		Sistema sistema = new Sistema();

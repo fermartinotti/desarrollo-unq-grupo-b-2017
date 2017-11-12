@@ -96,7 +96,6 @@ public final class MenuDAO extends HibernateGenericDAO<Menu> {
 	public void deleteById(final Serializable id) {
 		this.getHibernateTemplate().execute(new HibernateCallback<Menu>() {
 
-			@Override
 			public Menu doInHibernate(Session session) throws HibernateException {
 				Criteria criteria = session.createCriteria(Menu.class);
 				criteria.add(Restrictions.eq("id", id));
