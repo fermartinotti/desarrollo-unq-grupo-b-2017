@@ -169,5 +169,4 @@ public class MenuRest {
 			return Response.serverError().entity(e.getMessage()).build();
 		}
 	}
-
 }

@@ -19,7 +19,11 @@ public class MenuService extends GenericService<Menu> {
 	public void crearMenu(Menu menu) {
 		getRepository().save(menu);
 	}
-	
+
+	public Menu getMenuById(int id) {
+		return getRepository().findById(id);
+	}
+
 	public List<Menu> findMenuForCategory(String categoria,final Integer pageSize, final Integer pageNumber) {
 		return ((MenuDAO)getRepository()).findByCategoria(categoria, pageSize, pageNumber);
 	}

@@ -28,22 +28,21 @@ public class MenuGsonTypeAdapter implements JsonDeserializer<Menu> {
 //		ArrayList<String> hEntregas = new Gson().fromJson(jobject.getAsJsonArray("horariosDeEntrega"), listType);
 //		ArrayList<String> henvios = new Gson().fromJson(jobject.getAsJsonArray("horariosDeEnvio"), listType);
 
-		return new Menu(
-				jobject.get("nombre").getAsString(), 
-				jobject.get("descripcion").getAsString(), 
-				categoria, 
-				jobject.get("valorDelivery").getAsDouble(), 
-				jobject.get("fechaVigenciaDesde").getAsString(), 
-				jobject.get("fechaVigenciaDesde").getAsString(), 
-				//null,
-				//hEntregas,
-				//henvios,
-				//("horariosDeEntrega"),
-				jobject.get("precio").getAsDouble(), 
-				jobject.get("cantidadMinima").getAsInt(), 
-				jobject.get("cantidadMinima2").getAsInt(), 
-				jobject.get("precioCantidadMinima").getAsDouble(), 
-				jobject.get("precioCantidadMinima2").getAsDouble(), 
-				jobject.get("cantidadMaxVtasPorDia").getAsInt());
+		Menu menu = new Menu();
+		if(jobject.has("nombre")) menu.setNombre(jobject.get("nombre").getAsString());
+		if(jobject.has("descripcion")) menu.setDescripcion(jobject.get("descripcion").getAsString());
+		if(categoria != null) menu.setCategoria(categoria);
+		if(jobject.has("valorDelivery")) menu.setValorDelivery(jobject.get("valorDelivery").getAsDouble());
+//		if(jobject.has("fechaVigenciaDesde")) menu.setFechaVigenciaDesde(jobject.get("fechaVigenciaDesde").getAsString());
+//		if(jobject.has("fechaVigenciaHasta"))jobject.get("fechaVigenciaHasta").getAsString();
+		
+		if(jobject.has("precio")) menu.setPrecio(jobject.get("precio").getAsDouble());
+		if(jobject.has("cantidadMinima")) menu.setCantidadMinima(jobject.get("cantidadMinima").getAsInt());
+		if(jobject.has("cantidadMinima2")) menu.setCantidadMinima2(jobject.get("cantidadMinima2").getAsInt());
+		if(jobject.has("precioCantidadMinima")) menu.setPrecioCantidadMinima(jobject.get("precioCantidadMinima").getAsDouble());
+		if(jobject.has("precioCantidadMinima2"))  menu.setPrecioCantidadMinima2(jobject.get("precioCantidadMinima2").getAsDouble()); 
+		if(jobject.has("cantidadMaxVtasPorDia")) menu.setCantidadMaxVtasPorDia(jobject.get("cantidadMaxVtasPorDia").getAsInt());
+		
+		return menu;
 	}
 }
