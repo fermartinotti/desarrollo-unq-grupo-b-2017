@@ -28,4 +28,13 @@ public class MenuService extends GenericService<Menu> {
 	public List<Menu> getAllByPage(final int pageSize, final int pageNumber){
 		return getRepository().getAllByPage(pageSize, pageNumber);
 	}
+	
+	public Menu findByID(Integer id){
+		return getRepository().findById(id);
+	}
+	
+	public void editarMenu(Menu menu){
+		getRepository().update(menu);
+	}
+	
 }

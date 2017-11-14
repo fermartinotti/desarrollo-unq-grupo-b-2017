@@ -23,7 +23,7 @@ final class MenuDAO extends HibernateGenericDAO<Menu> {
 		return Menu.class;
 	}
 
-	// Sin paginaci贸n
+	// Sin paginaci髇
 	@Override
 	public List<Menu> findAll() {
 		List<Menu> list = (List<Menu>) getHibernateTemplate().execute(new HibernateCallback<List<Menu>>() {
@@ -38,7 +38,7 @@ final class MenuDAO extends HibernateGenericDAO<Menu> {
 		return list;
 	}
 
-	// Con paginaci贸n
+	// Con paginaci髇
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Menu> getAllByPage(final Integer pageSize, final Integer pageNumber) {
@@ -62,7 +62,7 @@ final class MenuDAO extends HibernateGenericDAO<Menu> {
 		return (Menu) (this.getHibernateTemplate().findByCriteria(criteria).get(0));
 	}
 
-	// Busca por substring (con paginaci贸n)
+	// Busca por substring (con paginaci髇)
 	@SuppressWarnings("unchecked")
 	public List<Menu> findByName(final Serializable nombre, final Integer pageSize, final Integer pageNumber) {
 		HibernateTemplate template = getHibernateTemplate();
@@ -77,7 +77,7 @@ final class MenuDAO extends HibernateGenericDAO<Menu> {
 		});
 	}
 	
-	// Busca por substring (con paginaci贸n)
+	// Busca por substring (con paginaci髇)
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Menu> findByCategoria(final String categoria, final Integer pageSize, final Integer pageNumber) {
