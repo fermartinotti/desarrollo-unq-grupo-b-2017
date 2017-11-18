@@ -31,7 +31,7 @@ public class TestMenu {
 	public void testSetValorDelivery(){
 		Menu menu = new Menu();
 		try {
-			menu.setValorDelivery(20);
+			menu.setValorDelivery((double) 20);
 		} catch (DatoInvalidoException e) {}
 		assertEquals(20, menu.getValorDelivery(), 0);
 	}
@@ -40,7 +40,7 @@ public class TestMenu {
 	public void testSetPrecio() {
 		Menu menu = new Menu();
 		try {
-			menu.setPrecio(15);
+			menu.setPrecio((double) 15);
 		} catch (DatoInvalidoException e) {}
 			assertEquals(15, menu.getPrecio(), 0);
 	}

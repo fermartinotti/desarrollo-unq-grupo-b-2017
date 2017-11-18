@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import morfiya.domain.Menu;
-import morfiya.domain.Servicio;
 
 /**
  * Interface for generic DAO

@@ -22,7 +22,7 @@ public class TestDatoInvalidoException {
 		Menu menu = new Menu();
 		// menu.setPrecio(900);
 		try {
-			menu.setPrecioCantidadMinima(-1);
+			menu.setPrecioCantidadMinima((double) -1);
 			fail("Se esperaba excepcion");
 		} catch (DatoInvalidoException e) {}
 	}
@@ -34,7 +34,7 @@ public class TestDatoInvalidoException {
 		Menu menu = new Menu();
 		// menu.setPrecio(900);
 		try {
-			menu.setPrecioCantidadMinima(2000);
+			menu.setPrecioCantidadMinima((double) 2000);
 			fail("Se esperaba excepcion");
 		} catch (DatoInvalidoException e) {}
 	}
@@ -46,8 +46,8 @@ public class TestDatoInvalidoException {
 		Menu menu = new Menu();
 		
 		try {
-			menu.setPrecio(900);
-			menu.setPrecioCantidadMinima(950);
+			menu.setPrecio((double) 900);
+			menu.setPrecioCantidadMinima((double) 950);
 			fail("Se esperaba excepcion");
 		} catch (DatoInvalidoException e) {}
 	}
@@ -59,7 +59,7 @@ public class TestDatoInvalidoException {
 		Menu menu = new Menu();
 		// menu.setPrecio(900);
 		try {
-			menu.setPrecioCantidadMinima2(-1);
+			menu.setPrecioCantidadMinima2((double) -1);
 			fail("Se esperaba excepcion");
 		} catch (DatoInvalidoException e) {}
 	}
@@ -71,7 +71,7 @@ public class TestDatoInvalidoException {
 		Menu menu = new Menu();
 		// menu.setPrecio(900);
 		try {
-			menu.setPrecioCantidadMinima2(2000);
+			menu.setPrecioCantidadMinima2((double) 2000);
 			fail("Se esperaba excepcion");
 		} catch (DatoInvalidoException e) {}
 	}
@@ -83,8 +83,8 @@ public class TestDatoInvalidoException {
 		Menu menu = new Menu();
 		
 		try {
-			menu.setPrecio(900);
-			menu.setPrecioCantidadMinima2(950);
+			menu.setPrecio((double) 900);
+			menu.setPrecioCantidadMinima2((double) 950);
 			fail("Se esperaba excepcion");
 		} catch (DatoInvalidoException e) {}
 	}
@@ -96,9 +96,9 @@ public class TestDatoInvalidoException {
 		Menu menu = new Menu();
 		
 		try {
-			menu.setPrecio(900);
-			menu.setPrecioCantidadMinima(700);
-			menu.setPrecioCantidadMinima2(800);
+			menu.setPrecio((double) 900);
+			menu.setPrecioCantidadMinima((double) 700);
+			menu.setPrecioCantidadMinima2((double) 800);
 			fail("Se esperaba excepcion");
 		} catch (DatoInvalidoException e) {}
 	}
@@ -149,7 +149,7 @@ public class TestDatoInvalidoException {
 	public void testValorDelDeliveyMenorADiez(){
 		Menu menu = new Menu();
 		try{
-			menu.setValorDelivery((float) 5);
+			menu.setValorDelivery((double) 5);
 			fail("Se esperaba excepcion");
 		} catch(DatoInvalidoException e){}
 	}
@@ -158,7 +158,7 @@ public class TestDatoInvalidoException {
 	public void testValorDelDeliveyMayorACuarenta(){
 		Menu menu = new Menu();
 		try{
-			menu.setValorDelivery(45);
+			menu.setValorDelivery((double) 45);
 			fail("Se esperaba excepcion");
 		} catch(DatoInvalidoException e){}
 	}
