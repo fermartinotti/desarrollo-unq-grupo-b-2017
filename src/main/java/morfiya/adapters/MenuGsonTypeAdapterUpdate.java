@@ -12,10 +12,9 @@ import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 
 import morfiya.domain.Categoria;
-import morfiya.domain.Menu;
 import morfiya.exceptions.DatoInvalidoException;
 
-public class MenuGsonTypeAdapterUpdate  implements JsonDeserializer<Menu> {
+public class MenuGsonTypeAdapterUpdate  implements JsonDeserializer<MenuUpdate> {
 	
 	public String checkStringOrNull(String string, JsonObject jobject){
 		
@@ -63,7 +62,7 @@ public class MenuGsonTypeAdapterUpdate  implements JsonDeserializer<Menu> {
 
 
 
-	public Menu deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException, DatoInvalidoException {
+	public MenuUpdate deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException, DatoInvalidoException {
 
 		JsonObject jobject = json.getAsJsonObject();
 
@@ -76,7 +75,7 @@ public class MenuGsonTypeAdapterUpdate  implements JsonDeserializer<Menu> {
 		ArrayList<String> hEntregas = new Gson().fromJson(jobject.getAsJsonArray("horariosDeEntrega"), listType);
 		ArrayList<String> henvios = new Gson().fromJson(jobject.getAsJsonArray("horariosDeEnvio"), listType);
 
-		return new Menu(
+		return new MenuUpdate(
 				
 				checkStringOrNull("nombre", jobject), 
 				checkStringOrNull("descripcion", jobject), 
@@ -84,7 +83,7 @@ public class MenuGsonTypeAdapterUpdate  implements JsonDeserializer<Menu> {
 				checkDoubleOrNull("valorDelivery",jobject), 
 				checkStringOrNull("fechaVigenciaDesde", jobject), 
 				checkStringOrNull("fechaVigenciaDesde", jobject), 
-				//null, // Inicializo el menu en null, porque todavia no definimos bien cual va a ser el uso
+				null, // Inicializo el menu en null, porque todavia no definimos bien cual va a ser el uso
 				checkListaOrNull(hEntregas),
 				checkListaOrNull(henvios),
 				//("horariosDeEntrega"),
@@ -93,6 +92,7 @@ public class MenuGsonTypeAdapterUpdate  implements JsonDeserializer<Menu> {
 				checkIntegerOrNull("cantidadMinima2", jobject), 
 				checkDoubleOrNull("precioCantidadMinima", jobject), 
 				checkDoubleOrNull("precioCantidadMinima2", jobject), 
-				checkIntegerOrNull("cantidadMaxVtasPorDia", jobject));
-	}
+				checkIntegerOrNull("cantidadMaxVtasPorDia", jobject),
+				checkIntegerOrNull("id", jobject));
+		}
 }

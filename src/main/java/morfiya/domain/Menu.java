@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+import morfiya.adapters.MenuUpdate;
 import morfiya.exceptions.DatoInvalidoException;
 import morfiya.utils.DateFormatter;
 
@@ -58,113 +59,10 @@ public class Menu extends Entity {
 		setCantidadMaxVtasPorDia(cantidadMaxVtasPorDia);
 	}
 
-	public Menu(String nombre, String descripcion, Categoria categoria, Double valorDelivery, String fechaVigenciaDesde,
-			String fechaVigenciaHasta , ArrayList<String> horariosDeEntrega, ArrayList<String> horariosDeEnvio,
-			Double precio,
-			Integer cantidadMinima, Integer cantidadMinima2, Double precioCantidadMinima, Double precioCantidadMinima2,
-			Integer cantidadMaxVtasPorDia) throws DatoInvalidoException {
-		
-		
-		
-		if(nombre == null)
-			this.nombre = nombre;
-		else	
-			this.setNombre(nombre);
-		
-		if(descripcion == null)
-			this.descripcion = descripcion;
-		else	
-			this.setDescripcion(descripcion);
-		
-		if(categoria == null)
-			this.categoria = categoria;
-		else	
-			this.setCategoria(categoria);
-		
-		if(valorDelivery == null)
-			this.valorDelivery = valorDelivery;
-		else	
-			this.setValorDelivery(valorDelivery);
-		
-		if(fechaVigenciaDesde == null)
-			this.fechaVigenciaDesde = DateFormatter.formatLocalDate(fechaVigenciaDesde);
-		else
-			this.setFechaVigenciaDesde(DateFormatter.formatLocalDate(fechaVigenciaDesde));
-		
-		if(fechaVigenciaHasta == null)
-			this.fechaVigenciaHasta = DateFormatter.formatLocalDate(fechaVigenciaHasta);
-		else	
-			this.setFechaVigenciaHasta(DateFormatter.formatLocalDate(fechaVigenciaHasta));
-			
-		if(turnos == null)
-			this.turnos = null;
-		else
-			this.setTurnos(turnos);
-			
-		if(horariosDeEntrega == null)
-			this.horariosDeEntrega = DateFormatter.formatLocalTime(horariosDeEntrega);
-		else
-			this.setHorariosDeEntrega(DateFormatter.formatLocalTime(horariosDeEntrega));
-			
-		
-		if(horariosDeEnvio == null)
-			this.horariosDeEnvio = DateFormatter.formatLocalTime(horariosDeEnvio);
-		else	
-			this.setHorariosDeEnvio(DateFormatter.formatLocalTime(horariosDeEnvio));
-			
-		
-		if(precio == null)
-			this.precio = precio;
-		else	
-			this.setPrecio(precio);
-			
-		
-		if(cantidadMinima == null)
-			this.cantidadMinima = cantidadMinima;
-			
-		else
-			this.setCantidadMinima(cantidadMinima);
-			
-		if(cantidadMinima2 == null)
-			this.cantidadMinima2 = cantidadMinima2;
-		else	
-			this.setCantidadMinima2(cantidadMinima2);
-					
-		
-		if(precioCantidadMinima == null)
-				this.precioCantidadMinima = precioCantidadMinima;		
-		else
-			this.setPrecioCantidadMinima(precioCantidadMinima);
-							
-
-		if(precioCantidadMinima2 == null)
-			this.precioCantidadMinima2 = precioCantidadMinima2;
-		else
-			this.setPrecioCantidadMinima2(precioCantidadMinima2);
-									
-		if(cantidadMaxVtasPorDia == null)
-			this.cantidadMaxVtasPorDia = cantidadMaxVtasPorDia;
-		else
-			this.setCantidadMaxVtasPorDia(cantidadMaxVtasPorDia);
-			
-		//return ret;
-	}
-
 	public Double getPrecioCantidadMinima() {
 		return precioCantidadMinima;
 	}
 
-	public Menu(Double valorDelivery, Double precio, Double precioCantMin1, Double precioCantMin2, Integer cantMin1,
-			Integer cantMin2, Integer cantMaxVtasPorDia) {
-		super();
-		this.valorDelivery = valorDelivery;
-		this.precio = precio;
-		this.precioCantidadMinima = precioCantMin1;
-		this.precioCantidadMinima2 = precioCantMin2;
-		this.cantidadMinima = cantMin1;
-		this.cantidadMinima2 = cantMin2;
-		this.cantidadMaxVtasPorDia = cantMaxVtasPorDia;
-	}
 
 	public void setPrecioCantidadMinima(Double precioCantidadMinima) throws DatoInvalidoException {
 		if (precioCantidadMinima < 0) {
@@ -355,6 +253,61 @@ public class Menu extends Entity {
 
 	public void inhabilitarMenu() {
 		estaParaLaVenta = Habilitacion.INHABILITADO;
+	}
+	
+	public void actualizar(MenuUpdate update){
+	    if(update.getNombre() != null) 
+	    	this.setNombre(update.getNombre());
+		
+		if(update.getDescripcion() != null)	
+			this.setDescripcion(update.getDescripcion());
+		
+		if(update.getCategoria() != null)	
+			this.setCategoria(update.getCategoria());
+		
+		if(update.getValorDelivery() != null)
+			this.setValorDelivery(update.getValorDelivery());
+		
+		if(update.getFechaVigenciaDesde() != null)
+			this.setFechaVigenciaDesde(update.getFechaVigenciaDesde());
+		
+		if(update.getFechaVigenciaHasta() != null)
+			this.setFechaVigenciaHasta(update.getFechaVigenciaHasta() );
+			
+		if(update.getTurnos() != null)
+			this.setTurnos(update.getTurnos());
+			
+		if(update.getHorariosDeEntrega() != null)
+			this.setHorariosDeEntrega(update.getHorariosDeEntrega());
+			
+		
+		if(update.getHorariosDeEnvio() != null)
+			this.setHorariosDeEnvio(update.getHorariosDeEnvio());
+			
+		
+		if(update.getPrecio() != null)
+			this.setPrecio(update.getPrecio());
+			
+		
+		if(update.getCantidadMinima() != null)
+			this.setCantidadMinima(update.getCantidadMinima());
+			
+		if(update.getCantidadMinima2() != null)
+			this.setCantidadMinima2(update.getCantidadMinima2());
+					
+		
+		if(update.getPrecioCantidadMinima() != null)
+			this.setPrecioCantidadMinima(update.getPrecioCantidadMinima() );
+							
 
+		if(update.getPrecioCantidadMinima2() != null)
+			this.setPrecioCantidadMinima2(update.getPrecioCantidadMinima2());
+									
+		if(update.getCantidadMaxVtasPorDia() != null)
+			this.setCantidadMaxVtasPorDia(update.getCantidadMaxVtasPorDia() );
+		
+		if(update.getId() != null)
+			this.setId(update.getId());
+	    
 	}
 }

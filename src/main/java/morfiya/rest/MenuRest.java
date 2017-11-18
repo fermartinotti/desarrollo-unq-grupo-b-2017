@@ -19,6 +19,7 @@ import com.google.gson.GsonBuilder;
 
 import morfiya.adapters.MenuGsonTypeAdapter;
 import morfiya.adapters.MenuGsonTypeAdapterUpdate;
+import morfiya.adapters.MenuUpdate;
 import morfiya.domain.Menu;
 import morfiya.exceptions.DatoInvalidoException;
 import morfiya.services.MenuService;
@@ -96,60 +97,12 @@ public class MenuRest {
 	@PUT
 	@Path("/edit")
 	public Response editMenu(String menuJson) {
- 		Gson gson = new GsonBuilder().registerTypeAdapter(Menu.class, new MenuGsonTypeAdapterUpdate()).create();
-		Menu menu = gson.fromJson(menuJson, Menu.class);
+ 		Gson gson = new GsonBuilder().registerTypeAdapter(MenuUpdate.class, new MenuGsonTypeAdapterUpdate()).create();
+		MenuUpdate menu = gson.fromJson(menuJson, MenuUpdate.class);
 
 		try {
 			Menu menuEncontrado = service.findByID(menu.getId());
-			
-			if(menu.getNombre()!= null)
-				menuEncontrado.setNombre(menu.getNombre());
-			
-			if(menu.getDescripcion()!= null)
-				menuEncontrado.setDescripcion(menu.getDescripcion());
-				
-			if(menu.getCategoria()!= null)
-				menuEncontrado.setCategoria(menu.getCategoria());
-				
-			if(menu.getValorDelivery() != null)
-				menuEncontrado.setValorDelivery(menu.getValorDelivery());
-				
-			if(menu.getFechaVigenciaDesde()!= null)
-				menuEncontrado.setFechaVigenciaDesde(menu.getFechaVigenciaDesde());
-						
-			if(menu.getFechaVigenciaHasta()!= null)
-				menuEncontrado.setFechaVigenciaHasta(menu.getFechaVigenciaHasta());
-							
-			if(menu.getTurnos()!= null)
-				menuEncontrado.setTurnos(menu.getTurnos());
-			
-			if(menu.getHorariosDeEntrega()!= null)
-				menuEncontrado.setHorariosDeEntrega(menu.getHorariosDeEntrega());
-				
-			if(menu.getHorariosDeEntrega()!= null)
-				menuEncontrado.setHorariosDeEntrega(menu.getHorariosDeEntrega());
-					
-			if(menu.getHorariosDeEnvio()!= null)
-				menuEncontrado.setHorariosDeEnvio(menu.getHorariosDeEnvio());
-						
-			if(menu.getPrecio()!= null)
-				menuEncontrado.setPrecio(menu.getPrecio());
-							
-			if(menu.getCantidadMinima()!= null)
-				menuEncontrado.setCantidadMinima(menu.getCantidadMinima());
-								
-			if(menu.getCantidadMinima2()!= null)
-				menuEncontrado.setCantidadMinima2(menu.getCantidadMinima2());
-								
-			if(menu.getPrecioCantidadMinima()!= null)
-				menuEncontrado.setPrecioCantidadMinima(menu.getPrecioCantidadMinima());
-									
-			if(menu.getPrecioCantidadMinima2()!= null)
-				menuEncontrado.setPrecioCantidadMinima2(menu.getPrecioCantidadMinima2());
-			
-			if(menu.getPrecioCantidadMinima2()!= Double.NaN)
-				menuEncontrado.setCantidadMaxVtasPorDia(menu.getCantidadMaxVtasPorDia());
-			
+			menuEncontrado.actualizar(menu);
 			service.editarMenu(menuEncontrado);
 			return Response.ok().build();
 		} catch (Exception e) {
