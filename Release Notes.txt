@@ -1,0 +1,63 @@
+------------------------
+TAG 1
+------------------------
+NEW FEATURES:
+* Configuracion de integracion continua Travis, build corriendo y SUCCESS. 
+* Deploy automatico en heroku
+* Codacy configurado, link en readme.md en github. 
+* Todas las relaciones creadas entre entidades.
+* Se puede puntuar una compra.
+* Se puede comprar un menu.
+* Confirmar las compras.
+* Se califica el menu
+* Se calcula el promedio de los menus y se evalua si se debe dar de baja a un proveedor.
+* Se realizan todos los chekeos y validaciones pedidas en el alcance del proyecto.
+
+
+NOTES:
+Algunos metodos que "emulan" el funcionamiento del sistema (por ejemplo el confirmar las compras) no funcionan realmente, 
+ya que hay algunas cosas van a migrar a Querys a DB  llamando al dao y estas pasan a ser un servicio,
+funcionando asi todo en un ambiente transaccional seguro. Cosa que en este momento NO lo esta.
+
+
+KNOWN ISSUES:
+- Falta definir el tema de los "Turnos" de los pedidos
+- Falta agregar el tipo de envio : Ej: retiro en el local, envio a domicilio.
+
+------------------------
+TAG 2
+------------------------
+NEW FEATURES:
+* Entidades "cliente" y "proveedor" (y todos sus colaboradores) mappeados en hibernate  
+* API REST: Los metodos necesarios para poder crear, buscar, y editar un cliente y un proveedor.
+
+NOTES: 
+Lo unico que se puede editar de ambas entidades son los creditos.
+
+KNOWN ISSUES:
+- No se encuentra todavia la logica para buscar por substring un menu.
+- Falta agregar los datos "fake" para probar la aplicación.
+
+------------------------
+TAG 3
+------------------------
+NEW FEATURES:
+
+- Las búsquedas de menus se realizan por subtring (nombre, categoría y localidad)
+- El resultado de las busquedas se encuentran realizadas con paginación
+- Se puede dar de alta un menú
+- Se puede editar a los clientes, proveedores y menus de forma completa
+- Se creo un test de arquitectura
+
+NOTES:
+No está funcionando de forma correcta la autenticación de la aplicación con Google.
+La lógica de los email funciona, hay que introducirlos cuando se concreta la compra.
+
+KNOWN ISSUES:
+
+- Falta agregar los datos "fake" para probar la aplicación.
+- Falta los formatters de fecha, $ (moneda) y # (números) según LOCALE
+- Falta la confirmación del pedido
+
+
+
