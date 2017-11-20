@@ -1,6 +1,5 @@
 package morfiya.repositories;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +31,7 @@ public class ServicioDAO extends HibernateGenericDAO<Servicio> {
 		});
 	}
 
-	// Sin paginación
+	// Sin paginacion
 	@Override
 	public List<Servicio> findAll() {
 		List<Servicio> list = (List<Servicio>) getHibernateTemplate().execute(new HibernateCallback<List<Servicio>>() {
@@ -48,26 +47,13 @@ public class ServicioDAO extends HibernateGenericDAO<Servicio> {
 	}
 
 	@Override
-	public List<Menu> findByName(Serializable nombre, Integer pageSize, Integer pageNumber) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Menu> findByCategoria(String categoria, Integer pageSize, Integer pageNumber) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	protected Class<Servicio> getDomainClass() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
-	// Con paginación
+	// Con paginacion
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<Menu> findByLocalidad(final String localidad, final Integer pageSize, final Integer pageNumber) {
 		HibernateTemplate template = getHibernateTemplate();
 		return (List<Menu>) template.execute(new HibernateCallback<Object>() {

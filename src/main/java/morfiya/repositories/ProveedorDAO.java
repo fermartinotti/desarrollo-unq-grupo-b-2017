@@ -11,7 +11,6 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
-import morfiya.domain.Menu;
 import morfiya.domain.Proveedor;
 
 public final class ProveedorDAO extends HibernateGenericDAO<Proveedor>{
@@ -66,22 +65,4 @@ public final class ProveedorDAO extends HibernateGenericDAO<Proveedor>{
 
 		return (Proveedor) (this.getHibernateTemplate().findByCriteria(criteria).get(0));
 	}
-
-	@Override
-	public List<Menu> findByName(Serializable nombre, Integer pageSize, Integer pageNumber) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-  
-	@Override
-	public List<Menu> findByCategoria(String categoria, Integer pageSize, Integer pageNumber) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Menu> findByLocalidad(String localidad, Integer pageSize, Integer pageNumber) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
