@@ -19,10 +19,10 @@ import com.google.gson.GsonBuilder;
 
 import morfiya.adapters.MenuGsonTypeAdapter;
 import morfiya.adapters.MenuGsonTypeAdapterUpdate;
-import morfiya.adapters.MenuUpdate;
 import morfiya.domain.Menu;
 import morfiya.exceptions.DatoInvalidoException;
 import morfiya.services.MenuService;
+import morfiya.updates.MenuUpdate;
 
 @Path("/menus")
 @Transactional

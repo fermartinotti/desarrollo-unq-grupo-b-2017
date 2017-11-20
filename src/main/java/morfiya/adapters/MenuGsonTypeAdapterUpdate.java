@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken;
 
 import morfiya.domain.Categoria;
 import morfiya.exceptions.DatoInvalidoException;
+import morfiya.updates.MenuUpdate;
 
 public class MenuGsonTypeAdapterUpdate  implements JsonDeserializer<MenuUpdate> {
 	

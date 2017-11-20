@@ -14,7 +14,7 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import morfiya.domain.Menu;
 import morfiya.domain.Proveedor;
 
-final class ProveedorDAO extends HibernateGenericDAO<Proveedor>{
+public final class ProveedorDAO extends HibernateGenericDAO<Proveedor>{
 
 	private static final long serialVersionUID = 2274059891644843280L;
 
@@ -56,6 +56,13 @@ final class ProveedorDAO extends HibernateGenericDAO<Proveedor>{
 	public Proveedor findById(Serializable id) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Proveedor.class);
 		criteria.add(Restrictions.eq("id", id));
+
+		return (Proveedor) (this.getHibernateTemplate().findByCriteria(criteria).get(0));
+	}
+	
+	public Proveedor findByEmail(String email){
+		DetachedCriteria criteria = DetachedCriteria.forClass(Proveedor.class);
+		criteria.add(Restrictions.eq("email", email));
 
 		return (Proveedor) (this.getHibernateTemplate().findByCriteria(criteria).get(0));
 	}

@@ -13,8 +13,8 @@ public class TestProveedor {
 		Proveedor proveedor= new Proveedor();
 		
 		try {
-			proveedor.cargarCredito(100);	
-			proveedor.retirarCreditos(20);
+			proveedor.cargarCredito(100.0);	
+			proveedor.retirarCreditos(20.0);
 		} catch (DatoInvalidoException e) {}
 		assertEquals(80, proveedor.getCreditos(), 0);
 	}
@@ -24,7 +24,7 @@ public class TestProveedor {
 		Proveedor proveedor= new Proveedor();
 		
 		try {
-				proveedor.cargarCredito(20);
+				proveedor.cargarCredito(20.0);
 		} catch (DatoInvalidoException e) {}
 		assertEquals(20, proveedor.getCreditos(), 0);
 	}
@@ -32,8 +32,8 @@ public class TestProveedor {
 	public void testRetirarCreditoNoDisponible(){
 		Proveedor proveedor= new Proveedor();
 		try {
-			proveedor.cargarCreditoNoDisponible(100);	
-			proveedor.retirarCreditosNoDisponibles(20);
+			proveedor.cargarCreditoNoDisponible(100.0);	
+			proveedor.retirarCreditosNoDisponibles(20.0);
 		} catch (DatoInvalidoException e) {}
 		assertEquals(80, proveedor.getCreditos(), 0);
 	}
@@ -43,7 +43,7 @@ public class TestProveedor {
 		Proveedor proveedor= new Proveedor();
 		
 		try {
-				proveedor.cargarCreditoNoDisponible(20);
+				proveedor.cargarCreditoNoDisponible(20.0);
 		} catch (DatoInvalidoException e) {}
 		assertEquals(20, proveedor.getCreditosNoDisponibles(), 0);
 	}

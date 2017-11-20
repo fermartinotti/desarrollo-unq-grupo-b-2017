@@ -1,4 +1,4 @@
-package morfiya.adapters;
+package morfiya.updates;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

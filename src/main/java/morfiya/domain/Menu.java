@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-import morfiya.adapters.MenuUpdate;
 import morfiya.exceptions.DatoInvalidoException;
+import morfiya.updates.MenuUpdate;
 import morfiya.utils.DateFormatter;
 
 public class Menu extends Entity {

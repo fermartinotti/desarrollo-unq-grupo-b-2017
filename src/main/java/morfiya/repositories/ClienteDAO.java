@@ -15,7 +15,7 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import morfiya.domain.Cliente;
 import morfiya.domain.Menu;
 
-final class ClienteDAO extends HibernateGenericDAO<Cliente> {
+public final class ClienteDAO extends HibernateGenericDAO<Cliente> {
 
 	private static final long serialVersionUID = -8437497503411362604L;
 
@@ -76,6 +76,13 @@ final class ClienteDAO extends HibernateGenericDAO<Cliente> {
 			}
 		});
 
+	}
+	
+	public Cliente findByEmail(String email){
+		DetachedCriteria criteria = DetachedCriteria.forClass(Cliente.class);
+		criteria.add(Restrictions.eq("email", email));
+
+		return (Cliente) (this.getHibernateTemplate().findByCriteria(criteria).get(0));
 	}
 
 	public List<Menu> findByName(Serializable nombre, Integer pageSize, Integer pageNumber) {
