@@ -1,6 +1,7 @@
 package morfiya.domain;
 
 import morfiya.exceptions.DatoInvalidoException;
+import morfiya.updates.ClienteUpdate;
 
 public class Cliente extends Entity {
 
@@ -12,7 +13,7 @@ public class Cliente extends Entity {
 	private String email;
 	private Telefono telefono;
 	private Direccion direccion;
-	private double creditos = 0;
+	private Double creditos = 0.0;
 	private Habilitacion puedeComprar = Habilitacion.HABILITADO;
 
 	public Integer getCuit() {
@@ -63,7 +64,7 @@ public class Cliente extends Entity {
 		this.direccion = direccion;
 	}
 
-	public double getCreditos() {
+	public Double getCreditos() {
 		return creditos;
 	}
 
@@ -83,15 +84,15 @@ public class Cliente extends Entity {
 		return (puedeComprar == Habilitacion.HABILITADO);
 	}
 
-	public void cargarCredito(double cantidad) throws DatoInvalidoException {
-		if (cantidad < 0) {
+	public void cargarCredito(Double cantidad) throws DatoInvalidoException {
+		if (cantidad < 0.0) {
 			throw new DatoInvalidoException("No se puede cargar saldo negativo");
 		}
 		creditos += cantidad;
 	}
 
-	public void retirarCreditos(double cantidad) throws DatoInvalidoException {
-		if (cantidad < 0) {
+	public void retirarCreditos(Double cantidad) throws DatoInvalidoException {
+		if (cantidad < 0.0) {
 			throw new DatoInvalidoException("No se puede retirar una cantidad negativa de creditos");
 		}
 		if (cantidad > creditos) {
@@ -175,6 +176,30 @@ public class Cliente extends Entity {
 		} else if (!telefono.equals(other.telefono))
 			return false;
 		return true;
+	}
+	
+	public void actualizar(ClienteUpdate update){
+		if(update.getApellido()!=null)
+			this.setApellido(update.getApellido());
+		
+		if(update.getCreditos()!=null)
+			this.cargarCredito(update.getCreditos());
+		
+		if(update.getCuit()!=null)
+			this.setCuit(update.getCuit());
+		
+		if(update.getDireccion()!=null)
+			this.setDireccion(update.getDireccion());
+		
+		if(update.getEmail()!=null)
+			this.setEmail(update.getEmail());
+		
+		if(update.getNombre()!=null)
+			this.setNombre(update.getNombre());
+		
+		if(update.getTelefono()!=null)
+			this.setTelefono(getTelefono());
+			
 	}
 
 }

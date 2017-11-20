@@ -11,10 +11,9 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
-import morfiya.domain.Menu;
 import morfiya.domain.Proveedor;
 
-final class ProveedorDAO extends HibernateGenericDAO<Proveedor>{
+public final class ProveedorDAO extends HibernateGenericDAO<Proveedor>{
 
 	private static final long serialVersionUID = 2274059891644843280L;
 
@@ -59,22 +58,11 @@ final class ProveedorDAO extends HibernateGenericDAO<Proveedor>{
 
 		return (Proveedor) (this.getHibernateTemplate().findByCriteria(criteria).get(0));
 	}
+	
+	public Proveedor findByEmail(String email){
+		DetachedCriteria criteria = DetachedCriteria.forClass(Proveedor.class);
+		criteria.add(Restrictions.eq("email", email));
 
-	@Override
-	public List<Menu> findByName(Serializable nombre, Integer pageSize, Integer pageNumber) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Proveedor) (this.getHibernateTemplate().findByCriteria(criteria).get(0));
 	}
-  
-	@Override
-	public List<Menu> findByCategoria(String categoria, Integer pageSize, Integer pageNumber) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Menu> findByLocalidad(String localidad, Integer pageSize, Integer pageNumber) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

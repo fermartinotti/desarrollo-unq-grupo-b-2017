@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import morfiya.domain.Menu;
+import morfiya.repositories.MenuDAO;
 
 public class MenuService extends GenericService<Menu> {
 
@@ -18,14 +19,23 @@ public class MenuService extends GenericService<Menu> {
 	}
 	
 	public List<Menu> findMenuForCategory(String categoria,final Integer pageSize, final Integer pageNumber) {
-		return getRepository().findByCategoria(categoria, pageSize, pageNumber);
+		return ((MenuDAO)getRepository()).findByCategoria(categoria, pageSize, pageNumber);
 	}
 	
 	public List<Menu> findMenuForName(Serializable nombre,final Integer pageSize, final Integer pageNumber) {
-		return getRepository().findByName(nombre, pageSize, pageNumber);
+		return ((MenuDAO)getRepository()).findByName(nombre, pageSize, pageNumber);
 	}
 	
 	public List<Menu> getAllByPage(final int pageSize, final int pageNumber){
 		return getRepository().getAllByPage(pageSize, pageNumber);
 	}
+	
+	public Menu findByID(Integer id){
+		return getRepository().findById(id);
+	}
+	
+	public void editarMenu(Menu menu){
+		getRepository().update(menu);
+	}
+	
 }

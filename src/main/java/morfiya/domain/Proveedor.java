@@ -1,6 +1,7 @@
 package morfiya.domain;
 
 import morfiya.exceptions.DatoInvalidoException;
+import morfiya.updates.ProveedorUpdate;
 
 public class Proveedor extends Entity{
 
@@ -8,8 +9,11 @@ public class Proveedor extends Entity{
 	
 	private String nombre;
 	private Servicio servicio;
-	private double creditos = 0;
-	private double creditosNoDisponibles= 0;
+	private Double creditos = 0.0;
+	private Double creditosNoDisponibles= 0.0;
+	private String email;
+	
+
 	private Habilitacion puedeVender = Habilitacion.HABILITADO; 
 	//preguntar si el cliente no tiene que tener un telefono de contacto, y una direccion???
 
@@ -17,11 +21,12 @@ public class Proveedor extends Entity{
 		super();
 	}
 
-	public Proveedor(String nombre, Servicio servicio, double creditos) {
+	public Proveedor(String nombre, Servicio servicio, Double creditos, String email) {
 		super();
 		this.nombre=nombre;
 		this.servicio=servicio;
 		this.creditos=creditos;
+		this.email=email;
 	}
 	
 	public Proveedor(String nombre) {
@@ -40,8 +45,8 @@ public class Proveedor extends Entity{
 		this.nombre = nombre;
 	}
 	
-	public void retirarCreditos(double cantidad) throws DatoInvalidoException{
-		if(cantidad < 0) {
+	public void retirarCreditos(Double cantidad) throws DatoInvalidoException{
+		if(cantidad < 0.0) {
 			throw new DatoInvalidoException("No se puede retirar una cantidad negativa de creditos");
 		}
 		
@@ -51,15 +56,15 @@ public class Proveedor extends Entity{
 		creditos -= cantidad;
 	}
 	
-	public void cargarCredito(double cantidad)throws DatoInvalidoException {
+	public void cargarCredito(Double cantidad)throws DatoInvalidoException {
 		 
-	    if (cantidad <0) {
+	    if (cantidad <0.0) {
 	    	throw new DatoInvalidoException("No se puede cargar saldo negativo");
 	    }
 	    creditos += cantidad;
 	 }
 
-	public double getCreditos() {
+	public Double getCreditos() {
 		return creditos;
 	}
 
@@ -71,11 +76,11 @@ public class Proveedor extends Entity{
 		this.puedeVender = puedeVender;
 	}
 
-	public double getCreditosNoDisponibles() {
+	public Double getCreditosNoDisponibles() {
 		return creditosNoDisponibles;
 	}
 	
-	public void retirarCreditosNoDisponibles(double cantidad) throws DatoInvalidoException{
+	public void retirarCreditosNoDisponibles(Double cantidad) throws DatoInvalidoException{
 		if(cantidad < 0) {
 			throw new DatoInvalidoException("No se puede retirar una cantidad negativa de creditos");
 		}
@@ -86,11 +91,37 @@ public class Proveedor extends Entity{
 		creditosNoDisponibles -= cantidad;
 	}
 	
-	public void cargarCreditoNoDisponible(double cantidad)throws DatoInvalidoException {
+	public void cargarCreditoNoDisponible(Double cantidad)throws DatoInvalidoException {
 		 
-	    if (cantidad <0) {
+	    if (cantidad <0.0) {
 	    	throw new DatoInvalidoException("No se puede cargar saldo negativo");
 	    }
 	    creditosNoDisponibles += cantidad;
 	 }	
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public void actualizar(ProveedorUpdate update){
+		
+		
+		if(update.getCreditos()!=null)
+			this.cargarCredito(update.getCreditos());
+		
+		if(update.getEmail()!=null)
+			this.setEmail(update.getEmail());
+		
+		if(update.getNombre()!=null)
+			this.setNombre(update.getNombre());
+		
+		// Faltaria servicio
+		
+	
+			
+	}
 }

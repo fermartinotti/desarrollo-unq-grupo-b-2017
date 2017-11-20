@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -17,9 +18,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import morfiya.adapters.MenuGsonTypeAdapter;
+import morfiya.adapters.MenuGsonTypeAdapterUpdate;
 import morfiya.domain.Menu;
 import morfiya.exceptions.DatoInvalidoException;
 import morfiya.services.MenuService;
+import morfiya.updates.MenuUpdate;
 
 @Path("/menus")
 @Transactional
@@ -90,6 +93,25 @@ public class MenuRest {
 		return Response.ok(menus).build();
 	}
 
+	
+	@PUT
+	@Path("/edit")
+	public Response editMenu(String menuJson) {
+ 		Gson gson = new GsonBuilder().registerTypeAdapter(MenuUpdate.class, new MenuGsonTypeAdapterUpdate()).create();
+		MenuUpdate menu = gson.fromJson(menuJson, MenuUpdate.class);
+
+		try {
+			Menu menuEncontrado = service.findByID(menu.getId());
+			menuEncontrado.actualizar(menu);
+			service.editarMenu(menuEncontrado);
+			return Response.ok().build();
+		} catch (Exception e) {
+			return Response.serverError().entity(e.getMessage()).build();
+		}
+
+	}
+	
+	
 	@POST
 	@Path("/create")
 	public Response createMenu(String menuJson) {

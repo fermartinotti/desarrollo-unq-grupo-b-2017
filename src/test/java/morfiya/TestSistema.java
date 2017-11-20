@@ -100,9 +100,9 @@ public class TestSistema {
 		try {
 			menu.setCantidadMinima(20);
 			menu.setCantidadMinima2(50);
-			menu.setPrecio(30);
-			menu.setPrecioCantidadMinima(10);
-			menu.setPrecioCantidadMinima2(5);
+			menu.setPrecio((double) 30);
+			menu.setPrecioCantidadMinima((double) 10);
+			menu.setPrecioCantidadMinima2((double) 5);
 
 			
 		} catch (DatoInvalidoException e) {}

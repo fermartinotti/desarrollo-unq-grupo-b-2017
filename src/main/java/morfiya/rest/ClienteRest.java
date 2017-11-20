@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 
 import morfiya.domain.Cliente;
 import morfiya.services.ClienteService;
+import morfiya.updates.ClienteUpdate;
 
 @Path("/clientes")
 @Transactional
@@ -69,6 +70,21 @@ public class ClienteRest {
 		}
 	}
 	
+    
+	@GET
+	@Path("/getByEmail/{email}")
+	@Produces("application/json")
+	public Response getClienteByEmail(@PathParam("email") final String email) {
+		try {
+			Cliente cliente = service.getClienteByEmail(email);
+			return Response.ok(cliente).build();
+		}
+
+		catch (Exception e) {
+			return Response.serverError().entity(e.getMessage()).build();
+		}
+	}
+	
 	@GET
 	@Path("/getCreditos/{id}")
 	@Produces("application/json")
@@ -96,8 +112,8 @@ public class ClienteRest {
 	}
 
 	@PUT
-	@Path("/editCreditos")
-	public Response editCreditosCliente(String clienteJson) {
+	@Path("/cargarCreditos")
+	public Response cargarCreditosCliente(String clienteJson) {
 		Gson gson = new Gson();
 		Cliente cliente = gson.fromJson(clienteJson, Cliente.class);
 
@@ -111,22 +127,33 @@ public class ClienteRest {
 		}
 	}
 	
+	@PUT
+	@Path("/retirarCreditos")
+	public Response retirarCreditosCliente(String clienteJson) {
+		Gson gson = new Gson();
+		Cliente cliente = gson.fromJson(clienteJson, Cliente.class);
+
+		try {
+			Cliente clienteEncontrado = service.getClienteByID(cliente.getId());
+			clienteEncontrado.retirarCreditos(cliente.getCreditos());
+			service.editarCliente(clienteEncontrado);
+			return Response.ok().build();
+		} catch (Exception e) {
+			return Response.serverError().entity(e.getMessage()).build();
+		}
+	}
+	
 	
 	// No edito el credito ya que tiene su propio servicio
 	@PUT
 	@Path("/edit")
 	public Response editCliente(String clienteJson) {
 		Gson gson = new Gson();
-		Cliente cliente = gson.fromJson(clienteJson, Cliente.class);
+		ClienteUpdate cliente = gson.fromJson(clienteJson, ClienteUpdate.class);
 
 		try {
 			Cliente clienteEncontrado = service.getClienteByID(cliente.getId());
-			clienteEncontrado.setCuit(cliente.getCuit());
-			clienteEncontrado.setNombre(cliente.getNombre());
-			clienteEncontrado.setApellido(cliente.getApellido());
-			clienteEncontrado.setEmail(cliente.getEmail());
-			clienteEncontrado.setTelefono(cliente.getTelefono());
-			clienteEncontrado.setDireccion(cliente.getDireccion());
+			clienteEncontrado.actualizar(cliente);
 			service.editarCliente(clienteEncontrado);
 			return Response.ok().build();
 		} catch (Exception e) {

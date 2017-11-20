@@ -1,7 +1,9 @@
 package morfiya.services;
 
 import java.util.List;
+
 import morfiya.domain.Proveedor;
+import morfiya.repositories.ProveedorDAO;
 
 public class ProveedorService extends GenericService<Proveedor> {
 
@@ -18,6 +20,10 @@ public class ProveedorService extends GenericService<Proveedor> {
 
 	public Proveedor getProveedorByID(Integer id) {
 		return getRepository().findById(id);
+	}
+	
+	public Proveedor getProveedorByEmail(String email){
+		return ((ProveedorDAO) getRepository()).findByEmail(email);
 	}
 
 	public void crearProveedor(Proveedor proveedor) {

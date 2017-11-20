@@ -10,6 +10,7 @@
 
 		<property name="nombre" />
 		<property name="creditos" />
+		<property name="email"/>
 		<property name="creditosNoDisponibles" />
 		<one-to-one name="servicio" class="morfiya.domain.Servicio" />
 		<property name="puedeVender">

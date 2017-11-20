@@ -2,6 +2,7 @@ package morfiya.services;
 
 import java.util.List;
 import morfiya.domain.Cliente;
+import morfiya.repositories.ClienteDAO;
 
 public class ClienteService extends GenericService<Cliente> {
 
@@ -19,6 +20,10 @@ public class ClienteService extends GenericService<Cliente> {
 	
 	public Cliente getClienteByID(Integer id) {
 		return getRepository().findById(id);
+	}
+	
+	public Cliente getClienteByEmail(String email){
+		return ((ClienteDAO) getRepository()).findByEmail(email);
 	}
 
 	public void crearCliente(Cliente cliente) {

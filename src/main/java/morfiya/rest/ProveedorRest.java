@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 
 import morfiya.domain.Proveedor;
 import morfiya.services.ProveedorService;
+import morfiya.updates.ProveedorUpdate;
 
 @Path("/proveedores")
 @Transactional
@@ -68,6 +69,20 @@ public class ProveedorRest {
 			return Response.serverError().entity(e.getMessage()).build();
 		}
 	}
+	
+	@GET
+	@Path("/getByEmail/{email}")
+	@Produces("application/json")
+	public Response getProveedorByEmail(@PathParam("email") final String email) {
+		try {
+			Proveedor proveedor = service.getProveedorByEmail(email);
+			return Response.ok(proveedor).build();
+		}
+
+		catch (Exception e) {
+			return Response.serverError().entity(e.getMessage()).build();
+		}
+	}
 
 	@GET
 	@Path("/getCreditos/{id}")
@@ -97,14 +112,30 @@ public class ProveedorRest {
 	}
 
 	@PUT
-	@Path("/editCreditos")
-	public Response editCreditosProveedor(String proveedorJson) {
+	@Path("/cargarCreditos")
+	public Response cargarCreditosProveedor(String proveedorJson) {
 		Gson gson = new Gson();
 		Proveedor proveedor = gson.fromJson(proveedorJson, Proveedor.class);
 
 		try {
 			Proveedor proveedorEncontrado = service.getProveedorByID(proveedor.getId());
 			proveedorEncontrado.cargarCredito(proveedor.getCreditos());
+			service.editarProveedor(proveedorEncontrado);
+			return Response.ok().build();
+		} catch (Exception e) {
+			return Response.serverError().entity(e.getMessage()).build();
+		}
+	}
+	
+	@PUT
+	@Path("/retirarCreditos")
+	public Response retirarCreditosProveedor(String proveedorJson) {
+		Gson gson = new Gson();
+		Proveedor proveedor = gson.fromJson(proveedorJson, Proveedor.class);
+
+		try {
+			Proveedor proveedorEncontrado = service.getProveedorByID(proveedor.getId());
+			proveedorEncontrado.retirarCreditos(proveedor.getCreditos());
 			service.editarProveedor(proveedorEncontrado);
 			return Response.ok().build();
 		} catch (Exception e) {
@@ -118,11 +149,11 @@ public class ProveedorRest {
 	@Path("/edit")
 	public Response editProovedor(String proveedorJson) {
 		Gson gson = new Gson();
-		Proveedor proveedor = gson.fromJson(proveedorJson, Proveedor.class);
+		ProveedorUpdate proveedor = gson.fromJson(proveedorJson, ProveedorUpdate.class);
 
 		try {
 			Proveedor proveedorEncontrado = service.getProveedorByID(proveedor.getId());
-			proveedorEncontrado.setNombre(proveedor.getNombre());
+			proveedorEncontrado.actualizar(proveedor);
 			service.editarProveedor(proveedorEncontrado);
 			return Response.ok().build();
 		} catch (Exception e) {
