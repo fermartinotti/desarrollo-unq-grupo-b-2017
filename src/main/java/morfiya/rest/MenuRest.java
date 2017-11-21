@@ -129,4 +129,19 @@ public class MenuRest {
 			return Response.status(Response.Status.BAD_REQUEST).entity(objectNode1.toString()).build();
 		}
 	}
+	
+	@GET
+	@Path("/{id}")
+	@Produces("application/json")
+	public Response getMenu(@PathParam("id") final Integer id) {
+
+		try {
+			Menu menu = service.findByID(id);
+			return Response.ok(menu).build();
+		}
+		catch (Exception e) {
+			return Response.serverError().entity(e.getMessage()).build();
+		}
+	}
+
 }

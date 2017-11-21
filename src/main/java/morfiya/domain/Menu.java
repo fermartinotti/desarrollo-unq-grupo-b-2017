@@ -49,8 +49,8 @@ public class Menu extends Entity {
 		setFechaVigenciaDesde(DateFormatter.formatLocalDate(fechaVigenciaDesde));
 		setFechaVigenciaHasta(DateFormatter.formatLocalDate(fechaVigenciaHasta));
 		setTurnos(turnos);
-		setHorariosDeEntrega(DateFormatter.formatLocalTime(horariosDeEntrega));
-		setHorariosDeEnvio(DateFormatter.formatLocalTime(horariosDeEnvio));
+		// setHorariosDeEntrega(DateFormatter.formatLocalTime(horariosDeEntrega));
+		// setHorariosDeEnvio(DateFormatter.formatLocalTime(horariosDeEnvio));
 		setPrecio(precio);
 		setCantidadMinima(cantidadMinima);
 		setCantidadMinima2(cantidadMinima2);

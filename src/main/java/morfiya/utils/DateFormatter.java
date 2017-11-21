@@ -7,12 +7,12 @@ import java.util.ArrayList;
 
 public class DateFormatter {
 	
-	static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+	static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 
 	public static LocalDate formatLocalDate(String fechaVigenciaDesde){
 		
-		LocalDate fechaVigenciaD = LocalDate.parse(fechaVigenciaDesde, formatter);
+		LocalDate fechaVigenciaD = LocalDate.parse(fechaVigenciaDesde.subSequence(0, 10), formatter);
 		
 		return fechaVigenciaD;
 	}
