@@ -1,7 +1,6 @@
 package morfiya.adapters;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonDeserializationContext;
@@ -9,7 +8,6 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import com.google.gson.reflect.TypeToken;
 
 import morfiya.domain.Categoria;
 import morfiya.domain.Menu;
@@ -26,9 +24,9 @@ public class MenuGsonTypeAdapter implements JsonDeserializer<Menu> {
 		Categoria categoria = gson.fromJson(categoriaJson, Categoria.class);	
 		
 		
-		Type listType = new TypeToken<ArrayList<String>>() {}.getType();
-		ArrayList<String> hEntregas = new Gson().fromJson(jobject.getAsJsonArray("horariosDeEntrega"), listType);
-		ArrayList<String> henvios = new Gson().fromJson(jobject.getAsJsonArray("horariosDeEnvio"), listType);
+//		Type listType = new TypeToken<ArrayList<String>>() {}.getType();
+//		ArrayList<String> hEntregas = new Gson().fromJson(jobject.getAsJsonArray("horariosDeEntrega"), listType);
+//		ArrayList<String> henvios = new Gson().fromJson(jobject.getAsJsonArray("horariosDeEnvio"), listType);
 
 		return new Menu(
 				jobject.get("nombre").getAsString(), 
@@ -37,9 +35,9 @@ public class MenuGsonTypeAdapter implements JsonDeserializer<Menu> {
 				jobject.get("valorDelivery").getAsDouble(), 
 				jobject.get("fechaVigenciaDesde").getAsString(), 
 				jobject.get("fechaVigenciaDesde").getAsString(), 
-				null, // Inicializo el menu en null, porque todavia no definimos bien cual va a ser el uso
-				hEntregas,
-				henvios,
+				//null,
+				//hEntregas,
+				//henvios,
 				//("horariosDeEntrega"),
 				jobject.get("precio").getAsDouble(), 
 				jobject.get("cantidadMinima").getAsInt(), 

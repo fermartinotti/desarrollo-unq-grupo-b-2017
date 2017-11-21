@@ -14,7 +14,6 @@ import javax.ws.rs.core.Response;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.ObjectNode;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.Gson;
 
@@ -23,7 +22,6 @@ import morfiya.services.ProveedorService;
 import morfiya.updates.ProveedorUpdate;
 
 @Path("/proveedores")
-@Transactional
 public class ProveedorRest {
 
 	ProveedorService service;

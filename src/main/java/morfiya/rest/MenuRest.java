@@ -12,7 +12,6 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ObjectNode;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -25,7 +24,6 @@ import morfiya.services.MenuService;
 import morfiya.updates.MenuUpdate;
 
 @Path("/menus")
-@Transactional
 public class MenuRest {
 
 	MenuService service;

@@ -1,9 +1,7 @@
 package morfiya.repositories;
 
-import java.io.Serializable;
 import java.util.List;
 
-import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -13,7 +11,6 @@ import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
 import morfiya.domain.Cliente;
-import morfiya.domain.Menu;
 
 public final class ClienteDAO extends HibernateGenericDAO<Cliente> {
 
@@ -22,21 +19,6 @@ public final class ClienteDAO extends HibernateGenericDAO<Cliente> {
 	@Override
 	protected Class<Cliente> getDomainClass() {
 		return Cliente.class;
-	}
-
-	// Sin paginacion
-	@Override
-	public List<Cliente> findAll() {
-		List<Cliente> list = (List<Cliente>) getHibernateTemplate().execute(new HibernateCallback<List<Cliente>>() {
-
-			@SuppressWarnings("unchecked")
-			public List<Cliente> doInHibernate(Session session) throws HibernateException {
-
-				return (List<Cliente>) session.createCriteria(Cliente.class).list();
-			}
-		});
-
-		return list;
 	}
 
 	// CON paginacion
@@ -53,40 +35,11 @@ public final class ClienteDAO extends HibernateGenericDAO<Cliente> {
 			}
 		});
 	}
-
-	@Override
-	public Cliente findById(Serializable id) {
-		DetachedCriteria criteria = DetachedCriteria.forClass(Cliente.class);
-		criteria.add(Restrictions.eq("id", id));
-
-		return (Cliente) (this.getHibernateTemplate().findByCriteria(criteria).get(0));
-	}
-
-	@Override
-	public void deleteById(final Serializable id) {
-		this.getHibernateTemplate().execute(new HibernateCallback<Cliente>() {
-
-			public Cliente doInHibernate(Session session) throws HibernateException {
-				Criteria criteria = session.createCriteria(Cliente.class);
-				criteria.add(Restrictions.eq("id", id));
-				Cliente cliente = (Cliente) criteria.uniqueResult();
-				session.delete(cliente);
-				session.flush();
-				return null;
-			}
-		});
-
-	}
 	
 	public Cliente findByEmail(String email){
 		DetachedCriteria criteria = DetachedCriteria.forClass(Cliente.class);
 		criteria.add(Restrictions.eq("email", email));
 
 		return (Cliente) (this.getHibernateTemplate().findByCriteria(criteria).get(0));
-	}
-
-	public List<Menu> findByName(Serializable nombre, Integer pageSize, Integer pageNumber) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

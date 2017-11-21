@@ -2,9 +2,12 @@ package morfiya.services;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import morfiya.domain.Proveedor;
 import morfiya.repositories.ProveedorDAO;
 
+@Transactional
 public class ProveedorService extends GenericService<Proveedor> {
 
 	private static final long serialVersionUID = 2326320574811159527L;

@@ -44,6 +44,7 @@ public abstract class HibernateGenericDAO<T> extends HibernateDaoSupport impleme
 		this.getHibernateTemplate().delete(obj);
 	}
 
+	// Funciona para todos
 	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
 		List<T> find = (List<T>) this.getHibernateTemplate().find("from " + this.persistentClass.getName() + " o");
@@ -54,7 +55,8 @@ public abstract class HibernateGenericDAO<T> extends HibernateDaoSupport impleme
 		return this.getHibernateTemplate().findByExample(exampleObject);
 
 	}
-
+	
+	// Funciona para todos
 	public T findById(final Serializable id) {
 		return this.getHibernateTemplate().get(this.persistentClass, id);
 	}

@@ -1,8 +1,6 @@
 package morfiya.updates;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
 
 import morfiya.domain.Categoria;
 import morfiya.domain.Entity;
@@ -20,9 +18,9 @@ public class MenuUpdate extends Entity  {
 	private Double valorDelivery;
 	private LocalDate fechaVigenciaDesde;
 	private LocalDate fechaVigenciaHasta;
-	private ArrayList<String> turnos; // ESTO QUEDA ?
-	private ArrayList<LocalTime> horariosDeEntrega;
-	private ArrayList<LocalTime> horariosDeEnvio;
+//	private ArrayList<String> turnos; // ESTO QUEDA ?
+//	private ArrayList<LocalTime> horariosDeEntrega;
+//	private ArrayList<LocalTime> horariosDeEnvio;
 	// Turnos entrega envio
 	private Double precio;
 	private Integer cantidadMinima;
@@ -40,9 +38,8 @@ public class MenuUpdate extends Entity  {
 
 
 	public MenuUpdate(String nombre, String descripcion, Categoria categoria, Double valorDelivery, String fechaVigenciaDesde,
-			String fechaVigenciaHasta , ArrayList<String> turnos, ArrayList<String> horariosDeEntrega, ArrayList<String> horariosDeEnvio,
-			Double precio, Integer cantidadMinima, Integer cantidadMinima2, Double precioCantidadMinima, Double precioCantidadMinima2,
-			Integer cantidadMaxVtasPorDia, Integer id) throws DatoInvalidoException {
+			String fechaVigenciaHasta , Double precio, Integer cantidadMinima, Integer cantidadMinima2, Double precioCantidadMinima, 
+			Double precioCantidadMinima2, Integer cantidadMaxVtasPorDia, Integer id) throws DatoInvalidoException {
 		
 		
 		
@@ -64,16 +61,16 @@ public class MenuUpdate extends Entity  {
 		if(fechaVigenciaHasta != null)
 			this.setFechaVigenciaHasta(DateFormatter.formatLocalDate(fechaVigenciaHasta));
 			
-		if(turnos != null)
-			this.setTurnos(turnos);
-			
-		if(horariosDeEntrega != null)
-			this.setHorariosDeEntrega(DateFormatter.formatLocalTime(horariosDeEntrega));
-			
-		
-		if(horariosDeEnvio != null)
-			this.setHorariosDeEnvio(DateFormatter.formatLocalTime(horariosDeEnvio));
-			
+//		if(turnos != null)
+//			this.setTurnos(turnos);
+//			
+//		if(horariosDeEntrega != null)
+//			this.setHorariosDeEntrega(DateFormatter.formatLocalTime(horariosDeEntrega));
+//			
+//		
+//		if(horariosDeEnvio != null)
+//			this.setHorariosDeEnvio(DateFormatter.formatLocalTime(horariosDeEnvio));
+//			
 		
 		if(precio != null)
 			this.setPrecio(precio);
@@ -251,29 +248,29 @@ public class MenuUpdate extends Entity  {
 		this.descripcion = descripcion;
 	}
 
-	public ArrayList<LocalTime> getHorariosDeEnvio() {
-		return horariosDeEnvio;
-	}
-
-	public void setHorariosDeEnvio(ArrayList<LocalTime> horariosDeEnvio) {
-		this.horariosDeEnvio = horariosDeEnvio;
-	}
-
-	public ArrayList<LocalTime> getHorariosDeEntrega() {
-		return horariosDeEntrega;
-	}
-
-	public void setHorariosDeEntrega(ArrayList<LocalTime> horariosDeEntrega) {
-		this.horariosDeEntrega = horariosDeEntrega;
-	}
-
-	public ArrayList<String> getTurnos() {
-		return turnos;
-	}
-
-	public void setTurnos(ArrayList<String> turnos) {
-		this.turnos = turnos;
-	}
+//	public ArrayList<LocalTime> getHorariosDeEnvio() {
+//		return horariosDeEnvio;
+//	}
+//
+//	public void setHorariosDeEnvio(ArrayList<LocalTime> horariosDeEnvio) {
+//		this.horariosDeEnvio = horariosDeEnvio;
+//	}
+//
+//	public ArrayList<LocalTime> getHorariosDeEntrega() {
+//		return horariosDeEntrega;
+//	}
+//
+//	public void setHorariosDeEntrega(ArrayList<LocalTime> horariosDeEntrega) {
+//		this.horariosDeEntrega = horariosDeEntrega;
+//	}
+//
+//	public ArrayList<String> getTurnos() {
+//		return turnos;
+//	}
+//
+//	public void setTurnos(ArrayList<String> turnos) {
+//		this.turnos = turnos;
+//	}
 
 	public Habilitacion getEstado() {
 		return estaParaLaVenta;

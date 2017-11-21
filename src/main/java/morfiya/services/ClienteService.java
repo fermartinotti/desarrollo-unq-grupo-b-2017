@@ -1,9 +1,11 @@
 package morfiya.services;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 import morfiya.domain.Cliente;
 import morfiya.repositories.ClienteDAO;
 
+@Transactional
 public class ClienteService extends GenericService<Cliente> {
 
 	private static final long serialVersionUID = 1L;
