@@ -1,9 +1,7 @@
 package morfiya.utils;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 public class DateFormatter {
 	
@@ -17,14 +15,14 @@ public class DateFormatter {
 		return fechaVigenciaD;
 	}
 	
-	public static ArrayList<LocalTime> formatLocalTime( ArrayList<String> horariosDeEntrega){
-		ArrayList<LocalTime> horariosRet = new ArrayList<LocalTime>();
-		for(String horario : horariosDeEntrega){
-			horariosRet.add(LocalTime.parse(horario));
-		}
-		
-		return horariosRet;
-	}
+//	public static ArrayList<LocalTime> formatLocalTime( ArrayList<String> horariosDeEntrega){
+//		ArrayList<LocalTime> horariosRet = new ArrayList<LocalTime>();
+//		for(String horario : horariosDeEntrega){
+//			horariosRet.add(LocalTime.parse(horario));
+//		}
+//		
+//		return horariosRet;
+//	}
 
 	public DateFormatter() {
 		super();

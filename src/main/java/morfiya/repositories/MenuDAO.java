@@ -3,12 +3,9 @@ package morfiya.repositories;
 import java.io.Serializable;
 import java.util.List;
 
-import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
@@ -21,21 +18,6 @@ public final class MenuDAO extends HibernateGenericDAO<Menu> {
 	@Override
 	protected Class<Menu> getDomainClass() {
 		return Menu.class;
-	}
-
-	// Sin paginación
-	@Override
-	public List<Menu> findAll() {
-		List<Menu> list = (List<Menu>) getHibernateTemplate().execute(new HibernateCallback<List<Menu>>() {
-
-			@SuppressWarnings("unchecked")
-			public List<Menu> doInHibernate(Session session) throws HibernateException {
-
-				return (List<Menu>) session.createCriteria(Menu.class).list();
-			}
-		});
-
-		return list;
 	}
 
 	// Con paginación
@@ -53,15 +35,7 @@ public final class MenuDAO extends HibernateGenericDAO<Menu> {
 			}
 		});
 	}
-
-	@Override
-	public Menu findById(Serializable id) {
-		DetachedCriteria criteria = DetachedCriteria.forClass(Menu.class);
-		criteria.add(Restrictions.eq("id", id));
-
-		return (Menu) (this.getHibernateTemplate().findByCriteria(criteria).get(0));
-	}
-
+	
 	// Busca por substring (con paginación)
 	@SuppressWarnings("unchecked")
 	public List<Menu> findByName(final Serializable nombre, final Integer pageSize, final Integer pageNumber) {
@@ -90,21 +64,5 @@ public final class MenuDAO extends HibernateGenericDAO<Menu> {
 				return query.list();
 			}
 		});
-	}
-
-	@Override
-	public void deleteById(final Serializable id) {
-		this.getHibernateTemplate().execute(new HibernateCallback<Menu>() {
-
-			public Menu doInHibernate(Session session) throws HibernateException {
-				Criteria criteria = session.createCriteria(Menu.class);
-				criteria.add(Restrictions.eq("id", id));
-				Menu menu = (Menu) criteria.uniqueResult();
-				session.delete(menu);
-				session.flush();
-				return null;
-			}
-		});
-
 	}
 }

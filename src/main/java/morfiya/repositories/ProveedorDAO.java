@@ -1,6 +1,5 @@
 package morfiya.repositories;
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -22,20 +21,6 @@ public final class ProveedorDAO extends HibernateGenericDAO<Proveedor>{
 		return Proveedor.class;
 	}
 
-	// Sin paginacion
-	@Override
-	public List<Proveedor> findAll() {
-		List<Proveedor> list = (List<Proveedor>) getHibernateTemplate()
-				.execute(new HibernateCallback<List<Proveedor>>() {
-
-					@SuppressWarnings("unchecked")
-					public List<Proveedor> doInHibernate(Session session) throws HibernateException {
-						return (List<Proveedor>) session.createCriteria(Proveedor.class).list();
-					}
-				});
-		return list;
-	}
-
 	// CON paginacion
 	@SuppressWarnings("unchecked")
 	public List<Proveedor> getAllByPage(final Integer pageSize, final Integer pageNumber) {
@@ -51,14 +36,6 @@ public final class ProveedorDAO extends HibernateGenericDAO<Proveedor>{
 		});
 	}
 
-	@Override
-	public Proveedor findById(Serializable id) {
-		DetachedCriteria criteria = DetachedCriteria.forClass(Proveedor.class);
-		criteria.add(Restrictions.eq("id", id));
-
-		return (Proveedor) (this.getHibernateTemplate().findByCriteria(criteria).get(0));
-	}
-	
 	public Proveedor findByEmail(String email){
 		DetachedCriteria criteria = DetachedCriteria.forClass(Proveedor.class);
 		criteria.add(Restrictions.eq("email", email));

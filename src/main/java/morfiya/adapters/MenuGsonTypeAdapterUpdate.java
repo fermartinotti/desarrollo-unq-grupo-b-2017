@@ -9,7 +9,6 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import com.google.gson.reflect.TypeToken;
 
 import morfiya.domain.Categoria;
 import morfiya.exceptions.DatoInvalidoException;
@@ -72,9 +71,9 @@ public class MenuGsonTypeAdapterUpdate  implements JsonDeserializer<MenuUpdate> 
 		Categoria categoria = gson.fromJson(categoriaJson, Categoria.class);	
 		
 		
-		Type listType = new TypeToken<ArrayList<String>>() {}.getType();
-		ArrayList<String> hEntregas = new Gson().fromJson(jobject.getAsJsonArray("horariosDeEntrega"), listType);
-		ArrayList<String> henvios = new Gson().fromJson(jobject.getAsJsonArray("horariosDeEnvio"), listType);
+//		Type listType = new TypeToken<ArrayList<String>>() {}.getType();
+//		ArrayList<String> hEntregas = new Gson().fromJson(jobject.getAsJsonArray("horariosDeEntrega"), listType);
+//		ArrayList<String> henvios = new Gson().fromJson(jobject.getAsJsonArray("horariosDeEnvio"), listType);
 
 		return new MenuUpdate(
 				
@@ -84,9 +83,9 @@ public class MenuGsonTypeAdapterUpdate  implements JsonDeserializer<MenuUpdate> 
 				checkDoubleOrNull("valorDelivery",jobject), 
 				checkStringOrNull("fechaVigenciaDesde", jobject), 
 				checkStringOrNull("fechaVigenciaDesde", jobject), 
-				null, // Inicializo el menu en null, porque todavia no definimos bien cual va a ser el uso
-				checkListaOrNull(hEntregas),
-				checkListaOrNull(henvios),
+//				null,/
+//				checkListaOrNull(hEntregas),
+//				checkListaOrNull(henvios),
 				//("horariosDeEntrega"),
 				checkDoubleOrNull("precio",jobject), 
 				checkIntegerOrNull("cantidadMinima", jobject), 

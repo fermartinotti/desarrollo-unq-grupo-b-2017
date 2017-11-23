@@ -3,9 +3,12 @@ package morfiya.services;
 import java.io.Serializable;
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import morfiya.domain.Menu;
 import morfiya.repositories.MenuDAO;
 
+@Transactional
 public class MenuService extends GenericService<Menu> {
 
 	private static final long serialVersionUID = -7961010215734577876L;

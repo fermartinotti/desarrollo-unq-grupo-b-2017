@@ -11,7 +11,6 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ObjectNode;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -23,7 +22,6 @@ import morfiya.exceptions.DatoInvalidoException;
 import morfiya.services.ServicioService;
 
 @Path("/servicios")
-@Transactional
 public class ServicioRest {
 
 	ServicioService service;
