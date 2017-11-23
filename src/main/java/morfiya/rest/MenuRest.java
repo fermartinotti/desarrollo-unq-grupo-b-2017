@@ -21,12 +21,15 @@ import morfiya.adapters.MenuGsonTypeAdapterUpdate;
 import morfiya.domain.Menu;
 import morfiya.exceptions.DatoInvalidoException;
 import morfiya.services.MenuService;
+import morfiya.services.ServicioService;
 import morfiya.updates.MenuUpdate;
 
 @Path("/menus")
 public class MenuRest {
 
 	MenuService service;
+	ServicioService servService;
+	
 	private final Integer pageSize = 10;
 
 	public MenuService getService() {
@@ -44,6 +47,22 @@ public class MenuRest {
 	public Response getMenuByName(@PathParam("nombre") final String nombre, @PathParam("pageNumber") final String pageNumber) {
 		try {
 			List<Menu> menu = service.findMenuForName(nombre, pageSize, Integer.parseInt(pageNumber));
+			return Response.ok(menu).build();
+		}
+
+		catch (Exception e) {
+			return Response.serverError().entity(e.getMessage()).build();
+		}
+	}
+	
+	// TIENE QUE HABER ALGUN SERVICIO EN EL SISTEMA PARA QUE ESTO FUNCIONE
+	// Con paginacion
+	@GET
+	@Path("/getByLocalidad/{localidad}/{pageNumber}")
+	@Produces("application/json")
+	 public Response getMenuByLocalidad(@PathParam("localidad") final String localidad, @PathParam("pageNumber") final String pageNumber) {
+		try {
+			List<Menu> menu = servService.findMenuForLocalidad(localidad,pageSize, Integer.parseInt(pageNumber));
 			return Response.ok(menu).build();
 		}
 
