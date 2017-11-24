@@ -29,6 +29,12 @@
 	<bean id="servicioRest" class="morfiya.rest.ServicioRest">
 		<property name="service" ref="servicioService" />
 	</bean>
+	
+		<!-- *************** FAKE *************** -->
+
+	<bean id="dataFakeRest" class="morfiya.rest.DataFakeRest">
+		<property name="service" ref="clienteService" />
+	</bean>
 
 	<tx:annotation-driven />
 </beans>
