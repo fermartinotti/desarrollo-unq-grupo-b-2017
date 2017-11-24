@@ -29,6 +29,10 @@ public class MenuService extends GenericService<Menu> {
 		return ((MenuDAO)getRepository()).findByName(nombre, pageSize, pageNumber);
 	}
 	
+	public List<Menu> findMenuForNameAndCategory(Serializable nombre, String categoria, final Integer pageSize, final Integer pageNumber) {
+		return ((MenuDAO)getRepository()).findByNameAndCategory(nombre, categoria, pageSize, pageNumber);
+	}
+	
 	public List<Menu> getAllByPage(final int pageSize, final int pageNumber){
 		return getRepository().getAllByPage(pageSize, pageNumber);
 	}

@@ -35,7 +35,7 @@ public final class MenuDAO extends HibernateGenericDAO<Menu> {
 			}
 		});
 	}
-	
+
 	// Busca por substring (con paginación)
 	@SuppressWarnings("unchecked")
 	public List<Menu> findByName(final Serializable nombre, final Integer pageSize, final Integer pageNumber) {
@@ -50,7 +50,7 @@ public final class MenuDAO extends HibernateGenericDAO<Menu> {
 			}
 		});
 	}
-	
+
 	// Busca por substring (con paginación)
 	@SuppressWarnings("unchecked")
 	public List<Menu> findByCategoria(final String categoria, final Integer pageSize, final Integer pageNumber) {
@@ -64,5 +64,31 @@ public final class MenuDAO extends HibernateGenericDAO<Menu> {
 				return query.list();
 			}
 		});
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Menu> findByNameAndCategory(final Serializable nombre, final String categoria, final Integer pageSize,
+			final Integer pageNumber) {
+		HibernateTemplate template = getHibernateTemplate();
+		return (List<Menu>) template.execute(new HibernateCallback<Object>() {
+
+			public Object doInHibernate(Session session) throws HibernateException {			
+				
+				if(nombre== null && categoria !=null)
+					//Query query = session.createQuery(("FROM Menu WHERE categoria like '%" + categoria.toString() + "%'"));
+					return findByCategoria(categoria, pageSize, pageNumber);
+				
+				if(nombre!= null && categoria ==null)
+					//Query query = session.createQuery(("FROM Menu WHERE nombre like '%" + nombre + "%'"));
+					return findByName(nombre, pageSize, pageNumber);
+				
+				
+				Query query = session.createQuery(("FROM Menu WHERE nombre like '%" + nombre + "%' AND categoria like '%" + categoria +"%'"));
+				query.setMaxResults(pageSize);
+				query.setFirstResult(pageSize * (pageNumber - 1));
+				return query.list();
+			}
+		});
+
 	}
 }

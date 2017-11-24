@@ -8,6 +8,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -67,6 +68,39 @@ public class MenuRest {
 			return Response.serverError().entity(e.getMessage()).build();
 		}
 	}
+	
+	   // Con paginacion 
+		@GET
+		@Path("/getByNombreYCategoria")
+		@Produces("application/json")
+		public Response getMenuByNombreYCategoria(@QueryParam("nombre") final String nombre, @QueryParam("categoria") final String categoria, @QueryParam("pageNumber") final String pageNumber) {
+			try {
+					if(nombre!=null && pageNumber!=null && categoria == null){
+					List<Menu> menu = service.findMenuForName(nombre, pageSize, Integer.parseInt(pageNumber));
+					return Response.ok(menu).build();
+				}
+					
+				
+				if(categoria!=null && pageNumber!=null && nombre == null){
+					List<Menu> menu = service.findMenuForCategory(categoria, pageSize, Integer.parseInt(pageNumber));
+					return Response.ok(menu).build();
+				}
+					
+				
+				if(categoria!=null && pageNumber!=null && nombre != null){
+					List<Menu> menu = service.findMenuForNameAndCategory(nombre,categoria, pageSize, Integer.parseInt(pageNumber));
+					return Response.ok(menu).build();
+				}
+					
+				
+				return Response.ok().build();
+				
+			}
+
+			catch (Exception e) {
+				return Response.serverError().entity(e.getMessage()).build();
+			}
+		}
 	
 	
 	
