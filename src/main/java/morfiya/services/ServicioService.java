@@ -4,9 +4,7 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import morfiya.domain.Menu;
 import morfiya.domain.Servicio;
-import morfiya.repositories.ServicioDAO;
 
 @Transactional
 public class ServicioService extends GenericService<Servicio> {
@@ -25,7 +23,7 @@ public class ServicioService extends GenericService<Servicio> {
 		getRepository().save(servicio);
 	}
 
-	public List<Menu> findMenuForLocalidad(String localidad, final Integer pageSize, final Integer pageNumber) {
-		return ((ServicioDAO)getRepository()).findByLocalidad(localidad, pageSize, pageNumber);
-	}
+//	public List<Menu> findMenuForLocalidad(String localidad, final Integer pageSize, final Integer pageNumber) {
+//		return ((ServicioDAO)getRepository()).findByLocalidad(localidad, pageSize, pageNumber);
+//	}
 }

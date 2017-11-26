@@ -22,6 +22,7 @@
 
 	<bean id="menuRest" class="morfiya.rest.MenuRest">
 		<property name="service" ref="menuService" />
+<!-- 		<property name="serviceS" ref="servicioService" /> -->
 	</bean>
 
 	<!-- *************** Servicio *************** -->
