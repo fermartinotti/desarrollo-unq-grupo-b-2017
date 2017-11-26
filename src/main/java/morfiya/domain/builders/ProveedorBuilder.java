@@ -24,7 +24,7 @@ public class ProveedorBuilder {
 		return this;
 	}
 	
-	public ProveedorBuilder withServicio(String email) {
+	public ProveedorBuilder withEmail(String email) {
 		this.email= email;
 		return this;
 	}

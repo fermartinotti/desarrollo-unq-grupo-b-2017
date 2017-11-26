@@ -33,7 +33,8 @@
 		<!-- *************** FAKE *************** -->
 
 	<bean id="dataFakeRest" class="morfiya.rest.DataFakeRest">
-		<property name="service" ref="clienteService" />
+		<property name="serviceP" ref="proveedorService" />
+		<property name="serviceC" ref="clienteService" />
 	</bean>
 
 	<tx:annotation-driven />
