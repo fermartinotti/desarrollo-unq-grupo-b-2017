@@ -16,7 +16,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import morfiya.adapters.ServicioGsonTypeAdapter;
-import morfiya.domain.Menu;
 import morfiya.domain.Servicio;
 import morfiya.exceptions.DatoInvalidoException;
 import morfiya.services.ServicioService;
@@ -55,20 +54,20 @@ public class ServicioRest {
 		return Response.ok(servicios).build();
 	}
 
-	// Con paginacion
-	@GET
-	@Path("/getByLocalidad/{localidad}/{pageNumber}")
-	@Produces("application/json")
-	 public Response getMenuByLocalidad(@PathParam("localidad") final String localidad, @PathParam("pageNumber") final String pageNumber) {
-		try {
-			List<Menu> menu = service.findMenuForLocalidad(localidad,pageSize, Integer.parseInt(pageNumber));
-			return Response.ok(menu).build();
-		}
-
-		catch (Exception e) {
-			return Response.serverError().entity(e.getMessage()).build();
-		}
-	}
+//	// Con paginacion
+//	@GET
+//	@Path("/getByLocalidad/{localidad}/{pageNumber}")
+//	@Produces("application/json")
+//	 public Response getMenuByLocalidad(@PathParam("localidad") final String localidad, @PathParam("pageNumber") final String pageNumber) {
+//		try {
+//			List<Menu> menu = service.findMenuForLocalidad(localidad,pageSize, Integer.parseInt(pageNumber));
+//			return Response.ok(menu).build();
+//		}
+//
+//		catch (Exception e) {
+//			return Response.serverError().entity(e.getMessage()).build();
+//		}
+//	}
 
 	@POST
 	@Path("/create")
