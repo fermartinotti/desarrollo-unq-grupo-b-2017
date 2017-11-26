@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.ObjectNode;
+import org.springframework.test.context.ContextConfiguration;
 
 import com.google.gson.Gson;
 

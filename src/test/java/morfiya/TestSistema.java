@@ -3,6 +3,8 @@ package morfiya;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
+import java.io.IOException;
+
 import org.junit.Test;
 
 import jdepend.framework.DependencyConstraint;
@@ -26,16 +28,28 @@ public class TestSistema {
 
 	@Test
 	public void testServicesPkgShouldNotDependOnDommainPkg() {
+		
 		final JDepend jDepend = new JDepend();
-		
+		try {
+			jDepend.addDirectory("/morfiya/servicies/classes");
+			//jDepend.addDirectory("/src/main/java/morfiya/repositories");
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+       
+        
 		DependencyConstraint constraint = new DependencyConstraint();
-		JavaPackage domain = constraint.addPackage("domain");
-		JavaPackage services = constraint.addPackage("services");
+		JavaPackage servicies = constraint.addPackage("morfiya.servicies");
+		JavaPackage repositories = constraint.addPackage("morfiya.repositories");
 		
-		domain.dependsUpon(services);
+		servicies.dependsUpon(repositories);
 		
 		jDepend.analyze();
+		
 		assertFalse(jDepend.dependencyMatch(constraint));
+		
+		// assertTrue(jDepend.dependencyMatch(constraint));
 	}
 		
 	
