@@ -27,17 +27,13 @@ public class TestSistema {
 	}
 
 	@Test
-	public void testServicesPkgShouldNotDependOnDommainPkg() {
+	public void testServicesPkgShouldNotDependOnDommainPkg() throws IOException {
 		
 		final JDepend jDepend = new JDepend();
-		try {
-			jDepend.addDirectory("/morfiya/servicies/classes");
-			//jDepend.addDirectory("/src/main/java/morfiya/repositories");
-		} catch (IOException e) {
-			
-			e.printStackTrace();
-		}
-       
+		
+		//jDepend.addDirectory("/path/to/project/util/classes");
+       // jDepend.addDirectory("/path/to/project/ejb/classes");
+		
         
 		DependencyConstraint constraint = new DependencyConstraint();
 		JavaPackage servicies = constraint.addPackage("morfiya.servicies");
