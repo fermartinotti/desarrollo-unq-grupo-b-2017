@@ -24,7 +24,7 @@ import morfiya.updates.ClienteUpdate;
 @Path("/clientes")
 public class ClienteRest {
 
-	ClienteService service;
+	private ClienteService service;
 	private final Integer pageSize = 10;
 
 	public ClienteService getService() {

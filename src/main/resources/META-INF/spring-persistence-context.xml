@@ -125,6 +125,7 @@
 			<ref bean="proveedorRest" />
 			<ref bean="menuRest"/>
 			<ref bean="servicioRest"/>
+			<ref bean="dataFakeRest"/>
 		</jaxrs:serviceBeans>
 		<jaxrs:extensionMappings>
 			<entry key="json" value="application/json" />
