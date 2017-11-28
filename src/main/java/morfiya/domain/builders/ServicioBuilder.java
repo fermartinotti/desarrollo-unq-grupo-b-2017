@@ -11,15 +11,15 @@ import morfiya.domain.Telefono;
 
 public class ServicioBuilder {
 	
-	String nombre;
-	List<Menu> menus = new ArrayList<Menu>();
-	Direccion direccion;
-	String descripcion;
-	String link;
-	String email;
+	private String nombre;
+	private List<Menu> menus = new ArrayList<Menu>();
+	private Direccion direccion;
+	private String descripcion;
+	private String link;
+	private String email;
 	Telefono telefono;
 	//DiasDeAtencion atencionAlPublico;
-	Localidad localidadDeEntregas;
+	private Localidad localidadDeEntregas;
 	
 	public static ServicioBuilder mkBuilder() {
 		return new ServicioBuilder();

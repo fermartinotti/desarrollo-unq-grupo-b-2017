@@ -23,7 +23,7 @@ import morfiya.services.ServicioService;
 @Path("/servicios")
 public class ServicioRest {
 
-	ServicioService service;
+	private ServicioService service;
 	private final Integer pageSize = 10;
 
 	public ServicioService getService() {

@@ -23,8 +23,8 @@ import morfiya.services.ProveedorService;
 @Path("/")
 public class DataFakeRest {
 
-	ProveedorService serviceP;
-	ClienteService serviceC;
+	private ProveedorService serviceP;
+	private ClienteService serviceC;
 
 	public ProveedorService getServiceP() {
 		return serviceP;

@@ -27,8 +27,8 @@ import morfiya.updates.MenuUpdate;
 @Path("/menus")
 public class MenuRest {
 
-	MenuService service;
-	ServicioService servService;
+	private MenuService service;
+	private ServicioService servService;
 	
 	private final Integer pageSize = 10;
 

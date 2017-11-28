@@ -13,8 +13,6 @@ public class ClienteBuilder {
 	private Direccion direccion;
 	private double creditos = 0;
 	
-	public ClienteBuilder() {}
-	
 	public static ClienteBuilder mkBuilder(){
         return new ClienteBuilder();
     }
