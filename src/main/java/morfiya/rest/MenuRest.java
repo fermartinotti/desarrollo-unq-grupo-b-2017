@@ -40,14 +40,6 @@ public class MenuRest {
 		this.service = service;
 	}
 
-	// public ServicioService getServiceS() {
-	// return servicioS;
-	// }
-	//
-	// public void setServiceS(ServicioService service) {
-	// this.servicioS = service;
-	// }
-
 	// CON paginacion
 	@GET
 	@Path("/getAllPagination/{pageNumber}")
@@ -114,6 +106,10 @@ public class MenuRest {
 				List<Menu> menu = service.findByNameCategoryAndLocality(nombre, categoria, localidad, pageSize,
 						Integer.parseInt(pageNumber));
 				return Response.ok(menu).build();
+			}
+			
+			if(nombre == null && categoria == null && localidad == null && pageNumber != null){
+				return Response.ok(service.getAllByPage(pageSize, Integer.parseInt(pageNumber))).build();
 			}
 
 			return Response.ok().build();
