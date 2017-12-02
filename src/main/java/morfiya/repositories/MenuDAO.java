@@ -79,22 +79,15 @@ public final class MenuDAO extends HibernateGenericDAO<Menu> {
 		return (List<Menu>) template.execute(new HibernateCallback<Object>() {
 
 			public Object doInHibernate(Session session) throws HibernateException {
-				//Query query = session.createQuery(("FROM Menu m INNER JOIN m.mid s WHERE s.localidadDeEntregas like '%"+localidad.toString()+"%'"));
-				Query query = session.createQuery(("FROM Servicio WHERE localidadDeEntregas like '%" + localidad + "%'"));
+				
+				Query query = session.createQuery("FROM Menu where mid in (SELECT id FROM Servicio WHERE localidadDeEntregas like '%" + localidad + "%')");
 				
 				query.setMaxResults(pageSize);
 				query.setFirstResult(pageSize * (pageNumber - 1));
-				List<Servicio> serviciosFiltrados = query.list();
-				List<Menu> menusFiltrados = new ArrayList<Menu>();
-				
-				for(Servicio s : serviciosFiltrados){
-					menusFiltrados.addAll(s.getMenus());
-				}
-				
-				return menusFiltrados;
+
+				return query.list();
 			}
 		});
-
 	}
 
 	@SuppressWarnings("unchecked")
@@ -156,5 +149,5 @@ public final class MenuDAO extends HibernateGenericDAO<Menu> {
 			}
 		});
 
-	}
+	}	
 }
