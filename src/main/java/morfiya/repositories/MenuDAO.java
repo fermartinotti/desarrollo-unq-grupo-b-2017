@@ -1,8 +1,6 @@
 package morfiya.repositories;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -11,21 +9,19 @@ import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
 import morfiya.domain.Menu;
-import morfiya.domain.Servicio;
 
 public final class MenuDAO extends HibernateGenericDAO<Menu> {
 
 	private static final long serialVersionUID = 6287473767660304813L;
 
 	// NO SE COMO INICIALIZARLO
-	//ServicioDAO servicioDAO; 
-	
-	
+	// ServicioDAO servicioDAO;
+
 	@Override
 	protected Class<Menu> getDomainClass() {
 		return Menu.class;
 	}
-	
+
 	// Con paginación
 	@SuppressWarnings("unchecked")
 	@Override
@@ -71,7 +67,7 @@ public final class MenuDAO extends HibernateGenericDAO<Menu> {
 			}
 		});
 	}
-	
+
 	// Con paginacion
 	@SuppressWarnings("unchecked")
 	public List<Menu> findByLocalidad(final String localidad, final Integer pageSize, final Integer pageNumber) {
@@ -79,9 +75,11 @@ public final class MenuDAO extends HibernateGenericDAO<Menu> {
 		return (List<Menu>) template.execute(new HibernateCallback<Object>() {
 
 			public Object doInHibernate(Session session) throws HibernateException {
-				
-				Query query = session.createQuery("FROM Menu where mid in (SELECT id FROM Servicio WHERE localidadDeEntregas like '%" + localidad + "%')");
-				
+
+				Query query = session
+						.createQuery("FROM Menu where mid in (SELECT id FROM Servicio WHERE localidadDeEntregas like '%"
+								+ localidad + "%')");
+
 				query.setMaxResults(pageSize);
 				query.setFirstResult(pageSize * (pageNumber - 1));
 
@@ -96,58 +94,68 @@ public final class MenuDAO extends HibernateGenericDAO<Menu> {
 		HibernateTemplate template = getHibernateTemplate();
 		return (List<Menu>) template.execute(new HibernateCallback<Object>() {
 
-			public Object doInHibernate(Session session) throws HibernateException {			
-				Query query = session.createQuery(("FROM Menu WHERE nombre like '%" + nombre + "%' AND categoria like '%" + categoria +"%'"));
+			public Object doInHibernate(Session session) throws HibernateException {
+				Query query = session.createQuery(
+						("FROM Menu WHERE nombre like '%" + nombre + "%' AND categoria like '%" + categoria + "%'"));
 				query.setMaxResults(pageSize);
 				query.setFirstResult(pageSize * (pageNumber - 1));
 				return query.list();
 			}
 		});
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<Menu> findByNameAndLocality(final String nombre, final String localidad,final Integer pageSize,
+	public List<Menu> findByNameAndLocality(final String nombre, final String localidad, final Integer pageSize,
 			final Integer pageNumber) {
 		HibernateTemplate template = getHibernateTemplate();
 		return (List<Menu>) template.execute(new HibernateCallback<Object>() {
 
-			public Object doInHibernate(Session session) throws HibernateException {							
-				List<Menu> menusNombres = findByName(nombre, pageSize, pageNumber);
-			
-				return findByLocalidad(localidad, pageSize, pageNumber).stream().filter(menusNombres::contains).collect(Collectors.toList());
-			}
-		});
-
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Menu> findByCategoryAndLocality(final String categoria, final String localidad,final Integer pageSize,
-			final Integer pageNumber) {
-		HibernateTemplate template = getHibernateTemplate();
-		return (List<Menu>) template.execute(new HibernateCallback<Object>() {
-
-			public Object doInHibernate(Session session) throws HibernateException {							
-				List<Menu> menusCategoria = findByCategoria(categoria, pageSize, pageNumber);
-			
-				return findByLocalidad(localidad, pageSize, pageNumber).stream().filter(menusCategoria::contains).collect(Collectors.toList());
-			}
-		});
-
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Menu> findByNameCategoryAndLocality(final String nombre, final String categoria, String localidad,final Integer pageSize,
-			final Integer pageNumber) {
-		HibernateTemplate template = getHibernateTemplate();
-		return (List<Menu>) template.execute(new HibernateCallback<Object>() {
-
-			public Object doInHibernate(Session session) throws HibernateException {							
-				Query query = session.createQuery(("FROM Menu WHERE nombre like '%" + nombre + "%' AND categoria like '%" + categoria +"%'"));
+			public Object doInHibernate(Session session) throws HibernateException {
+				Query query = session
+						.createQuery("FROM Menu where mid in (SELECT id FROM Servicio WHERE localidadDeEntregas like '%"
+								+ localidad + "%') AND nombre like '%" + nombre + "%'");
 				query.setMaxResults(pageSize);
 				query.setFirstResult(pageSize * (pageNumber - 1));
-				return findByLocalidad(localidad, pageSize, pageNumber).stream().filter(query.list()::contains).collect(Collectors.toList());
+				return query.list();
 			}
 		});
 
-	}	
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Menu> findByCategoryAndLocality(final String categoria, final String localidad, final Integer pageSize,
+			final Integer pageNumber) {
+		HibernateTemplate template = getHibernateTemplate();
+		return (List<Menu>) template.execute(new HibernateCallback<Object>() {
+
+			public Object doInHibernate(Session session) throws HibernateException {
+				Query query = session
+						.createQuery("FROM Menu where mid in (SELECT id FROM Servicio WHERE localidadDeEntregas like '%"
+								+ localidad + "%') AND categoria like '%" + categoria + "%'");
+				query.setMaxResults(pageSize);
+				query.setFirstResult(pageSize * (pageNumber - 1));
+				return query.list();
+				
+			}
+		});
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Menu> findByNameCategoryAndLocality(final String nombre, final String categoria, String localidad,
+			final Integer pageSize, final Integer pageNumber) {
+		HibernateTemplate template = getHibernateTemplate();
+		return (List<Menu>) template.execute(new HibernateCallback<Object>() {
+
+			public Object doInHibernate(Session session) throws HibernateException {
+				Query query = session.createQuery(
+						(" FROM Menu where mid in (SELECT id FROM Servicio WHERE localidadDeEntregas like '%"
+								+ localidad + "%') AND nombre like '%" + nombre + "%' AND categoria like '%" + categoria + "%'"));
+				query.setMaxResults(pageSize);
+				query.setFirstResult(pageSize * (pageNumber - 1));
+				return query.list();
+			}
+		});
+
+	}
 }
