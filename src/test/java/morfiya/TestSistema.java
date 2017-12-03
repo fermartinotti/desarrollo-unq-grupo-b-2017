@@ -1,9 +1,7 @@
 package morfiya;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,9 +13,6 @@ import org.reflections.Reflections;
 import java.lang.reflect.*;
 import org.springframework.transaction.annotation.Transactional;
 
-import jdepend.framework.DependencyConstraint;
-import jdepend.framework.JDepend;
-import jdepend.framework.JavaPackage;
 import morfiya.domain.Menu;
 import morfiya.domain.Pedido;
 import morfiya.domain.Sistema;
@@ -55,31 +50,31 @@ public class TestSistema {
 //
 //	}
 	
-	@Test 
-	public void testArquitectura() {
-		Reflections reflections = new Reflections("");    
-		@SuppressWarnings("")
-		Set<Class<? extends GenericService>> classes = reflections.getSubTypesOf(GenericService.class);
-		List<Method> allMethodswithoutAnottations = new ArrayList<Method>();
-		
-		 	for (Class<? extends GenericService> class1 : classes) {
-		 		allMethodswithoutAnottations.addAll(getAllMethodsWithoutTransaction(class1));
-		 		
-			}
-		 	assertEquals(0,allMethodswithoutAnottations.size());
-	}
-		
-	private static List<Method> getAllMethodsWithoutTransaction(final Class<?> clase){
-		List<Method> result = new ArrayList<Method>();
-		List<java.lang.reflect.Method> list = Arrays.asList(clase.getDeclaredMethods());
-	        for (java.lang.reflect.Method method : list) {
-	                if(!method.isAnnotationPresent(Transactional.class)) {
-	                	result.add(method);
-	                }
-	    }
-	        
-	    return result;
-	}
+//	@Test 
+//	public void testArquitectura() {
+//		Reflections reflections = new Reflections("");    
+//		@SuppressWarnings("")
+//		Set<Class<? extends GenericService>> classes = reflections.getSubTypesOf(GenericService.class);
+//		List<Method> allMethodswithoutAnottations = new ArrayList<Method>();
+//		
+//		 	for (Class<? extends GenericService> class1 : classes) {
+//		 		allMethodswithoutAnottations.addAll(getAllMethodsWithoutTransaction(class1));
+//		 		
+//			}
+//		 	assertEquals(0,allMethodswithoutAnottations.size());
+//	}
+//		
+//	private static List<Method> getAllMethodsWithoutTransaction(final Class<?> clase){
+//		List<Method> result = new ArrayList<Method>();
+//		List<java.lang.reflect.Method> list = Arrays.asList(clase.getDeclaredMethods());
+//	        for (java.lang.reflect.Method method : list) {
+//	                if(!method.isAnnotationPresent(Transactional.class)) {
+//	                	result.add(method);
+//	                }
+//	    }
+//	        
+//	    return result;
+//	}
 //	@Test
 //	public void testComprar() {
 //		Sistema sistema = new Sistema();
