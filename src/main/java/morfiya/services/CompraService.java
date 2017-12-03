@@ -58,9 +58,9 @@ public class CompraService extends GenericService<Pedido>{
 			try{
 				
 				cliente.retirarCreditos(menu.getPrecio() * cantidad);
-				clienteDAO.save(cliente);
+				clienteDAO.update(cliente);
 				proveedor.cargarCreditoNoDisponible(menu.getPrecio() * cantidad);
-				proveedorDAO.save(proveedor);
+				proveedorDAO.update(proveedor);
 				Pedido pedido = new Pedido(fechaDeEntrega, descripcion,menu, cliente);
 				pedidoDAO.save(pedido); 
 				EmailSender.sendEmail(cliente, descripcion);
