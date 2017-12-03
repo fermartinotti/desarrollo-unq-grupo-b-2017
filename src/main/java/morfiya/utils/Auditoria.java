@@ -17,7 +17,7 @@ public class Auditoria {
 	@Around("execution(* morfiya.rest.*.*(..))")
     public Object aroundGreeting(final ProceedingJoinPoint pjp) throws Throwable {
 		LocalDate now = LocalDate.now();
-		log.info(now + " Metodo: " + pjp.getSignature().getName() + " argumentos: ");
+		log.info(now + "Llamando desde APIREST al metodo: " + pjp.getSignature().getName() + " con los siguientes argumentos: ");
 		Object[] signatureArgs = pjp.getArgs();
 	    for (Object signatureArg : signatureArgs) {
 	    	log.info(signatureArg.toString());

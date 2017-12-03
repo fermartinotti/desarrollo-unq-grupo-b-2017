@@ -2,7 +2,6 @@ package morfiya.services;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +21,31 @@ public class CompraService extends GenericService<Pedido>{
 	ProveedorDAO proveedorDAO;
 	PedidoDAO pedidoDAO;
 	
+	
+	public ClienteDAO getClienteDAO() {
+		return clienteDAO;
+	}
+
+	public void setClienteDAO(ClienteDAO clienteDAO) {
+		this.clienteDAO = clienteDAO;
+	}
+
+	public ProveedorDAO getProveedorDAO() {
+		return proveedorDAO;
+	}
+
+	public void setProveedorDAO(ProveedorDAO proveedorDAO) {
+		this.proveedorDAO = proveedorDAO;
+	}
+
+	public PedidoDAO getPedidoDAO() {
+		return pedidoDAO;
+	}
+
+	public void setPedidoDAO(PedidoDAO pedidoDAO) {
+		this.pedidoDAO = pedidoDAO;
+	}
+
 	@Transactional
 	public void comprar(Menu menu, Integer cantidad, LocalDate fechaDeEntrega, Cliente cliente, String descripcion, Proveedor proveedor) {
 		if (puedeComprar(menu, cliente, fechaDeEntrega))
