@@ -17,15 +17,15 @@ public class Servicio extends Entity{
 	private String link; // Referencia a la direccion web o al link de su perfil de FB.
 	private String email;
 	private Telefono telefono;
-	private DiasDeAtencion atencionAlPublico;
+//	private DiasDeAtencion atencionAlPublico;
 	private Localidad localidadDeEntregas;
 	Integer maximoDeMenusVigentes = 20;
 	
 	
 	
-	// 
+	// , DiasDeAtencion atencionAlPublico
 	public Servicio(String nombre, List<Menu> menus, Direccion direccion, String descripcion, String link,
-			String email, Telefono telefono, DiasDeAtencion atencionAlPublico, Localidad localidadDeEntregas) 
+			String email, Telefono telefono, Localidad localidadDeEntregas) 
 	{
 		super();
 		this.nombre = nombre;
@@ -35,7 +35,7 @@ public class Servicio extends Entity{
 		this.link = link;
 		this.email = email;
 		this.telefono = telefono;
-		this.atencionAlPublico = atencionAlPublico;
+		//this.atencionAlPublico = atencionAlPublico;
 		this.localidadDeEntregas = localidadDeEntregas;
 		
 	}
@@ -135,13 +135,13 @@ public class Servicio extends Entity{
 	public void setLogo(String logo) {
 		this.logo = logo;
 	}
-	public DiasDeAtencion getAtencionAlPublico() {
-		return atencionAlPublico;
-	}
-
-	public void setAtencionAlPublico(DiasDeAtencion atencionAlPublico) {
-		this.atencionAlPublico = atencionAlPublico;
-	}
+//	public DiasDeAtencion getAtencionAlPublico() {
+//		return atencionAlPublico;
+//	}
+//
+//	public void setAtencionAlPublico(DiasDeAtencion atencionAlPublico) {
+//		this.atencionAlPublico = atencionAlPublico;
+//	}
 
 	public Localidad getLocalidadDeEntregas() {
 		return localidadDeEntregas;

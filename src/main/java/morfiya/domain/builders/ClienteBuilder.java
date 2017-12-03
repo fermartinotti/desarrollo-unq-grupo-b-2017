@@ -13,14 +13,12 @@ public class ClienteBuilder {
 	private Direccion direccion;
 	private double creditos = 0;
 	
-	private ClienteBuilder() {}
-	
 	public static ClienteBuilder mkBuilder(){
         return new ClienteBuilder();
     }
 	
-	public ClienteBuilder withCuit(){
-        this.cuit = 37179092;
+	public ClienteBuilder withCuit(Integer cuit){
+        this.cuit = cuit;
         return this;
     }
 
@@ -40,8 +38,13 @@ public class ClienteBuilder {
         return this;
     }
 	
-	public ClienteBuilder withCreditosDisponibles(double creditos){
+	public ClienteBuilder withCreditosDisponibles(Double creditos){
         this.creditos= creditos;
+        return this;
+    }
+	
+	public ClienteBuilder withDireccion(Direccion direccion){
+        this.direccion=direccion;
         return this;
     }
 
