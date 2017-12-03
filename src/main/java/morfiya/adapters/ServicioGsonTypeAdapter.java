@@ -12,7 +12,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 
-import morfiya.domain.DiasDeAtencion;
 import morfiya.domain.Direccion;
 import morfiya.domain.Localidad;
 import morfiya.domain.Menu;
@@ -34,8 +33,8 @@ public class ServicioGsonTypeAdapter implements JsonDeserializer<Servicio> {
 		JsonElement telefonoJson = jobject.get("telefono");
 		Telefono telefono = gson.fromJson(telefonoJson, Telefono.class);
 		
-		JsonElement diasDeAtencionJson = jobject.get("atencionAlPublico");
-		DiasDeAtencion diasDeAtencion = gson.fromJson( diasDeAtencionJson, DiasDeAtencion.class);
+		//JsonElement diasDeAtencionJson = jobject.get("atencionAlPublico");
+		//DiasDeAtencion diasDeAtencion = gson.fromJson( diasDeAtencionJson, DiasDeAtencion.class);
 		
 		JsonElement direccionJson = jobject.get("direccion");
 		Direccion direccion = gson.fromJson( direccionJson, Direccion.class);
@@ -53,7 +52,7 @@ public class ServicioGsonTypeAdapter implements JsonDeserializer<Servicio> {
 				jobject.get("link").getAsString(), 
 				jobject.get("email").getAsString(), 
 				telefono,
-				diasDeAtencion,
+				//diasDeAtencion,
 				localidad);
 	}
 }

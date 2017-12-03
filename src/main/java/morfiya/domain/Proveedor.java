@@ -24,7 +24,7 @@ public class Proveedor extends Entity{
 	public Proveedor(String nombre, Servicio servicio, Double creditos, String email) {
 		super();
 		this.nombre=nombre;
-		this.servicio=servicio;
+		this.setServicio(servicio);
 		this.creditos=creditos;
 		this.email=email;
 	}
@@ -34,7 +34,7 @@ public class Proveedor extends Entity{
 		this.nombre = nombre;
 	}
 	public void agregarServicio(Servicio servicio) {
-		this.servicio = servicio;
+		this.setServicio(servicio);
 	}
 	
 	public String getNombre() {
@@ -123,5 +123,13 @@ public class Proveedor extends Entity{
 		
 	
 			
+	}
+
+	public Servicio getServicio() {
+		return servicio;
+	}
+
+	public void setServicio(Servicio servicio) {
+		this.servicio = servicio;
 	}
 }

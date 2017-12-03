@@ -29,6 +29,7 @@ http://www.springframework.org/schema/aop/spring-aop-2.5.xsd"
 
 	<bean id="menuRest" class="morfiya.rest.MenuRest">
 		<property name="service" ref="menuService" />
+<!-- 		<property name="serviceS" ref="servicioService" /> -->
 	</bean>
 
 	<!-- *************** Servicio *************** -->
@@ -37,8 +38,17 @@ http://www.springframework.org/schema/aop/spring-aop-2.5.xsd"
 		<property name="service" ref="servicioService" />
 	</bean>
 	
+  
 <aop:aspectj-autoproxy />
  <bean id="auditoria" class="morfiya.utils.Auditoria" />
+
+		<!-- *************** FAKE *************** -->
+
+	<bean id="dataFakeRest" class="morfiya.rest.DataFakeRest">
+		<property name="serviceP" ref="proveedorService" />
+		<property name="serviceC" ref="clienteService" />
+	</bean>
+
 
 	<tx:annotation-driven />
 </beans>

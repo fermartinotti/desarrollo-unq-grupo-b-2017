@@ -1,6 +1,5 @@
 package morfiya.services;
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +30,12 @@ public class MenuService extends GenericService<Menu> {
 	public List<Menu> findMenuForName(Serializable nombre,final Integer pageSize, final Integer pageNumber) {
 		return ((MenuDAO)getRepository()).findByName(nombre, pageSize, pageNumber);
 	}
-	
+
+  @Transactional
+	public List<Menu> findMenuForNameAndCategory(String nombre, String categoria, final Integer pageSize, final Integer pageNumber) {
+		return ((MenuDAO)getRepository()).findByNameAndCategory(nombre, categoria, pageSize, pageNumber);
+	}
+  
 	@Transactional
 	public List<Menu> getAllByPage(final int pageSize, final int pageNumber){
 		return getRepository().getAllByPage(pageSize, pageNumber);
@@ -45,6 +49,28 @@ public class MenuService extends GenericService<Menu> {
 	@Transactional
 	public void editarMenu(Menu menu){
 		getRepository().update(menu);
+	}
+	
+  @Transactional
+	public List<Menu> findMenuForLocality(String localidad, Integer pageSize, Integer pageNumber) {
+		return ((MenuDAO)getRepository()).findByLocalidad(localidad, pageSize, pageNumber);
+	}
+
+  @Transactional
+	public List<Menu> findByNameAndLocality(String nombre, String localidad, Integer pageSize, Integer pageNumber) {
+		return ((MenuDAO)getRepository()).findByNameAndLocality(nombre, localidad, pageSize, pageNumber);
+	}
+
+  @Transactional
+	public List<Menu> findByCategoryAndLocality(String categoria, String localidad, Integer pageSize,
+			Integer pageNumber) {
+		return ((MenuDAO)getRepository()).findByCategoryAndLocality(categoria, localidad, pageSize, pageNumber);
+	}
+
+  @Transactional
+	public List<Menu> findByNameCategoryAndLocality(String nombre, String categoria, String localidad, Integer pageSize,
+			Integer pageNumber) {
+		return ((MenuDAO)getRepository()).findByNameCategoryAndLocality(nombre, categoria, localidad, pageSize, pageNumber);
 	}
 	
 }
