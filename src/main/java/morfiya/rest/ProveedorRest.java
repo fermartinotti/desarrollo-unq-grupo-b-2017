@@ -90,7 +90,7 @@ public class ProveedorRest {
 		try {
 			Proveedor proveedor = service.getProveedorByID(id);
 			return Response
-					.ok("Los créditos del proveedor " + proveedor.getNombre() + " son: " + proveedor.getCreditos())
+					.ok("Los crï¿½ditos del proveedor " + proveedor.getNombre() + " son: " + proveedor.getCreditos())
 					.build();
 		}
 
@@ -104,9 +104,9 @@ public class ProveedorRest {
 	public Response createProveedor(String proveedorJson) {
 		Gson gson = new Gson();
 		Proveedor proveedor = gson.fromJson(proveedorJson, Proveedor.class);
-		service.crearProveedor(proveedor);
+		Proveedor proveedorNew =service.crearProveedor(proveedor);
 
-		return Response.ok().build();
+		return Response.ok().entity(proveedorNew).build();
 	}
 
 	@PUT

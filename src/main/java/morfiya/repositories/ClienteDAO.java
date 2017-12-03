@@ -42,4 +42,33 @@ public final class ClienteDAO extends HibernateGenericDAO<Cliente> {
 
 		return (Cliente) (this.getHibernateTemplate().findByCriteria(criteria).get(0));
 	}
+
+	@Override
+	public Cliente save(Cliente cliente) {
+		getHibernateTemplate().getSessionFactory().getCurrentSession().setFlushMode(FlushMode.AUTO);
+		getHibernateTemplate().save(cliente);
+		getHibernateTemplate().flush();
+		return cliente;
+	}
+
+	@Override
+	public void deleteById(final Serializable id) {
+		this.getHibernateTemplate().execute(new HibernateCallback<Cliente>() {
+
+			public Cliente doInHibernate(Session session) throws HibernateException {
+				Criteria criteria = session.createCriteria(Cliente.class);
+				criteria.add(Restrictions.eq("id", id));
+				Cliente cliente = (Cliente) criteria.uniqueResult();
+				session.delete(cliente);
+				session.flush();
+				return null;
+			}
+		});
+
+	}
+
+	public List<Menu> findByName(Serializable nombre, Integer pageSize, Integer pageNumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

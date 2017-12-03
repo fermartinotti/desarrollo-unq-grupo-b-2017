@@ -28,8 +28,8 @@ public class ClienteService extends GenericService<Cliente> {
 		return ((ClienteDAO) getRepository()).findByEmail(email);
 	}
 
-	public void crearCliente(Cliente cliente) {
-		getRepository().save(cliente);
+	public Cliente crearCliente(Cliente cliente) {
+		return getRepository().save(cliente);
 	}
 	
 	public void editarCliente(Cliente cliente){

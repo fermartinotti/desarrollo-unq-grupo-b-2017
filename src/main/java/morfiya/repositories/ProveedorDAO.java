@@ -42,4 +42,19 @@ public final class ProveedorDAO extends HibernateGenericDAO<Proveedor>{
 
 		return (Proveedor) (this.getHibernateTemplate().findByCriteria(criteria).get(0));
 	}
+
+	@Override
+	public Proveedor save(Proveedor proveedor) {
+		getHibernateTemplate().getSessionFactory().getCurrentSession().setFlushMode(FlushMode.AUTO);
+		getHibernateTemplate().save(proveedor);
+		getHibernateTemplate().flush();
+		
+		return proveedor;
+	}
+
+	public List<Menu> findByName(Serializable nombre, Integer pageSize, Integer pageNumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

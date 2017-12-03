@@ -16,8 +16,8 @@ public class MenuService extends GenericService<Menu> {
 		return getRepository().findAll();
 	}
 
-	public void crearMenu(Menu menu) {
-		getRepository().save(menu);
+	public Menu crearMenu(Menu menu) {
+		return getRepository().save(menu);
 	}
 
 	public Menu getMenuById(int id) {

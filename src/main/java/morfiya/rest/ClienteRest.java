@@ -18,6 +18,7 @@ import org.codehaus.jackson.node.ObjectNode;
 import com.google.gson.Gson;
 
 import morfiya.domain.Cliente;
+import morfiya.domain.Menu;
 import morfiya.services.ClienteService;
 import morfiya.updates.ClienteUpdate;
 
@@ -90,7 +91,7 @@ public class ClienteRest {
 
 		try {
 			Cliente cliente = service.getClienteByID(id);
-			return Response.ok("Los créditos del cliente "+ cliente.getNombre() + " son: " + cliente.getCreditos()).build();
+			return Response.ok("Los crï¿½ditos del cliente "+ cliente.getNombre() + " son: " + cliente.getCreditos()).build();
 		}
 
 		catch (Exception e) {
@@ -104,9 +105,10 @@ public class ClienteRest {
 	public Response createCliente(String clienteJson) {
 		Gson gson = new Gson();
 		Cliente cliente = gson.fromJson(clienteJson, Cliente.class);
-		service.crearCliente(cliente);
+		Cliente newCliente = service.crearCliente(cliente);
 
-		return Response.ok().build();
+		return Response.ok().entity(newCliente).build();
+		
 	}
 
 	@PUT

@@ -29,8 +29,8 @@ public class ProveedorService extends GenericService<Proveedor> {
 		return ((ProveedorDAO) getRepository()).findByEmail(email);
 	}
 
-	public void crearProveedor(Proveedor proveedor) {
-		getRepository().save(proveedor);
+	public Proveedor crearProveedor(Proveedor proveedor) {
+		return getRepository().save(proveedor);
 	}
 	
 	public void editarProveedor(Proveedor proveedor){

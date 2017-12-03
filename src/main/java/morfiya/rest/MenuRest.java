@@ -149,8 +149,8 @@ public class MenuRest {
 
 		try {
 			Menu menu = gson.fromJson(menuJson, Menu.class);
-			service.crearMenu(menu);
-			return Response.ok().build();
+			Menu newMenu = service.crearMenu(menu);
+			return Response.ok().entity(newMenu).build();
 		} catch (DatoInvalidoException e) {
 			objectNode1.put("error", e.getMessage());
 			return Response.status(Response.Status.BAD_REQUEST).entity(objectNode1.toString()).build();
