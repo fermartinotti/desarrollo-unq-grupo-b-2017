@@ -16,7 +16,10 @@ import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.ObjectNode;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import morfiya.adapters.MenuGsonTypeAdapter;
+import morfiya.domain.Menu;
 import morfiya.domain.Proveedor;
 import morfiya.services.ProveedorService;
 import morfiya.updates.ProveedorUpdate;
@@ -178,4 +181,30 @@ public class ProveedorRest {
 			return Response.status(Response.Status.BAD_REQUEST).entity(objectNode1.toString()).build();
 		}
 	}
+	
+	 @PUT
+	 
+	  @Path("/agregarMenu/{id}")
+	 
+	  public Response agregarMenu(@PathParam("id") final Integer id, String menuJson) {
+		 
+		 Gson gson = new GsonBuilder().registerTypeAdapter(Menu.class, new MenuGsonTypeAdapter()).create();
+		 Menu menu = gson.fromJson(menuJson, Menu.class);
+	 
+		 try {
+	 
+	      Proveedor proveedorEncontrado = service.getProveedorByID(id);
+	      proveedorEncontrado.agregarMenu(menu);
+	      service.editarProveedor(proveedorEncontrado);
+	 
+	      return Response.ok().build();
+	 
+	    } catch (Exception e) {
+	 
+	      return Response.serverError().entity(e.getMessage()).build();
+	 
+	    }
+	 
+	  }  
+	 
 }
