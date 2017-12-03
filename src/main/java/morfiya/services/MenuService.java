@@ -1,5 +1,6 @@
 package morfiya.services;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +28,7 @@ public class MenuService extends GenericService<Menu> {
 	}
 	
 	@Transactional
-	public List<Menu> findMenuForName(Serializable nombre,final Integer pageSize, final Integer pageNumber) {
+	public List<Menu> findMenuForName(String nombre,final Integer pageSize, final Integer pageNumber) {
 		return ((MenuDAO)getRepository()).findByName(nombre, pageSize, pageNumber);
 	}
 

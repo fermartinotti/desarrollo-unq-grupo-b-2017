@@ -1,5 +1,6 @@
 package morfiya.repositories;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,7 +45,7 @@ public final class MenuDAO extends HibernateGenericDAO<Menu> {
 
 	// Busca por substring (con paginación)
 	@SuppressWarnings("unchecked")
-	public List<Menu> findByName(final String nombre, final Integer pageSize, final Integer pageNumber) {
+	public List<Menu> findByName(final Serializable nombre, final Integer pageSize, final Integer pageNumber) {
 		HibernateTemplate template = getHibernateTemplate();
 		return (List<Menu>) template.execute(new HibernateCallback<Object>() {
 
