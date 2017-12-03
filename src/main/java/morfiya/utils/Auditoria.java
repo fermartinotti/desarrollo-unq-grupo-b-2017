@@ -17,14 +17,11 @@ public class Auditoria {
 	@Around("execution(* morfiya.rest.*.*(..))")
     public Object aroundGreeting(final ProceedingJoinPoint pjp) throws Throwable {
 		LocalDate now = LocalDate.now();
-		System.out.print(now + " Metodo: " + pjp.getSignature().getName() + " argumentos: ");
+		log.info(now + " Metodo: " + pjp.getSignature().getName() + " argumentos: ");
 		Object[] signatureArgs = pjp.getArgs();
 	    for (Object signatureArg : signatureArgs) {
-	    	System.out.print(signatureArg.toString());
-	        //logger.info("###### Arguments: {} ", signatureArg.toString());
+	    	log.info(signatureArg.toString());
 	    }
-	    System.out.println(""); // Solamente por legivilidad CAMBIAR
-        log.info("Mensaje");
         try {
             return pjp.proceed();
         } finally {

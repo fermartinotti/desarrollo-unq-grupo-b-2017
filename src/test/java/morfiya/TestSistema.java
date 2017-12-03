@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 import java.io.IOException;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -14,6 +15,7 @@ import morfiya.domain.Menu;
 import morfiya.domain.Pedido;
 import morfiya.domain.Sistema;
 import morfiya.exceptions.DatoInvalidoException;
+import morfiya.services.GenericService;
 
 public class TestSistema {
 	
@@ -26,30 +28,29 @@ public class TestSistema {
 		assertEquals(1, sistema.getPedidos().size());
 	}
 
-	@Test
-	public void testServicesPkgShouldNotDependOnDommainPkg() {
+//	@Test
+//	public void testArquitectura() throws IOException {
+//		
+//		final JDepend jDepend = new JDepend();
+//		jDepend.addDirectory("./");
+//		//jDepend.analyze();
+//       
+//        
+//		DependencyConstraint constraint = new DependencyConstraint();
+//		JavaPackage servicies = constraint.addPackage("servicies");
+//		JavaPackage repositories = constraint.addPackage("repositories");
+//		
+//		servicies.dependsUpon(repositories);
+//		
+//		jDepend.analyze();
+//		
+//		assertFalse(jDepend.dependencyMatch(constraint));
+//
+//	}
+	
+	@Test 
+	public void testArquitectura() {
 		
-		final JDepend jDepend = new JDepend();
-		try {
-			jDepend.addDirectory("/morfiya/servicies/classes");
-			//jDepend.addDirectory("/src/main/java/morfiya/repositories");
-		} catch (IOException e) {
-			
-			e.printStackTrace();
-		}
-       
-        
-		DependencyConstraint constraint = new DependencyConstraint();
-		JavaPackage servicies = constraint.addPackage("morfiya.servicies");
-		JavaPackage repositories = constraint.addPackage("morfiya.repositories");
-		
-		servicies.dependsUpon(repositories);
-		
-		jDepend.analyze();
-		
-		assertFalse(jDepend.dependencyMatch(constraint));
-		
-		// assertTrue(jDepend.dependencyMatch(constraint));
 	}
 		
 	
