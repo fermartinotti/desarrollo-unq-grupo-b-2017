@@ -33,8 +33,8 @@ public class ProveedorService extends GenericService<Proveedor> {
 	}
 
 	@Transactional
-	public void crearProveedor(Proveedor proveedor) {
-		getRepository().save(proveedor);
+	public Proveedor crearProveedor(Proveedor proveedor) {
+		return getRepository().save(proveedor);
 	}
 	
 	@Transactional
