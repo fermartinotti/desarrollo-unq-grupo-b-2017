@@ -11,6 +11,7 @@ public class ProveedorService extends GenericService<Proveedor> {
 
 	private static final long serialVersionUID = 2326320574811159527L;
 	
+	@Transactional
 	public List<Proveedor> getAll() {
 		return getRepository().findAll();
 	}

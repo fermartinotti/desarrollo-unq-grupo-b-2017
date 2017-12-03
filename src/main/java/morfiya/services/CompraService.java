@@ -21,27 +21,32 @@ public class CompraService extends GenericService<Pedido>{
 	ProveedorDAO proveedorDAO;
 	PedidoDAO pedidoDAO;
 	
-	
+	@Transactional
 	public ClienteDAO getClienteDAO() {
 		return clienteDAO;
 	}
-
+	
+	@Transactional
 	public void setClienteDAO(ClienteDAO clienteDAO) {
 		this.clienteDAO = clienteDAO;
 	}
 
+	@Transactional
 	public ProveedorDAO getProveedorDAO() {
 		return proveedorDAO;
 	}
 
+	@Transactional
 	public void setProveedorDAO(ProveedorDAO proveedorDAO) {
 		this.proveedorDAO = proveedorDAO;
 	}
 
+	@Transactional
 	public PedidoDAO getPedidoDAO() {
 		return pedidoDAO;
 	}
 
+	@Transactional
 	public void setPedidoDAO(PedidoDAO pedidoDAO) {
 		this.pedidoDAO = pedidoDAO;
 	}
@@ -66,16 +71,19 @@ public class CompraService extends GenericService<Pedido>{
 		}
 	}
 	
+	@Transactional
 	public Boolean puedeComprar(Menu menu, Cliente cliente, LocalDate fechaDeEntrega){
 		return (cantDeVentasNoSuperada(menu) && cliente.puedeComprar() && esFechaValida(fechaDeEntrega));
 	}
 	
+	@Transactional
 	public Boolean cantDeVentasNoSuperada(Menu menu){
 		
 		List<Pedido> pedidos = pedidoDAO.getCantDePedidosPorMenu(menu);
 		return (pedidos.size() < menu.getCantidadMaxVtasPorDia());
 	}
 	
+	@Transactional
 	public Boolean esFechaValida(LocalDate fecha) {
 		int diffDays= 0;
 		LocalDate today = LocalDate.now();
