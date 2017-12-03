@@ -190,6 +190,17 @@
    <bean id="servicioService" class="morfiya.services.ServicioService">
     	<property name="repository" ref="servicioDAO"/>
     </bean>
-	
+    
+    <!-- *************** Servicio *************** -->
+	<bean id="pedidoDAO" class="morfiya.repositories.PedidoDAO">
+    	<property name="sessionFactory" ref="persistence.sessionFactory"/>
+    </bean>
 
+
+   <bean id="CompraService" class="morfiya.services.CompraService">
+    	<property name="pedidoDAO" ref="pedidoDAO"/>
+    	<property name="clienteDAO" ref="clienteDAO"/>
+    	<property name="proveedorDAO" ref="proveedorDAO"/>
+    	
+    </bean>
 </beans>
