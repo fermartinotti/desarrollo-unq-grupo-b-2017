@@ -1,17 +1,23 @@
 package morfiya;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 import org.junit.Test;
+import org.reflections.Reflections;
 
-import jdepend.framework.DependencyConstraint;
-import jdepend.framework.JDepend;
-import jdepend.framework.JavaPackage;
+import java.lang.reflect.*;
+import org.springframework.transaction.annotation.Transactional;
+
 import morfiya.domain.Menu;
 import morfiya.domain.Pedido;
 import morfiya.domain.Sistema;
 import morfiya.exceptions.DatoInvalidoException;
+import morfiya.services.GenericService;
 
 public class TestSistema {
 	
@@ -24,21 +30,51 @@ public class TestSistema {
 		assertEquals(1, sistema.getPedidos().size());
 	}
 
-	@Test
-	public void testServicesPkgShouldNotDependOnDommainPkg() {
-		final JDepend jDepend = new JDepend();
+//	@Test
+//	public void testArquitectura() throws IOException {
+//		
+//		final JDepend jDepend = new JDepend();
+//		jDepend.addDirectory("./");
+//		//jDepend.analyze();
+//       
+//        
+//		DependencyConstraint constraint = new DependencyConstraint();
+//		JavaPackage servicies = constraint.addPackage("servicies");
+//		JavaPackage repositories = constraint.addPackage("repositories");
+//		
+//		servicies.dependsUpon(repositories);
+//		
+//		jDepend.analyze();
+//		
+//		assertFalse(jDepend.dependencyMatch(constraint));
+//
+//	}
+	
+	@Test 
+	public void testArquitectura() {
+		Reflections reflections = new Reflections("");    
+		@SuppressWarnings("")
+		Set<Class<? extends GenericService>> classes = reflections.getSubTypesOf(GenericService.class);
+		List<Method> allMethodswithoutAnottations = new ArrayList<Method>();
 		
-		DependencyConstraint constraint = new DependencyConstraint();
-		JavaPackage domain = constraint.addPackage("domain");
-		JavaPackage services = constraint.addPackage("services");
-		
-		domain.dependsUpon(services);
-		
-		jDepend.analyze();
-		assertFalse(jDepend.dependencyMatch(constraint));
+		 	for (Class<? extends GenericService> class1 : classes) {
+		 		allMethodswithoutAnottations.addAll(getAllMethodsWithoutTransaction(class1));
+		 		
+			}
+		 	assertEquals(0,allMethodswithoutAnottations.size());
 	}
 		
-	
+	private static List<Method> getAllMethodsWithoutTransaction(final Class<?> clase){
+		List<Method> result = new ArrayList<Method>();
+		List<java.lang.reflect.Method> list = Arrays.asList(clase.getDeclaredMethods());
+	        for (java.lang.reflect.Method method : list) {
+	                if(!method.isAnnotationPresent(Transactional.class)) {
+	                	result.add(method);
+	                }
+	    }
+	        
+	    return result;
+	}
 //	@Test
 //	public void testComprar() {
 //		Sistema sistema = new Sistema();

@@ -14,7 +14,6 @@ import morfiya.domain.EmailSender;
 
 public class TestEmailSender{
 	private final static Logger log = Logger.getLogger(TestEmailSender.class);
-	// ARREGLAR LOGGEO,  O FALLAR TEST.
 	
 	@Test
 	public void testSendEmail() {

@@ -51,6 +51,25 @@
 	</build>
 
 	<dependencies>
+	<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt -->
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjrt</artifactId>
+		    <version>1.6.11</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.reflections/reflections -->
+		<dependency>
+		    <groupId>org.reflections</groupId>
+		    <artifactId>reflections</artifactId>
+		    <version>0.9.11</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.6.11</version>
+		</dependency>
 	
 		<!-- https://mvnrepository.com/artifact/jdepend/jdepend -->
 		<dependency>
