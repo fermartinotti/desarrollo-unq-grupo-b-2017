@@ -44,7 +44,7 @@ http://www.springframework.org/schema/aop/spring-aop-2.5.xsd"
 
 		<!-- *************** FAKE *************** -->
 
-	<bean id="dataFakeRest" class="morfiya.rest.DataFakeRest">
+	<bean id="dataFakeRest" class="morfiya.rest.DataFakeRest" init-method="load">
 		<property name="serviceP" ref="proveedorService" />
 		<property name="serviceC" ref="clienteService" />
 	</bean>

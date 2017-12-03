@@ -21,39 +21,12 @@ import morfiya.services.GenericService;
 
 public class TestSistema {
 	
-	@Test
-	public void testAgregarPedido() {
-		Sistema sistema = new Sistema();
-		Pedido pedido = new Pedido(null, null, null, null);
-		
-		sistema.agregarPedido(pedido);
-		assertEquals(1, sistema.getPedidos().size());
-	}
 
-//	@Test
-//	public void testArquitectura() throws IOException {
-//		
-//		final JDepend jDepend = new JDepend();
-//		jDepend.addDirectory("./");
-//		//jDepend.analyze();
-//       
-//        
-//		DependencyConstraint constraint = new DependencyConstraint();
-//		JavaPackage servicies = constraint.addPackage("servicies");
-//		JavaPackage repositories = constraint.addPackage("repositories");
-//		
-//		servicies.dependsUpon(repositories);
-//		
-//		jDepend.analyze();
-//		
-//		assertFalse(jDepend.dependencyMatch(constraint));
-//
-//	}
-	
+	@SuppressWarnings("rawtypes")
 	@Test 
 	public void testArquitectura() {
 		Reflections reflections = new Reflections("");    
-		@SuppressWarnings("")
+		
 		Set<Class<? extends GenericService>> classes = reflections.getSubTypesOf(GenericService.class);
 		List<Method> allMethodswithoutAnottations = new ArrayList<Method>();
 		
@@ -145,6 +118,14 @@ public class TestSistema {
 		assertEquals(20, sistema.evaluarDiferenciaDinero(menu, 30), 0);
 	}
 	
+	@Test
+	public void testAgregarPedido() {
+		Sistema sistema = new Sistema();
+		Pedido pedido = new Pedido(null, null, null, null);
+		
+		sistema.agregarPedido(pedido);
+		assertEquals(1, sistema.getPedidos().size());
+	}
 /*
 	@Test
 	public void testConfirmarCompras() {

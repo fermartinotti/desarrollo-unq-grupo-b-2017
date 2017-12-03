@@ -22,7 +22,6 @@ import morfiya.adapters.MenuGsonTypeAdapterUpdate;
 import morfiya.domain.Menu;
 import morfiya.exceptions.DatoInvalidoException;
 import morfiya.services.MenuService;
-import morfiya.services.ServicioService;
 import morfiya.updates.MenuUpdate;
 
 @Path("/menus")
@@ -40,6 +39,8 @@ public class MenuRest {
 	public void setService(MenuService service) {
 		this.service = service;
 	}
+	
+	
 
 	// CON paginacion
 	@GET
@@ -121,7 +122,36 @@ public class MenuRest {
 			return Response.serverError().entity(e.getMessage()).build();
 		}
 	}
-
+	
+//	@PUT
+//	@Path("/comprar")
+//	public Response crearPedido(String proveedorJson, String clienteJson, String menuJson, String fechaJson, Integer cantidad) {
+//		
+//		Gson gson = new GsonBuilder().registerTypeAdapter(Proveedor.class, new MenuGsonTypeAdapterUpdate()).create();
+//		Proveedor proveedor = gson.fromJson(proveedorJson, Proveedor.class);
+//		
+//		Gson gson2 = new GsonBuilder().registerTypeAdapter(Cliente.class, new MenuGsonTypeAdapterUpdate()).create();
+//		Cliente cliente = gson2.fromJson(clienteJson, Cliente.class);
+//		
+//		Gson gson3 = new GsonBuilder().registerTypeAdapter(Menu.class, new MenuGsonTypeAdapterUpdate()).create();
+//		Menu menu = gson3.fromJson(menuJson, Menu.class);
+//		
+//		Date date = null;
+//		
+//		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy, hh:mm:ss a");
+//
+//		try {
+//			date = sdf.parse(fechaJson);		
+//			
+//			
+//			return Response.ok().build();
+//		} catch (Exception e) {
+//			return Response.serverError().entity(e.getMessage()).build();
+//		}
+//
+//	}
+	
+	
 	@PUT
 	@Path("/edit")
 	public Response editMenu(String menuJson) {
