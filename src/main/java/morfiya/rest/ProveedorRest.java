@@ -24,7 +24,7 @@ import morfiya.updates.ProveedorUpdate;
 @Path("/proveedores")
 public class ProveedorRest {
 
-	ProveedorService service;
+	private ProveedorService service;
 	private final Integer pageSize = 10;
 
 	public ProveedorService getService() {

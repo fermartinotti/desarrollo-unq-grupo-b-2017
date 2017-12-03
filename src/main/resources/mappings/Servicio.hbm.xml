@@ -23,7 +23,7 @@
 		<property name="link" />
 		<property name="email" />
 		<one-to-one name="telefono" class="morfiya.domain.Telefono" />
-		<one-to-one name="atencionAlPublico" class="morfiya.domain.DiasDeAtencion" />
+<!-- 		<one-to-one name="atencionAlPublico" class="morfiya.domain.DiasDeAtencion" /> -->
 		
 		<property name="localidadDeEntregas">
 		   <type name="org.hibernate.type.EnumType"> 
