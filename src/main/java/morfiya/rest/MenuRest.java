@@ -1,5 +1,9 @@
 package morfiya.rest;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -19,8 +23,11 @@ import com.google.gson.GsonBuilder;
 
 import morfiya.adapters.MenuGsonTypeAdapter;
 import morfiya.adapters.MenuGsonTypeAdapterUpdate;
+import morfiya.domain.Cliente;
 import morfiya.domain.Menu;
+import morfiya.domain.Proveedor;
 import morfiya.exceptions.DatoInvalidoException;
+import morfiya.services.CompraService;
 import morfiya.services.MenuService;
 import morfiya.updates.MenuUpdate;
 
@@ -28,6 +35,7 @@ import morfiya.updates.MenuUpdate;
 public class MenuRest {
 
 	MenuService service;
+	CompraService compraService;
 	// ServicioService servicioS;
 
 	private final Integer pageSize = 10;
@@ -40,7 +48,13 @@ public class MenuRest {
 		this.service = service;
 	}
 	
-	
+	public CompraService getCompraService() {
+		return compraService;
+	}
+
+	public void setCompraService(CompraService compraService) {
+		this.compraService = compraService;
+	}
 
 	// CON paginacion
 	@GET
@@ -123,33 +137,33 @@ public class MenuRest {
 		}
 	}
 	
-//	@PUT
-//	@Path("/comprar")
-//	public Response crearPedido(String proveedorJson, String clienteJson, String menuJson, String fechaJson, Integer cantidad) {
-//		
-//		Gson gson = new GsonBuilder().registerTypeAdapter(Proveedor.class, new MenuGsonTypeAdapterUpdate()).create();
-//		Proveedor proveedor = gson.fromJson(proveedorJson, Proveedor.class);
-//		
-//		Gson gson2 = new GsonBuilder().registerTypeAdapter(Cliente.class, new MenuGsonTypeAdapterUpdate()).create();
-//		Cliente cliente = gson2.fromJson(clienteJson, Cliente.class);
-//		
-//		Gson gson3 = new GsonBuilder().registerTypeAdapter(Menu.class, new MenuGsonTypeAdapterUpdate()).create();
-//		Menu menu = gson3.fromJson(menuJson, Menu.class);
-//		
-//		Date date = null;
-//		
-//		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy, hh:mm:ss a");
-//
-//		try {
-//			date = sdf.parse(fechaJson);		
-//			
-//			
-//			return Response.ok().build();
-//		} catch (Exception e) {
-//			return Response.serverError().entity(e.getMessage()).build();
-//		}
-//
-//	}
+	@PUT
+	@Path("/comprar")
+	@Produces("application/json")
+	public Response crearPedido(String proveedorJson, String clienteJson, String menuJson, String fechaJson, String descripcion, Integer cantidad) {
+		Gson gson = new Gson();
+		
+		Cliente cliente = gson.fromJson(clienteJson, Cliente.class);
+		Proveedor proveedor = gson.fromJson(proveedorJson, Proveedor.class);
+		Menu menu = gson.fromJson(menuJson, Menu.class);
+		
+		Date date = null;
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy, hh:mm:ss a");
+
+		try {
+			date = sdf.parse(fechaJson);
+			LocalDate localdate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			
+			compraService.comprar(menu, cantidad, localdate, cliente, descripcion, proveedor);
+			
+			
+			return Response.ok().build();
+		} catch (Exception e) {
+			return Response.serverError().entity(e.getMessage()).build();
+		}
+
+	}
 	
 	
 	@PUT
