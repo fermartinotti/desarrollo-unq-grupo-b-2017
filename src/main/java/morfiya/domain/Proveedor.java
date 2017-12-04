@@ -132,4 +132,9 @@ public class Proveedor extends Entity{
 	public void setServicio(Servicio servicio) {
 		this.servicio = servicio;
 	}
+
+	public void agregarMenu(Menu menu) {
+		this.servicio.agregarMenu(menu);
+		
+	}
 }
