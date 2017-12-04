@@ -12,7 +12,7 @@
 		<property name="creditos" />
 		<property name="email"/>
 		<property name="creditosNoDisponibles" />
-		<one-to-one name="servicio" class="morfiya.domain.Servicio" />
+		<many-to-one name="servicio" class="morfiya.domain.Servicio" />
 		<property name="puedeVender">
 		   <type name="org.hibernate.type.EnumType"> 
 		      <param name="enumClass">morfiya.domain.Habilitacion</param> 
