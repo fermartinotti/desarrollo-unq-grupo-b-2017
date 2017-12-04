@@ -32,8 +32,8 @@ public class ClienteService extends GenericService<Cliente> {
 	}
 
 	@Transactional
-	public void crearCliente(Cliente cliente) {
-		getRepository().save(cliente);
+	public Cliente crearCliente(Cliente cliente) {
+		return getRepository().save(cliente);
 	}
 	
 	@Transactional
