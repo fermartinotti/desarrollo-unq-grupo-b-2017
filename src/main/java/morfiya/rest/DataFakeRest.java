@@ -96,11 +96,11 @@ public class DataFakeRest {
 		
 		
 		Servicio servicio1 = new ServicioBuilder().withNombre("Servicio Morfi Ya").withAgregarMenus(menu1).withAgregarMenus(menu2).withDireccion(direccion1).withDescripcion("Este es el mejor servicio del pais")
-				.withLink("www.morfiya.com").withTelefono("011", "42531236").withLocalidad(Localidad.AVELLANEDA)
+				.withLink("www.morfiya.com").withTelefono("011", "42531236").withLocalidad(Localidad.AVELLANEDA).withEmail("servicio1@hotmail.com")
 				.build();
 		
 		Servicio servicio2 = new ServicioBuilder().withNombre("Servicio de QUILMES").withAgregarMenus(menu3).withAgregarMenus(menu4).withDireccion(direccion1).withDescripcion("Este es el mejor servicio del pais")
-				.withLink("www.morfiya.com").withTelefono("011", "42531236").withLocalidad(Localidad.QUILMES)
+				.withLink("www.morfiya.com").withTelefono("011", "42531236").withLocalidad(Localidad.QUILMES).withEmail("servicio2@hotmail.com")
 				.build();
 		
 
