@@ -23,9 +23,14 @@ public class Auditoria {
 		LocalDate now = LocalDate.now();
 		log.info(now + "Llamando desde APIREST al metodo: " + pjp.getSignature().getName() + " con los siguientes argumentos: ");
 		Object[] signatureArgs = pjp.getArgs();
-	    for (Object signatureArg : signatureArgs) {
-	    	log.info(signatureArg.toString());
-	    }
+		
+		for (Object signatureArg : signatureArgs) {
+			if(signatureArg != null) {
+				log.info(signatureArg.toString());
+				
+			}
+		}
+				
         try {
             return pjp.proceed();
         } finally {
