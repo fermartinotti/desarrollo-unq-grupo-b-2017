@@ -10,7 +10,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
-import morfiya.domain.Proveedor;
+import morfiya.domain.*;
 
 public final class ProveedorDAO extends HibernateGenericDAO<Proveedor>{
 
@@ -42,4 +42,26 @@ public final class ProveedorDAO extends HibernateGenericDAO<Proveedor>{
 
 		return (Proveedor) (this.getHibernateTemplate().findByCriteria(criteria).get(0));
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Proveedor> findProveedorByIDMenu(Integer menuId){
+		HibernateTemplate template = getHibernateTemplate();
+		return (List<Proveedor>) template.execute(new HibernateCallback<Object>() {
+
+			public Object doInHibernate(Session session) throws HibernateException {
+				Query query = session.createQuery("FROM Menu WHERE id =" + menuId);
+				
+				
+				//Query query = session.createQuery("From Menu where idMenu = " + id);
+				
+				
+				
+				// (FROM Menu WHERE mid idMenu =" + menuId + ")");
+				return query.list();
+			}
+		});
+		
+	}
+	
 }
+	

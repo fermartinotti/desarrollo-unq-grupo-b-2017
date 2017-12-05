@@ -23,7 +23,7 @@ public final class MenuDAO extends HibernateGenericDAO<Menu> {
 		return Menu.class;
 	}
 
-	// Con paginaci�n
+	// Con paginacion
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Menu> getAllByPage(final Integer pageSize, final Integer pageNumber) {
@@ -39,7 +39,7 @@ public final class MenuDAO extends HibernateGenericDAO<Menu> {
 		});
 	}
 
-	// Busca por substring (con paginaci�n)
+	// Busca por substring (con paginacion)
 	@SuppressWarnings("unchecked")
 	public List<Menu> findByName(final Serializable nombre, final Integer pageSize, final Integer pageNumber) {
 		HibernateTemplate template = getHibernateTemplate();
@@ -54,7 +54,7 @@ public final class MenuDAO extends HibernateGenericDAO<Menu> {
 		});
 	}
 
-	// Busca por substring (con paginaci�n)
+	// Busca por substring (con paginacion)
 	@SuppressWarnings("unchecked")
 	public List<Menu> findByCategoria(final String categoria, final Integer pageSize, final Integer pageNumber) {
 		HibernateTemplate template = getHibernateTemplate();
