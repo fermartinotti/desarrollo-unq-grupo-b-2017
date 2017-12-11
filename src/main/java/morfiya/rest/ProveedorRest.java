@@ -211,7 +211,7 @@ public class ProveedorRest {
 	 @Produces("application/json")
 	 	public Response getProveedorByIDMenu(@PathParam("idMenu") Integer idMenu) {
 			try {
-				List<Proveedor> proveedor = service.findProveedorByIDMenu(idMenu);
+				Proveedor proveedor = service.findProveedorByIDMenu(idMenu);
 				return Response.ok(proveedor).build();
 			}
 

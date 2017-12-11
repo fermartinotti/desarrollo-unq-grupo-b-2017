@@ -48,7 +48,7 @@ public class ProveedorService extends GenericService<Proveedor> {
 	}
 
 	@Transactional
-	public List<Proveedor> findProveedorByIDMenu(Integer idMenu){
+	public Proveedor findProveedorByIDMenu(Integer idMenu){
 		return ((ProveedorDAO) getRepository()).findProveedorByIDMenu(idMenu);
 	}
 

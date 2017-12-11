@@ -2,6 +2,7 @@ package morfiya.repositories;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -10,7 +11,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
-import morfiya.domain.*;
+import morfiya.domain.Proveedor;
+import morfiya.domain.Servicio;
 
 public final class ProveedorDAO extends HibernateGenericDAO<Proveedor>{
 
@@ -43,21 +45,27 @@ public final class ProveedorDAO extends HibernateGenericDAO<Proveedor>{
 		return (Proveedor) (this.getHibernateTemplate().findByCriteria(criteria).get(0));
 	}
 	
-	@SuppressWarnings("unchecked")
-	public List<Proveedor> findProveedorByIDMenu(Integer menuId){
+	
+	public Proveedor findProveedorByIDMenu(Integer menuId){
 		HibernateTemplate template = getHibernateTemplate();
-		return (List<Proveedor>) template.execute(new HibernateCallback<Object>() {
+		return (Proveedor) template.execute(new HibernateCallback<Object>() {
 
 			public Object doInHibernate(Session session) throws HibernateException {
-				Query query = session.createQuery("FROM Menu WHERE id =" + menuId);
 				
+				// Acá obtengo el servicio
+				Criteria c = session.createCriteria(Servicio.class, "servicio");
+				c.createAlias("servicio.menus", "menu");
+				c.add(Restrictions.eq("menu.id", menuId));
 				
-				//Query query = session.createQuery("From Menu where idMenu = " + id);
+				Servicio servicio = (Servicio) c.uniqueResult();
 				
+				////////////////////////////////////////////////////////////////
 				
+				Criteria cProveedor = session.createCriteria(Proveedor.class, "proveedor");
+				cProveedor.add(Restrictions.eq("proveedor.servicio", servicio));
 				
-				// (FROM Menu WHERE mid idMenu =" + menuId + ")");
-				return query.list();
+				return cProveedor.uniqueResult();
+				
 			}
 		});
 		
