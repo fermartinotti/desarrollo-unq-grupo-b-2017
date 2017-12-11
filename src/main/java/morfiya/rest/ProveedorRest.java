@@ -19,8 +19,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import morfiya.adapters.MenuGsonTypeAdapter;
-import morfiya.domain.Menu;
-import morfiya.domain.Proveedor;
+import morfiya.domain.*;
 import morfiya.services.ProveedorService;
 import morfiya.updates.ProveedorUpdate;
 
@@ -206,5 +205,20 @@ public class ProveedorRest {
 	    }
 	 
 	  }  
+	 
+	 @GET
+		@Path("/searchProveedor/{idMenu}")
+	 @Produces("application/json")
+	 	public Response getProveedorByIDMenu(@PathParam("idMenu") Integer idMenu) {
+			try {
+				Proveedor proveedor = service.findProveedorByIDMenu(idMenu);
+				return Response.ok(proveedor).build();
+			}
+
+			catch (Exception e) {
+				return Response.serverError().entity(e.getMessage()).build();
+			}
+		}
+	 
 	 
 }

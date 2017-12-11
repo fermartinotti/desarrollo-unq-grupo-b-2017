@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import morfiya.domain.Proveedor;
+import morfiya.domain.*;
 import morfiya.repositories.ProveedorDAO;
 
 public class ProveedorService extends GenericService<Proveedor> {
@@ -47,5 +47,9 @@ public class ProveedorService extends GenericService<Proveedor> {
 		getRepository().deleteById(id);
 	}
 
+	@Transactional
+	public Proveedor findProveedorByIDMenu(Integer idMenu){
+		return ((ProveedorDAO) getRepository()).findProveedorByIDMenu(idMenu);
+	}
 
 }
