@@ -56,6 +56,7 @@ public class ServicioRest {
 
 	@POST
 	@Path("/create")
+	@Produces("application/json")
 	public Response createServicio(String servicioJson) {
 		Gson gson = new GsonBuilder().registerTypeAdapter(Servicio.class, new ServicioGsonTypeAdapter()).create();
 

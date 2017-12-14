@@ -102,6 +102,7 @@ public class ClienteRest {
 
 	@POST
 	@Path("/create")
+	@Produces("application/json")
 	public Response createCliente(String clienteJson) {
 		Gson gson = new Gson();
 		Cliente cliente = gson.fromJson(clienteJson, Cliente.class);

@@ -202,6 +202,8 @@
     	<property name="pedidoDAO" ref="pedidoDAO"/>
     	<property name="clienteDAO" ref="clienteDAO"/>
     	<property name="proveedorDAO" ref="proveedorDAO"/>
+    	<property name="menuDAO" ref="menuDAO"/>
+    	
     	
     </bean>
 </beans>

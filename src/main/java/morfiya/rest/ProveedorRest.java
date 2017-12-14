@@ -103,6 +103,7 @@ public class ProveedorRest {
 
 	@POST
 	@Path("/create")
+	@Produces("application/json")
 	public Response createProveedor(String proveedorJson) {
 		Gson gson = new Gson();
 		Proveedor proveedor = gson.fromJson(proveedorJson, Proveedor.class);
