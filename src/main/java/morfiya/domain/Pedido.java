@@ -4,7 +4,10 @@ import java.time.LocalDate;
 
 import morfiya.exceptions.DatoInvalidoException;
 
-public class Pedido {
+public class Pedido extends Entity {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private LocalDate fechaDeEntrega;
 	private LocalDate fechaCompra = LocalDate.now();
 	

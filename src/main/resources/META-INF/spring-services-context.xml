@@ -29,7 +29,7 @@ http://www.springframework.org/schema/aop/spring-aop-2.5.xsd"
 
 	<bean id="menuRest" class="morfiya.rest.MenuRest">
 		<property name="service" ref="menuService" />
-		<property name="compraService" ref="CompraService" />
+		<property name="compraService" ref="compraService" />
 <!-- 		<property name="serviceS" ref="servicioService" /> -->
 	</bean>
 

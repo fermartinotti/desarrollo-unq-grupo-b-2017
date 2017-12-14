@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field"
+	default-cascade="save-update">
+	<class name="morfiya.domain.Pedido">
+		<id column="ID" name="id">
+			<generator class="native" />
+		</id>
+		
+		<property name="descripcion" />
+		<property name="puntuacion" type="java.lang.Integer"/>
+		<property name="fechaDeEntrega"/>
+		<property name="fechaCompra"/>
+		<many-to-one name="proveedor" class="morfiya.domain.Proveedor" />
+		<many-to-one name="cliente" class="morfiya.domain.Cliente" />
+		<many-to-one name="menu" class="morfiya.domain.Menu"/>
+		<property name="estadoPuntuacion">
+		   <type name="org.hibernate.type.EnumType"> 
+		      <param name="enumClass">morfiya.domain.EstadoPuntuacion</param> 
+		      <param name="useNamed">true</param>
+		   </type> 
+		</property>
+
+
+	</class>
+</hibernate-mapping>
