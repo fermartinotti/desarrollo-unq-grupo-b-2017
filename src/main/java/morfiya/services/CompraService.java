@@ -76,11 +76,11 @@ public class CompraService extends GenericService<Pedido>{
 			try{
 				
 				cliente.retirarCreditos(menu.getPrecio() * pedido.getCantMenusPedidos());
-				//clienteDAO.update(cliente);
+				clienteDAO.update(cliente);
 				proveedor.cargarCreditoNoDisponible(menu.getPrecio() * pedido.getCantMenusPedidos());
 				proveedorDAO.update(proveedor);
 				
-				//pedidoDAO.save(pedido); 
+				pedidoDAO.save(pedido); 
 				EmailSender.sendEmail(cliente, "Email pruebas");
 				
 			}catch (Exception e) {
