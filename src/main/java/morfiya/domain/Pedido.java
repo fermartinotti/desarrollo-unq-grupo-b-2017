@@ -19,18 +19,17 @@ public class Pedido extends Entity {
 	Cliente cliente;
 	Menu menu;
 	String	descripcion;
-	Integer cantMenusPedidos;
+	Integer cantMenusPedidos = 0;
 	EstadoPuntuacion estadoPuntuacion = EstadoPuntuacion.PENDIENTE;
 	
 
-	public Pedido(LocalDate fechaDeEntrega, String descripcion, Menu menu, Cliente cliente, Proveedor proveedor, Integer cantMenusPedidos) {
+	public Pedido(LocalDate fechaDeEntrega, String descripcion, Menu menu, Cliente cliente, Proveedor proveedor) {
 		super();
 		this.fechaDeEntrega = fechaDeEntrega;
 		this.menu = menu;
 		this.cliente = cliente;
 		this.proveedor = proveedor;
-		this.descripcion = descripcion; 
-		this.cantMenusPedidos = cantMenusPedidos;
+		this.descripcion = descripcion;
 	}
 	
 	public Proveedor getProveedor() {

@@ -22,18 +22,18 @@ public class Sistema {
 		pedidos.add(pedido);
 	}
 	
-	public void comprar(Menu menu, Integer cantidad, LocalDate fechaDeEntrega, Cliente cliente, String descripcion, Proveedor proveedor) {
-		if (puedeComprar(menu, cliente, fechaDeEntrega)){ 
-			try{
-				cliente.retirarCreditos(menu.getPrecio() * cantidad);
-				proveedor.cargarCreditoNoDisponible(menu.getPrecio() * cantidad);
-				//calcular tiempo de entrega (RELEASE 2)
-				Pedido pedido = new Pedido(fechaDeEntrega, descripcion,menu, cliente);
-				pedidos.add(pedido); // Futuro save de un servicio a la DB.
-				EmailSender.sendEmail(cliente, descripcion);
-			}catch (Exception e) {}
-		}
-	}
+//	public void comprar(Menu menu, Integer cantidad, LocalDate fechaDeEntrega, Cliente cliente, String descripcion, Proveedor proveedor) {
+//		if (puedeComprar(menu, cliente, fechaDeEntrega)){ 
+//			try{
+//				cliente.retirarCreditos(menu.getPrecio() * cantidad);
+//				proveedor.cargarCreditoNoDisponible(menu.getPrecio() * cantidad);
+//				//calcular tiempo de entrega (RELEASE 2)
+//				Pedido pedido = new Pedido(fechaDeEntrega, descripcion,menu, cliente);
+//				pedidos.add(pedido); // Futuro save de un servicio a la DB.
+//				EmailSender.sendEmail(cliente, descripcion);
+//			}catch (Exception e) {}
+//		}
+//	}
 
 	public Boolean puedeComprar(Menu menu, Cliente cliente, LocalDate fechaDeEntrega){
 		return (cantDeVentasNoSuperada(menu) && cliente.puedeComprar() && esFechaValida(fechaDeEntrega));
