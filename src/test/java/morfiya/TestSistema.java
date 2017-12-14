@@ -121,7 +121,7 @@ public class TestSistema {
 	@Test
 	public void testAgregarPedido() {
 		Sistema sistema = new Sistema();
-		Pedido pedido = new Pedido(null, null, null, null);
+		Pedido pedido = new Pedido(null, null, null, null, null);
 		
 		sistema.agregarPedido(pedido);
 		assertEquals(1, sistema.getPedidos().size());
