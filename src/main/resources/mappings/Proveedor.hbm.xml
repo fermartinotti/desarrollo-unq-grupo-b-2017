@@ -12,7 +12,8 @@
 		<property name="creditos" />
 		<property name="email"/>
 		<property name="creditosNoDisponibles" />
-		<many-to-one name="servicio" class="morfiya.domain.Servicio" />
+		<!-- <many-to-one name="propertyName"  (1) column="column_name"  (2) class="ClassName"  (3) cascade="cascade_style"  (4) fetch="join|select"  (5) update="true|false"  (6) insert="true|false"  (6) property-ref="propertyNameFromAssociatedClass"  (7) access="field|property|ClassName"  (8) unique="true|false"  (9) not-null="true|false"  (10) optimistic-lock="true|false"  (11) lazy="proxy|no-proxy|false"  (12) not-found="ignore|exception"  (13) entity-name="EntityName"  (14) formula="arbitrary SQL expression"  (15) node="element-name|@attribute-name|element/@attribute|." embed-xml="true|false" index="index_name" unique_key="unique_key_id" foreign-key="foreign_key_name" />     --> 
+    	<many-to-one name="servicio" class="morfiya.domain.Servicio" lazy="false"/> 
 		<property name="puedeVender">
 		   <type name="org.hibernate.type.EnumType"> 
 		      <param name="enumClass">morfiya.domain.Habilitacion</param> 
