@@ -19,6 +19,7 @@ import com.google.gson.GsonBuilder;
 
 import morfiya.adapters.MenuGsonTypeAdapter;
 import morfiya.adapters.MenuGsonTypeAdapterUpdate;
+import morfiya.adapters.PedidoGsonTypeAdapter;
 import morfiya.domain.Menu;
 import morfiya.domain.Pedido;
 import morfiya.exceptions.DatoInvalidoException;
@@ -155,9 +156,11 @@ public class MenuRest {
 	@Path("/comprar/{cantidad}")
 	@Produces("application/json")
 	public Response crearPedido(@PathParam("cantidad") final Integer cantidad, String pedidoJson) {
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().registerTypeAdapter(Pedido.class, new PedidoGsonTypeAdapter()).create();
 		
 		Pedido pedido = gson.fromJson(pedidoJson, Pedido.class);
+//		Gson gson = new Gson();	
+//		Pedido pedido = gson.fromJson(pedidoJson, Pedido.class);
 		
 //		Date date = null;
 //		
@@ -212,7 +215,6 @@ public class MenuRest {
 		}
 
 	}
-
 
 	@GET
 	@Path("/{id}")
