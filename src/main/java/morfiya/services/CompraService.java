@@ -82,17 +82,18 @@ public class CompraService extends GenericService<Pedido>{
 		
 		// Esto es solo para probar
 		
-		cliente.cargarCredito(2000.00);
+		cliente.cargarCredito(50000.00);
 		proveedor.cargarCreditoNoDisponible(2000.00);
 		
 		
 		if (puedeComprar(menu, cliente, cantidad))
 		{ 
 			try{
+				Double precioFinalMenu = ((Double) menu.getPrecio() * cantidad) - (evaluarDiferenciaDinero(menu, cantidad) * cantidad);
 				
-				cliente.retirarCreditos((Double) menu.getPrecio() * cantidad);
+				cliente.retirarCreditos(precioFinalMenu);
 				clienteDAO.update(cliente);
-				proveedor.cargarCreditoNoDisponible((Double) menu.getPrecio() * cantidad);
+				proveedor.cargarCreditoNoDisponible(precioFinalMenu);
 				proveedorDAO.update(proveedor);
 				
 				pedidoDAO.save(pedido); 
@@ -102,6 +103,18 @@ public class CompraService extends GenericService<Pedido>{
 				
 			}
 		}
+	}
+	
+	@Transactional
+	public Double evaluarDiferenciaDinero(Menu menu, Integer cantVendidos) {
+
+		if(cantVendidos >= menu.getCantidadMinima() && cantVendidos < menu.getCantidadMinima2()) {
+			return menu.getPrecio() - menu.getPrecioCantidadMinima();
+		}
+		if(cantVendidos >= menu.getCantidadMinima2() ) {
+			return menu.getPrecio() - menu.getPrecioCantidadMinima2();
+		}
+		return 0.0;
 	}
 	
 	@Transactional
