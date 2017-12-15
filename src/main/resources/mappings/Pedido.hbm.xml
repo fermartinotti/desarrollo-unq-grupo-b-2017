@@ -10,6 +10,7 @@
 		
 		<property name="descripcion" />
 		<property name="puntuacion" type="java.lang.Integer"/>
+		<property name="cantMenusPedidos" type="java.lang.Integer"/>
 		<property name="fechaDeEntrega"/>
 		<property name="fechaCompra"/>
 		<many-to-one name="proveedor" class="morfiya.domain.Proveedor" />

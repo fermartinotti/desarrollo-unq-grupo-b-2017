@@ -198,10 +198,12 @@
     </bean>
 
 
-   <bean id="compraService" class="morfiya.services.CompraService">
+   <bean id="CompraService" class="morfiya.services.CompraService">
     	<property name="pedidoDAO" ref="pedidoDAO"/>
     	<property name="clienteDAO" ref="clienteDAO"/>
     	<property name="proveedorDAO" ref="proveedorDAO"/>
+    	<property name="menuDAO" ref="menuDAO"/>
+    	
     	
     </bean>
 </beans>

@@ -1,9 +1,5 @@
 package morfiya.rest;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -23,9 +19,8 @@ import com.google.gson.GsonBuilder;
 
 import morfiya.adapters.MenuGsonTypeAdapter;
 import morfiya.adapters.MenuGsonTypeAdapterUpdate;
-import morfiya.domain.Cliente;
 import morfiya.domain.Menu;
-import morfiya.domain.Proveedor;
+import morfiya.domain.Pedido;
 import morfiya.exceptions.DatoInvalidoException;
 import morfiya.services.CompraService;
 import morfiya.services.MenuService;
@@ -137,25 +132,23 @@ public class MenuRest {
 		}
 	}
 	
-	@PUT
+	@POST
 	@Path("/comprar")
 	@Produces("application/json")
-	public Response crearPedido(String proveedorJson, String clienteJson, String menuJson, String fechaJson, String descripcion, Integer cantidad) {
+	public Response crearPedido(String pedidoJson) {
 		Gson gson = new Gson();
 		
-		Cliente cliente = gson.fromJson(clienteJson, Cliente.class);
-		Proveedor proveedor = gson.fromJson(proveedorJson, Proveedor.class);
-		Menu menu = gson.fromJson(menuJson, Menu.class);
+		Pedido pedido = gson.fromJson(pedidoJson, Pedido.class);
 		
-		Date date = null;
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy, hh:mm:ss a");
+//		Date date = null;
+//		
+//		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy, hh:mm:ss a");
 
 		try {
-			date = sdf.parse(fechaJson);
-			LocalDate localdate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//			date = sdf.parse(fechaJson);
+//			LocalDate localdate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 			
-			compraService.comprar(menu, cantidad, localdate, cliente, descripcion, proveedor);
+			compraService.comprar(pedido);
 			
 			
 			return Response.ok().build();
@@ -165,6 +158,24 @@ public class MenuRest {
 
 	}
 	
+	@POST
+	@Path("/create")
+	@Produces("application/json")
+	public Response createMenu(String menuJson) {
+		Gson gson = new GsonBuilder().registerTypeAdapter(Menu.class, new MenuGsonTypeAdapter()).create();
+
+		ObjectMapper mapper = new ObjectMapper();
+		ObjectNode objectNode1 = mapper.createObjectNode();
+
+		try {
+			Menu menu = gson.fromJson(menuJson, Menu.class);
+			service.crearMenu(menu);
+			return Response.ok().build();
+		} catch (DatoInvalidoException e) {
+			objectNode1.put("error", e.getMessage());
+			return Response.status(Response.Status.BAD_REQUEST).entity(objectNode1.toString()).build();
+		}
+	}
 	
 	@PUT
 	@Path("/edit")
@@ -183,23 +194,6 @@ public class MenuRest {
 
 	}
 
-	@POST
-	@Path("/create")
-	public Response createMenu(String menuJson) {
-		Gson gson = new GsonBuilder().registerTypeAdapter(Menu.class, new MenuGsonTypeAdapter()).create();
-
-		ObjectMapper mapper = new ObjectMapper();
-		ObjectNode objectNode1 = mapper.createObjectNode();
-
-		try {
-			Menu menu = gson.fromJson(menuJson, Menu.class);
-			service.crearMenu(menu);
-			return Response.ok().build();
-		} catch (DatoInvalidoException e) {
-			objectNode1.put("error", e.getMessage());
-			return Response.status(Response.Status.BAD_REQUEST).entity(objectNode1.toString()).build();
-		}
-	}
 
 	@GET
 	@Path("/{id}")

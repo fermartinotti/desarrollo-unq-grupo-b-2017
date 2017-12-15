@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import morfiya.exceptions.DatoInvalidoException;
 
 public class Pedido extends Entity {
-	
+
 	private static final long serialVersionUID = 1L;
 	
 	private LocalDate fechaDeEntrega;
@@ -19,14 +19,17 @@ public class Pedido extends Entity {
 	Cliente cliente;
 	Menu menu;
 	String	descripcion;
+	Integer cantMenusPedidos = 0;
 	EstadoPuntuacion estadoPuntuacion = EstadoPuntuacion.PENDIENTE;
 	
-	public Pedido(LocalDate fechaDeEntrega, String descripcion, Menu menu, Cliente cliente) {
+
+	public Pedido(LocalDate fechaDeEntrega, String descripcion, Menu menu, Cliente cliente, Proveedor proveedor) {
 		super();
 		this.fechaDeEntrega = fechaDeEntrega;
 		this.menu = menu;
 		this.cliente = cliente;
-		this.descripcion = descripcion; 
+		this.proveedor = proveedor;
+		this.descripcion = descripcion;
 	}
 	
 	public Proveedor getProveedor() {
@@ -73,6 +76,14 @@ public class Pedido extends Entity {
 	
 	public LocalDate getFechaCompra() {
 		return fechaCompra;
+	}
+	
+	public Integer getCantMenusPedidos() {
+		return cantMenusPedidos;
+	}
+
+	public void setCantMenusPedidos(Integer cantMenusPedidos) {
+		this.cantMenusPedidos = cantMenusPedidos;
 	}
 	
 	public void puntuar(Integer valor) throws DatoInvalidoException {

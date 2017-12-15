@@ -12,6 +12,7 @@ import morfiya.domain.Menu;
 import morfiya.domain.Pedido;
 import morfiya.domain.Proveedor;
 import morfiya.repositories.ClienteDAO;
+import morfiya.repositories.MenuDAO;
 import morfiya.repositories.PedidoDAO;
 import morfiya.repositories.ProveedorDAO;
 
@@ -19,8 +20,20 @@ public class CompraService extends GenericService<Pedido>{
 	private static final long serialVersionUID = 1L;
 	ClienteDAO clienteDAO;
 	ProveedorDAO proveedorDAO;
+	MenuDAO menuDAO;
 	PedidoDAO pedidoDAO;
 	
+	
+	@Transactional
+	public MenuDAO getMenuDAO() {
+		return menuDAO;
+	}
+	
+	@Transactional
+	public void setMenuDAO(MenuDAO menuDAO) {
+		this.menuDAO = menuDAO;
+	}
+
 	@Transactional
 	public ClienteDAO getClienteDAO() {
 		return clienteDAO;
@@ -52,18 +65,23 @@ public class CompraService extends GenericService<Pedido>{
 	}
 
 	@Transactional
-	public void comprar(Menu menu, Integer cantidad, LocalDate fechaDeEntrega, Cliente cliente, String descripcion, Proveedor proveedor) {
-		if (puedeComprar(menu, cliente, fechaDeEntrega))
+	public void comprar(Pedido pedido) {
+		Cliente cliente = clienteDAO.findById(pedido.getCliente().getId());
+		Proveedor proveedor = proveedorDAO.findById(pedido.getProveedor().getId());
+		Menu menu = menuDAO.findById(pedido.getMenu().getId());
+		
+		
+		if (puedeComprar(menu, cliente))
 		{ 
 			try{
 				
-				cliente.retirarCreditos(menu.getPrecio() * cantidad);
+				cliente.retirarCreditos(menu.getPrecio() * pedido.getCantMenusPedidos());
 				clienteDAO.update(cliente);
-				proveedor.cargarCreditoNoDisponible(menu.getPrecio() * cantidad);
+				proveedor.cargarCreditoNoDisponible(menu.getPrecio() * pedido.getCantMenusPedidos());
 				proveedorDAO.update(proveedor);
-				Pedido pedido = new Pedido(fechaDeEntrega, descripcion,menu, cliente);
+				
 				pedidoDAO.save(pedido); 
-				EmailSender.sendEmail(cliente, descripcion);
+				EmailSender.sendEmail(cliente, "Email pruebas");
 				
 			}catch (Exception e) {
 				
@@ -72,15 +90,16 @@ public class CompraService extends GenericService<Pedido>{
 	}
 	
 	@Transactional
-	public Boolean puedeComprar(Menu menu, Cliente cliente, LocalDate fechaDeEntrega){
-		return (cantDeVentasNoSuperada(menu) && cliente.puedeComprar() && esFechaValida(fechaDeEntrega));
+	public Boolean puedeComprar(Menu menu, Cliente cliente){
+		return (cantDeVentasNoSuperada(menu) && cliente.puedeComprar());
 	}
 	
 	@Transactional
 	public Boolean cantDeVentasNoSuperada(Menu menu){
 		
-		List<Pedido> pedidos = pedidoDAO.getCantDePedidosPorMenu(menu);
-		return (pedidos.size() < menu.getCantidadMaxVtasPorDia());
+//		List<Pedido> pedidos = pedidoDAO.getCantDePedidosPorMenu(menu);
+//		return (pedidos.size() < menu.getCantidadMaxVtasPorDia());
+		return (menu.getCantidadVendidos() < menu.getCantidadMaxVtasPorDia());
 	}
 	
 	@Transactional
