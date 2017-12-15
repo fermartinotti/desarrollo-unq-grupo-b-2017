@@ -12,24 +12,18 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 
 import morfiya.domain.Menu;
 import morfiya.domain.Pedido;
-import morfiya.domain.Proveedor;
 
 public class PedidoDAO extends HibernateGenericDAO<Pedido>{
 
 	private static final long serialVersionUID = 1L;
 
-	@Override
-	public List<Pedido> getAllByPage(Integer pageSize, Integer pageNumber) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	protected Class<Pedido> getDomainClass() {
-		// TODO Auto-generated method stub
-		return null;
+		return Pedido.class;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Pedido> getCantDePedidosPorMenu(final Menu menu){
 		HibernateTemplate template = getHibernateTemplate();	
 		DetachedCriteria criteria = DetachedCriteria.forClass(Pedido.class);
@@ -37,5 +31,21 @@ public class PedidoDAO extends HibernateGenericDAO<Pedido>{
 
 		return (List<Pedido>) (this.getHibernateTemplate().findByCriteria(criteria));
 		
+	}
+	
+	// Con paginacion
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Pedido> getAllByPage(final Integer pageSize, final Integer pageNumber) {
+		HibernateTemplate template = getHibernateTemplate();
+		return (List<Pedido>) template.execute(new HibernateCallback<Object>() {
+
+			public Object doInHibernate(Session session) throws HibernateException {
+				Query query = session.createQuery("from Pedido");
+				query.setMaxResults(pageSize);
+				query.setFirstResult(pageSize * (pageNumber - 1));
+				return query.list();
+			}
+		});
 	}
 }

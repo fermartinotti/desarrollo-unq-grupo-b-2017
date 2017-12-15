@@ -31,7 +31,6 @@ public class MenuRest {
 
 	MenuService service;
 	CompraService compraService;
-	// ServicioService servicioS;
 
 	private final Integer pageSize = 10;
 
@@ -67,6 +66,26 @@ public class MenuRest {
 	@Produces("application/json")
 	public Response getAllMenus() {
 		List<Menu> menus = service.getAll();
+
+		return Response.ok(menus).build();
+	}
+	
+	// CON paginacion
+	@GET
+	@Path("/getAllPedidos/{pageNumber}")
+	@Produces("application/json")
+	public Response getAllPedidosPagination(@PathParam("pageNumber") final String pageNumber) {
+		List<Pedido> pedidos = compraService.getAllByPage(pageSize, Integer.parseInt(pageNumber));
+
+		return Response.ok(pedidos).build();
+	}
+	
+	// Sin paginacion
+	@GET
+	@Path("/getAllPedidos")
+	@Produces("application/json")
+	public Response getAllPedidos() {
+		List<Pedido> menus = compraService.getAll();
 
 		return Response.ok(menus).build();
 	}
@@ -133,9 +152,9 @@ public class MenuRest {
 	}
 	
 	@POST
-	@Path("/comprar")
+	@Path("/comprar/{cantidad}")
 	@Produces("application/json")
-	public Response crearPedido(String pedidoJson) {
+	public Response crearPedido(@PathParam("cantidad") final Integer cantidad, String pedidoJson) {
 		Gson gson = new Gson();
 		
 		Pedido pedido = gson.fromJson(pedidoJson, Pedido.class);
@@ -148,7 +167,7 @@ public class MenuRest {
 //			date = sdf.parse(fechaJson);
 //			LocalDate localdate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 			
-			compraService.comprar(pedido);
+			compraService.comprar(pedido, cantidad);
 			
 			
 			return Response.ok().build();

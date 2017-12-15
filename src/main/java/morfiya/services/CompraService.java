@@ -63,21 +63,36 @@ public class CompraService extends GenericService<Pedido>{
 	public void setPedidoDAO(PedidoDAO pedidoDAO) {
 		this.pedidoDAO = pedidoDAO;
 	}
+	
+	@Transactional
+	public List<Pedido> getAllByPage(final int pageSize, final int pageNumber){
+		return pedidoDAO.getAllByPage(pageSize, pageNumber);
+	}
+	
+	@Transactional
+	public List<Pedido> getAll() {
+		return pedidoDAO.findAll();
+	}
 
 	@Transactional
-	public void comprar(Pedido pedido) {
-		Cliente cliente = clienteDAO.findById(pedido.getCliente().getId());
-		Proveedor proveedor = proveedorDAO.findById(pedido.getProveedor().getId());
-		Menu menu = menuDAO.findById(pedido.getMenu().getId());
+	public void comprar(Pedido pedido, Integer cantidad) {
+		Cliente cliente = clienteDAO.findByEmail(pedido.getCliente().getEmail());
+		Proveedor proveedor = proveedorDAO.findByEmail(pedido.getProveedor().getEmail());
+		Menu menu = menuDAO.findMenuByName(pedido.getMenu().getNombre());
+		
+		// Esto es solo para probar
+		
+		cliente.cargarCredito(2000.00);
+		proveedor.cargarCreditoNoDisponible(2000.00);
 		
 		
-		if (puedeComprar(menu, cliente))
+		if (puedeComprar(menu, cliente, cantidad))
 		{ 
 			try{
 				
-				cliente.retirarCreditos(menu.getPrecio() * pedido.getCantMenusPedidos());
+				cliente.retirarCreditos((Double) menu.getPrecio() * cantidad);
 				clienteDAO.update(cliente);
-				proveedor.cargarCreditoNoDisponible(menu.getPrecio() * pedido.getCantMenusPedidos());
+				proveedor.cargarCreditoNoDisponible((Double) menu.getPrecio() * cantidad);
 				proveedorDAO.update(proveedor);
 				
 				pedidoDAO.save(pedido); 
@@ -90,16 +105,16 @@ public class CompraService extends GenericService<Pedido>{
 	}
 	
 	@Transactional
-	public Boolean puedeComprar(Menu menu, Cliente cliente){
-		return (cantDeVentasNoSuperada(menu) && cliente.puedeComprar());
+	public Boolean puedeComprar(Menu menu, Cliente cliente, Integer cantidad){
+		return (cantDeVentasNoSuperada(menu, cantidad) && cliente.puedeComprar() && cliente.getCreditos() >= (menu.getPrecio() * cantidad));
 	}
 	
 	@Transactional
-	public Boolean cantDeVentasNoSuperada(Menu menu){
+	public Boolean cantDeVentasNoSuperada(Menu menu, Integer cantidad){
 		
 //		List<Pedido> pedidos = pedidoDAO.getCantDePedidosPorMenu(menu);
 //		return (pedidos.size() < menu.getCantidadMaxVtasPorDia());
-		return (menu.getCantidadVendidos() < menu.getCantidadMaxVtasPorDia());
+		return (cantidad < menu.getCantidadMaxVtasPorDia());
 	}
 	
 	@Transactional

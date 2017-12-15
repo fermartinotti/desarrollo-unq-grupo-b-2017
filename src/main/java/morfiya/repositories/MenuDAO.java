@@ -6,10 +6,13 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
 import morfiya.domain.Menu;
+import morfiya.domain.Proveedor;
 
 public final class MenuDAO extends HibernateGenericDAO<Menu> {
 
@@ -52,6 +55,14 @@ public final class MenuDAO extends HibernateGenericDAO<Menu> {
 				return query.list();
 			}
 		});
+	}
+	
+	// Busca por nombre exacto
+	public Menu findMenuByName(final Serializable nombre) {
+			DetachedCriteria criteria = DetachedCriteria.forClass(Menu.class);
+			criteria.add(Restrictions.eq("nombre", nombre));
+
+			return (Menu) (this.getHibernateTemplate().findByCriteria(criteria).get(0));
 	}
 
 	// Busca por substring (con paginacion)

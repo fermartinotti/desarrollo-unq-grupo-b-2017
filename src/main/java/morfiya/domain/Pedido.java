@@ -22,6 +22,10 @@ public class Pedido extends Entity {
 	Integer cantMenusPedidos = 0;
 	EstadoPuntuacion estadoPuntuacion = EstadoPuntuacion.PENDIENTE;
 	
+	
+	public Pedido() {
+		super();
+	}
 
 	public Pedido(LocalDate fechaDeEntrega, String descripcion, Menu menu, Cliente cliente, Proveedor proveedor) {
 		super();
