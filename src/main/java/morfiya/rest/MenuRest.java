@@ -159,21 +159,12 @@ public class MenuRest {
 		Gson gson = new GsonBuilder().registerTypeAdapter(Pedido.class, new PedidoGsonTypeAdapter()).create();
 		
 		Pedido pedido = gson.fromJson(pedidoJson, Pedido.class);
-//		Gson gson = new Gson();	
-//		Pedido pedido = gson.fromJson(pedidoJson, Pedido.class);
-		
-//		Date date = null;
-//		
-//		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy, hh:mm:ss a");
 
 		try {
-//			date = sdf.parse(fechaJson);
-//			LocalDate localdate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-			
 			compraService.comprar(pedido, cantidad);
 			
-			
 			return Response.ok().build();
+			
 		} catch (Exception e) {
 			return Response.serverError().entity(e.getMessage()).build();
 		}

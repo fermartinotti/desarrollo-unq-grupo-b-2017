@@ -34,7 +34,7 @@ public class MenuGsonTypeAdapter implements JsonDeserializer<Menu> {
 				categoria, 
 				jobject.get("valorDelivery").getAsDouble(), 
 				jobject.get("fechaVigenciaDesde").getAsString(), 
-				jobject.get("fechaVigenciaDesde").getAsString(), 
+				jobject.get("fechaVigenciaHasta").getAsString(), 
 				//null,
 				//hEntregas,
 				//henvios,

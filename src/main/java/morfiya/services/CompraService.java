@@ -86,8 +86,8 @@ public class CompraService extends GenericService<Pedido>{
 		proveedor.cargarCreditoNoDisponible(2000.00);
 		////////////////////////////////////////////////
 		
-		//&& esFechaValida(pedido.getFechaDeEntrega())
-		if (puedeComprar(menu, cliente, cantidad) )
+		
+		if (puedeComprar(menu, cliente, cantidad) &&  estaVigenteMenu(pedido.getFechaDeEntrega(), menu.getFechaVigenciaDesde(), menu.getFechaVigenciaHasta()))
 		{ 
 			try{
 				Double precioFinalMenu = ((Double) menu.getPrecio() * cantidad) - (evaluarDiferenciaDinero(menu, cantidad) * cantidad);
@@ -125,11 +125,17 @@ public class CompraService extends GenericService<Pedido>{
 	
 	@Transactional
 	public Boolean cantDeVentasNoSuperada(Menu menu, Integer cantidad){
-		
-//		List<Pedido> pedidos = pedidoDAO.getCantDePedidosPorMenu(menu);
-//		return (pedidos.size() < menu.getCantidadMaxVtasPorDia());
 		return (cantidad < menu.getCantidadMaxVtasPorDia());
 	}
+	
+	@Transactional
+	public Boolean estaVigenteMenu(LocalDate fechaEntrega, LocalDate fechaD, LocalDate fechaH){
+		System.out.println(fechaD);
+		System.out.println(fechaH);
+		System.out.println(fechaEntrega);
+		return (fechaEntrega.isAfter(fechaD) || fechaD.equals(fechaEntrega)) && (fechaEntrega.isBefore(fechaH) || fechaH.equals(fechaEntrega));
+	}
+	
 	
 	@Transactional
 	public Boolean esFechaValida(LocalDate fecha) {
