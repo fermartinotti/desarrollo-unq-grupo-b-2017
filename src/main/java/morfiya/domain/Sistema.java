@@ -40,10 +40,8 @@ public class Sistema {
 	}
 	
 	public Boolean cantDeVentasNoSuperada(Menu menu){
-		// chekea si este menu no supera la cant de ventas maximas por dia.		
-		//ArrayList<Pedido> pedidos = pedidosServicesImpl.getCantDePedidosPorMenu(menu);  ESTA ES LA IMPLEMENTACION REAL
 		return (pedidos.size() < menu.getCantidadMaxVtasPorDia());
-		// En este caso pedidos es TODOS los pedidos, no se realiza el filter ya que es una Query a DB. Se implementa para el prox release.
+		
 	}
 	
 	public Boolean esFechaValida(LocalDate fecha) {

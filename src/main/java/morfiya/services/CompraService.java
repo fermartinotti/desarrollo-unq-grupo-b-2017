@@ -63,21 +63,38 @@ public class CompraService extends GenericService<Pedido>{
 	public void setPedidoDAO(PedidoDAO pedidoDAO) {
 		this.pedidoDAO = pedidoDAO;
 	}
+	
+	@Transactional
+	public List<Pedido> getAllByPage(final int pageSize, final int pageNumber){
+		return pedidoDAO.getAllByPage(pageSize, pageNumber);
+	}
+	
+	@Transactional
+	public List<Pedido> getAll() {
+		return pedidoDAO.findAll();
+	}
 
 	@Transactional
-	public void comprar(Pedido pedido) {
-		Cliente cliente = clienteDAO.findById(pedido.getCliente().getId());
-		Proveedor proveedor = proveedorDAO.findById(pedido.getProveedor().getId());
-		Menu menu = menuDAO.findById(pedido.getMenu().getId());
+	public void comprar(Pedido pedido, Integer cantidad) {
+		Cliente cliente = clienteDAO.findByEmail(pedido.getCliente().getEmail());
+		Proveedor proveedor = proveedorDAO.findByEmail(pedido.getProveedor().getEmail());
+		Menu menu = menuDAO.findMenuByName(pedido.getMenu().getNombre());
+		
+		// Esto es solo para probar
+		////////////////////////////////////////////////
+		cliente.cargarCredito(50000.00);
+		proveedor.cargarCreditoNoDisponible(2000.00);
+		////////////////////////////////////////////////
 		
 		
-		if (puedeComprar(menu, cliente))
+		if (puedeComprar(menu, cliente, cantidad) &&  estaVigenteMenu(pedido.getFechaDeEntrega(), menu.getFechaVigenciaDesde(), menu.getFechaVigenciaHasta()))
 		{ 
 			try{
+				Double precioFinalMenu = ((Double) menu.getPrecio() * cantidad) - (evaluarDiferenciaDinero(menu, cantidad) * cantidad);
 				
-				cliente.retirarCreditos(menu.getPrecio() * pedido.getCantMenusPedidos());
+				cliente.retirarCreditos(precioFinalMenu);
 				clienteDAO.update(cliente);
-				proveedor.cargarCreditoNoDisponible(menu.getPrecio() * pedido.getCantMenusPedidos());
+				proveedor.cargarCreditoNoDisponible(precioFinalMenu);
 				proveedorDAO.update(proveedor);
 				
 				pedidoDAO.save(pedido); 
@@ -90,17 +107,35 @@ public class CompraService extends GenericService<Pedido>{
 	}
 	
 	@Transactional
-	public Boolean puedeComprar(Menu menu, Cliente cliente){
-		return (cantDeVentasNoSuperada(menu) && cliente.puedeComprar());
+	public Double evaluarDiferenciaDinero(Menu menu, Integer cantVendidos) {
+
+		if(cantVendidos >= menu.getCantidadMinima() && cantVendidos < menu.getCantidadMinima2()) {
+			return menu.getPrecio() - menu.getPrecioCantidadMinima();
+		}
+		if(cantVendidos >= menu.getCantidadMinima2() ) {
+			return menu.getPrecio() - menu.getPrecioCantidadMinima2();
+		}
+		return 0.0;
 	}
 	
 	@Transactional
-	public Boolean cantDeVentasNoSuperada(Menu menu){
-		
-//		List<Pedido> pedidos = pedidoDAO.getCantDePedidosPorMenu(menu);
-//		return (pedidos.size() < menu.getCantidadMaxVtasPorDia());
-		return (menu.getCantidadVendidos() < menu.getCantidadMaxVtasPorDia());
+	public Boolean puedeComprar(Menu menu, Cliente cliente, Integer cantidad){
+		return (cantDeVentasNoSuperada(menu, cantidad) && cliente.puedeComprar() && cliente.getCreditos() >= (menu.getPrecio() * cantidad));
 	}
+	
+	@Transactional
+	public Boolean cantDeVentasNoSuperada(Menu menu, Integer cantidad){
+		return (cantidad < menu.getCantidadMaxVtasPorDia());
+	}
+	
+	@Transactional
+	public Boolean estaVigenteMenu(LocalDate fechaEntrega, LocalDate fechaD, LocalDate fechaH){
+		System.out.println(fechaD);
+		System.out.println(fechaH);
+		System.out.println(fechaEntrega);
+		return (fechaEntrega.isAfter(fechaD) || fechaD.equals(fechaEntrega)) && (fechaEntrega.isBefore(fechaH) || fechaH.equals(fechaEntrega));
+	}
+	
 	
 	@Transactional
 	public Boolean esFechaValida(LocalDate fecha) {

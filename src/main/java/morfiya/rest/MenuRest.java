@@ -19,6 +19,7 @@ import com.google.gson.GsonBuilder;
 
 import morfiya.adapters.MenuGsonTypeAdapter;
 import morfiya.adapters.MenuGsonTypeAdapterUpdate;
+import morfiya.adapters.PedidoGsonTypeAdapter;
 import morfiya.domain.Menu;
 import morfiya.domain.Pedido;
 import morfiya.exceptions.DatoInvalidoException;
@@ -31,7 +32,6 @@ public class MenuRest {
 
 	MenuService service;
 	CompraService compraService;
-	// ServicioService servicioS;
 
 	private final Integer pageSize = 10;
 
@@ -67,6 +67,26 @@ public class MenuRest {
 	@Produces("application/json")
 	public Response getAllMenus() {
 		List<Menu> menus = service.getAll();
+
+		return Response.ok(menus).build();
+	}
+	
+	// CON paginacion
+	@GET
+	@Path("/getAllPedidos/{pageNumber}")
+	@Produces("application/json")
+	public Response getAllPedidosPagination(@PathParam("pageNumber") final String pageNumber) {
+		List<Pedido> pedidos = compraService.getAllByPage(pageSize, Integer.parseInt(pageNumber));
+
+		return Response.ok(pedidos).build();
+	}
+	
+	// Sin paginacion
+	@GET
+	@Path("/getAllPedidos")
+	@Produces("application/json")
+	public Response getAllPedidos() {
+		List<Pedido> menus = compraService.getAll();
 
 		return Response.ok(menus).build();
 	}
@@ -133,25 +153,18 @@ public class MenuRest {
 	}
 	
 	@POST
-	@Path("/comprar")
+	@Path("/comprar/{cantidad}")
 	@Produces("application/json")
-	public Response crearPedido(String pedidoJson) {
-		Gson gson = new Gson();
+	public Response crearPedido(@PathParam("cantidad") final Integer cantidad, String pedidoJson) {
+		Gson gson = new GsonBuilder().registerTypeAdapter(Pedido.class, new PedidoGsonTypeAdapter()).create();
 		
 		Pedido pedido = gson.fromJson(pedidoJson, Pedido.class);
-		
-//		Date date = null;
-//		
-//		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy, hh:mm:ss a");
 
 		try {
-//			date = sdf.parse(fechaJson);
-//			LocalDate localdate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-			
-			compraService.comprar(pedido);
-			
+			compraService.comprar(pedido, cantidad);
 			
 			return Response.ok().build();
+			
 		} catch (Exception e) {
 			return Response.serverError().entity(e.getMessage()).build();
 		}
@@ -193,7 +206,6 @@ public class MenuRest {
 		}
 
 	}
-
 
 	@GET
 	@Path("/{id}")

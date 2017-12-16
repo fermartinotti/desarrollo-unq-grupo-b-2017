@@ -3,6 +3,7 @@ package morfiya.domain;
 import java.time.LocalDate;
 
 import morfiya.exceptions.DatoInvalidoException;
+import morfiya.utils.DateFormatter;
 
 public class Pedido extends Entity {
 
@@ -11,9 +12,6 @@ public class Pedido extends Entity {
 	private LocalDate fechaDeEntrega;
 	private LocalDate fechaCompra = LocalDate.now();
 	
-
-	// como almacenamos la hora
-	// Tipo de entrega definir
 	Integer puntuacion=0;
 	Proveedor proveedor;
 	Cliente cliente;
@@ -22,16 +20,29 @@ public class Pedido extends Entity {
 	Integer cantMenusPedidos = 0;
 	EstadoPuntuacion estadoPuntuacion = EstadoPuntuacion.PENDIENTE;
 	
-
-	public Pedido(LocalDate fechaDeEntrega, String descripcion, Menu menu, Cliente cliente, Proveedor proveedor) {
+	
+	public Pedido() {
 		super();
-		this.fechaDeEntrega = fechaDeEntrega;
+	}
+
+	public Pedido(String fechaDeEntrega, String descripcion, Menu menu, 
+			Cliente cliente, Proveedor proveedor) {
+		super();
+		this.setFechaDeEntrega(DateFormatter.formatLocalDate(fechaDeEntrega));
 		this.menu = menu;
 		this.cliente = cliente;
 		this.proveedor = proveedor;
 		this.descripcion = descripcion;
 	}
 	
+	public LocalDate getFechaDeEntrega() {
+		return fechaDeEntrega;
+	}
+
+	public void setFechaDeEntrega(LocalDate fechaDeEntrega) {
+		this.fechaDeEntrega = fechaDeEntrega;
+	}
+
 	public Proveedor getProveedor() {
 		return proveedor;
 	}

@@ -19,7 +19,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import morfiya.adapters.MenuGsonTypeAdapter;
-import morfiya.domain.*;
+import morfiya.adapters.ProveedorGsonTypeAdapter;
+import morfiya.domain.Menu;
+import morfiya.domain.Proveedor;
+import morfiya.exceptions.DatoInvalidoException;
 import morfiya.services.ProveedorService;
 import morfiya.updates.ProveedorUpdate;
 
@@ -105,11 +108,19 @@ public class ProveedorRest {
 	@Path("/create")
 	@Produces("application/json")
 	public Response createProveedor(String proveedorJson) {
-		Gson gson = new Gson();
-		Proveedor proveedor = gson.fromJson(proveedorJson, Proveedor.class);
-		Proveedor newProveedor = service.crearProveedor(proveedor);
+		Gson gson = new GsonBuilder().registerTypeAdapter(Proveedor.class, new ProveedorGsonTypeAdapter()).create();
+		
+		ObjectMapper mapper = new ObjectMapper();
+		ObjectNode objectNode1 = mapper.createObjectNode();
 
-		return Response.ok().entity(newProveedor).build();
+		try {
+			Proveedor proveedor = gson.fromJson(proveedorJson, Proveedor.class);
+			service.crearProveedor(proveedor);
+			return Response.ok().entity(proveedor).build();
+		} catch (DatoInvalidoException e) {
+			objectNode1.put("error", e.getMessage());
+			return Response.status(Response.Status.BAD_REQUEST).entity(objectNode1.toString()).build();
+		}		
 	}
 
 	@PUT
