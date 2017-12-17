@@ -9,6 +9,7 @@ import java.net.URL;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -26,12 +27,13 @@ public class AuthService {
 	
 	private ProveedorDAO proveedorRepository;
 
-
+	@Transactional
 	public AuthProfile getAuthProfile() {
 		AuthProfile authProfile = getProfile();	
 		return authProfile;
 	}
 
+	@Transactional
 	public Proveedor getProveedor() {
 		AuthProfile authProfile = getProfile();		
 		Proveedor proveedor = proveedorRepository.findByEmail(authProfile.getEmail());
@@ -39,6 +41,7 @@ public class AuthService {
 		return proveedor;
 	}
 	
+	@Transactional
 	public Cliente getCliente() {				
 		AuthProfile authProfile = getProfile();				
 		Cliente cliente = clienteRepository.findByEmail(authProfile.getEmail());
@@ -48,7 +51,7 @@ public class AuthService {
 		return cliente;
 	}
 	
-	
+	@Transactional
 	private AuthProfile getProfile() {
 		ServletRequestAttributes sra = (ServletRequestAttributes)RequestContextHolder.getRequestAttributes();
 	    HttpServletRequest request = sra.getRequest();
@@ -97,18 +100,22 @@ public class AuthService {
 		return null;
 	}
 
+	@Transactional
 	public ClienteDAO getClienteRepository() {
 		return clienteRepository;
 	}
 
+	@Transactional
 	public void setClienteRepository(ClienteDAO clienteRepository) {
 		this.clienteRepository = clienteRepository;
 	}
 	
+	@Transactional
 	public ProveedorDAO getProveedorRepository() {
 		return proveedorRepository;
 	}
 
+	@Transactional
 	public void setProveedorRepository(ProveedorDAO proveedorRepository) {
 		this.proveedorRepository = proveedorRepository;
 	}
