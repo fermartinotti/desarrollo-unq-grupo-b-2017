@@ -67,9 +67,6 @@ public class Cliente extends Entity {
 	public Double getCreditos() {
 		return creditos;
 	}
-	public void setCreditos(Double creditos) {
-		this.creditos = creditos;
-	}
 
 	public Habilitacion getEstado() {
 		return puedeComprar;
@@ -116,12 +113,6 @@ public class Cliente extends Entity {
 		this.telefono = telefono;
 		this.direccion = direccion;
 		this.creditos= creditos;
-	}
-
-	public Cliente(String nombre, String email) {
-		super();
-		this.nombre = nombre;
-		this.email = email;
 	}
 
 	@Override

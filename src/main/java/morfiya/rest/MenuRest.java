@@ -167,6 +167,7 @@ public class MenuRest {
 	@Produces("application/json")
 	public Response crearPedido(@PathParam("cantidad") final Integer cantidad, String pedidoJson) {
 		Gson gson = new GsonBuilder().registerTypeAdapter(Pedido.class, new PedidoGsonTypeAdapter()).create();
+		
 		Pedido pedido = gson.fromJson(pedidoJson, Pedido.class);
 	
 		ObjectMapper mapper = new ObjectMapper();
@@ -174,6 +175,7 @@ public class MenuRest {
 
 		try {
 			compraService.comprar(pedido, cantidad);
+			
 			return Response.ok().build();
 			
 		} catch (DatoInvalidoException e) {
@@ -181,6 +183,7 @@ public class MenuRest {
 			objectNode1.put("error", e.getMessage());
 			return Response.status(Response.Status.BAD_REQUEST).entity(objectNode1.toString()).build();
 		}
+
 	}
 	
 	@PUT
@@ -216,8 +219,8 @@ public class MenuRest {
 
 		try {
 			Menu menu = gson.fromJson(menuJson, Menu.class);
-			Menu newMenu = service.crearMenu(menu);
-			return Response.ok().entity(newMenu).build();
+			service.crearMenu(menu);
+			return Response.ok().build();
 		} catch (DatoInvalidoException e) {
 			objectNode1.put("error", e.getMessage());
 			return Response.status(Response.Status.BAD_REQUEST).entity(objectNode1.toString()).build();

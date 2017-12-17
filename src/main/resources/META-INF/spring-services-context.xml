@@ -8,9 +8,10 @@
        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
        http://www.springframework.org/schema/aop  
-       http://www.springframework.org/schema/aop/spring-aop-2.5.xsd"
+http://www.springframework.org/schema/aop/spring-aop-2.5.xsd"
     xmlns:aop="http://www.springframework.org/schema/aop"
-    xmlns:p="http://www.springframework.org/schema/p">
+    xmlns:p="http://www.springframework.org/schema/p"
+       >
 
 	<!-- *************** Cliente *************** -->
 
@@ -29,6 +30,7 @@
 	<bean id="menuRest" class="morfiya.rest.MenuRest">
 		<property name="service" ref="menuService" />
 		<property name="compraService" ref="CompraService" />
+<!-- 		<property name="serviceS" ref="servicioService" /> -->
 	</bean>
 
 	<!-- *************** Servicio *************** -->
@@ -38,8 +40,8 @@
 	</bean>
 	
   
-	<aop:aspectj-autoproxy />
- 	<bean id="auditoria" class="morfiya.utils.Auditoria" />
+<aop:aspectj-autoproxy />
+ <bean id="auditoria" class="morfiya.utils.Auditoria" />
 
 		<!-- *************** FAKE *************** -->
 
