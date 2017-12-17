@@ -93,6 +93,8 @@ public class CompraService extends GenericService<Pedido>{
 		proveedor.cargarCreditoNoDisponible(2000.00);
 		////////////////////////////////////////////////
 		
+		evaluarPuntuacionesDeMenu(menu, proveedor);
+		
 		if (! (puedeComprar(menu, cliente, proveedor, cantidad) &&  estaVigenteMenuYEsDiaDeSemana(pedido.getFechaDeEntrega(), menu.getFechaVigenciaDesde(), menu.getFechaVigenciaHasta()))){
 			throw new DatoInvalidoException("No se puede realizar la compra");
 		}	
@@ -106,7 +108,6 @@ public class CompraService extends GenericService<Pedido>{
 				proveedorDAO.update(proveedor);
 				
 				pedidoDAO.save(pedido);
-				evaluarPuntuacionesDeMenu(menu, proveedor);
 				EmailSender.sendEmail(cliente, "Email pruebas");
 				
 			}catch (Exception e) {}
