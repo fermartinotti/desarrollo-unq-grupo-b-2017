@@ -1,6 +1,5 @@
 package morfiya.services;
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +17,8 @@ public class MenuService extends GenericService<Menu> {
 	}
 
 	@Transactional
-	public void crearMenu(Menu menu) {
-		getRepository().save(menu);
+	public Menu crearMenu(Menu menu) {
+		return getRepository().save(menu);
 	}
 	
 	@Transactional
@@ -32,7 +31,7 @@ public class MenuService extends GenericService<Menu> {
 		return ((MenuDAO)getRepository()).findByName(nombre, pageSize, pageNumber);
 	}
 
-  @Transactional
+    @Transactional
 	public List<Menu> findMenuForNameAndCategory(String nombre, String categoria, final Integer pageSize, final Integer pageNumber) {
 		return ((MenuDAO)getRepository()).findByNameAndCategory(nombre, categoria, pageSize, pageNumber);
 	}
@@ -44,6 +43,7 @@ public class MenuService extends GenericService<Menu> {
 	
 	@Transactional
 	public Menu findByID(Integer id){
+		authService.getCliente();
 		return getRepository().findById(id);
 	}
 	
@@ -52,26 +52,27 @@ public class MenuService extends GenericService<Menu> {
 		getRepository().update(menu);
 	}
 	
-  @Transactional
+    @Transactional
 	public List<Menu> findMenuForLocality(String localidad, Integer pageSize, Integer pageNumber) {
 		return ((MenuDAO)getRepository()).findByLocalidad(localidad, pageSize, pageNumber);
 	}
 
-  @Transactional
+    @Transactional
 	public List<Menu> findByNameAndLocality(String nombre, String localidad, Integer pageSize, Integer pageNumber) {
 		return ((MenuDAO)getRepository()).findByNameAndLocality(nombre, localidad, pageSize, pageNumber);
 	}
 
-  @Transactional
+    @Transactional
 	public List<Menu> findByCategoryAndLocality(String categoria, String localidad, Integer pageSize,
 			Integer pageNumber) {
 		return ((MenuDAO)getRepository()).findByCategoryAndLocality(categoria, localidad, pageSize, pageNumber);
 	}
 
-  @Transactional
+    @Transactional
 	public List<Menu> findByNameCategoryAndLocality(String nombre, String categoria, String localidad, Integer pageSize,
 			Integer pageNumber) {
 		return ((MenuDAO)getRepository()).findByNameCategoryAndLocality(nombre, categoria, localidad, pageSize, pageNumber);
 	}
+
 	
 }

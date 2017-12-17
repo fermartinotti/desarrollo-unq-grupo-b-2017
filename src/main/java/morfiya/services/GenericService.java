@@ -13,6 +13,7 @@ public class GenericService<T> implements Serializable {
     private static final long serialVersionUID = -6540963495078524186L;
 
     private GenericRepository<T> repository;
+	protected AuthService authService;
 
     @Transactional
     public GenericRepository<T> getRepository() {
@@ -43,5 +44,13 @@ public class GenericService<T> implements Serializable {
     public void update(final T object) {
         this.getRepository().update(object);
     }
+     
+  	public AuthService getAuthService() {
+  		return authService;
+  	}
+
+  	public void setAuthService(AuthService authService) {
+  		this.authService = authService;
+  	}
 
 }
