@@ -159,14 +159,19 @@ public class MenuRest {
 		Gson gson = new GsonBuilder().registerTypeAdapter(Pedido.class, new PedidoGsonTypeAdapter()).create();
 		
 		Pedido pedido = gson.fromJson(pedidoJson, Pedido.class);
+	
+		ObjectMapper mapper = new ObjectMapper();
+		ObjectNode objectNode1 = mapper.createObjectNode();
 
 		try {
 			compraService.comprar(pedido, cantidad);
 			
 			return Response.ok().build();
 			
-		} catch (Exception e) {
-			return Response.serverError().entity(e.getMessage()).build();
+		} catch (DatoInvalidoException e) {
+			//return Response.serverError().entity(e.getMessage()).build();
+			objectNode1.put("error", e.getMessage());
+			return Response.status(Response.Status.BAD_REQUEST).entity(objectNode1.toString()).build();
 		}
 
 	}

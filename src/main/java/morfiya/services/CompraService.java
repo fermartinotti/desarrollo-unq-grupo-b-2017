@@ -11,6 +11,7 @@ import morfiya.domain.EmailSender;
 import morfiya.domain.Menu;
 import morfiya.domain.Pedido;
 import morfiya.domain.Proveedor;
+import morfiya.exceptions.DatoInvalidoException;
 import morfiya.repositories.ClienteDAO;
 import morfiya.repositories.MenuDAO;
 import morfiya.repositories.PedidoDAO;
@@ -86,9 +87,9 @@ public class CompraService extends GenericService<Pedido>{
 		proveedor.cargarCreditoNoDisponible(2000.00);
 		////////////////////////////////////////////////
 		
-		
-		if (puedeComprar(menu, cliente, cantidad) &&  estaVigenteMenu(pedido.getFechaDeEntrega(), menu.getFechaVigenciaDesde(), menu.getFechaVigenciaHasta()))
-		{ 
+		if (! (puedeComprar(menu, cliente, cantidad) &&  estaVigenteMenuYEsDiaDeSemana(pedido.getFechaDeEntrega(), menu.getFechaVigenciaDesde(), menu.getFechaVigenciaHasta()))){
+			throw new DatoInvalidoException("No se puede realizar la compra");
+		}	
 			try{
 				Double precioFinalMenu = ((Double) menu.getPrecio() * cantidad) - (evaluarDiferenciaDinero(menu, cantidad) * cantidad);
 				
@@ -100,10 +101,7 @@ public class CompraService extends GenericService<Pedido>{
 				pedidoDAO.save(pedido); 
 				EmailSender.sendEmail(cliente, "Email pruebas");
 				
-			}catch (Exception e) {
-				
-			}
-		}
+			}catch (Exception e) {}
 	}
 	
 	@Transactional
@@ -129,11 +127,13 @@ public class CompraService extends GenericService<Pedido>{
 	}
 	
 	@Transactional
-	public Boolean estaVigenteMenu(LocalDate fechaEntrega, LocalDate fechaD, LocalDate fechaH){
-		System.out.println(fechaD);
-		System.out.println(fechaH);
-		System.out.println(fechaEntrega);
-		return (fechaEntrega.isAfter(fechaD) || fechaD.equals(fechaEntrega)) && (fechaEntrega.isBefore(fechaH) || fechaH.equals(fechaEntrega));
+	public Boolean estaVigenteMenuYEsDiaDeSemana(LocalDate fechaEntrega, LocalDate fechaD, LocalDate fechaH){
+		return (fechaEntrega.isAfter(fechaD) || fechaD.equals(fechaEntrega)) && 
+				(fechaEntrega.isBefore(fechaH) || fechaH.equals(fechaEntrega)) && 
+				(fechaEntrega.getDayOfWeek() != DayOfWeek.SUNDAY && fechaEntrega.getDayOfWeek() != DayOfWeek.SATURDAY);
+	
+		
+	
 	}
 	
 	
