@@ -8,7 +8,7 @@ import morfiya.repositories.ClienteDAO;
 public class ClienteService extends GenericService<Cliente> {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	// Sin paginacion
 	@Transactional
 	public List<Cliente> getAll() {
@@ -44,5 +44,18 @@ public class ClienteService extends GenericService<Cliente> {
 	@Transactional
 	public void deleteCliente(Integer id){
 		getRepository().deleteById(id);
+	}
+
+	public Double getClienteCreditos() {
+		Cliente cliente = authService.getCliente();
+		return cliente.getCreditos();
+	}
+	
+	@Transactional
+	public void cargarCreditosCliente(Double credito) {
+		Cliente cliente = authService.getCliente();
+		Double current = cliente.getCreditos();
+		cliente.setCreditos(current + credito);
+		this.getRepository().update(cliente);
 	}
 }
