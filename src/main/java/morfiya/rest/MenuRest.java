@@ -90,6 +90,16 @@ public class MenuRest {
 
 		return Response.ok(menus).build();
 	}
+	
+	
+	@GET
+	@Path("/getPedido/{id}")
+	@Produces("application/json")
+	public Response getPedidoByID(@PathParam("id") final Integer id) {
+		Pedido pedido = compraService.getPedidoByID(id);
+
+		return Response.ok(pedido).build();
+	}
 
 	// Con paginacion
 	@GET
@@ -174,6 +184,28 @@ public class MenuRest {
 			return Response.status(Response.Status.BAD_REQUEST).entity(objectNode1.toString()).build();
 		}
 
+	}
+	
+	@PUT
+	@Path("/calificar/{puntuacion}")
+	@Produces("application/json")
+	public Response calificarPedido(@PathParam("puntuacion") final Integer puntuacion, String pedidoJson){
+		
+		Gson gson = new GsonBuilder().registerTypeAdapter(Pedido.class, new PedidoGsonTypeAdapter()).create();
+		Pedido pedido = gson.fromJson(pedidoJson, Pedido.class);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		ObjectNode objectNode1 = mapper.createObjectNode();
+		
+		try{
+			
+			compraService.puntuarPedido(pedido, puntuacion);
+			return Response.ok().build();
+		
+		}catch (DatoInvalidoException e){
+			objectNode1.put("error", e.getMessage());
+			return Response.status(Response.Status.BAD_REQUEST).entity(objectNode1.toString()).build();
+		}	
 	}
 	
 	@POST

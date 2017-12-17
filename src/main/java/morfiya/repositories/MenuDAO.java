@@ -18,9 +18,6 @@ public final class MenuDAO extends HibernateGenericDAO<Menu> {
 
 	private static final long serialVersionUID = 6287473767660304813L;
 
-	// NO SE COMO INICIALIZARLO
-	// ServicioDAO servicioDAO;
-
 	@Override
 	protected Class<Menu> getDomainClass() {
 		return Menu.class;

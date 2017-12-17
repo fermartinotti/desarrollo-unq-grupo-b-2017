@@ -13,9 +13,12 @@
 		<property name="cantMenusPedidos" type="java.lang.Integer"/>
 		<property name="fechaDeEntrega"/>
 		<property name="fechaCompra"/>
-		<many-to-one name="proveedor" class="morfiya.domain.Proveedor" />
-		<many-to-one name="cliente" class="morfiya.domain.Cliente" />
-		<many-to-one name="menu" class="morfiya.domain.Menu"/>
+		<many-to-one name="proveedor" class="morfiya.domain.Proveedor"
+		lazy="false" fetch="join" />
+		<many-to-one name="cliente" class="morfiya.domain.Cliente" 
+		lazy="false" fetch="join"/>
+		<many-to-one name="menu" class="morfiya.domain.Menu"
+		lazy="false" fetch="join"/>		
 		<property name="estadoPuntuacion">
 		   <type name="org.hibernate.type.EnumType"> 
 		      <param name="enumClass">morfiya.domain.EstadoPuntuacion</param> 

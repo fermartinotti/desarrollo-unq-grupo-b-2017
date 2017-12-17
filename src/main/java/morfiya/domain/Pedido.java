@@ -16,7 +16,7 @@ public class Pedido extends Entity {
 	Proveedor proveedor;
 	Cliente cliente;
 	Menu menu;
-	String	descripcion;
+	String descripcion;
 	Integer cantMenusPedidos = 0;
 	EstadoPuntuacion estadoPuntuacion = EstadoPuntuacion.PENDIENTE;
 	
