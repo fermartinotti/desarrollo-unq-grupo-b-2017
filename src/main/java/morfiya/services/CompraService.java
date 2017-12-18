@@ -3,12 +3,14 @@ package morfiya.services;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mashape.unirest.http.exceptions.UnirestException;
+
 import morfiya.domain.Cliente;
 import morfiya.domain.EmailSender;
-import morfiya.domain.EstadoPuntuacion;
 import morfiya.domain.Menu;
 import morfiya.domain.Pedido;
 import morfiya.domain.Proveedor;
@@ -93,7 +95,7 @@ public class CompraService extends GenericService<Pedido>{
 		proveedor.cargarCreditoNoDisponible(2000.00);
 		////////////////////////////////////////////////
 		
-		evaluarPuntuacionesDeMenu(menu, proveedor);
+		
 		
 		if (! (puedeComprar(menu, cliente, proveedor, cantidad) &&  estaVigenteMenuYEsDiaDeSemana(pedido.getFechaDeEntrega(), menu.getFechaVigenciaDesde(), menu.getFechaVigenciaHasta()))){
 			throw new DatoInvalidoException("No se puede realizar la compra");
@@ -151,22 +153,35 @@ public class CompraService extends GenericService<Pedido>{
 		cliente.habilitarCliente();
 		clienteDAO.update(cliente);
 		pedidoDAO.update(pedidoE);
+		
+		evaluarPuntuacionesDeMenu(menuDAO.findMenuByName(pedido.getMenu().getNombre()), proveedorDAO.findByEmail(pedido.getProveedor().getEmail()));
 	
 	}
 	
 	@Transactional
 	public void evaluarPuntuacionesDeMenu(Menu menu, Proveedor proveedor){
-		List<Pedido> pedidos = pedidoDAO.findMenu(menu);
+		List<Pedido> pedidos = pedidoDAO.findAll();
+		
+		List<Pedido> filtrados = pedidos.stream().filter(p->p.getMenu().getNombre().equals(menu.getNombre())).collect(Collectors.toList());
 		Double sumatoriaPuntuaciones = 0.0;
 		
-		for(Pedido pedido : pedidos) {
+		for(Pedido pedido : filtrados) {
 			sumatoriaPuntuaciones += pedido.getPuntuacion();
 		}
 		if(((sumatoriaPuntuaciones / pedidos.size()) < 2)  && pedidos.size() >= 2){
 			menu.inhabilitarMenu();
 			menuDAO.update(menuDAO.findMenuByName(menu.getNombre()));
-			// Esto modificalo vos FER
-			//EmailSender.sendEmail(proveedor, "El menu se ha dado de baja");
+			try {
+				EmailSender.sendEmail(proveedor, "El menu se ha dado de baja");
+			} catch (UnirestException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+	}
+	
+	@Transactional
+	public void evaluarMenusBloqueados(){
+		
 	}
 }

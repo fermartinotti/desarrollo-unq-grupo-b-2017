@@ -48,23 +48,37 @@ public class PedidoDAO extends HibernateGenericDAO<Pedido> {
 			}
 		});
 	}
+	
+//	@SuppressWarnings("unchecked") 
+//	public List<Pedido> findMenu(Menu menu) { 
+//	  HibernateTemplate template = getHibernateTemplate(); 
+//	  return (List<Pedido>) template.execute(new HibernateCallback<Object>() { 
+//	 
+//	    public Object doInHibernate(Session session) throws HibernateException { 
+//	      Criteria cr = session.createCriteria(Pedido.class, "pedido");
+//	      cr.createAlias("pedido.menu", "menu");
+//	      cr.add(Restrictions.eq("menu.nombre", menu.getNombre())); 
+//	      return cr.list(); 
+//	    } 
+//	  }); 
+//	} 
 
+	
+	@SuppressWarnings("unchecked")
+	public List<Pedido> findMenu(Menu menu) {
+		HibernateTemplate template = getHibernateTemplate();
+		return (List<Pedido>) template.execute(new HibernateCallback<Object>() {
 
-
-
-@SuppressWarnings("unchecked")
-public List<Pedido> findMenu(Menu menu) {
-	HibernateTemplate template = getHibernateTemplate();
-	return (List<Pedido>) template.execute(new HibernateCallback<Object>() {
-
-		public Object doInHibernate(Session session) throws HibernateException {
-			Criteria cr = session.createCriteria(Pedido.class, "servicio");
-			cr.add(Restrictions.eq("servicio.menu", menu));
-			return cr.list();
-		}
-	});
-}
-
+			public Object doInHibernate(Session session) throws HibernateException {
+				Query query = session.createQuery("from Pedido where menu.nombre = " + menu.getNombre() + ")" );
+				return query.list();
+			}
+		});
+	}
+	
+	
+	
+	
 public Pedido findByDescripcion(String descripcion){
 	HibernateTemplate template = getHibernateTemplate();
 	return (Pedido) template.execute(new HibernateCallback<Object>() {
