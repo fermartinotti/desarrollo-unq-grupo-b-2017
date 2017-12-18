@@ -176,6 +176,7 @@
     <bean id="menuService" class="morfiya.services.MenuService">
 		<property name="authService" ref="authService"/>
     	<property name="repository" ref="menuDAO"/>
+    	<property name="proveedorRepository" ref="proveedorDAO"/>
     </bean>
     
     <!-- *************** Servicio *************** -->

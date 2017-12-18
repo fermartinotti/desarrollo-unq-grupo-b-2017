@@ -71,25 +71,25 @@ public class DataFakeRest {
 		
 		Menu menu1 = new MenuBuilder().withNombre("La mejor pizza del pais")
 				.withDescripcion("Tiene la mejor muzarella de todas").withCategoria(Categoria.Pizza)
-				.withValorDelivery(30.0).withFechaVigenciaDesdeYHasta("2017-12-05", "2017-12-12").withPrecio(80.00)
-				.withCantidadMinima1y2(39, 50).withPrecioCantidadMinima1y2(70.00, 60.00).withCantidadMaxVtasPorDia(20)
+				.withValorDelivery(30.0).withFechaVigenciaDesdeYHasta("2017-12-05", "2017-12-20").withPrecio(80.00)
+				.withCantidadMinima1y2(39, 50).withPrecioCantidadMinima1y2(70.00, 60.00).withCantidadMaxVtasPorDia(100)
 				.build();
 
 		Menu menu2 = new MenuBuilder().withNombre("Cerveza artesanal Irlandesa")
 				.withDescripcion("Es la mejor birra del pais").withCategoria(Categoria.Cerveza).withValorDelivery(25.0)
-				.withFechaVigenciaDesdeYHasta("2017-12-01", "2017-12-15").withPrecio(40.00).withCantidadMinima1y2(39, 50)
-				.withPrecioCantidadMinima1y2(30.00, 25.00).withCantidadMaxVtasPorDia(10).build();
+				.withFechaVigenciaDesdeYHasta("2017-12-01", "2017-12-20").withPrecio(40.00).withCantidadMinima1y2(39, 50)
+				.withPrecioCantidadMinima1y2(30.00, 25.00).withCantidadMaxVtasPorDia(100).build();
 		
 		Menu menu3 = new MenuBuilder().withNombre("Empanadas Morita")
 				.withDescripcion("Empanadas con el mejor relleno").withCategoria(Categoria.Empanadas)
 				.withValorDelivery(30.0).withFechaVigenciaDesdeYHasta("2017-12-05", "2017-12-12").withPrecio(80.00)
-				.withCantidadMinima1y2(39, 50).withPrecioCantidadMinima1y2(70.00, 60.00).withCantidadMaxVtasPorDia(20)
+				.withCantidadMinima1y2(39, 50).withPrecioCantidadMinima1y2(70.00, 60.00).withCantidadMaxVtasPorDia(100)
 				.build();
 
 		Menu menu4 = new MenuBuilder().withNombre("Sushi Japones")
 				.withDescripcion("El sushi numero 1 del pais").withCategoria(Categoria.Sushi).withValorDelivery(25.0)
-				.withFechaVigenciaDesdeYHasta("2017-12-01", "2017-12-15").withPrecio(40.00).withCantidadMinima1y2(39, 50)
-				.withPrecioCantidadMinima1y2(30.00, 25.00).withCantidadMaxVtasPorDia(10).build();
+				.withFechaVigenciaDesdeYHasta("2017-12-01", "2017-12-20").withPrecio(40.00).withCantidadMinima1y2(39, 50)
+				.withPrecioCantidadMinima1y2(30.00, 25.00).withCantidadMaxVtasPorDia(100).build();
 		
 		
 		//////////////////////////////////////////// SERVICIO /////////////////////////////////////////////////// 

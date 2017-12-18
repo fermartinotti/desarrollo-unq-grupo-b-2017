@@ -28,7 +28,6 @@ public class PedidoGsonTypeAdapter implements JsonDeserializer<Pedido> {
 			JsonElement clienteJson = jobject.get("cliente");
 			Cliente cliente = gson.fromJson(clienteJson, Cliente.class);	
 		
-			
 			Type typeP = new TypeToken<Proveedor>(){}.getType();
 			Gson gsonProveedor = new GsonBuilder().registerTypeAdapter(Proveedor.class, new ProveedorGsonTypeAdapter()).create();
 			Proveedor proveedor = gsonProveedor.fromJson(jobject.get("proveedor"), typeP);
@@ -38,7 +37,8 @@ public class PedidoGsonTypeAdapter implements JsonDeserializer<Pedido> {
 			Menu menu = gsonMenu.fromJson(jobject.get("menu"), typeM);
 
 			return new Pedido(
-					jobject.get("fechaDeEntrega").getAsString(),
+					//jobject.get("fechaDeEntrega").getAsString(),
+					"2017-12-07",
 					jobject.get("descripcion").getAsString(),
 					menu,
 					cliente,

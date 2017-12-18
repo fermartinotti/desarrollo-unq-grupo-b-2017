@@ -80,28 +80,34 @@ public class CompraService extends GenericService<Pedido>{
 		Cliente cliente = clienteDAO.findByEmail(pedido.getCliente().getEmail());
 		Proveedor proveedor = proveedorDAO.findByEmail(pedido.getProveedor().getEmail());
 		Menu menu = menuDAO.findMenuByName(pedido.getMenu().getNombre());
-		
+		pedido.setMenu(menu);
+		pedido.setCliente(cliente);
+		pedido.setProveedor(proveedor);
 		// Esto es solo para probar
 		////////////////////////////////////////////////
 		cliente.cargarCredito(50000.00);
 		proveedor.cargarCreditoNoDisponible(2000.00);
 		////////////////////////////////////////////////
 		
-		if (! (puedeComprar(menu, cliente, cantidad) &&  estaVigenteMenuYEsDiaDeSemana(pedido.getFechaDeEntrega(), menu.getFechaVigenciaDesde(), menu.getFechaVigenciaHasta()))){
+		Boolean puedeComprarResult = puedeComprar(menu, cliente, cantidad);
+		Boolean estaVigente = estaVigenteMenuYEsDiaDeSemana(pedido.getFechaDeEntrega(), menu.getFechaVigenciaDesde(), menu.getFechaVigenciaHasta());
+		if (! (puedeComprarResult &&  estaVigente)){
 			throw new DatoInvalidoException("No se puede realizar la compra");
 		}	
-			try{
-				Double precioFinalMenu = ((Double) menu.getPrecio() * cantidad) - (evaluarDiferenciaDinero(menu, cantidad) * cantidad);
-				
-				cliente.retirarCreditos(precioFinalMenu);
-				clienteDAO.update(cliente);
-				proveedor.cargarCreditoNoDisponible(precioFinalMenu);
-				proveedorDAO.update(proveedor);
-				
-				pedidoDAO.save(pedido); 
-				EmailSender.sendEmail(cliente, "Email pruebas");
-				
-			}catch (Exception e) {}
+		try{
+			Double precioFinalMenu = ((Double) menu.getPrecio() * cantidad) - (evaluarDiferenciaDinero(menu, cantidad) * cantidad);
+			
+			cliente.retirarCreditos(precioFinalMenu);
+			clienteDAO.update(cliente);
+			proveedor.cargarCreditoNoDisponible(precioFinalMenu);
+			proveedorDAO.update(proveedor);
+			
+			pedidoDAO.save(pedido); 
+			EmailSender.sendEmail(cliente, "Email pruebas");
+		}
+		catch (Exception e) {
+			
+		}
 	}
 	
 	@Transactional

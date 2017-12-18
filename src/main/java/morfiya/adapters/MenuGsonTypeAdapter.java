@@ -1,6 +1,7 @@
 package morfiya.adapters;
 
 import java.lang.reflect.Type;
+import java.time.LocalDate;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonDeserializationContext;
@@ -28,13 +29,14 @@ public class MenuGsonTypeAdapter implements JsonDeserializer<Menu> {
 //		ArrayList<String> hEntregas = new Gson().fromJson(jobject.getAsJsonArray("horariosDeEntrega"), listType);
 //		ArrayList<String> henvios = new Gson().fromJson(jobject.getAsJsonArray("horariosDeEnvio"), listType);
 
+	
 		return new Menu(
 				jobject.get("nombre").getAsString(), 
 				jobject.get("descripcion").getAsString(), 
 				categoria, 
 				jobject.get("valorDelivery").getAsDouble(), 
-				jobject.get("fechaVigenciaDesde").getAsString(), 
-				jobject.get("fechaVigenciaHasta").getAsString(), 
+				"2017-12-05", 
+				"2017-12-12", 
 				//null,
 				//hEntregas,
 				//henvios,
