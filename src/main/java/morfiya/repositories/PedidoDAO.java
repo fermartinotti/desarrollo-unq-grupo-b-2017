@@ -6,7 +6,6 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.HibernateTemplate;
@@ -23,15 +22,16 @@ public class PedidoDAO extends HibernateGenericDAO<Pedido> {
 		return Pedido.class;
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Pedido> getCantDePedidosPorMenu(final Menu menu) {
-		HibernateTemplate template = getHibernateTemplate();
-		DetachedCriteria criteria = DetachedCriteria.forClass(Pedido.class);
-		criteria.add(Restrictions.eq("menu", menu));
-
-		return (List<Pedido>) (this.getHibernateTemplate().findByCriteria(criteria));
-
-	}
+	// @SuppressWarnings("unchecked")
+	// public List<Pedido> getCantDePedidosPorMenu(final Menu menu) {
+	// HibernateTemplate template = getHibernateTemplate();
+	// DetachedCriteria criteria = DetachedCriteria.forClass(Pedido.class);
+	// criteria.add(Restrictions.eq("menu", menu));
+	//
+	// return (List<Pedido>)
+	// (this.getHibernateTemplate().findByCriteria(criteria));
+	//
+	// }
 
 	// Con paginacion
 	@SuppressWarnings("unchecked")
@@ -48,55 +48,47 @@ public class PedidoDAO extends HibernateGenericDAO<Pedido> {
 			}
 		});
 	}
-	
-//	@SuppressWarnings("unchecked") 
-//	public List<Pedido> findMenu(Menu menu) { 
-//	  HibernateTemplate template = getHibernateTemplate(); 
-//	  return (List<Pedido>) template.execute(new HibernateCallback<Object>() { 
-//	 
-//	    public Object doInHibernate(Session session) throws HibernateException { 
-//	      Criteria cr = session.createCriteria(Pedido.class, "pedido");
-//	      cr.createAlias("pedido.menu", "menu");
-//	      cr.add(Restrictions.eq("menu.nombre", menu.getNombre())); 
-//	      return cr.list(); 
-//	    } 
-//	  }); 
-//	} 
 
-	
+	// @SuppressWarnings("unchecked")
+	// public List<Pedido> findMenu(Menu menu) {
+	// HibernateTemplate template = getHibernateTemplate();
+	// return (List<Pedido>) template.execute(new HibernateCallback<Object>() {
+	//
+	// public Object doInHibernate(Session session) throws HibernateException {
+	// Criteria cr = session.createCriteria(Pedido.class, "pedido");
+	// cr.createAlias("pedido.menu", "menu");
+	// cr.add(Restrictions.eq("menu.nombre", menu.getNombre()));
+	// return cr.list();
+	// }
+	// });
+	// }
+
 	@SuppressWarnings("unchecked")
 	public List<Pedido> findMenu(Menu menu) {
 		HibernateTemplate template = getHibernateTemplate();
 		return (List<Pedido>) template.execute(new HibernateCallback<Object>() {
 
 			public Object doInHibernate(Session session) throws HibernateException {
-				Query query = session.createQuery("from Pedido where menu.nombre = " + menu.getNombre() + ")" );
+				Query query = session.createQuery("from Pedido where menu.nombre = " + menu.getNombre() + ")");
 				return query.list();
 			}
 		});
 	}
-	
-	
-	
-	
-public Pedido findByDescripcion(String descripcion){
-	HibernateTemplate template = getHibernateTemplate();
-	return (Pedido) template.execute(new HibernateCallback<Object>() {
 
-		public Object doInHibernate(Session session) throws HibernateException {
-			
-			
-			Criteria c = session.createCriteria(Pedido.class, "pedido");
-			c.add(Restrictions.eq("pedido.descripcion", descripcion));
-			
-			return (Pedido) c.uniqueResult();
+	public Pedido findByDescripcion(String descripcion) {
+		HibernateTemplate template = getHibernateTemplate();
+		return (Pedido) template.execute(new HibernateCallback<Object>() {
 
-		}
-	});
-	
-}
-	
+			public Object doInHibernate(Session session) throws HibernateException {
+
+				Criteria c = session.createCriteria(Pedido.class, "pedido");
+				c.add(Restrictions.eq("pedido.descripcion", descripcion));
+
+				return (Pedido) c.uniqueResult();
+
+			}
+		});
+
+	}
 
 }
-
-

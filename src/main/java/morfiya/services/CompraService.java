@@ -95,7 +95,7 @@ public class CompraService extends GenericService<Pedido>{
 		proveedor.cargarCreditoNoDisponible(2000.00);
 		////////////////////////////////////////////////
 		
-		
+		evaluarMenusBloqueados(proveedorDAO.findByEmail(pedido.getProveedor().getEmail()));
 		
 		if (! (puedeComprar(menu, cliente, proveedor, cantidad) &&  estaVigenteMenuYEsDiaDeSemana(pedido.getFechaDeEntrega(), menu.getFechaVigenciaDesde(), menu.getFechaVigenciaHasta()))){
 			throw new DatoInvalidoException("No se puede realizar la compra");
@@ -156,6 +156,7 @@ public class CompraService extends GenericService<Pedido>{
 		
 		evaluarPuntuacionesDeMenu(menuDAO.findMenuByName(pedido.getMenu().getNombre()), proveedorDAO.findByEmail(pedido.getProveedor().getEmail()));
 	
+	
 	}
 	
 	@Transactional
@@ -181,7 +182,20 @@ public class CompraService extends GenericService<Pedido>{
 	}
 	
 	@Transactional
-	public void evaluarMenusBloqueados(){
+	public void evaluarMenusBloqueados(Proveedor proveedor){
+		List<Pedido> pedidos = pedidoDAO.findAll();
+		List<Pedido> filtrados = pedidos.stream().filter(p->p.getProveedor().getEmail().equals(proveedor.getEmail())).collect(Collectors.toList());
 		
+		Integer bloqueados = 0;
+		
+		for(Pedido pedido : filtrados) {
+			if(! pedido.getMenu().estaParaLaVenta())
+				bloqueados = bloqueados + 1;
+		}
+		
+		if(bloqueados >= 1){
+			proveedor.inhabilitarProveedor();
+			proveedorDAO.update(proveedorDAO.findByEmail(proveedor.getEmail()));	
+		}
 	}
 }

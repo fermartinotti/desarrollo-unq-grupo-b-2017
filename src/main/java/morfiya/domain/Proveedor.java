@@ -77,6 +77,10 @@ public class Proveedor extends Entity{
 	public void setPuedeVender(Habilitacion puedeVender) {
 		this.puedeVender = puedeVender;
 	}
+	
+	public void inhabilitarProveedor(){
+		this.puedeVender = Habilitacion.INHABILITADO;
+	}
 
 	public Double getCreditosNoDisponibles() {
 		return creditosNoDisponibles;
