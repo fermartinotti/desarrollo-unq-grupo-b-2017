@@ -11,7 +11,7 @@ import morfiya.repositories.ProveedorDAO;
 
 public class MenuService extends GenericService<Menu> {
 	
-	public ProveedorDAO proveedorRepository;
+	ProveedorDAO proveedorRepository;
 
 	private static final long serialVersionUID = -7961010215734577876L;
 
