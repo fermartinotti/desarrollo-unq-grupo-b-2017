@@ -5,9 +5,13 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import morfiya.domain.Menu;
+import morfiya.domain.Proveedor;
 import morfiya.repositories.MenuDAO;
+import morfiya.repositories.ProveedorDAO;
 
 public class MenuService extends GenericService<Menu> {
+	
+	ProveedorDAO proveedorRepository;
 
 	private static final long serialVersionUID = -7961010215734577876L;
 
@@ -18,6 +22,10 @@ public class MenuService extends GenericService<Menu> {
 
 	@Transactional
 	public Menu crearMenu(Menu menu) {
+		Proveedor proveedor = authService.getProveedor();
+		proveedor.agregarMenu(menu);
+		proveedorRepository.save(proveedor);
+		
 		return getRepository().save(menu);
 	}
 	
@@ -73,6 +81,22 @@ public class MenuService extends GenericService<Menu> {
 			Integer pageNumber) {
 		return ((MenuDAO)getRepository()).findByNameCategoryAndLocality(nombre, categoria, localidad, pageSize, pageNumber);
 	}
+    
+    @Transactional
+	public ProveedorDAO getProveedorRepository() {
+		return proveedorRepository;
+	}
 
+    @Transactional
+	public void setProveedorRepository(ProveedorDAO proveedorRepository) {
+		this.proveedorRepository = proveedorRepository;
+	}
+
+    @Transactional
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+    
 	
 }

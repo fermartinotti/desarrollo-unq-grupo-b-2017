@@ -22,6 +22,7 @@ public class EmailSender {
 	.queryString("subject", "Gracias por comprar en MorfiYA")
 	.queryString("text", descripcion)
 	.asJson();
+	request.getStatus();
 	
 	log.debug("Se envia email con exito con descripcion:" + descripcion);
 	return request.getBody();
