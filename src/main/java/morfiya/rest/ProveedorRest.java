@@ -92,8 +92,10 @@ public class ProveedorRest {
 	@Produces("application/json")
 	public Response getProveedorCreditos(@PathParam("id") final Integer id) {
 		try {
-			Double creditos = service.getProveedorCreditos();
-			return Response.ok(creditos).build();
+			Proveedor proveedor = service.getProveedorByID(id);
+			return Response
+					.ok(proveedor.getCreditos())
+					.build();
 		}
 		catch (Exception e) {
 			return Response.serverError().entity(e.getMessage()).build();

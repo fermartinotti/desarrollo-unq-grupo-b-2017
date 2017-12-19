@@ -10,16 +10,15 @@
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
        http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
-	  http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
-	  http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
+	http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
+	http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
        
        
        
     <tx:annotation-driven transaction-manager="persistence.transactionManager"	proxy-target-class="true" />
 
-    <!--
-		========================= 
-		GENERAL DEFINITIONS
+<!--
+		========================= GENERAL DEFINITIONS
 		=========================
 	-->
 	<!--
@@ -48,15 +47,24 @@
         <property name="initialSize" value="20" />
         <property name="maxActive" value="30" />
         <property name="maxIdle" value="25" />
+
 	</bean>
 
 	<!--
 		Defines a global session factory that will be used by all modules.
 	-->
+<!-- 	<bean id="persistence.sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean"> -->
 		
-	<bean id="persistence.sessionFactory"
+		<bean id="persistence.sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" >
+
 		<property name="dataSource" ref="persistence.dataSource" />
+<!--  
+		<property name="entityCacheStrategies" ref="persistence.hibernateClassCacheProperties" />
+		<property name="collectionCacheStrategies" ref="persistence.hibernateCollectionCacheProperties" />
+-->
+
 		<property name="hibernateProperties">
 			<props>
 				<!--
@@ -66,12 +74,14 @@
 				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
 				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+
 				<prop key="hibernate.cglib.use_reflection_optimizer">true</prop>
 				<!-- Propiedades para la configuración de la cache de segundo nivel
 				<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
 				<prop key="hibernate.cache.use_second_level_cache">false</prop>
 				<prop key="hibernate.cache.use_query_cache">true</prop> -->
 				<prop key="hibernate.connection.autocommit">false</prop>
+<!-- 				<prop key="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</prop> -->
 			</props>
 		</property>
 		<property name="mappingLocations">
@@ -79,13 +89,15 @@
 				<value>classpath*:mappings/*.hbm.xml</value>
 			</list>
 		</property>
+
 	</bean>
 
 
-	<!-- Transaction manager for a single JDBC DataSource -->
+<!-- Transaction manager for a single JDBC DataSource -->
 	<bean id="persistence.transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="persistence.sessionFactory" />
+<!-- 		<property name="jdbcExceptionTranslator" ref="persistence.jdbcExceptionTranslator" /> -->
 	</bean>
 
 	<bean name="persistence.jdbcExceptionTranslator"
@@ -99,13 +111,13 @@
 	<!-- =========JAXB / CXF ========= -->
 	<!-- =========================== -->
 	 
-	<import resource="classpath:META-INF/cxf/cxf.xml" />
-	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
-	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
-
-	<bean id="jaxbProvider" class="org.apache.cxf.jaxrs.provider.JAXBElementProvider" />
-
-	<bean id='jacksonProvider' class='org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider' />
+		<import resource="classpath:META-INF/cxf/cxf.xml" />
+		<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+		<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	
+		<bean id="jaxbProvider" class="org.apache.cxf.jaxrs.provider.JAXBElementProvider" />
+	
+		<bean id='jacksonProvider' class='org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider' />
 	
 	<jaxrs:server id="cliente" address="/"  > 
 		<jaxrs:serviceBeans>
@@ -135,12 +147,6 @@
 	<!-- ________________________________________ -->
 	<!-- ________________________________________ -->
 	
-	
-	
-	<bean id="authService" class="morfiya.services.AuthService">
-		<property name="clienteRepository" ref="clienteDAO"/>
-		<property name="proveedorRepository" ref="proveedorDAO"/>
-	</bean>
     
     <!-- *************** Cliente *************** -->
     
@@ -150,7 +156,6 @@
 
 
    <bean id="clienteService" class="morfiya.services.ClienteService">
-		<property name="authService" ref="authService"/>
     	<property name="repository" ref="clienteDAO"/>
     </bean>
 
@@ -162,7 +167,6 @@
 
 
    <bean id="proveedorService" class="morfiya.services.ProveedorService">
-		<property name="authService" ref="authService"/>
     	<property name="repository" ref="proveedorDAO"/>
     </bean>
     
@@ -173,8 +177,7 @@
     </bean>
 
 
-    <bean id="menuService" class="morfiya.services.MenuService">
-		<property name="authService" ref="authService"/>
+   <bean id="menuService" class="morfiya.services.MenuService">
     	<property name="repository" ref="menuDAO"/>
     	<property name="proveedorRepository" ref="proveedorDAO"/>
     </bean>
@@ -196,10 +199,12 @@
     </bean>
 
 
-    <bean id="CompraService" class="morfiya.services.CompraService">
+   <bean id="CompraService" class="morfiya.services.CompraService">
     	<property name="pedidoDAO" ref="pedidoDAO"/>
     	<property name="clienteDAO" ref="clienteDAO"/>
     	<property name="proveedorDAO" ref="proveedorDAO"/>
-    	<property name="menuDAO" ref="menuDAO"/>    	
+    	<property name="menuDAO" ref="menuDAO"/>
+    	
+    	
     </bean>
 </beans>

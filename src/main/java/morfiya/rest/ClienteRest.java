@@ -19,7 +19,6 @@ import org.springframework.test.context.ContextConfiguration;
 import com.google.gson.Gson;
 
 import morfiya.domain.Cliente;
-import morfiya.services.AuthService;
 import morfiya.services.ClienteService;
 import morfiya.updates.ClienteUpdate;
 
@@ -89,15 +88,18 @@ public class ClienteRest {
 	@Path("/getCreditos/{id}")
 	@Produces("application/json")
 	public Response getCreditosCliente(@PathParam("id") final Integer id) {
+
 		try {
-			Double creditos = service.getClienteCreditos();
-			return Response.ok(creditos).build();
+			Cliente cliente = service.getClienteByID(id);
+			return Response.ok(cliente.getCreditos()).build();
 		}
+
 		catch (Exception e) {
 			return Response.serverError().entity(e.getMessage()).build();
 		}
 	}
 	
+
 	@POST
 	@Path("/create")
 	@Produces("application/json")
@@ -110,21 +112,19 @@ public class ClienteRest {
 	}
 
 	@PUT
-	@Path("/cargarCreditos/{credito}")
-	public Response cargarCreditosCliente(@PathParam("credito") final Double credito) {
-//		Gson gson = new Gson();
-//		Cliente cliente = gson.fromJson(clienteJson, Cliente.class);
-//
-//		try {
-//			Cliente clienteEncontrado = service.getClienteByID(cliente.getId());
-//			clienteEncontrado.cargarCredito(cliente.getCreditos());
-//			service.editarCliente(clienteEncontrado);
-//			return Response.ok().build();
-//		} catch (Exception e) {
-//			return Response.serverError().entity(e.getMessage()).build();
-//		}
-		service.cargarCreditosCliente(credito);
-		return Response.ok("{}").build();
+	@Path("/cargarCreditos")
+	public Response cargarCreditosCliente(String clienteJson) {
+		Gson gson = new Gson();
+		Cliente cliente = gson.fromJson(clienteJson, Cliente.class);
+
+		try {
+			Cliente clienteEncontrado = service.getClienteByID(cliente.getId());
+			clienteEncontrado.cargarCredito(cliente.getCreditos());
+			service.editarCliente(clienteEncontrado);
+			return Response.ok().build();
+		} catch (Exception e) {
+			return Response.serverError().entity(e.getMessage()).build();
+		}
 	}
 	
 	@PUT

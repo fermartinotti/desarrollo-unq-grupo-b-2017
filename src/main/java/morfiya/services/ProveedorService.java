@@ -51,11 +51,5 @@ public class ProveedorService extends GenericService<Proveedor> {
 	public Proveedor findProveedorByIDMenu(Integer idMenu){
 		return ((ProveedorDAO) getRepository()).findProveedorByIDMenu(idMenu);
 	}
-	
-	@Transactional
-	public Double getProveedorCreditos() {
-		Proveedor proveedor = authService.getProveedor();
-		return proveedor.getCreditos();
-	}
 
 }
