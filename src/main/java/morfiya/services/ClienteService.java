@@ -46,6 +46,7 @@ public class ClienteService extends GenericService<Cliente> {
 		getRepository().deleteById(id);
 	}
 
+	@Transactional
 	public Double getClienteCreditos() {
 		Cliente cliente = authService.getCliente();
 		return cliente.getCreditos();

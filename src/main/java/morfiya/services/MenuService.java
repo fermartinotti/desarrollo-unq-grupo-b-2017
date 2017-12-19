@@ -81,15 +81,18 @@ public class MenuService extends GenericService<Menu> {
 			Integer pageNumber) {
 		return ((MenuDAO)getRepository()).findByNameCategoryAndLocality(nombre, categoria, localidad, pageSize, pageNumber);
 	}
-
+    
+    @Transactional
 	public ProveedorDAO getProveedorRepository() {
 		return proveedorRepository;
 	}
 
+    @Transactional
 	public void setProveedorRepository(ProveedorDAO proveedorRepository) {
 		this.proveedorRepository = proveedorRepository;
 	}
 
+    @Transactional
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
