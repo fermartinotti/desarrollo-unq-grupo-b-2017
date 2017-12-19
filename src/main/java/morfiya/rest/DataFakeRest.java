@@ -57,8 +57,8 @@ public class DataFakeRest {
 				.withEmail("d10s@gmail.com").withTelefono("011", "42100987").withCreditosDisponibles(15.0)
 				.withDireccion(direccion1).build();
 
-		Cliente cliente2 = new ClienteBuilder().withCuit(789123).withNombreYApellido("Martin", "Palermo")
-				.withEmail("el_loco@gmail.com").withTelefono("011", "42502345").withCreditosDisponibles(20.0)
+		Cliente cliente2 = new ClienteBuilder().withCuit(789123).withNombreYApellido("Juan Pablo", "Strah")
+				.withEmail("strahjuanpablo@gmail.com").withTelefono("011", "42502345").withCreditosDisponibles(20.0)
 				.withDireccion(direccion2).build();
 
 		serviceC.crearCliente(cliente1);
@@ -80,13 +80,13 @@ public class DataFakeRest {
 				.withFechaVigenciaDesdeYHasta("2017-12-01", "2017-12-20").withPrecio(40.00).withCantidadMinima1y2(39, 50)
 				.withPrecioCantidadMinima1y2(30.00, 25.00).withCantidadMaxVtasPorDia(100).build();
 		
-		Menu menu3 = new MenuBuilder().withNombre("La mejor pizza del pais")
+		Menu menu3 = new MenuBuilder().withNombre("Empanadas Morita")
 				.withDescripcion("Empanadas con el mejor relleno").withCategoria(Categoria.Empanadas)
 				.withValorDelivery(30.0).withFechaVigenciaDesdeYHasta("2017-12-05", "2017-12-12").withPrecio(80.00)
 				.withCantidadMinima1y2(39, 50).withPrecioCantidadMinima1y2(70.00, 60.00).withCantidadMaxVtasPorDia(100)
 				.build();
 
-		Menu menu4 = new MenuBuilder().withNombre("Cerveza artesanal Irlandesa")
+		Menu menu4 = new MenuBuilder().withNombre("Sushi Japones")
 				.withDescripcion("El sushi numero 1 del pais").withCategoria(Categoria.Sushi).withValorDelivery(25.0)
 				.withFechaVigenciaDesdeYHasta("2017-12-01", "2017-12-20").withPrecio(40.00).withCantidadMinima1y2(39, 50)
 				.withPrecioCantidadMinima1y2(30.00, 25.00).withCantidadMaxVtasPorDia(100).build();
@@ -99,15 +99,15 @@ public class DataFakeRest {
 				.withLink("www.morfiya.com").withTelefono("011", "42531236").withLocalidad(Localidad.AVELLANEDA).withEmail("servicio1@hotmail.com")
 				.build();
 		
-		Servicio servicio2 = new ServicioBuilder().withNombre("Servicio de QUILMES").withAgregarMenus(menu3).withAgregarMenus(menu4).withDireccion(direccion1).withDescripcion("Este es el mejor servicio del pais")
+		Servicio servicio2 = new ServicioBuilder().withNombre("Servicio de QUILMES").withAgregarMenus(menu3).withAgregarMenus(menu4).withDireccion(direccion1).withDescripcion("Este es el mejor servicio de zona sur")
 				.withLink("www.morfiya.com").withTelefono("011", "42531236").withLocalidad(Localidad.QUILMES).withEmail("servicio2@hotmail.com")
 				.build();
 		
 
 		//////////////////////////// PROVEEDOR ////////////////
 
-		Proveedor proveedor = new ProveedorBuilder().withNombre("Pepe Sand").withServicio(servicio1)
-				.withEmail("pepe9@gmail.com").withCreditosDisponibles(20.00).build();
+		Proveedor proveedor = new ProveedorBuilder().withNombre("Nicolas Robles").withServicio(servicio1)
+				.withEmail("juanpablo.strah@retcon.com.ar").withCreditosDisponibles(20.00).build();
 		
 		Proveedor proveedor2 = new ProveedorBuilder().withNombre("Juan salvador Gaviota").withServicio(servicio2)
 				.withEmail("jsg@gmail.com").withCreditosDisponibles(20.00).build();

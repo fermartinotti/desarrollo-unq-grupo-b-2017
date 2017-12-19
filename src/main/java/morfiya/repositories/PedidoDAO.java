@@ -2,7 +2,6 @@ package morfiya.repositories;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -14,9 +13,10 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import morfiya.domain.Menu;
 import morfiya.domain.Pedido;
 
-public class PedidoDAO extends HibernateGenericDAO<Pedido> {
+public class PedidoDAO extends HibernateGenericDAO<Pedido>{
 
 	private static final long serialVersionUID = 1L;
+
 
 	@Override
 	protected Class<Pedido> getDomainClass() {
@@ -24,15 +24,15 @@ public class PedidoDAO extends HibernateGenericDAO<Pedido> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Pedido> getCantDePedidosPorMenu(final Menu menu) {
-		HibernateTemplate template = getHibernateTemplate();
+	public List<Pedido> getCantDePedidosPorMenu(final Menu menu){
+		HibernateTemplate template = getHibernateTemplate();	
 		DetachedCriteria criteria = DetachedCriteria.forClass(Pedido.class);
 		criteria.add(Restrictions.eq("menu", menu));
 
 		return (List<Pedido>) (this.getHibernateTemplate().findByCriteria(criteria));
-
+		
 	}
-
+	
 	// Con paginacion
 	@SuppressWarnings("unchecked")
 	@Override
@@ -48,41 +48,4 @@ public class PedidoDAO extends HibernateGenericDAO<Pedido> {
 			}
 		});
 	}
-
-
-
-
-@SuppressWarnings("unchecked")
-public List<Pedido> findMenu(Menu menu) {
-	HibernateTemplate template = getHibernateTemplate();
-	return (List<Pedido>) template.execute(new HibernateCallback<Object>() {
-
-		public Object doInHibernate(Session session) throws HibernateException {
-			Criteria cr = session.createCriteria(Pedido.class, "servicio");
-			cr.add(Restrictions.eq("servicio.menu", menu));
-			return cr.list();
-		}
-	});
 }
-
-public Pedido findByDescripcion(String descripcion){
-	HibernateTemplate template = getHibernateTemplate();
-	return (Pedido) template.execute(new HibernateCallback<Object>() {
-
-		public Object doInHibernate(Session session) throws HibernateException {
-			
-			
-			Criteria c = session.createCriteria(Pedido.class, "pedido");
-			c.add(Restrictions.eq("pedido.descripcion", descripcion));
-			
-			return (Pedido) c.uniqueResult();
-
-		}
-	});
-	
-}
-	
-
-}
-
-

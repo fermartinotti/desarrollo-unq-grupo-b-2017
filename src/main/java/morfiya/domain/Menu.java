@@ -252,10 +252,6 @@ public class Menu extends Entity {
 		estaParaLaVenta = Habilitacion.INHABILITADO;
 	}
 	
-	public Boolean estaParaLaVenta(){
-		return this.estaParaLaVenta == Habilitacion.HABILITADO;
-	}
-	
 	public void actualizar(MenuUpdate update){
 	    if(update.getNombre() != null) 
 	    	this.setNombre(update.getNombre());

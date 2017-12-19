@@ -12,8 +12,10 @@ public class Proveedor extends Entity{
 	private Double creditos = 0.0;
 	private Double creditosNoDisponibles= 0.0;
 	private String email;
-	private Habilitacion puedeVender = Habilitacion.HABILITADO; 
 	
+
+	private Habilitacion puedeVender = Habilitacion.HABILITADO; 
+	//preguntar si el cliente no tiene que tener un telefono de contacto, y una direccion???
 
 	public Proveedor() {
 		super();
@@ -66,10 +68,6 @@ public class Proveedor extends Entity{
 		return creditos;
 	}
 
-	public Boolean puedeVender(){
-		return this.puedeVender == Habilitacion.HABILITADO; 
-	}
-	
 	public Habilitacion getPuedeVender() {
 		return puedeVender;
 	}
@@ -120,7 +118,12 @@ public class Proveedor extends Entity{
 		
 		if(update.getNombre()!=null)
 			this.setNombre(update.getNombre());
-}
+		
+		// Faltaria servicio
+		
+	
+			
+	}
 
 	public Servicio getServicio() {
 		return servicio;

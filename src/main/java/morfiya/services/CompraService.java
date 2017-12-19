@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import morfiya.domain.Cliente;
 import morfiya.domain.EmailSender;
-import morfiya.domain.EstadoPuntuacion;
 import morfiya.domain.Menu;
 import morfiya.domain.Pedido;
 import morfiya.domain.Proveedor;
@@ -75,11 +74,6 @@ public class CompraService extends GenericService<Pedido>{
 	public List<Pedido> getAll() {
 		return pedidoDAO.findAll();
 	}
-	
-	@Transactional
-	public Pedido getPedidoByID(Integer id) {
-		return pedidoDAO.findById(id);
-	}
 
 	@Transactional
 	public void comprar(Pedido pedido, Integer cantidad) {
@@ -129,8 +123,8 @@ public class CompraService extends GenericService<Pedido>{
 	}
 	
 	@Transactional
-	public Boolean puedeComprar(Menu menu, Cliente cliente, Proveedor proveedor, Integer cantidad){
-		return (cantDeVentasNoSuperada(menu, cantidad) && cliente.puedeComprar() && cliente.getCreditos() >= (menu.getPrecio() * cantidad) && proveedor.puedeVender() && menu.estaParaLaVenta());
+	public Boolean puedeComprar(Menu menu, Cliente cliente, Integer cantidad){
+		return (cantDeVentasNoSuperada(menu, cantidad) && cliente.puedeComprar() && cliente.getCreditos() >= (menu.getPrecio() * cantidad));
 	}
 	
 	@Transactional
@@ -143,33 +137,26 @@ public class CompraService extends GenericService<Pedido>{
 		return (fechaEntrega.isAfter(fechaD) || fechaD.equals(fechaEntrega)) && 
 				(fechaEntrega.isBefore(fechaH) || fechaH.equals(fechaEntrega)) && 
 				(fechaEntrega.getDayOfWeek() != DayOfWeek.SUNDAY && fechaEntrega.getDayOfWeek() != DayOfWeek.SATURDAY);
+	
+		
+	
 	}
+	
 	
 	@Transactional
-	public void puntuarPedido(Pedido pedido, Integer puntuacion){
-		Pedido pedidoE = pedidoDAO.findByDescripcion(pedido.getDescripcion());
-		
-		pedidoE.puntuar(puntuacion);
-		Cliente cliente = clienteDAO.findByEmail(pedido.getCliente().getEmail());
-		cliente.habilitarCliente();
-		clienteDAO.update(cliente);
-		pedidoDAO.update(pedidoE);
-	
+	public Boolean esFechaValida(LocalDate fecha) {
+		int diffDays= 0;
+		LocalDate today = LocalDate.now();
+		  //mientras la fecha inicial sea menor o igual que la fecha final se cuentan los dias
+		  while (today.isBefore(fecha) || today.equals(fecha)) {
+			  if (today.getDayOfWeek() != DayOfWeek.SUNDAY || today.getDayOfWeek() != DayOfWeek.SATURDAY) {
+				  diffDays++;
+			  }
+			  today = today.plusDays(1);
+		  }
+		return diffDays > 2;
 	}
 	
-	@Transactional
-	public void evaluarPuntuacionesDeMenu(Menu menu, Proveedor proveedor){
-		List<Pedido> pedidos = pedidoDAO.findMenu(menu);
-		Double sumatoriaPuntuaciones = 0.0;
-		
-		for(Pedido pedido : pedidos) {
-			sumatoriaPuntuaciones += pedido.getPuntuacion();
-		}
-		if(((sumatoriaPuntuaciones / pedidos.size()) < 2)  && pedidos.size() >= 2){
-			menu.inhabilitarMenu();
-			menuDAO.update(menuDAO.findMenuByName(menu.getNombre()));
-			// Esto modificalo vos FER
-			//EmailSender.sendEmail(proveedor, "El menu se ha dado de baja");
-		}
-	}
+	
+
 }
